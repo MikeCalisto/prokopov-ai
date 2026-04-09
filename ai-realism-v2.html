@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AI REALISM — Гіперреалістичні фото і відео</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0908;
+  --bg2:#100e0c;
+  --bg3:#161310;
+  --gold:#C9A84C;
+  --gold-light:#E8C97A;
+  --gold-glow:rgba(201,168,76,0.25);
+  --gold-glow-strong:rgba(201,168,76,0.4);
+  --text:#F5F0E8;
+  --text-muted:#8A7D6B;
+  --border:rgba(201,168,76,0.18);
+  --border-hover:rgba(201,168,76,0.4);
+  --card:rgba(22,19,16,0.7);
+  --green:#A8B060;
+  --red:#B86B5A;
+  --max-w:430px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:#070605;
+  color:var(--text);
+  font-family:'Manrope',sans-serif;
+  font-weight:300;
+  font-size:16px;
+  line-height:1.7;
+  overflow-x:hidden;
+  display:flex;
+  justify-content:center;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── WRAPPER ── */
+.page-wrapper{
+  width:100%;max-width:var(--max-w);background:var(--bg);
+  position:relative;overflow:hidden;min-height:100vh;
+}
+@media(min-width:431px){
+  body{background:#050403;}
+  .page-wrapper{border-left:1px solid var(--border);border-right:1px solid var(--border);}
+}
+
+/* ── ANIMATED BG MESH ── */
+.bg-mesh{
+  position:fixed;top:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:var(--max-w);height:100vh;
+  pointer-events:none;z-index:0;overflow:hidden;
+}
+.bg-mesh::before,.bg-mesh::after{
+  content:'';position:absolute;border-radius:50%;filter:blur(100px);
+  animation:mesh-drift 12s ease-in-out infinite alternate;
+}
+.bg-mesh::before{
+  width:350px;height:350px;
+  background:radial-gradient(circle,rgba(201,168,76,0.08) 0%,transparent 70%);
+  top:-10%;right:-20%;
+}
+.bg-mesh::after{
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(232,201,122,0.05) 0%,transparent 70%);
+  bottom:20%;left:-15%;
+  animation-delay:6s;animation-direction:alternate-reverse;
+}
+@keyframes mesh-drift{
+  0%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(30px,-40px) scale(1.1);}
+  100%{transform:translate(-20px,30px) scale(0.95);}
+}
+
+/* ── PARTICLES ── */
+.particles{
+  position:fixed;top:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:var(--max-w);height:100vh;
+  pointer-events:none;z-index:0;overflow:hidden;
+}
+.particle{
+  position:absolute;width:2px;height:2px;
+  background:var(--gold);border-radius:50%;
+  opacity:0;animation:particle-float linear infinite;
+}
+.particle:nth-child(1){left:15%;animation-duration:8s;animation-delay:0s;}
+.particle:nth-child(2){left:35%;animation-duration:10s;animation-delay:2s;}
+.particle:nth-child(3){left:55%;animation-duration:7s;animation-delay:4s;}
+.particle:nth-child(4){left:75%;animation-duration:9s;animation-delay:1s;}
+.particle:nth-child(5){left:90%;animation-duration:11s;animation-delay:3s;}
+.particle:nth-child(6){left:25%;animation-duration:8.5s;animation-delay:5s;}
+.particle:nth-child(7){left:65%;animation-duration:9.5s;animation-delay:6s;}
+.particle:nth-child(8){left:45%;animation-duration:7.5s;animation-delay:7s;}
+@keyframes particle-float{
+  0%{transform:translateY(100vh) scale(0);opacity:0;}
+  10%{opacity:0.6;}
+  90%{opacity:0.3;}
+  100%{transform:translateY(-20px) scale(1);opacity:0;}
+}
+
+/* ── ORBS ── */
+.orb{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;}
+.orb-1{width:350px;height:350px;background:var(--gold);top:-120px;right:-120px;opacity:0.06;animation:orb-float 10s ease-in-out infinite;}
+.orb-2{width:280px;height:280px;background:var(--gold-light);bottom:18%;left:-120px;opacity:0.04;animation:orb-float 13s ease-in-out infinite 2s;}
+.orb-3{width:220px;height:220px;background:var(--gold);top:42%;right:-100px;opacity:0.03;animation:orb-float 11s ease-in-out infinite 4s;}
+@keyframes orb-float{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-20px) scale(1.05);}}
+
+section,header,footer,.hero,.cta-final{position:relative;z-index:1;}
+
+/* ── HEADER ── */
+header{
+  padding:16px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  position:sticky;top:0;z-index:100;
+  background:rgba(10,9,8,0.9);
+}
+.logo{
+  font-family:'Unbounded',sans-serif;
+  font-weight:700;font-size:15px;letter-spacing:0.05em;color:var(--gold);
+}
+.header-tag{
+  font-size:9px;color:var(--text-muted);letter-spacing:0.25em;text-transform:uppercase;font-weight:500;
+}
+
+/* ── HERO ── */
+.hero{padding:22px 20px 36px;text-align:center;position:relative;overflow:visible;}
+
+.hero>*:not(.hero-kristal):not(.hero-kristal-blur){position:relative;z-index:1;}
+
+/* hero kristal */
+/* main kristal — top right, sharp, above everything */
+.hero-kristal{
+  position:absolute;
+  top:10%;right:-22px;
+  width:126px;height:auto;
+  mix-blend-mode:screen;
+  opacity:0.7;
+  z-index:10;
+  pointer-events:none;
+  animation:kristal-float 6s ease-in-out infinite;
+}
+/* blurred copy — left, near price/button */
+.hero-kristal-blur{
+  position:absolute;
+  left:-14px;
+  top:54%;
+  width:100px;height:100px;
+  object-fit:contain;
+  opacity:0.45;
+  z-index:0;
+  pointer-events:none;
+  filter:blur(4px);
+  mix-blend-mode:screen;
+  animation:kristal-float-blur 8s ease-in-out infinite;
+}
+@keyframes kristal-float{
+  0%{transform:translateY(0) rotate(0deg);}
+  50%{transform:translateY(-22px) rotate(6deg);}
+  100%{transform:translateY(0) rotate(0deg);}
+}
+@keyframes kristal-float-blur{
+  0%{transform:rotate(-30deg) translateY(0);}
+  50%{transform:rotate(-26deg) translateY(-16px);}
+  100%{transform:rotate(-30deg) translateY(0);}
+}
+.hero-tag-row{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin-bottom:28px;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(201,168,76,0.08);
+  border:1px solid rgba(201,168,76,0.2);
+  color:var(--gold);
+  padding:10px 16px;border-radius:12px;
+  font-size:9px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  white-space:nowrap;
+  position:relative;
+  overflow:hidden;
+}
+.hero-tag::before{
+  content:'';position:absolute;top:0;left:0;
+  width:3px;height:100%;
+  background:linear-gradient(180deg,var(--gold),var(--gold-light));
+  border-radius:0 2px 2px 0;
+}
+.hero-start{
+  display:inline-flex;align-items:center;gap:7px;
+  background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.06));
+  border:1px solid rgba(201,168,76,0.25);
+  padding:10px 16px;border-radius:12px;
+  font-size:9px;font-weight:500;color:var(--text-muted);
+  letter-spacing:0.1em;text-transform:uppercase;
+  white-space:nowrap;
+}
+.hero-start::before{
+  content:'';
+  width:6px;height:6px;
+  background:var(--gold);
+  border-radius:50%;
+  flex-shrink:0;
+  animation:dot-pulse 2s ease-in-out infinite;
+}
+@keyframes dot-pulse{
+  0%,100%{opacity:1;transform:scale(1);}
+  50%{opacity:0.3;transform:scale(0.7);}
+}
+.hero-start span{
+  font-family:'Unbounded',sans-serif;
+  font-weight:700;font-size:10px;color:var(--gold);letter-spacing:0.05em;
+}
+.hero h1{
+  font-family:'Unbounded',sans-serif;
+  margin-bottom:22px;
+  display:flex;flex-direction:column;align-items:center;gap:0;
+}
+.h1-lead{
+  display:block;
+  font-weight:400;font-size:13px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--text-muted);
+  margin-bottom:2px;
+}
+.h1-hero{
+  display:block;
+  font-weight:800;font-size:23px;line-height:1.2;letter-spacing:0.03em;
+  text-transform:uppercase;
+  color:var(--text);
+  background:linear-gradient(180deg,var(--text) 40%,var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  padding-bottom:0;
+}
+.h1-accent{
+  font-size:32px;
+  display:block;
+  color:var(--gold);
+  -webkit-text-fill-color:var(--gold);
+  background:none;
+  -webkit-background-clip:unset;
+}
+.h1-sub{
+  display:block;
+  font-family:'Manrope',sans-serif;
+  font-weight:300;font-size:14px;line-height:1.6;letter-spacing:0.01em;
+  color:var(--text-muted);
+  margin-top:2px;
+}
+.h1-sub strong{
+  color:var(--gold);font-weight:700;
+  position:relative;
+}
+.h1-sub strong::after{
+  content:'';position:absolute;
+  left:0;right:0;bottom:-2px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.hero-sub{
+  font-size:13px;color:var(--text-muted);margin:0 auto 14px;line-height:1.75;font-weight:300;
+}
+
+/* ── BEFORE / AFTER ── */
+.before-after{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.ba-card{
+  border-radius:14px;overflow:hidden;position:relative;
+  border:1px solid var(--border);aspect-ratio:3/4;background:var(--bg3);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  transition:border-color 0.4s,box-shadow 0.4s;
+}
+.ba-card:active{transform:scale(0.97);}
+.ba-card img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+.ba-label{
+  position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+  padding:6px 16px;font-size:8px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;
+  white-space:nowrap;z-index:2;border-radius:8px;
+}
+.ba-label.before{background:rgba(184,107,90,0.85);color:var(--text);}
+.ba-label.after{background:rgba(201,168,76,0.9);color:var(--bg);}
+
+/* ── DISCLAIMER ── */
+.hero-disclaimer{
+  display:block;border-left:3px solid var(--gold);padding:14px 18px;
+  background:rgba(201,168,76,0.04);border-radius:0 12px 12px 0;
+  font-size:13px;color:var(--text-muted);margin-bottom:32px;text-align:left;line-height:1.65;
+}
+.hero-disclaimer strong{color:var(--text);font-weight:600;}
+
+/* ── PRICE ── */
+.hero-price-row{display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:16px;}
+.h-price-old{color:var(--text-muted);text-decoration:line-through;font-size:15px;font-weight:300;}
+.h-price-new{
+  font-family:'Unbounded',sans-serif;font-weight:800;font-size:32px;line-height:1;
+  color:var(--gold);letter-spacing:-0.01em;
+}
+.h-price-currency{
+  font-family:'Manrope',sans-serif;font-weight:400;font-size:16px;color:var(--text-muted);
+  margin-left:3px;
+}
+.h-price-badge{
+  background:rgba(201,168,76,0.12);color:var(--gold);font-size:10px;font-weight:700;
+  padding:4px 12px;border:1px solid var(--border);border-radius:8px;letter-spacing:0.1em;
+}
+
+/* ── BUTTONS ── */
+.btn-main{
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  color:var(--bg);border:none;
+  padding:16px 32px;border-radius:14px;
+  font-family:'Manrope',sans-serif;font-weight:800;font-size:13px;
+  letter-spacing:0.15em;text-transform:uppercase;
+  cursor:pointer;transition:all 0.3s;text-decoration:none;
+  display:block;text-align:center;width:100%;
+  box-shadow:0 4px 28px var(--gold-glow);
+  position:relative;overflow:hidden;
+  animation:ctaPulse 3s ease-in-out infinite;
+}
+.btn-main:active{transform:scale(0.97);}
+@keyframes ctaPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.02);}}
+.hero-cta-note{font-size:10px;color:var(--text-muted);margin-top:12px;display:block;text-align:center;letter-spacing:0.05em;}
+
+/* ── BONUS TIMER ── */
+.bonus-timer-wrap{
+  display:flex;justify-content:center;margin-bottom:20px;
+}
+.bonus-timer-blocks{
+  display:flex;align-items:center;gap:8px;
+}
+.bonus-timer-block{
+  background:#111110;
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:16px;
+  padding:16px 0;
+  text-align:center;
+  min-width:90px;
+}
+.bt-num{
+  font-family:'Unbounded',sans-serif;
+  font-weight:800;font-size:36px;color:var(--text);
+  display:block;line-height:1;
+}
+.bt-unit{
+  font-size:8px;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:0.2em;
+  margin-top:8px;display:block;
+}
+.bonus-timer-sep{
+  font-size:24px;font-weight:700;color:var(--gold);
+  display:flex;flex-direction:column;gap:6px;
+  align-items:center;
+}
+.bonus-timer-sep::before,.bonus-timer-sep::after{
+  content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);
+}
+.bonus-timer-sep::before{content:none;}
+/* override to show two dots */
+.bonus-timer-sep{font-size:0;}
+.bonus-timer-sep::before{content:'';display:block;}
+.bonus-timer-sep::after{content:'';display:block;}
+
+/* ── BONUSES ── */
+.bonuses-wrap{
+  background:rgba(201,168,76,0.03);
+  border:1px solid var(--border);
+  border-top:2px solid rgba(201,168,76,0.35);
+  border-radius:16px;
+  padding:20px;
+  margin-top:0;
+}
+.bonuses-title{
+  font-family:'Unbounded',sans-serif;font-size:11px;font-weight:600;
+  color:var(--gold);margin-bottom:18px;text-align:center;letter-spacing:0.08em;
+  text-transform:uppercase;line-height:1.5;
+}
+.bonuses-grid{display:grid;grid-template-columns:1fr;gap:12px;}
+.bonus-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  overflow:hidden;display:grid;grid-template-columns:70px 1fr;
+  transition:border-color 0.4s,box-shadow 0.4s;
+}
+.bonus-card:hover{border-color:var(--border-hover);box-shadow:0 0 20px rgba(201,168,76,0.08);}
+.bonus-img{
+  background:rgba(201,168,76,0.06);border-right:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;padding:8px;
+  overflow:hidden;
+}
+.bonus-img img{
+  width:100%;height:100%;object-fit:cover;border-radius:8px;
+}
+.bonus-body{padding:14px 16px;display:flex;flex-direction:column;justify-content:center;}
+.bonus-label{font-size:8px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.bonus-name{font-size:12px;font-weight:400;color:var(--text);line-height:1.5;}
+
+/* ── SECTIONS ── */
+.section{padding:52px 20px;}
+.section-title{
+  font-family:'Unbounded',sans-serif;font-weight:700;font-size:24px;
+  letter-spacing:-0.01em;margin-bottom:32px;line-height:1.25;color:var(--text);
+  text-transform:uppercase;
+}
+.section-title span{color:var(--gold);}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 20px;}
+
+/* ── СУТ ── */
+.sut-grid{display:flex;flex-direction:column;gap:16px;}
+.sut-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  overflow:hidden;transition:border-color 0.4s,box-shadow 0.4s;
+}
+.sut-card:hover{border-color:var(--border-hover);box-shadow:0 0 24px rgba(201,168,76,0.08);}
+.sut-inner{display:flex;flex-direction:column;}
+.sut-content{padding:24px 20px;position:relative;}
+.sut-num{
+  font-family:'Unbounded',sans-serif;font-weight:800;font-size:44px;line-height:1;
+  color:rgba(201,168,76,0.08);position:absolute;right:16px;top:12px;
+}
+.sut-card h3{
+  font-family:'Unbounded',sans-serif;font-weight:600;font-size:15px;
+  color:var(--gold);letter-spacing:-0.01em;margin-bottom:12px;line-height:1.35;padding-right:44px;
+}
+.sut-card.solution h3{color:var(--gold-light);}
+.sut-card p{color:var(--text-muted);margin-bottom:12px;font-size:13px;line-height:1.7;font-weight:300;}
+.sut-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.sut-list li{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--text-muted);line-height:1.6;font-weight:300;}
+.sut-list li::before{content:'—';color:var(--gold);flex-shrink:0;font-weight:500;}
+.sut-card.solution .sut-list li::before{color:var(--gold-light);}
+.sut-img-col{
+  border-top:1px solid var(--border);background:rgba(201,168,76,0.02);
+  display:flex;align-items:center;justify-content:center;padding:22px;min-height:170px;
+}
+.sut-img-placeholder{
+  width:100%;height:100%;min-height:140px;
+  border:1px dashed var(--border);border-radius:12px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  transition:border-color 0.4s;
+}
+.sut-img-placeholder:hover{border-color:var(--border-hover);}
+.sut-img-placeholder span{font-size:18px;opacity:0.3;color:var(--gold);}
+.sut-img-placeholder p{font-size:9px;color:var(--text-muted);text-align:center;line-height:1.4;letter-spacing:0.08em;text-transform:uppercase;}
+.solution-items{display:grid;grid-template-columns:1fr;gap:8px;margin-top:6px;}
+.sol-item{
+  display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--text-muted);
+  padding:10px 12px;background:rgba(201,168,76,0.04);border-radius:10px;
+  border:1px solid rgba(201,168,76,0.1);line-height:1.5;font-weight:300;
+}
+.sol-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px;}
+
+/* ── COMPARISON ── */
+.comparison-wrap{overflow-x:auto;margin:0 -20px;padding:0 20px;}
+.comparison-table{width:100%;border-collapse:separate;border-spacing:0;font-size:12px;}
+.comparison-table th{
+  padding:12px 14px;font-family:'Unbounded',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;
+}
+.comparison-table th:first-child{background:rgba(184,107,90,0.08);color:var(--red);border-radius:12px 0 0 0;border:1px solid rgba(184,107,90,0.15);}
+.comparison-table th:last-child{background:rgba(201,168,76,0.06);color:var(--gold);border-radius:0 12px 0 0;border:1px solid rgba(201,168,76,0.15);border-left:none;}
+.comparison-table td{padding:11px 14px;font-size:12px;line-height:1.5;vertical-align:top;font-weight:300;}
+.comparison-table tr:nth-child(odd) td:first-child{background:rgba(184,107,90,0.03);}
+.comparison-table tr:nth-child(even) td:first-child{background:rgba(184,107,90,0.05);}
+.comparison-table tr:nth-child(odd) td:last-child{background:rgba(201,168,76,0.02);}
+.comparison-table tr:nth-child(even) td:last-child{background:rgba(201,168,76,0.04);}
+.comparison-table td:first-child{color:var(--red);border:1px solid rgba(184,107,90,0.1);border-top:none;}
+.comparison-table td:last-child{color:var(--gold);border:1px solid rgba(201,168,76,0.1);border-top:none;border-left:none;}
+.comparison-table td:first-child::before{content:'— ';font-weight:500;}
+.comparison-table td:last-child::before{content:'+ ';font-weight:500;}
+.comparison-table tr:last-child td:first-child{border-radius:0 0 0 12px;}
+.comparison-table tr:last-child td:last-child{border-radius:0 0 12px 0;}
+
+/* ── JOURNEY ── */
+.journey-grid{display:flex;flex-direction:column;gap:0;position:relative;margin-bottom:28px;padding-left:8px;}
+.journey-line{position:absolute;left:33px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold),rgba(201,168,76,0.1));z-index:0;}
+.journey-step{display:flex;align-items:flex-start;gap:18px;padding:14px 0;position:relative;z-index:1;}
+.journey-num{
+  width:52px;height:52px;border-radius:14px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Unbounded',sans-serif;font-weight:700;font-size:16px;color:var(--bg);
+  flex-shrink:0;box-shadow:0 4px 16px var(--gold-glow);
+}
+.journey-info{padding-top:6px;}
+.journey-label{font-size:8px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.journey-text{font-size:13px;color:var(--text-muted);line-height:1.5;font-weight:300;}
+.journey-final{
+  background:rgba(201,168,76,0.05);border:1px solid var(--border);
+  border-radius:16px;padding:22px 24px;text-align:center;
+}
+.journey-final-label{font-size:8px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.journey-final-text{font-family:'Unbounded',sans-serif;font-size:14px;font-weight:400;color:var(--text);line-height:1.5;}
+
+/* ── MEDIA ── */
+.media-section{padding:52px 20px;position:relative;overflow:visible;}
+.media-section>*:not(.media-planet):not(.media-planet-blur){position:relative;z-index:1;}
+
+/* media planet elements */
+.media-planet{
+  position:absolute;top:5%;right:-24px;
+  width:165px;height:165px;object-fit:contain;
+  mix-blend-mode:screen;opacity:0.7;z-index:10;
+  pointer-events:none;
+  animation:planet-float 7s ease-in-out infinite;
+}
+.media-planet-blur{
+  position:absolute;bottom:8%;left:-30px;
+  width:180px;height:180px;object-fit:contain;
+  mix-blend-mode:screen;opacity:0.5;z-index:0;
+  pointer-events:none;
+  filter:blur(4px);
+  animation:planet-float-blur 9s ease-in-out infinite;
+}
+@keyframes planet-float{
+  0%{transform:translateY(0) rotate(0deg);}
+  50%{transform:translateY(-20px) rotate(8deg);}
+  100%{transform:translateY(0) rotate(0deg);}
+}
+@keyframes planet-float-blur{
+  0%{transform:rotate(20deg) translateY(0);}
+  50%{transform:rotate(16deg) translateY(-14px);}
+  100%{transform:rotate(20deg) translateY(0);}
+}
+.media-title{font-family:'Unbounded',sans-serif;font-size:22px;font-weight:700;letter-spacing:-0.01em;margin-bottom:8px;text-transform:uppercase;}
+.media-title span{color:var(--gold);}
+.media-sub{font-size:11px;color:var(--text-muted);margin-bottom:24px;letter-spacing:0.04em;}
+.media-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.media-slot{
+  aspect-ratio:9/16;background:var(--bg3);border:1px solid var(--border);
+  border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  transition:all 0.4s;position:relative;overflow:hidden;
+}
+.media-slot:hover{border-color:var(--border-hover);box-shadow:0 0 20px rgba(201,168,76,0.08);}
+.media-slot img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;z-index:1;border-radius:13px;}
+.media-slot video{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;z-index:1;border-radius:13px;}
+.media-slot iframe{width:100%;height:100%;position:absolute;inset:0;z-index:1;border:none;border-radius:13px;}
+.media-slot-icon{font-size:20px;opacity:0.2;color:var(--gold);}
+.media-slot-text{font-size:9px;color:var(--text-muted);text-align:center;letter-spacing:0.12em;text-transform:uppercase;}
+.media-slot-label{
+  position:absolute;top:8px;left:8px;
+  background:rgba(10,9,8,0.85);border:1px solid var(--border);border-radius:8px;
+  padding:3px 10px;font-size:8px;font-weight:600;color:var(--gold);
+  letter-spacing:0.2em;text-transform:uppercase;z-index:2;
+}
+.video-slot{aspect-ratio:9/16;}
+.media-cat-label{
+  font-family:'Unbounded',sans-serif;font-size:11px;font-weight:600;
+  color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:14px;
+}
+
+/* ── ПРОГРАМА ── */
+.program-list{display:flex;flex-direction:column;gap:8px;}
+.lesson{
+  border:1px solid var(--border);border-radius:16px;overflow:hidden;
+  transition:border-color 0.4s,box-shadow 0.4s;margin-bottom:0;
+}
+.lesson:hover{border-color:var(--border-hover);box-shadow:0 0 20px rgba(201,168,76,0.06);}
+.lesson-header{padding:18px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;background:transparent;}
+.lesson-num{
+  font-family:'Unbounded',sans-serif;font-weight:700;font-size:18px;
+  color:rgba(201,168,76,0.2);line-height:1;flex-shrink:0;width:30px;
+}
+.lesson-title-wrap{flex:1;min-width:0;}
+.lesson-title{font-size:13px;font-weight:600;margin-bottom:3px;color:var(--text);}
+.lesson-meta{font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.03em;}
+.lesson-time{
+  font-size:9px;color:var(--text-muted);flex-shrink:0;
+  background:rgba(201,168,76,0.06);padding:4px 12px;border:1px solid var(--border);
+  border-radius:8px;white-space:nowrap;letter-spacing:0.08em;
+}
+.lesson-body{max-height:0;overflow:hidden;transition:max-height 0.5s ease,padding 0.4s;padding:0 18px;}
+.lesson.open .lesson-body{max-height:600px;padding:0 18px 20px;}
+.lesson-header::after{
+  content:'+';color:var(--gold);font-family:'Unbounded',sans-serif;
+  font-size:18px;font-weight:300;flex-shrink:0;transition:transform 0.4s;
+}
+.lesson.open .lesson-header::after{transform:rotate(45deg);}
+.lesson-points{list-style:none;display:flex;flex-direction:column;gap:7px;margin:14px 0;}
+.lesson-points li{display:flex;gap:10px;font-size:12px;color:var(--text-muted);line-height:1.6;font-weight:300;}
+.lesson-points li::before{content:'—';color:var(--gold);flex-shrink:0;font-weight:500;}
+.lesson-result{
+  background:rgba(201,168,76,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:12px;
+  padding:12px 14px;font-size:12px;color:var(--text-muted);margin-bottom:10px;line-height:1.6;font-weight:300;
+}
+.lesson-result strong{color:var(--gold);font-weight:600;}
+.lesson-hw{
+  background:rgba(201,168,76,0.03);border:1px solid rgba(201,168,76,0.1);border-radius:10px;
+  padding:12px 14px;font-size:11px;color:var(--text-muted);line-height:1.5;font-weight:300;font-style:italic;
+}
+
+/* ── TOOLS ── */
+.tools-grid{display:grid;grid-template-columns:1fr;gap:14px;}
+.tool-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;
+  transition:border-color 0.4s,box-shadow 0.4s;
+}
+.tool-card:hover{border-color:var(--border-hover);box-shadow:0 0 20px rgba(201,168,76,0.08);}
+.tool-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px;}
+.tool-name{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:600;color:var(--text);}
+.tool-price{font-size:10px;color:var(--text-muted);letter-spacing:0.04em;}
+.tool-desc{font-size:12px;color:var(--text-muted);line-height:1.65;margin-bottom:12px;font-weight:300;}
+.tool-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:9px;font-weight:600;padding:4px 12px;border-radius:8px;
+  letter-spacing:0.08em;text-transform:uppercase;
+}
+.tool-badge.green{background:rgba(168,176,96,0.1);color:var(--green);border:1px solid rgba(168,176,96,0.2);}
+.tool-badge.yellow{background:rgba(201,168,76,0.08);color:var(--gold);border:1px solid rgba(201,168,76,0.2);}
+.tool-badge.red{background:rgba(184,107,90,0.08);color:var(--red);border:1px solid rgba(184,107,90,0.2);}
+.tools-summary{
+  margin-top:18px;background:rgba(201,168,76,0.04);border:1px solid var(--border);
+  border-radius:14px;padding:16px 18px;font-size:13px;color:var(--text-muted);line-height:1.7;font-weight:300;
+}
+.tools-summary strong{color:var(--text);font-weight:600;}
+
+/* ── FOR WHO ── */
+.for-who-grid{display:grid;grid-template-columns:1fr;gap:14px;}
+.fw-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;
+  transition:border-color 0.4s,box-shadow 0.4s;
+}
+.fw-card:hover{border-color:var(--border-hover);box-shadow:0 0 20px rgba(201,168,76,0.08);}
+.fw-card h3{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text);line-height:1.35;}
+.fw-card p{font-size:12px;color:var(--text-muted);line-height:1.7;font-weight:300;}
+.fw-card p strong{color:var(--gold);font-weight:600;}
+
+/* ── RESULTS ── */
+.results-grid{display:grid;grid-template-columns:1fr;gap:14px;}
+.res-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;
+  transition:border-color 0.4s,box-shadow 0.4s;
+}
+.res-card:hover{border-color:var(--border-hover);box-shadow:0 0 20px rgba(201,168,76,0.08);}
+.res-num{font-family:'Unbounded',sans-serif;font-weight:800;font-size:36px;line-height:1;color:var(--gold);margin-bottom:8px;opacity:0.5;}
+.res-card h3{font-size:13px;font-weight:600;margin-bottom:6px;color:var(--text);}
+.res-card p{font-size:12px;color:var(--text-muted);line-height:1.6;font-weight:300;}
+
+/* ── FULL LIST ── */
+.full-list-wrap{
+  background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px 20px;
+}
+.full-list-title{
+  font-family:'Unbounded',sans-serif;font-size:20px;font-weight:700;
+  letter-spacing:-0.01em;margin-bottom:24px;text-align:center;line-height:1.3;
+}
+.full-list-title span{color:var(--gold);}
+.full-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+.full-list li{
+  display:flex;align-items:flex-start;gap:14px;font-size:12px;color:var(--text-muted);line-height:1.6;
+  padding:12px 14px;background:rgba(201,168,76,0.03);border-radius:12px;border:1px solid rgba(201,168,76,0.06);font-weight:300;
+}
+.full-list li .li-icon{flex-shrink:0;width:20px;height:20px;margin-top:1px;display:flex;align-items:center;justify-content:center;}
+.full-list li .li-icon img{width:100%;height:100%;object-fit:contain;}
+.full-list li strong{color:var(--text);font-weight:600;}
+.full-list-price{text-align:center;margin-bottom:18px;}
+.fl-old{font-size:14px;color:var(--text-muted);text-decoration:line-through;margin-right:12px;font-weight:300;}
+.fl-new{font-family:'Unbounded',sans-serif;font-weight:800;font-size:40px;color:var(--gold);}
+
+/* ── HOW ── */
+.how-grid{display:grid;grid-template-columns:1fr;gap:14px;}
+.how-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;
+  display:flex;align-items:flex-start;gap:16px;transition:border-color 0.4s,box-shadow 0.4s;
+}
+.how-card:hover{border-color:var(--border-hover);box-shadow:0 0 20px rgba(201,168,76,0.06);}
+.how-icon{
+  flex-shrink:0;width:52px;height:52px;
+  display:flex;align-items:center;justify-content:center;
+}
+.how-icon img{
+  width:100%;height:100%;object-fit:contain;
+}
+.how-card h3{font-size:13px;font-weight:600;margin-bottom:5px;color:var(--text);}
+.how-card p{font-size:11px;color:var(--text-muted);line-height:1.6;font-weight:300;}
+
+/* ── REVIEWS ── */
+.reviews-grid{display:grid;grid-template-columns:1fr;gap:14px;}
+.review-slot{
+  background:var(--card);border:1px dashed var(--border);border-radius:14px;
+  min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;padding:22px;
+}
+.review-slot-icon{font-size:18px;opacity:0.15;color:var(--gold);}
+.review-slot-text{font-size:9px;color:var(--text-muted);text-align:center;letter-spacing:0.1em;text-transform:uppercase;}
+
+/* ── GUARANTEE ── */
+.guarantee-new{
+  background:var(--card);border:1px solid rgba(168,176,96,0.2);border-radius:18px;
+  padding:32px 22px;text-align:center;
+}
+.guarantee-icon{font-size:36px;margin-bottom:16px;display:block;opacity:0.6;}
+.guarantee-new h2{
+  font-family:'Unbounded',sans-serif;font-weight:700;font-size:18px;
+  letter-spacing:-0.01em;margin-bottom:14px;color:var(--text);line-height:1.3;
+}
+.guarantee-new p{color:var(--text-muted);font-size:13px;line-height:1.75;margin-bottom:16px;font-weight:300;}
+.guarantee-conditions{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:16px;text-align:left;}
+.guarantee-conditions li{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--text-muted);line-height:1.6;font-weight:300;}
+.guarantee-conditions li::before{content:'—';color:var(--green);font-weight:500;flex-shrink:0;}
+.guarantee-final{
+  font-family:'Unbounded',sans-serif;font-size:14px;font-weight:600;color:var(--text);
+  border-top:1px solid rgba(168,176,96,0.15);padding-top:16px;line-height:1.4;
+}
+
+/* ── AUTHOR ── */
+.author-card{
+  background:var(--card);border:1px solid var(--border);border-radius:18px;
+  padding:32px 22px;text-align:center;
+}
+.author-avatar{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  border:3px solid rgba(201,168,76,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;margin:0 auto 16px;box-shadow:0 4px 20px var(--gold-glow);
+}
+.author-name{font-family:'Unbounded',sans-serif;font-weight:700;font-size:22px;letter-spacing:0.02em;margin-bottom:4px;color:var(--text);}
+.author-title{color:var(--gold);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.3em;margin-bottom:14px;}
+.author-bio{color:var(--text-muted);font-size:13px;line-height:1.7;margin-bottom:18px;font-weight:300;}
+.author-stats{display:flex;justify-content:center;gap:28px;}
+.author-stat-num{font-family:'Unbounded',sans-serif;font-weight:700;font-size:22px;color:var(--gold);}
+.author-stat-label{font-size:9px;color:var(--text-muted);letter-spacing:0.08em;}
+
+/* ── FAQ ── */
+.faq-list{display:flex;flex-direction:column;gap:8px;}
+.faq-item{border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color 0.4s,box-shadow 0.4s;}
+.faq-item:hover{border-color:var(--border-hover);}
+.faq-q{
+  padding:18px;font-weight:500;font-size:13px;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  background:transparent;transition:background 0.3s;gap:12px;line-height:1.45;color:var(--text);
+}
+.faq-q:hover{background:rgba(201,168,76,0.03);}
+.faq-arrow{color:var(--gold);font-family:'Unbounded',sans-serif;font-size:16px;font-weight:300;transition:transform 0.4s;flex-shrink:0;}
+.faq-item.open .faq-arrow{transform:rotate(45deg);}
+.faq-a{padding:0 18px;max-height:0;overflow:hidden;transition:max-height 0.5s ease,padding 0.4s;color:var(--text-muted);font-size:12px;line-height:1.75;font-weight:300;}
+.faq-item.open .faq-a{max-height:400px;padding:14px 18px 20px;}
+
+/* ── FINAL CTA ── */
+.cta-final{text-align:center;padding:52px 20px 130px;position:relative;}
+.cta-final::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,0.08) 0%,transparent 70%);pointer-events:none;}
+.cta-final h2{
+  font-family:'Unbounded',sans-serif;font-weight:700;font-size:22px;
+  letter-spacing:-0.01em;margin-bottom:14px;line-height:1.3;position:relative;color:var(--text);
+  text-transform:uppercase;
+}
+.cta-final h2 span{color:var(--gold);}
+.cta-features{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:28px;position:relative;}
+.cta-feat{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text-muted);letter-spacing:0.04em;font-weight:300;}
+.cta-feat-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);}
+.cta-price-block{display:flex;align-items:baseline;justify-content:center;gap:14px;margin:24px 0;position:relative;flex-wrap:wrap;}
+.cta-price-old{color:var(--text-muted);text-decoration:line-through;font-size:16px;font-weight:300;}
+.cta-price-new{font-family:'Unbounded',sans-serif;font-weight:800;font-size:42px;color:var(--gold);}
+.cta-badge{background:rgba(201,168,76,0.12);color:var(--gold);font-size:10px;font-weight:700;padding:4px 12px;border:1px solid var(--border);border-radius:8px;letter-spacing:0.1em;}
+.btn-cta-final{
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  color:var(--bg);border:none;padding:18px 40px;border-radius:14px;
+  font-family:'Manrope',sans-serif;font-weight:800;font-size:13px;
+  letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;
+  display:block;text-decoration:none;width:100%;text-align:center;
+  box-shadow:0 4px 28px var(--gold-glow);transition:all 0.3s;
+  position:relative;overflow:hidden;animation:ctaPulse 3s ease-in-out infinite;
+}
+.btn-cta-final:active{transform:scale(0.97);}
+.cta-note{margin-top:14px;font-size:10px;color:var(--text-muted);position:relative;letter-spacing:0.04em;font-weight:300;}
+
+footer{
+  padding:24px 20px 110px;border-top:1px solid var(--border);
+  text-align:center;color:var(--text-muted);font-size:10px;letter-spacing:0.04em;
+}
+
+/* ═══ STICKY CTA ═══ */
+.sticky-cta{
+  position:fixed;bottom:0;left:50%;
+  transform:translateX(-50%) translateY(100%);
+  width:100%;max-width:var(--max-w);z-index:200;
+  transition:transform 0.5s cubic-bezier(0.22,1,0.36,1);pointer-events:none;
+}
+.sticky-cta.visible{transform:translateX(-50%) translateY(0);pointer-events:auto;}
+.sticky-cta-inner{
+  background:rgba(10,9,8,0.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-top:1px solid var(--border);padding:14px 20px 16px;
+  display:flex;align-items:center;gap:14px;
+}
+.sticky-cta-prices{display:flex;flex-direction:column;flex-shrink:0;}
+.sticky-cta-old{font-size:10px;color:var(--text-muted);text-decoration:line-through;font-weight:300;}
+.sticky-cta-row{display:flex;align-items:center;gap:8px;}
+.sticky-cta-new{font-family:'Unbounded',sans-serif;font-weight:700;font-size:20px;color:var(--gold);line-height:1;}
+.sticky-cta-badge{background:rgba(201,168,76,0.12);color:var(--gold);font-size:8px;font-weight:700;padding:3px 8px;border:1px solid var(--border);border-radius:6px;letter-spacing:0.1em;}
+.sticky-cta-btn{
+  flex:1;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  color:var(--bg);border:none;padding:14px 10px;border-radius:12px;
+  font-family:'Manrope',sans-serif;font-weight:800;font-size:12px;
+  letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;text-decoration:none;
+  display:block;text-align:center;
+  box-shadow:0 4px 20px var(--gold-glow);
+  transition:all 0.3s;position:relative;overflow:hidden;
+  animation:ctaPulse 3s ease-in-out infinite;
+}
+.sticky-cta-btn:active{transform:scale(0.97);}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+.hero>*:not(.hero-kristal):not(.hero-kristal-blur){animation:fadeUp 0.7s ease both;}
+.hero-tag{animation-delay:.1s}
+.hero h1{animation-delay:.18s}
+.hero-sub{animation-delay:.24s}
+.before-after{animation-delay:.3s}
+.hero-disclaimer{animation-delay:.36s}
+.hero-price-row{animation-delay:.42s}
+.btn-main{animation-delay:.48s}
+.hero-cta-note{animation-delay:.52s}
+.bonuses-wrap{animation-delay:.56s}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:0.12s;}
+.reveal-delay-2{transition-delay:0.24s;}
+.reveal-delay-3{transition-delay:0.36s;}
+
+/* gold shimmer on buttons */
+.btn-main::after,.sticky-cta-btn::after,.btn-cta-final::after{
+  content:'';position:absolute;top:0;left:-100%;
+  width:60%;height:100%;
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,0.35) 45%,rgba(255,248,220,0.5) 50%,rgba(255,255,255,0.35) 55%,transparent 80%);
+  animation:gold-shine 3s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes gold-shine{
+  0%{left:-100%;}
+  60%{left:150%;}
+  100%{left:150%;}
+}
+
+/* ── SCROLL PROGRESS ── */
+.scroll-progress{
+  position:fixed;top:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:var(--max-w);height:2px;z-index:201;background:transparent;
+}
+.scroll-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold-light));transition:width 0.1s linear;}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress"><div class="scroll-progress-bar" id="scrollBar"></div></div>
+
+<!-- BG EFFECTS -->
+<div class="bg-mesh"></div>
+<div class="particles">
+  <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  <div class="particle"></div><div class="particle"></div>
+</div>
+
+<div class="page-wrapper">
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- header removed -->
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <img src="kristal AI.png" alt="" class="hero-kristal">
+  <img src="kristal AI.png" alt="" class="hero-kristal-blur">
+  <div class="hero-tag-row">
+    <div class="hero-tag">Практичний курс з ДЗ</div>
+    <div class="hero-start">Старт <span id="startDate"></span></div>
+  </div>
+  <h1>
+    <span class="h1-lead">Навчись створювати</span>
+    <span class="h1-hero">гіперреалістичний<br><span class="h1-accent">АІ контент</span></span>
+    <span class="h1-sub">за який справді готові платити<br><strong>бізнеси та бренди</strong></span>
+  </h1>
+  <div class="before-after">
+    <div class="ba-card">
+      <img src="before.png" alt="До курсу">
+      <div class="ba-label before">До курсу</div>
+    </div>
+    <div class="ba-card">
+      <img src="after.png" alt="Після курсу">
+      <div class="ba-label after">Після курсу</div>
+    </div>
+  </div>
+
+  <p class="hero-sub">де жива шкіра, природні емоції, дії в кадрі і сам товар виглядають ДОРОГО та як з РЕАЛЬНОЇ фотосесії чи зйомки</p>
+
+  <div class="hero-disclaimer"><strong>Це не курс про те, як генерувати фото і відео в АІ з нуля</strong> — це курс про те, як зробити їх такими, щоб ніхто не здогадався, що це АІ.</div>
+
+  <div class="hero-price-row">
+    <span class="h-price-old">2 400 грн</span>
+    <span class="h-price-new">390<span class="h-price-currency">грн</span></span>
+    <span class="h-price-badge">-75%</span>
+  </div>
+  <a href="#cta" class="btn-main">Приєднатись до курсу</a>
+  <span class="hero-cta-note">6 уроків &middot; ~1 год 45 хв &middot; Відео + PDF &middot; Доступ одразу</span>
+
+  <div class="bonuses-wrap">
+    <div class="bonuses-title">Бонуси для тих, хто купує курс до кінця таймеру</div>
+    <div class="bonus-timer-wrap">
+      <div class="bonus-timer-blocks">
+        <div class="bonus-timer-block"><span class="bt-num" id="btHrs">00</span><span class="bt-unit">годин</span></div>
+        <div class="bonus-timer-sep">:</div>
+        <div class="bonus-timer-block"><span class="bt-num" id="btMin">10</span><span class="bt-unit">хвилин</span></div>
+        <div class="bonus-timer-sep">:</div>
+        <div class="bonus-timer-block"><span class="bt-num" id="btSec">00</span><span class="bt-unit">секунд</span></div>
+      </div>
+    </div>
+    <div class="bonuses-grid">
+      <div class="bonus-card">
+        <div class="bonus-img"><img src="bonus1.png" alt="Бонус 1"></div>
+        <div class="bonus-body">
+          <div class="bonus-label">Бонус 1</div>
+          <div class="bonus-name">ГАЙД: Як створювати ідеальні сценарії для твого першого АІ реалістичного ролика</div>
+        </div>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-img"><img src="bonus2.png" alt="Бонус 2"></div>
+        <div class="bonus-body">
+          <div class="bonus-label">Бонус 2</div>
+          <div class="bonus-name">10 готових ідей + промптів для АІ гіперреалістичних роликів</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ У ЧОМУ СУТЬ ═══ -->
+<div class="section" id="section-sut">
+  <div class="section-title reveal">У чому <span>суть?</span></div>
+  <div class="sut-grid">
+    <div class="sut-card reveal"><div class="sut-inner"><div class="sut-content"><div class="sut-num">01</div><h3>Твої AI фото одразу "паляться"</h3><p>Більшість людей, які починають генерувати через АІ, стикаються з одним і тим самим. Результат — відразу видно, що це АІ.</p><ul class="sut-list"><li>Шкіра як пластик або латекс — без пор, текстури</li><li>Обличчя симетричне до неприродності — як манекен</li><li>Очі "скляні" — без емоції, без живого погляду</li><li>Освітлення рівне і штучне — без тіней</li><li>Товар на моделі виглядає "вклеєним"</li></ul></div><div class="sut-img-col"><div class="sut-img-placeholder"><span>&#9671;</span><p>Приклад<br>пластикової генерації</p></div></div></div></div>
+    <div class="sut-card reveal"><div class="sut-inner"><div class="sut-content"><div class="sut-num">02</div><h3>АІ-відео видає себе з першої секунди</h3><p>На відео — ще гірше. Ось що бачить глядач:</p><ul class="sut-list"><li>Рухи роботизовані — це не жива людина</li><li>Обличчя "тане" або деформується в русі</li><li>Емоції застиглі — посмішка не змінюється</li><li>Рухи рук і пальців неприродні</li><li>З кожною генерацією якість падає</li></ul></div><div class="sut-img-col"><div class="sut-img-placeholder"><span>&#9671;</span><p>Приклад<br>роботизованого відео</p></div></div></div></div>
+    <div class="sut-card solution reveal" id="section-3"><div class="sut-inner"><div class="sut-content"><div class="sut-num">03</div><h3>Реалізм — це не магія.<br>Це система з 6 уроків.</h3><p>6 уроків. 6 АІ-інструментів. Один фокус — реалізм.</p><div class="solution-items"><div class="sol-item"><div class="sol-dot"></div>Типаж і зовнішність моделі під бізнес</div><div class="sol-item"><div class="sol-dot"></div>Світло, стилі й атмосфера</div><div class="sol-item"><div class="sol-dot"></div>Живі емоції і міміка</div><div class="sol-item"><div class="sol-dot"></div>Ракурси без втрати реалізму</div><div class="sol-item"><div class="sol-dot"></div>Товар або одяг на моделі</div><div class="sol-item"><div class="sol-dot"></div>Текстура шкіри — жива, не пластик</div><div class="sol-item"><div class="sol-dot"></div>Відео з природним рухом</div><div class="sol-item"><div class="sol-dot"></div>Upscale якості у пару кліків</div></div></div><div class="sut-img-col"><div class="sut-img-placeholder"><span>&#10022;</span><p>Приклад<br>реалістичної генерації</p></div></div></div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ФОТО + ВІДЕО ═══ -->
+<div class="media-section">
+  <img src="planetAI.png" alt="" class="media-planet">
+  <img src="planetAI.png" alt="" class="media-planet-blur">
+  <div class="media-title reveal">Ось такі <span>фото і відео</span> ти зможеш робити</div>
+  <div class="media-sub reveal">AI Realism — реальні приклади генерацій</div>
+  <div class="media-cat-label reveal">Відео</div>
+  <div class="media-grid reveal" style="margin-bottom:28px;">
+    <div class="media-slot video-slot"><iframe src="https://www.youtube.com/embed/mUqIYr6Vb5s?autoplay=1&mute=1&loop=1&playlist=mUqIYr6Vb5s&playsinline=1&controls=0" allow="autoplay; encrypted-media" allowfullscreen></iframe><div class="media-slot-label">відео 1</div></div>
+    <div class="media-slot video-slot"><iframe src="https://www.youtube.com/embed/PWPmUiAVvv8?autoplay=1&mute=1&loop=1&playlist=PWPmUiAVvv8&playsinline=1&controls=0" allow="autoplay; encrypted-media" allowfullscreen></iframe><div class="media-slot-label">відео 2</div></div>
+    <div class="media-slot video-slot"><iframe src="https://www.youtube.com/embed/3qG8ZGF7ZgY?autoplay=1&mute=1&loop=1&playlist=3qG8ZGF7ZgY&playsinline=1&controls=0" allow="autoplay; encrypted-media" allowfullscreen></iframe><div class="media-slot-label">відео 3</div></div>
+  </div>
+  <div class="media-cat-label reveal">Фото</div>
+  <div class="media-grid reveal">
+    <div class="media-slot"><img src="hf_20260330_105244_24514b95-f7da-4bec-97dd-02e86fa5c340.png" alt="AI фото 1"><div class="media-slot-label">фото 1</div></div>
+    <div class="media-slot"><img src="hf_20260330_105119_4b0fa233-3e39-4c7d-8970-72d56d0bbad9.png" alt="AI фото 2"><div class="media-slot-label">фото 2</div></div>
+    <div class="media-slot"><img src="hf_20260330_105202_b1f4bf13-2994-4d1f-9978-9a39f5d1d02d.png" alt="AI фото 3"><div class="media-slot-label">фото 3</div></div>
+    <div class="media-slot"><img src="hf_20260330_105136_988c2e42-045e-4ded-a2b7-4b60b391a878.png" alt="AI фото 4"><div class="media-slot-label">фото 4</div></div>
+    <div class="media-slot"><div class="media-slot-icon">&#9671;</div><div class="media-slot-text">AI фото</div><div class="media-slot-label">фото 5</div></div>
+    <div class="media-slot"><div class="media-slot-icon">&#9671;</div><div class="media-slot-text">AI фото</div><div class="media-slot-label">фото 6</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ДЛЯ КОГО ═══ -->
+<div class="section">
+  <div class="section-title reveal">Для кого <span>цей курс?</span></div>
+  <div class="for-who-grid">
+    <div class="fw-card reveal"><h3>Власник бізнесу або магазину</h3><p>Твій товар заслуговує на фото і відео, які виглядають як справжня зйомка — а не як <strong>"щось згенероване"</strong>.</p></div>
+    <div class="fw-card reveal"><h3>SMM-спеціаліст або маркетолог</h3><p>Вже генеруєш через АІ, але реалізму немає — <strong>і клієнт це бачить</strong>. Після курсу — більше тестів, вищий чек.</p></div>
+    <div class="fw-card reveal"><h3>Фрілансер або контент-мейкер</h3><p>Хочеш вийти на рівень, де за реалістичний АІ-контент платять дорого. <strong>Реалізм — конкурентна перевага.</strong></p></div>
+    <div class="fw-card reveal"><h3>Хочеш монетизувати АІ</h3><p>Бренди масово шукають тих, хто вміє створювати реалістичний АІ-контент. <strong>Після курсу це твоя послуга.</strong></p></div>
+    <div class="fw-card reveal"><h3>Повний новачок</h3><p>Ніколи нічого не генерував — стартуєш одразу з рівня реалізму, а не витрачаєш місяці на експерименти.</p></div>
+    <div class="fw-card reveal"><h3>Генеруєш, але виходить пластик</h3><p>Знаєш як генерувати — але реалізму немає. Курс <strong>переведе на рівень, де не відрізнити від реального.</strong></p></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ШЛЯХ ═══ -->
+<div class="section">
+  <div class="section-title reveal">Твій шлях <span>за 6 уроків</span></div>
+  <div class="journey-grid">
+    <div class="journey-line"></div>
+    <div class="journey-step reveal"><div class="journey-num">01</div><div class="journey-info"><div class="journey-label">Урок 1</div><div class="journey-text">Розбираєш інструменти і збираєш ланцюг</div></div></div>
+    <div class="journey-step reveal reveal-delay-1"><div class="journey-num">02</div><div class="journey-info"><div class="journey-label">Урок 2</div><div class="journey-text">Створюєш гіперреалістичну АІ-модель</div></div></div>
+    <div class="journey-step reveal reveal-delay-1"><div class="journey-num">03</div><div class="journey-info"><div class="journey-label">Урок 3</div><div class="journey-text">Додаєш світло, емоції та ракурс</div></div></div>
+    <div class="journey-step reveal reveal-delay-2"><div class="journey-num">04</div><div class="journey-info"><div class="journey-label">Урок 4</div><div class="journey-text">Одягаєш реальний товар на модель</div></div></div>
+    <div class="journey-step reveal reveal-delay-2"><div class="journey-num">05</div><div class="journey-info"><div class="journey-label">Урок 5</div><div class="journey-text">Робиш шкіру живою і прибираєш пластик</div></div></div>
+    <div class="journey-step reveal reveal-delay-3"><div class="journey-num">06</div><div class="journey-info"><div class="journey-label">Урок 6</div><div class="journey-text">Оживлюєш модель у реалістичне відео</div></div></div>
+  </div>
+  <div class="journey-final reveal"><div class="journey-final-label">Фінальний результат</div><div class="journey-final-text">Ти виходиш з курсу з готовим гіперреалістичним фото 4K і живим відео — контентом, який неможливо відрізнити від реальної зйомки.</div></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ДО / ПІСЛЯ ═══ -->
+<div class="section">
+  <div class="section-title reveal">До курсу <span>vs Після</span></div>
+  <div class="comparison-wrap"><table class="comparison-table"><thead><tr><th>До курсу</th><th>Після курсу</th></tr></thead><tbody>
+    <tr><td>Шкіра як пластик — без пор і текстури</td><td>Жива шкіра — пори, асиметрія, текстура</td></tr>
+    <tr><td>Обличчя як манекен — воскове</td><td>Природна зовнішність під задачу</td></tr>
+    <tr><td>Очі "скляні" — без емоції</td><td>Живий погляд — посмішка, впевненість</td></tr>
+    <tr><td>Освітлення штучне</td><td>Контрольоване світло — fashion, студія</td></tr>
+    <tr><td>Товар виглядає "вклеєним"</td><td>Товар органічний — тіні, відображення</td></tr>
+    <tr><td>Ракурс — модель "розсипається"</td><td>Будь-який ракурс без втрати якості</td></tr>
+    <tr><td>Відео роботизоване</td><td>Відео живе — природні жести</td></tr>
+    <tr><td>Обличчя "тане" в анімації</td><td>Обличчя стабільне в анімації</td></tr>
+    <tr><td>Якість падає при генерації</td><td>Upscale до максимальної якості</td></tr>
+  </tbody></table></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ПРОГРАМА ═══ -->
+<div class="section">
+  <div class="section-title reveal">Програма курсу <span>AI Realism</span></div>
+  <div class="program-list">
+    <div class="lesson open reveal"><div class="lesson-header" onclick="toggleLesson(this)"><div class="lesson-num">01</div><div class="lesson-title-wrap"><div class="lesson-title">СТАРТ: Інструменти та підписки</div><div class="lesson-meta">ChatGPT &middot; Midjourney &middot; Higgsfield &middot; Kling</div></div><div class="lesson-time">15–20 хв</div></div><div class="lesson-body"><ul class="lesson-points"><li>Огляд інтерфейсу нейронок — фото</li><li>Огляд інтерфейсу нейронок — відео</li><li>Створення кастомного чату в GPT для промптів</li></ul><div class="lesson-result"><strong>Результат:</strong> Ти зрозумієш ЛАНЦЮГ створення реалістичного контенту і які нейронки потрібні.</div><div class="lesson-hw">Домашнє завдання: налаштувати кастомний чат у ChatGPT і зробити перший промпт</div></div></div>
+    <div class="lesson reveal"><div class="lesson-header" onclick="toggleLesson(this)"><div class="lesson-num">02</div><div class="lesson-title-wrap"><div class="lesson-title">Гіперреалістична АІ-модель</div><div class="lesson-meta">ChatGPT &middot; Midjourney</div></div><div class="lesson-time">15–20 хв</div></div><div class="lesson-body"><ul class="lesson-points"><li>Лайфхак: типаж та зовнішність під бізнес</li><li>Генерація АІ-моделі в Midjourney по параметрам REALISM</li><li>Перший upscale якості АІ-моделі</li></ul><div class="lesson-result"><strong>Результат:</strong> Твоя перша гіперреалістична АІ-модель — живий результат, а не "пластик".</div><div class="lesson-hw">Домашнє завдання: згенерувати модель під свій бізнес і зробити upscale</div></div></div>
+    <div class="lesson reveal"><div class="lesson-header" onclick="toggleLesson(this)"><div class="lesson-num">03</div><div class="lesson-title-wrap"><div class="lesson-title">Світло, стиль, емоції та ракурси</div><div class="lesson-meta">ChatGPT &middot; Higgsfield</div></div><div class="lesson-time">15–20 хв</div></div><div class="lesson-body"><ul class="lesson-points"><li>Стиль фото через промпт — fashion, студія, натуральне</li><li>Живі емоції та міміка — посмішка, впевненість</li><li>Ракурс без втрати РЕАЛІЗМУ та якості</li><li>Як вписати модель у локацію</li></ul><div class="lesson-result"><strong>Результат:</strong> Модель виглядатиме як знімок з дорогої фотосесії.</div><div class="lesson-hw">Домашнє завдання: 3 варіанти фото з різним світлом і емоціями</div></div></div>
+    <div class="lesson reveal"><div class="lesson-header" onclick="toggleLesson(this)"><div class="lesson-num">04</div><div class="lesson-title-wrap"><div class="lesson-title">Реальний товар на АІ-моделі</div><div class="lesson-meta">Midjourney &middot; Higgsfield</div></div><div class="lesson-time">15–20 хв</div></div><div class="lesson-body"><ul class="lesson-points"><li>Перенесення реального товару на АІ-модель</li><li>Поєднання: модель + товар + локація</li><li>Збереження деталей товару та кольору</li><li>Реалістичні складки, посадка та матеріал</li><li>Тіні, відображення, органічність</li></ul><div class="lesson-result"><strong>Результат:</strong> Готові фото з товаром на моделі — не відрізнити від зйомки.</div><div class="lesson-hw">Домашнє завдання: перенести реальний товар на свою АІ-модель</div></div></div>
+    <div class="lesson reveal"><div class="lesson-header" onclick="toggleLesson(this)"><div class="lesson-num">05</div><div class="lesson-title-wrap"><div class="lesson-title">Жива шкіра та максимальна якість</div><div class="lesson-meta">Higgsfield</div></div><div class="lesson-time">15–20 хв</div></div><div class="lesson-body"><ul class="lesson-points"><li>Повний список елементів для живої шкіри</li><li>Спосіб 1: покращення шкіри готовим інструментом</li><li>Спосіб 2: три промпти для Higgsfield</li><li>Ідеальна шкіра ≠ жива шкіра — психологія РЕАЛІЗМУ</li></ul><div class="lesson-result"><strong>Результат:</strong> Генерації не видаватимуть "пластик" — візуал працюватиме на довіру.</div><div class="lesson-hw">Домашнє завдання: застосувати обидва способи покращення шкіри</div></div></div>
+    <div class="lesson reveal"><div class="lesson-header" onclick="toggleLesson(this)"><div class="lesson-num">06</div><div class="lesson-title-wrap"><div class="lesson-title">Оживлення: відео з емоціями та жестами</div><div class="lesson-meta">ChatGPT &middot; Kling</div></div><div class="lesson-time">15–20 хв</div></div><div class="lesson-body"><ul class="lesson-points"><li>Якісні промпти з емоціями для Kling через ChatGPT</li><li>Оживлення фото з уроку 5 у відео</li><li>Реалістичний рух — без роботизованості</li><li>Уникнення деформацій обличчя в анімації</li></ul><div class="lesson-result"><strong>Результат:</strong> Статичне фото стає живим відео — готове для реклами або соцмереж.</div><div class="lesson-hw">Домашнє завдання: оживити фото з уроку 5 та зробити фінальне відео</div></div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ РЕЗУЛЬТАТИ ═══ -->
+<div class="section">
+  <div class="section-title reveal">Після курсу <span>ти вмієш:</span></div>
+  <div class="results-grid">
+    <div class="res-card reveal"><div class="res-num">01</div><h3>Розуміти весь процес від і до</h3><p>Ланцюг із 6 нейронок — від промпту до фінального відео.</p></div>
+    <div class="res-card reveal"><div class="res-num">02</div><h3>Створювати гіперреалістичну АІ-модель</h3><p>Правильний типаж і параметри — живий результат з першої спроби.</p></div>
+    <div class="res-card reveal"><div class="res-num">03</div><h3>Керувати світлом, стилем, емоціями</h3><p>Атмосфера через промпт, живий погляд. Ракурс без втрати реалізму.</p></div>
+    <div class="res-card reveal"><div class="res-num">04</div><h3>Переносити товар на АІ-модель</h3><p>Модель + товар + локація зі збереженням кольору і тіней.</p></div>
+    <div class="res-card reveal"><div class="res-num">05</div><h3>Прибирати пластиковість шкіри</h3><p>Два способи зробити шкіру живою + upscale якості.</p></div>
+    <div class="res-card reveal"><div class="res-num">06</div><h3>Оживлювати фото в відео</h3><p>Природний рух без деформацій — готове для реклами.</p></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ЯК ПРОХОДИТЬ ═══ -->
+<div class="section">
+  <div class="section-title reveal">Як проходить <span>навчання?</span></div>
+  <div class="how-grid">
+    <div class="how-card reveal"><div class="how-icon"><img src="1.png" alt=""></div><div><h3>Telegram-бот</h3><p>Всі уроки у зручному форматі. З телефону або ПК.</p></div></div>
+    <div class="how-card reveal"><div class="how-icon"><img src="2.png" alt=""></div><div><h3>Натисни — Повтори — Результат</h3><p>Покрокові інструкції без води.</p></div></div>
+    <div class="how-card reveal"><div class="how-icon"><img src="3.png" alt=""></div><div><h3>PDF до кожного уроку</h3><p>Промпти, чек-листи і матеріали назавжди.</p></div></div>
+    <div class="how-card reveal"><div class="how-icon"><img src="4.png" alt=""></div><div><h3>Домашнє завдання</h3><p>Практика після кожного уроку.</p></div></div>
+    <div class="how-card reveal"><div class="how-icon"><img src="5.png" alt=""></div><div><h3>Доступ назавжди</h3><p>Купуєш один раз — без обмежень по часу.</p></div></div>
+    <div class="how-card reveal"><div class="how-icon"><img src="6.png" alt=""></div><div><h3>Старт одразу після оплати</h3><p>Доступ миттєво.</p></div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ НЕЙРОНКИ ═══ -->
+<div class="section">
+  <div class="section-title reveal">Нейронки, з якими <span>працюватимеш</span></div>
+  <div class="tools-grid">
+    <div class="tool-card reveal"><div class="tool-top"><div class="tool-name">ChatGPT</div><div class="tool-price">Безкоштовно / від $20/міс</div></div><div class="tool-desc">Промпти для генерації фото і відео. Безкоштовної версії вистачить.</div><span class="tool-badge green">Підписка не обов'язкова</span></div>
+    <div class="tool-card reveal"><div class="tool-top"><div class="tool-name">Midjourney</div><div class="tool-price">від $10/міс</div></div><div class="tool-desc">Гіперреалістична АІ-модель з потрібним типажем.</div><span class="tool-badge yellow">Можна обійтись</span></div>
+    <div class="tool-card reveal"><div class="tool-top"><div class="tool-name">Higgsfield</div><div class="tool-price">від $15/міс</div></div><div class="tool-desc">Основний інструмент. Емоції, міміка, текстура шкіри, товар.</div><span class="tool-badge red">Потрібна — серце процесу</span></div>
+    <div class="tool-card reveal"><div class="tool-top"><div class="tool-name">Kling / Veo / Cinema</div><div class="tool-price">Безкоштовний старт</div></div><div class="tool-desc">Оживлення фото в реалістичне відео.</div><span class="tool-badge yellow">Безкоштовний старт</span></div>
+  </div>
+  <div class="tools-summary reveal"><strong>Мінімальний старт — від $15/міс</strong> (Higgsfield). Повний комплект — від $25–45/міс.</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ПОВНИЙ СПИСОК ═══ -->
+<div class="section">
+  <div class="full-list-wrap reveal">
+    <div class="full-list-title">Повний список того,<br>що ти <span>отримаєш:</span></div>
+    <ul class="full-list">
+      <li><span class="li-icon"><img src="checkmark.png" alt="✓"></span><div><strong>6 практичних уроків</strong> — кожен конкретний навик, одразу в практику</div></li>
+      <li><span class="li-icon"><img src="checkmark.png" alt="✓"></span><div><strong>6 нейронок:</strong> ChatGPT, Midjourney, Higgsfield, Kling, Veo, Cinema Studio</div></li>
+      <li><span class="li-icon"><img src="checkmark.png" alt="✓"></span><div><strong>Готові промпти</strong> для гіперреалістичних фото і відео</div></li>
+      <li><span class="li-icon"><img src="checkmark.png" alt="✓"></span><div><strong>ЛАЙФХАК:</strong> типаж АІ-моделі під конкретний бізнес</div></li>
+      <li><span class="li-icon"><img src="checkmark.png" alt="✓"></span><div><strong>ТЕХНОЛОГІЯ:</strong> перенесення товару на АІ-модель зі збереженням деталей</div></li>
+      <li><span class="li-icon"><img src="checkmark.png" alt="✓"></span><div><strong>ТЕХНОЛОГІЯ:</strong> модель + товар + локація в одній сцені</div></li>
+      <li><span class="li-icon"><img src="checkmark.png" alt="✓"></span><div><strong>2 методи</strong> покращення шкіри — прибираємо пластик</div></li>
+      <li><span class="li-icon"><img src="checkmark.png" alt="✓"></span><div><strong>ПРАКТИКА:</strong> оживлення фото у відео через Kling + ChatGPT</div></li>
+      <li><span class="li-icon">&#10022;</span><div><strong>БОНУС 1:</strong> ГАЙД — сценарії для АІ реалістичного ролика</div></li>
+      <li><span class="li-icon">&#10022;</span><div><strong>БОНУС 2:</strong> 10 ідей + промптів для гіперреалістичних роликів</div></li>
+      <li><span class="li-icon"><img src="checkmark.png" alt="✓"></span><div><strong>Доступ до курсу — назавжди</strong></div></li>
+      <li><span class="li-icon"><img src="checkmark.png" alt="✓"></span><div><strong>Підтримка</strong> від автора курсу</div></li>
+      <li><span class="li-icon"><img src="checkmark.png" alt="✓"></span><div><strong>Гарантія повернення</strong> на 14 днів</div></li>
+    </ul>
+    <div class="full-list-price"><span class="fl-old">2 400 грн</span><span class="fl-new">390 грн</span></div>
+    <div style="text-align:center;"><a href="#cta" class="btn-main">ПРИЄДНАТИСЬ</a></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ГАРАНТІЯ ═══ -->
+<div class="section">
+  <div class="section-title reveal">Нуль <span>ризиків</span></div>
+  <div class="guarantee-new reveal">
+    <div class="guarantee-icon">&#9671;</div>
+    <h2>14 днів — повна гарантія повернення</h2>
+    <p>Якщо протягом 14 днів ти пройдеш уроки і не зможеш:</p>
+    <ul class="guarantee-conditions"><li>створити гіперреалістичну АІ-модель без пластику</li><li>додати живі емоції та правильне освітлення</li><li>перенести товар на модель зі збереженням деталей</li><li>прибрати пластиковість шкіри двома способами</li><li>оживити фото в реалістичне відео</li></ul>
+    <p>— я без питань поверну тобі кошти.</p>
+    <div class="guarantee-final">Або реалістичний AI-контент — або гроші назад.</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ АВТОР ═══ -->
+<div class="section">
+  <div class="section-title reveal">Про <span>автора</span></div>
+  <div class="author-card reveal">
+    <div class="author-avatar">&#9671;</div>
+    <div class="author-name">РОМАН</div>
+    <div class="author-title">AI-контент &middot; Реалізм &middot; Практик</div>
+    <div class="author-bio">[Додати текст від Романа: досвід роботи з АІ, кейси, результати студентів]</div>
+    <div class="author-stats"><div><div class="author-stat-num">1950+</div><div class="author-stat-label">студентів</div></div><div><div class="author-stat-num">6</div><div class="author-stat-label">AI-інструментів</div></div><div><div class="author-stat-num">2024</div><div class="author-stat-label">рік старту</div></div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ВІДГУКИ ═══ -->
+<div class="section">
+  <div class="section-title reveal">Що <span>говорять студенти</span></div>
+  <div class="reviews-grid">
+    <div class="review-slot reveal"><div class="review-slot-icon">&#9671;</div><div class="review-slot-text">Відгук студента</div></div>
+    <div class="review-slot reveal"><div class="review-slot-icon">&#9671;</div><div class="review-slot-text">Відгук студента</div></div>
+    <div class="review-slot reveal"><div class="review-slot-icon">&#9671;</div><div class="review-slot-text">Відгук студента</div></div>
+    <div class="review-slot reveal"><div class="review-slot-icon">&#9671;</div><div class="review-slot-text">Відгук студента</div></div>
+    <div class="review-slot reveal"><div class="review-slot-icon">&#9671;</div><div class="review-slot-text">Відгук студента</div></div>
+    <div class="review-slot reveal"><div class="review-slot-icon">&#9671;</div><div class="review-slot-text">Відгук студента</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ FAQ ═══ -->
+<div class="section">
+  <div class="section-title reveal">Питання та <span>відповіді</span></div>
+  <div class="faq-list">
+    <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Скільки коштують підписки на нейронки?<span class="faq-arrow">+</span></div><div class="faq-a">[Відповідь від Романа — мінімальний старт від $15/міс (Higgsfield), повний комплект від $25–45/міс]</div></div>
+    <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Підходить, якщо ніколи не працював з АІ?<span class="faq-arrow">+</span></div><div class="faq-a">Так, абсолютно. Курс побудований за принципом "натисни — повтори — отримай результат". Стартуєш одразу з правильного фундаменту. Після першого уроку все стане на свої місця.</div></div>
+    <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Вже генерую контент. Чи знайду нове?<span class="faq-arrow">+</span></div><div class="faq-a">Так. Курс фокусується на реалізмі — деталях, які роблять генерацію живою. Більшість ніколи системно не опрацьовувала текстуру шкіри, світло через промпти і відео без деформацій.</div></div>
+    <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Як довго буде доступ до курсу?<span class="faq-arrow">+</span></div><div class="faq-a">Назавжди. Купуєш один раз — матеріали залишаються без обмежень по часу.</div></div>
+    <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Чи можна монетизувати навичку?<span class="faq-arrow">+</span></div><div class="faq-a">Так. Бренди і бізнеси активно шукають тих, хто вміє створювати реалістичний АІ-контент. Після курсу у тебе є конкретний навик, який можна продавати.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ FINAL CTA ═══ -->
+<div class="cta-final" id="cta">
+  <h2>Готовий вийти на<br><span>новий рівень реалізму?</span></h2>
+  <div class="cta-features">
+    <div class="cta-feat"><div class="cta-feat-dot"></div>6 уроків</div>
+    <div class="cta-feat"><div class="cta-feat-dot"></div>6 нейронок</div>
+    <div class="cta-feat"><div class="cta-feat-dot"></div>Відео + PDF</div>
+    <div class="cta-feat"><div class="cta-feat-dot"></div>Домашні завдання</div>
+    <div class="cta-feat"><div class="cta-feat-dot"></div>Доступ назавжди</div>
+    <div class="cta-feat"><div class="cta-feat-dot"></div>14 днів гарантія</div>
+  </div>
+  <div class="cta-price-block"><span class="cta-price-old">2 400 грн</span><span class="cta-price-new">390 грн</span><span class="cta-badge">-75%</span></div>
+  <a href="#" class="btn-cta-final">Приєднатись до курсу</a>
+  <div class="cta-note">Старт одразу &middot; Без ризиків &middot; 14 днів гарантія</div>
+</div>
+
+<footer>
+  <p>&copy; 2025 AI Realism</p>
+  <p style="margin-top:8px;"><a href="#" style="color:var(--text-muted);text-decoration:none;margin:0 10px;font-size:10px;">Політика конфіденційності</a><a href="#" style="color:var(--text-muted);text-decoration:none;margin:0 10px;font-size:10px;">Договір оферти</a></p>
+</footer>
+
+</div>
+
+<!-- STICKY CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <div class="sticky-cta-inner">
+    <div class="sticky-cta-prices"><div class="sticky-cta-old">2 400 грн</div><div class="sticky-cta-row"><div class="sticky-cta-new">390 грн</div><div class="sticky-cta-badge">-75%</div></div></div>
+    <a href="#cta" class="sticky-cta-btn">Приєднатись</a>
+  </div>
+</div>
+
+<script>
+// bonus timer — 10 min from page load
+(function(){
+  let total=600;
+  const hEl=document.getElementById('btHrs');
+  const mEl=document.getElementById('btMin');
+  const sEl=document.getElementById('btSec');
+  if(!mEl||!sEl||!hEl)return;
+  function tick(){
+    if(total<=0){hEl.textContent='00';mEl.textContent='00';sEl.textContent='00';return;}
+    total--;
+    const h=Math.floor(total/3600);
+    const m=Math.floor((total%3600)/60);
+    const s=total%60;
+    hEl.textContent=String(h).padStart(2,'0');
+    mEl.textContent=String(m).padStart(2,'0');
+    sEl.textContent=String(s).padStart(2,'0');
+  }
+  setInterval(tick,1000);
+})();
+
+// dynamic start date — always tomorrow
+(function(){
+  const months=['січня','лютого','березня','квітня','травня','червня','липня','серпня','вересня','жовтня','листопада','грудня'];
+  const d=new Date();d.setDate(d.getDate()+1);
+  const el=document.getElementById('startDate');
+  if(el)el.textContent=d.getDate()+' '+months[d.getMonth()];
+})();
+
+function toggleLesson(h){const l=h.parentElement;const o=l.classList.contains('open');document.querySelectorAll('.lesson.open').forEach(x=>x.classList.remove('open'));if(!o)l.classList.add('open');}
+function toggleFaq(q){const i=q.parentElement;const o=i.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(x=>x.classList.remove('open'));if(!o)i.classList.add('open');}
+const revEls=document.querySelectorAll('.reveal');
+const rObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');rObs.unobserve(x.target);}});},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+revEls.forEach(el=>rObs.observe(el));
+const stCta=document.getElementById('stickyCta'),trEl=document.getElementById('section-3'),ctaF=document.getElementById('cta');
+function uS(){if(!trEl||!stCta)return;const t=trEl.getBoundingClientRect().top,c=ctaF?ctaF.getBoundingClientRect().top:Infinity,w=window.innerHeight;if(t<w*0.7&&c>w)stCta.classList.add('visible');else stCta.classList.remove('visible');}
+window.addEventListener('scroll',uS,{passive:true});uS();
+const sB=document.getElementById('scrollBar');
+window.addEventListener('scroll',()=>{const s=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;if(sB)sB.style.width=(s/d)*100+'%';},{passive:true});
+</script>
+</body>
+</html>

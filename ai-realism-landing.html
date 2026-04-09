@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI REALISM — Гіперреалістичні фото і відео</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080810;
+  --bg2: #0d0d1a;
+  --bg3: #111124;
+  --accent: #7B5CFA;
+  --accent2: #4F8EF7;
+  --accent-glow: rgba(123,92,250,0.35);
+  --text: #f0f0ff;
+  --text-muted: #8888aa;
+  --border: rgba(123,92,250,0.18);
+  --card: rgba(255,255,255,0.03);
+  --orange: #FF6B35;
+  --green: #00E5A0;
+  --red: #FF4444;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--text); font-family:'Manrope',sans-serif; font-size:16px; line-height:1.6; overflow-x:hidden; }
+.orb { position:fixed; border-radius:50%; filter:blur(120px); pointer-events:none; z-index:0; opacity:0.12; }
+.orb-1 { width:600px; height:600px; background:var(--accent); top:-200px; right:-100px; }
+.orb-2 { width:400px; height:400px; background:var(--accent2); bottom:10%; left:-100px; }
+section, header, footer, .hero, .cta-final { position:relative; z-index:1; }
+
+/* ── HEADER ── */
+header { padding:16px 40px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border); backdrop-filter:blur(20px); position:sticky; top:0; z-index:100; background:rgba(8,8,16,0.92); }
+.logo { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:3px; background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.header-price { display:flex; align-items:center; gap:12px; }
+.price-old { color:var(--text-muted); text-decoration:line-through; font-size:14px; }
+.price-new { font-size:20px; font-weight:800; }
+.badge-disc { background:var(--orange); color:#fff; font-size:11px; font-weight:800; padding:4px 8px; border-radius:4px; letter-spacing:1px; }
+.btn-header { background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border:none; padding:10px 24px; border-radius:8px; font-family:'Manrope',sans-serif; font-weight:700; font-size:13px; cursor:pointer; text-decoration:none; display:inline-block; transition:opacity 0.2s,transform 0.2s; }
+.btn-header:hover { opacity:0.9; transform:translateY(-1px); }
+
+/* ── HERO ── */
+.hero { padding:72px 40px 56px; max-width:1000px; margin:0 auto; text-align:center; }
+.hero-tag { display:inline-block; border:1px solid var(--border); background:rgba(123,92,250,0.08); color:var(--accent); padding:6px 18px; border-radius:100px; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:28px; }
+.hero h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(38px,7vw,80px); line-height:1.05; letter-spacing:2px; margin-bottom:20px; }
+.hero h1 span { background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.hero-sub { font-size:clamp(15px,2vw,19px); color:var(--text-muted); max-width:640px; margin:0 auto 32px; line-height:1.65; }
+
+/* before/after */
+.before-after { display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:560px; margin:0 auto 28px; }
+.ba-card { border-radius:14px; overflow:hidden; position:relative; border:1px solid var(--border); aspect-ratio:3/4; background:var(--bg3); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px; padding:20px; }
+.ba-label { position:absolute; bottom:10px; left:50%; transform:translateX(-50%); padding:5px 14px; border-radius:100px; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; white-space:nowrap; }
+.ba-label.before { background:rgba(255,80,80,0.2); color:#ff6060; border:1px solid rgba(255,80,80,0.3); }
+.ba-label.after { background:rgba(123,92,250,0.2); color:#a88fff; border:1px solid rgba(123,92,250,0.3); }
+.ba-icon { font-size:44px; opacity:0.3; }
+.ba-text { font-size:12px; color:var(--text-muted); text-align:center; line-height:1.4; }
+
+/* hero disclaimer */
+.hero-disclaimer { display:inline-block; border-left:3px solid var(--accent); padding:12px 18px; background:rgba(123,92,250,0.05); border-radius:0 8px 8px 0; font-size:14px; color:var(--text-muted); max-width:660px; margin:0 auto 36px; text-align:left; }
+.hero-disclaimer strong { color:var(--text); }
+
+/* hero price + cta */
+.hero-price-row { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:14px; }
+.h-price-old { color:var(--text-muted); text-decoration:line-through; font-size:18px; }
+.h-price-new { font-family:'Bebas Neue',sans-serif; font-size:52px; line-height:1; color:#fff; letter-spacing:1px; }
+.h-price-badge { background:var(--orange); color:#fff; font-size:12px; font-weight:800; padding:5px 10px; border-radius:6px; letter-spacing:1px; }
+.btn-main { background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border:none; padding:18px 48px; border-radius:12px; font-family:'Manrope',sans-serif; font-weight:800; font-size:16px; cursor:pointer; letter-spacing:0.5px; transition:all 0.2s; text-decoration:none; display:inline-block; box-shadow:0 0 40px var(--accent-glow); }
+.btn-main:hover { transform:translateY(-2px); box-shadow:0 0 60px var(--accent-glow); }
+.hero-cta-note { font-size:12px; color:var(--text-muted); margin-top:10px; display:block; }
+
+/* bonuses */
+.bonuses-wrap { margin-top:36px; max-width:680px; margin-left:auto; margin-right:auto; }
+.bonuses-title { font-size:15px; font-weight:800; color:#fff; margin-bottom:16px; text-align:center; }
+.bonuses-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.bonus-card { background:rgba(123,92,250,0.06); border:1px solid rgba(123,92,250,0.2); border-radius:14px; overflow:hidden; }
+.bonus-img { background:rgba(123,92,250,0.08); border-bottom:1px solid rgba(123,92,250,0.12); min-height:90px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:16px; }
+.bonus-img span { font-size:32px; }
+.bonus-img small { font-size:10px; color:#5a5a7a; letter-spacing:0.06em; text-transform:uppercase; }
+.bonus-body { padding:14px; }
+.bonus-label { font-size:10px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:4px; }
+.bonus-name { font-size:13px; font-weight:700; color:#fff; line-height:1.4; }
+
+/* ── SECTIONS ── */
+.section { padding:72px 40px; max-width:1000px; margin:0 auto; }
+.section-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(30px,5vw,52px); letter-spacing:2px; margin-bottom:40px; line-height:1.1; }
+.section-title span { background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.divider { height:1px; background:linear-gradient(90deg,transparent,var(--border),transparent); margin:0 40px; }
+
+/* ── У ЧОМУ СУТЬ (2-col: text left, image right) ── */
+.sut-grid { display:flex; flex-direction:column; gap:20px; }
+.sut-card { background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:border-color 0.3s; }
+.sut-card:hover { border-color:rgba(123,92,250,0.35); }
+.sut-inner { display:grid; grid-template-columns:1fr 280px; gap:0; min-height:260px; }
+.sut-content { padding:28px 28px 28px 32px; position:relative; }
+.sut-num { font-family:'Bebas Neue',sans-serif; font-size:56px; line-height:1; color:rgba(123,92,250,0.1); position:absolute; right:20px; top:12px; letter-spacing:-2px; }
+.sut-card h3 { font-size:17px; font-weight:800; color:var(--orange); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:14px; line-height:1.3; }
+.sut-card.solution h3 { color:var(--accent2); }
+.sut-card p { color:var(--text-muted); margin-bottom:14px; font-size:14px; line-height:1.65; }
+.sut-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.sut-list li { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:var(--text-muted); line-height:1.5; }
+.sut-list li::before { content:'—'; color:var(--orange); flex-shrink:0; font-weight:700; }
+.sut-card.solution .sut-list li::before { color:var(--accent2); }
+.sut-img-col { border-left:1px solid var(--border); background:rgba(123,92,250,0.03); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:20px; min-height:220px; }
+.sut-img-placeholder { width:100%; height:100%; min-height:200px; border:2px dashed rgba(123,92,250,0.2); border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; cursor:pointer; transition:border-color 0.3s; }
+.sut-img-placeholder:hover { border-color:rgba(123,92,250,0.4); }
+.sut-img-placeholder span { font-size:28px; opacity:0.4; }
+.sut-img-placeholder p { font-size:11px; color:#5a5a7a; text-align:center; line-height:1.4; }
+.solution-items { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px; }
+.sol-item { display:flex; align-items:flex-start; gap:8px; font-size:13px; color:var(--text-muted); padding:10px; background:rgba(123,92,250,0.05); border-radius:8px; border:1px solid rgba(123,92,250,0.1); line-height:1.4; }
+.sol-dot { width:5px; height:5px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent2)); flex-shrink:0; margin-top:6px; }
+
+/* ── ДО/ПІСЛЯ TABLE ── */
+.comparison-wrap { overflow-x:auto; }
+.comparison-table { width:100%; border-collapse:collapse; }
+.comparison-table th { padding:14px 20px; font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; }
+.comparison-table th:first-child { background:rgba(255,68,68,0.08); color:var(--red); border-radius:12px 0 0 0; border:1px solid rgba(255,68,68,0.15); }
+.comparison-table th:last-child { background:rgba(0,229,160,0.08); color:var(--green); border-radius:0 12px 0 0; border:1px solid rgba(0,229,160,0.15); border-left:none; }
+.comparison-table td { padding:12px 20px; font-size:14px; line-height:1.5; vertical-align:top; }
+.comparison-table tr:nth-child(odd) td:first-child { background:rgba(255,68,68,0.03); }
+.comparison-table tr:nth-child(even) td:first-child { background:rgba(255,68,68,0.05); }
+.comparison-table tr:nth-child(odd) td:last-child { background:rgba(0,229,160,0.03); }
+.comparison-table tr:nth-child(even) td:last-child { background:rgba(0,229,160,0.05); }
+.comparison-table td:first-child { color:#cc8888; border:1px solid rgba(255,68,68,0.1); border-top:none; }
+.comparison-table td:last-child { color:#88ccaa; border:1px solid rgba(0,229,160,0.1); border-top:none; border-left:none; }
+.comparison-table td:first-child::before { content:'✕ '; color:var(--red); font-weight:800; }
+.comparison-table td:last-child::before { content:'✓ '; color:var(--green); font-weight:800; }
+.comparison-table tr:last-child td:first-child { border-radius:0 0 0 12px; }
+.comparison-table tr:last-child td:last-child { border-radius:0 0 12px 0; }
+
+/* ── JOURNEY / ШЛЯХ ── */
+.journey-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; position:relative; margin-bottom:32px; }
+.journey-grid::before { content:''; position:absolute; top:36px; left:calc(50%/3); right:calc(50%/3); height:2px; background:linear-gradient(90deg,var(--accent),var(--accent2)); z-index:0; pointer-events:none; }
+.journey-step { display:flex; flex-direction:column; align-items:center; text-align:center; padding:0 12px; position:relative; z-index:1; }
+.journey-num { width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent2)); display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:1px; color:#fff; margin-bottom:14px; box-shadow:0 0 24px var(--accent-glow); flex-shrink:0; }
+.journey-label { font-size:11px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+.journey-text { font-size:13px; color:var(--text-muted); line-height:1.5; }
+.journey-arrow { display:flex; align-items:center; justify-content:center; padding-top:24px; color:var(--accent); font-size:20px; }
+.journey-final { background:linear-gradient(135deg,rgba(123,92,250,0.1),rgba(79,142,247,0.1)); border:1px solid rgba(123,92,250,0.25); border-radius:14px; padding:20px 24px; text-align:center; }
+.journey-final-label { font-size:11px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+.journey-final-text { font-size:15px; font-weight:700; color:#fff; line-height:1.5; }
+
+/* ── MEDIA GALLERY (фото / відео) ── */
+.media-section { padding:64px 40px; max-width:1000px; margin:0 auto; }
+.media-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(26px,4vw,44px); letter-spacing:2px; margin-bottom:8px; }
+.media-title span { background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.media-sub { font-size:14px; color:var(--text-muted); margin-bottom:28px; }
+.media-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.media-slot { aspect-ratio:9/16; background:var(--bg3); border:2px dashed rgba(123,92,250,0.2); border-radius:14px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; cursor:pointer; transition:all 0.3s; position:relative; overflow:hidden; }
+.media-slot:hover { border-color:rgba(123,92,250,0.5); background:rgba(123,92,250,0.05); }
+.media-slot-icon { font-size:32px; opacity:0.35; }
+.media-slot-text { font-size:12px; color:#5a5a7a; text-align:center; line-height:1.4; }
+.media-slot-label { position:absolute; top:10px; left:10px; background:rgba(123,92,250,0.2); border:1px solid rgba(123,92,250,0.3); border-radius:6px; padding:3px 8px; font-size:10px; font-weight:700; color:var(--accent); letter-spacing:0.06em; text-transform:uppercase; }
+.video-slot { aspect-ratio:16/9; }
+
+/* ── ПРОГРАМА ── */
+.program-list { display:flex; flex-direction:column; gap:4px; }
+.lesson { border:1px solid var(--border); border-radius:12px; overflow:hidden; transition:border-color 0.3s; margin-bottom:4px; }
+.lesson:hover { border-color:rgba(123,92,250,0.4); }
+.lesson-header { padding:18px 24px; display:flex; align-items:center; gap:16px; cursor:pointer; background:var(--card); }
+.lesson-num { font-family:'Bebas Neue',sans-serif; font-size:28px; color:rgba(123,92,250,0.3); line-height:1; flex-shrink:0; width:32px; }
+.lesson-title-wrap { flex:1; }
+.lesson-title { font-size:14px; font-weight:700; margin-bottom:3px; }
+.lesson-meta { font-size:11px; color:var(--text-muted); }
+.lesson-time { font-size:11px; color:var(--text-muted); flex-shrink:0; background:rgba(123,92,250,0.08); padding:4px 10px; border-radius:100px; border:1px solid var(--border); }
+.lesson-body { padding:0 24px 20px 72px; display:none; }
+.lesson.open .lesson-body { display:block; }
+.lesson-points { list-style:none; display:flex; flex-direction:column; gap:7px; margin:14px 0; }
+.lesson-points li { display:flex; gap:10px; font-size:13px; color:var(--text-muted); line-height:1.5; }
+.lesson-points li::before { content:'→'; color:var(--accent); flex-shrink:0; }
+.lesson-result { background:rgba(123,92,250,0.05); border:1px solid rgba(123,92,250,0.15); border-radius:8px; padding:10px 14px; font-size:13px; color:var(--text-muted); margin-bottom:10px; }
+.lesson-result strong { color:var(--accent); }
+.lesson-hw { background:rgba(255,107,53,0.06); border:1px solid rgba(255,107,53,0.2); border-radius:8px; padding:10px 14px; font-size:12px; color:#cc8866; display:flex; align-items:center; gap:8px; }
+.lesson-hw::before { content:'📝'; font-size:14px; }
+
+/* ── НЕЙРОНКИ ── */
+.tools-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.tool-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px; transition:all 0.3s; }
+.tool-card:hover { border-color:rgba(123,92,250,0.35); transform:translateY(-2px); }
+.tool-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; gap:8px; }
+.tool-name { font-size:15px; font-weight:800; color:#fff; }
+.tool-price { font-size:12px; color:var(--text-muted); }
+.tool-desc { font-size:13px; color:var(--text-muted); line-height:1.55; margin-bottom:12px; }
+.tool-badge { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; padding:4px 10px; border-radius:100px; }
+.tool-badge.green { background:rgba(0,229,160,0.1); color:var(--green); border:1px solid rgba(0,229,160,0.2); }
+.tool-badge.yellow { background:rgba(255,200,0,0.1); color:#ffcc00; border:1px solid rgba(255,200,0,0.2); }
+.tool-badge.red { background:rgba(255,68,68,0.1); color:#ff8888; border:1px solid rgba(255,68,68,0.2); }
+.tools-summary { margin-top:20px; background:rgba(123,92,250,0.05); border:1px solid rgba(123,92,250,0.15); border-radius:12px; padding:16px 20px; font-size:14px; color:var(--text-muted); line-height:1.6; }
+.tools-summary strong { color:var(--text); }
+
+/* ── ДЛЯ КОГО ── */
+.for-who-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.fw-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; transition:all 0.3s; }
+.fw-card:hover { border-color:rgba(123,92,250,0.35); transform:translateY(-2px); }
+.fw-card h3 { font-size:15px; font-weight:800; margin-bottom:10px; }
+.fw-card p { font-size:13px; color:var(--text-muted); line-height:1.65; }
+.fw-card p strong { color:var(--accent); }
+
+/* ── ПІСЛЯ КУРСУ ── */
+.results-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.res-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:22px; transition:all 0.3s; }
+.res-card:hover { border-color:rgba(123,92,250,0.35); transform:translateY(-2px); }
+.res-num { font-family:'Bebas Neue',sans-serif; font-size:48px; line-height:1; background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px; }
+.res-card h3 { font-size:14px; font-weight:800; margin-bottom:6px; }
+.res-card p { font-size:13px; color:var(--text-muted); line-height:1.55; }
+
+/* ── ПОВНИЙ СПИСОК ── */
+.full-list-wrap { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:32px; }
+.full-list-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(24px,4vw,40px); letter-spacing:2px; margin-bottom:28px; text-align:center; line-height:1.1; }
+.full-list-title span { background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.full-list { list-style:none; display:flex; flex-direction:column; gap:12px; margin-bottom:28px; }
+.full-list li { display:flex; align-items:flex-start; gap:14px; font-size:14px; color:var(--text-muted); line-height:1.55; padding:12px 16px; background:rgba(255,255,255,0.02); border-radius:10px; border:1px solid rgba(255,255,255,0.04); }
+.full-list li .li-icon { font-size:20px; flex-shrink:0; margin-top:1px; }
+.full-list li strong { color:var(--text); }
+.full-list-price { text-align:center; margin-bottom:20px; }
+.fl-old { font-size:18px; color:var(--text-muted); text-decoration:line-through; margin-right:12px; }
+.fl-new { font-family:'Bebas Neue',sans-serif; font-size:52px; color:#fff; letter-spacing:1px; }
+
+/* ── ЯК ПРОХОДИТЬ ── */
+.how-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.how-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:22px; text-align:center; }
+.how-icon { font-size:32px; margin-bottom:12px; }
+.how-card h3 { font-size:14px; font-weight:800; margin-bottom:6px; }
+.how-card p { font-size:12px; color:var(--text-muted); line-height:1.55; }
+
+/* ── ВІДГУКИ ── */
+.reviews-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+.review-slot { background:var(--card); border:2px dashed rgba(123,92,250,0.2); border-radius:14px; min-height:160px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:20px; cursor:pointer; transition:all 0.3s; }
+.review-slot:hover { border-color:rgba(123,92,250,0.4); }
+.review-slot-icon { font-size:28px; opacity:0.3; }
+.review-slot-text { font-size:12px; color:#5a5a7a; text-align:center; }
+
+/* ── ГАРАНТІЯ ── */
+.guarantee-new { background:var(--card); border:1px solid rgba(0,229,160,0.2); border-radius:20px; padding:40px; display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:start; }
+.guarantee-icon { font-size:56px; }
+.guarantee-new h2 { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:1px; margin-bottom:12px; color:#fff; }
+.guarantee-new p { color:var(--text-muted); font-size:14px; line-height:1.7; margin-bottom:16px; }
+.guarantee-conditions { list-style:none; display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+.guarantee-conditions li { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:var(--text-muted); line-height:1.5; }
+.guarantee-conditions li::before { content:'—'; color:var(--green); font-weight:700; flex-shrink:0; }
+.guarantee-final { font-size:15px; font-weight:800; color:#fff; border-top:1px solid rgba(0,229,160,0.15); padding-top:14px; }
+
+/* ── АВТОР ── */
+.author-card { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:40px; display:grid; grid-template-columns:auto 1fr; gap:32px; align-items:center; }
+.author-avatar { width:90px; height:90px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent2)); display:flex; align-items:center; justify-content:center; font-size:36px; flex-shrink:0; border:3px solid rgba(123,92,250,0.3); }
+.author-name { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:1px; margin-bottom:4px; }
+.author-title { color:var(--accent); font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:2px; margin-bottom:12px; }
+.author-bio { color:var(--text-muted); font-size:14px; line-height:1.65; margin-bottom:16px; }
+.author-stats { display:flex; gap:28px; }
+.author-stat-num { font-family:'Bebas Neue',sans-serif; font-size:28px; background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.author-stat-label { font-size:11px; color:var(--text-muted); }
+
+/* ── FAQ ── */
+.faq-list { display:flex; flex-direction:column; gap:4px; }
+.faq-item { border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+.faq-q { padding:18px 24px; font-weight:700; font-size:14px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; background:var(--card); transition:background 0.2s; gap:12px; }
+.faq-q:hover { background:rgba(123,92,250,0.05); }
+.faq-arrow { color:var(--accent); font-size:20px; transition:transform 0.3s; flex-shrink:0; }
+.faq-item.open .faq-arrow { transform:rotate(45deg); }
+.faq-a { padding:0 24px; max-height:0; overflow:hidden; transition:max-height 0.4s ease,padding 0.3s; color:var(--text-muted); font-size:13px; line-height:1.7; }
+.faq-item.open .faq-a { max-height:400px; padding:14px 24px 18px; }
+
+/* ── FINAL CTA ── */
+.cta-final { text-align:center; padding:72px 40px; position:relative; }
+.cta-final::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 50%,rgba(123,92,250,0.08) 0%,transparent 70%); pointer-events:none; }
+.cta-final h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(32px,6vw,68px); letter-spacing:2px; margin-bottom:12px; line-height:1.05; position:relative; }
+.cta-price-block { display:flex; align-items:center; justify-content:center; gap:16px; margin:24px 0; position:relative; flex-wrap:wrap; }
+.cta-price-old { color:var(--text-muted); text-decoration:line-through; font-size:20px; }
+.cta-price-new { font-size:52px; font-weight:900; color:var(--text); font-family:'Bebas Neue',sans-serif; letter-spacing:1px; }
+.cta-badge { background:var(--orange); color:#fff; font-size:13px; font-weight:800; padding:5px 12px; border-radius:6px; letter-spacing:1px; }
+.cta-features { display:flex; justify-content:center; gap:24px; margin-bottom:32px; flex-wrap:wrap; position:relative; }
+.cta-feat { display:flex; align-items:center; gap:6px; font-size:13px; color:var(--text-muted); }
+.cta-feat-dot { width:5px; height:5px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent2)); }
+.btn-cta-final { background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border:none; padding:20px 56px; border-radius:14px; font-family:'Manrope',sans-serif; font-weight:800; font-size:17px; cursor:pointer; letter-spacing:0.5px; display:inline-block; text-decoration:none; box-shadow:0 0 56px var(--accent-glow); transition:all 0.2s; position:relative; }
+.btn-cta-final:hover { transform:translateY(-3px); box-shadow:0 0 80px var(--accent-glow); }
+.cta-note { margin-top:14px; font-size:12px; color:var(--text-muted); position:relative; }
+
+footer { padding:28px 40px; border-top:1px solid var(--border); text-align:center; color:var(--text-muted); font-size:12px; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+.hero>* { animation:fadeUp 0.6s ease both; }
+.hero-tag{animation-delay:.1s} .hero h1{animation-delay:.2s} .hero-sub{animation-delay:.25s} .before-after{animation-delay:.3s} .hero-disclaimer{animation-delay:.35s} .hero-price-row{animation-delay:.4s} .btn-main{animation-delay:.45s} .hero-cta-note{animation-delay:.48s} .bonuses-wrap{animation-delay:.5s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  header{padding:14px 18px;} .header-price{display:none;}
+  .hero{padding:44px 18px 36px;} .section{padding:48px 18px;} .divider{margin:0 18px;}
+  .sut-inner{grid-template-columns:1fr;} .sut-img-col{border-left:none;border-top:1px solid var(--border);min-height:160px;}
+  .for-who-grid,.results-grid,.tools-grid,.bonuses-grid{grid-template-columns:1fr;}
+  .how-grid{grid-template-columns:1fr;}
+  .journey-grid{grid-template-columns:1fr;gap:16px;} .journey-grid::before{display:none;}
+  .media-grid{grid-template-columns:1fr 1fr;}
+  .comparison-table th,.comparison-table td{padding:10px 12px;font-size:12px;}
+  .guarantee-new,.author-card{grid-template-columns:1fr;text-align:center;}
+  .author-stats{justify-content:center;}
+  .lesson-body{padding-left:18px;}
+  .reviews-grid{grid-template-columns:1fr;}
+  .solution-items{grid-template-columns:1fr;}
+  .cta-features{flex-direction:column;align-items:center;gap:12px;}
+  .media-section{padding:44px 18px;}
+  .full-list-wrap{padding:20px;}
+}
+</style>
+</head>
+<body>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="logo">AI REALISM</div>
+  <div class="header-price">
+    <span class="price-old">2 400 грн</span>
+    <span class="price-new">390 грн</span>
+    <span class="badge-disc">-75%</span>
+  </div>
+  <a href="#cta" class="btn-header">Приєднатись →</a>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-tag">🎯 міні-курс · 6 уроків · AI контент</div>
+  <h1>Навчіться створювати<br><span>гіперреалістичні</span><br>AI фото і відео<br>за 6 простих уроків</h1>
+  <p class="hero-sub">де жива шкіра, природні емоції, дії і сам товар виглядають як КОНТЕНТ з РЕАЛЬНОЇ фотосесії, зйомки</p>
+
+  <div class="before-after">
+    <div class="ba-card">
+      <div class="ba-icon">🤖</div>
+      <div class="ba-text">Пластикове обличчя.<br>Одразу видно — це АІ</div>
+      <div class="ba-label before">До курсу</div>
+    </div>
+    <div class="ba-card">
+      <div class="ba-icon">✨</div>
+      <div class="ba-text">Жива шкіра. Реальні емоції.<br>Не відрізнити від фото</div>
+      <div class="ba-label after">Після курсу</div>
+    </div>
+  </div>
+
+  <div class="hero-disclaimer"><strong>Це не курс про те, як генерувати фото і відео в АІ з нуля</strong> — це курс про те, як зробити їх такими, щоб ніхто не здогадався, що це АІ.</div>
+
+  <div class="hero-price-row">
+    <span class="h-price-old">2 400 грн</span>
+    <span class="h-price-new">390 грн</span>
+    <span class="h-price-badge">-75%</span>
+  </div>
+  <a href="#cta" class="btn-main">Приєднатись до курсу — знижка 75% 🔥</a>
+  <span class="hero-cta-note">6 уроків · ~1 год 45 хв · Відео + PDF · Доступ одразу після оплати</span>
+
+  <div class="bonuses-wrap">
+    <div class="bonuses-title">🎁 Бонуси, які ти отримаєш одразу після покупки</div>
+    <div class="bonuses-grid">
+      <div class="bonus-card">
+        <div class="bonus-img"><span>🎬</span><small>Прев'ю бонусу</small></div>
+        <div class="bonus-body">
+          <div class="bonus-label">Бонус 1</div>
+          <div class="bonus-name">ГАЙД: Як створювати ідеальні сценарії для твого першого АІ реалістичного ролика</div>
+        </div>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-img"><span>💡</span><small>Прев'ю бонусу</small></div>
+        <div class="bonus-body">
+          <div class="bonus-label">Бонус 2</div>
+          <div class="bonus-name">10 готових ідей + промптів для АІ гіперреалістичних роликів</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ У ЧОМУ СУТЬ ═══ -->
+<div class="section">
+  <div class="section-title">У чому <span>суть?</span></div>
+  <div class="sut-grid">
+
+    <div class="sut-card">
+      <div class="sut-inner">
+        <div class="sut-content">
+          <div class="sut-num">01</div>
+          <h3>Твої AI фото одразу "паляться"</h3>
+          <p>Більшість людей, які починають генерувати через АІ, стикаються з одним і тим самим. Результат — відразу видно, що це АІ. Навіть без спеціальних знань.</p>
+          <ul class="sut-list">
+            <li>Шкіра як пластик або латекс — без пор, текстури, живих деталей</li>
+            <li>Обличчя симетричне до неприродності — як манекен, а не людина</li>
+            <li>Очі "скляні" — без емоції, без живого погляду</li>
+            <li>Освітлення рівне і штучне — без тіней, без характеру</li>
+            <li>Товар на моделі виглядає "вклеєним" — інше освітлення, інша різкість</li>
+          </ul>
+        </div>
+        <div class="sut-img-col">
+          <div class="sut-img-placeholder"><span>🖼</span><p>Вставити приклад<br>пластикової генерації</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sut-card">
+      <div class="sut-inner">
+        <div class="sut-content">
+          <div class="sut-num">02</div>
+          <h3>АІ-відео видає себе з першої секунди</h3>
+          <p>І це ще до відео. На відео — ще гірше. Ось що бачить глядач:</p>
+          <ul class="sut-list">
+            <li>Рухи роботизовані — модель рухається, але це не жива людина</li>
+            <li>Обличчя "тане" або деформується в процесі руху</li>
+            <li>Емоції застиглі — посмішка є, але вона не змінюється</li>
+            <li>Рухи рук і пальців неприродні або розмиті</li>
+            <li>При кожній новій генерації якість падає — деталі зникають</li>
+          </ul>
+        </div>
+        <div class="sut-img-col">
+          <div class="sut-img-placeholder"><span>🎬</span><p>Вставити приклад<br>роботизованого відео</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sut-card solution">
+      <div class="sut-inner">
+        <div class="sut-content">
+          <div class="sut-num">03</div>
+          <h3>Реалізм — це не магія.<br>Це система з 6 уроків.</h3>
+          <p>6 уроків. 6 АІ-інструментів. Один фокус — реалізм.</p>
+          <div class="solution-items">
+            <div class="sol-item"><div class="sol-dot"></div>Типаж і зовнішність моделі під бізнес або задачу</div>
+            <div class="sol-item"><div class="sol-dot"></div>Світло, стилі й атмосфера — fashion, студія, натуральне</div>
+            <div class="sol-item"><div class="sol-dot"></div>Живі емоції і міміка — посмішка, впевненість, погляд</div>
+            <div class="sol-item"><div class="sol-dot"></div>Ракурси без втрати реалізму та якості</div>
+            <div class="sol-item"><div class="sol-dot"></div>Товар або одяг на моделі — деталі, колір, тіні</div>
+            <div class="sol-item"><div class="sol-dot"></div>Текстура шкіри — що робить її живою, а не пластиком</div>
+            <div class="sol-item"><div class="sol-dot"></div>Відео з природним рухом — без роботизованості</div>
+            <div class="sol-item"><div class="sol-dot"></div>Upscale якості фото і відео у пару кліків</div>
+          </div>
+        </div>
+        <div class="sut-img-col">
+          <div class="sut-img-placeholder"><span>✨</span><p>Вставити приклад<br>реалістичної генерації</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ДЛЯ КОГО ═══ -->
+<div class="section">
+  <div class="section-title">Для кого <span>цей курс?</span></div>
+  <div class="for-who-grid">
+    <div class="fw-card"><h3>🏪 Власник бізнесу або інтернет-магазину</h3><p>Твій товар заслуговує на рекламні фото і відео, які виглядають як справжня студійна зйомка — а не як <strong>"щось згенероване"</strong>. Після курсу твій контент продає, а не відштовхує.</p></div>
+    <div class="fw-card"><h3>📊 SMM-спеціаліст або маркетолог</h3><p>Вже генеруєш через АІ, але реалізму немає — <strong>і клієнт це бачить</strong>. Після курсу твої креативи не відрізнити від реальної зйомки. Більше тестів, вищий чек.</p></div>
+    <div class="fw-card"><h3>💻 Фрілансер або контент-мейкер</h3><p>Хочеш вийти на новий рівень — де за реалістичний АІ-контент платять окремо і дорого. <strong>Реалізм — це твоя конкурентна перевага.</strong></p></div>
+    <div class="fw-card"><h3>💰 Хочеш монетизувати АІ як послугу</h3><p>Бренди масово шукають тих, хто вміє створювати реалістичний АІ-контент під ключ. Фото, відео, рілси, сторіси, карточки товарів — <strong>після курсу це твоя послуга.</strong></p></div>
+    <div class="fw-card"><h3>🌱 Повний новачок</h3><p>Ніколи нічого не генерував — і цей курс саме для тебе. Ти стартуєш одразу з рівня реалізму, а не витрачаєш місяці на експерименти з безкоштовними інструментами.</p></div>
+    <div class="fw-card"><h3>⚡ Вже генеруєш, але виходить пластик</h3><p>Знаєш як генерувати — але реалізму немає. Цей курс <strong>переведе тебе на рівень, де результат не відрізнити від реального.</strong></p></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ТВІЙ ШЛЯХ ═══ -->
+<div class="section">
+  <div class="section-title">Твій шлях <span>за 6 уроків</span></div>
+  <div class="journey-grid">
+    <div class="journey-step">
+      <div class="journey-num">01</div>
+      <div class="journey-label">Урок 1</div>
+      <div class="journey-text">Розбираєш інструменти і збираєш ланцюг</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-num">02</div>
+      <div class="journey-label">Урок 2</div>
+      <div class="journey-text">Створюєш гіперреалістичну АІ-модель</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-num">03</div>
+      <div class="journey-label">Урок 3</div>
+      <div class="journey-text">Додаєш світло, емоції та ракурс без пластику</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-num">04</div>
+      <div class="journey-label">Урок 4</div>
+      <div class="journey-text">Одягаєш реальний товар на модель</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-num">05</div>
+      <div class="journey-label">Урок 5</div>
+      <div class="journey-text">Робиш шкіру живою і прибираєш пластик</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-num">06</div>
+      <div class="journey-label">Урок 6</div>
+      <div class="journey-text">Оживлюєш модель у реалістичне відео</div>
+    </div>
+  </div>
+  <div class="journey-final">
+    <div class="journey-final-label">🏆 Фінальний результат</div>
+    <div class="journey-final-text">Ти виходиш з курсу з готовим гіперреалістичним фото 4K і живим відео — контентом, який неможливо відрізнити від реальної зйомки.</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ДО / ПІСЛЯ ═══ -->
+<div class="section">
+  <div class="section-title">До курсу <span>vs Після курсу</span></div>
+  <div class="comparison-wrap">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>✕ До курсу</th>
+          <th>✓ Після курсу</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Шкіра як пластик — латекс, без пор і текстури</td><td>Жива шкіра — пори, асиметрія, натуральна текстура</td></tr>
+        <tr><td>Обличчя як манекен — симетричне, воскове</td><td>Природна зовнішність — типаж підібраний під задачу</td></tr>
+        <tr><td>Очі "скляні" — без погляду, без емоції</td><td>Живий погляд — посмішка, впевненість, замисленість</td></tr>
+        <tr><td>Освітлення штучне — рівне, без характеру</td><td>Контрольоване світло — fashion, студія, натуральне</td></tr>
+        <tr><td>Товар виглядає "вклеєним" — інша різкість, інший тон</td><td>Товар органічний — єдине освітлення, тіні, відображення</td></tr>
+        <tr><td>Ракурс змінюється — модель "розсипається"</td><td>Будь-який ракурс без втрати реалізму та якості</td></tr>
+        <tr><td>Відео роботизоване — рухи механічні, пластикові</td><td>Відео живе — природні жести, міміка, характер руху</td></tr>
+        <tr><td>Обличчя "тане" в анімації — деформації при русі</td><td>Обличчя стабільне — без деформацій в анімації</td></tr>
+        <tr><td>Якість падає при кожній новій генерації</td><td>Upscale до максимальної якості у пару кліків</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ПРОГРАМА ═══ -->
+<div class="section">
+  <div class="section-title">Програма курсу <span>AI REALISM</span></div>
+  <div class="program-list">
+    <div class="lesson open">
+      <div class="lesson-header" onclick="toggleLesson(this)">
+        <div class="lesson-num">01</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">СТАРТ: Інструменти та підписки на AI</div>
+          <div class="lesson-meta">ChatGPT · Midjourney · Higgsfield · Kling · Veo · Cinema Studio</div>
+        </div>
+        <div class="lesson-time">15–20 хв</div>
+      </div>
+      <div class="lesson-body">
+        <ul class="lesson-points">
+          <li>Огляд інтерфейсу нейронок з якими працюємо — фото</li>
+          <li>Огляд інтерфейсу нейронок з якими працюємо — відео</li>
+          <li>Створення кастомного чату в GPT, який пише якісні промпти під фото і відео</li>
+        </ul>
+        <div class="lesson-result"><strong>Результат:</strong> Ти зрозумієш ЛАНЦЮГ, по якому створюється реалістичний контент — і які нейронки потрібні для кожного кроку.</div>
+        <div class="lesson-hw">Домашнє завдання: налаштувати кастомний чат у ChatGPT і зробити перший тестовий промпт</div>
+      </div>
+    </div>
+    <div class="lesson">
+      <div class="lesson-header" onclick="toggleLesson(this)">
+        <div class="lesson-num">02</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">Як створити гіперреалістичну АІ-модель?</div>
+          <div class="lesson-meta">ChatGPT · Midjourney</div>
+        </div>
+        <div class="lesson-time">15–20 хв</div>
+      </div>
+      <div class="lesson-body">
+        <ul class="lesson-points">
+          <li>Лайфхак: як обрати типаж та зовнішність АІ-моделі під конкретний бізнес або послугу</li>
+          <li>Генерація АІ-моделі в Midjourney по готовим параметрам, які впливають на REALISM</li>
+          <li>Перший upscale (покращення якості) АІ-моделі, яку ми створили</li>
+        </ul>
+        <div class="lesson-result"><strong>Результат:</strong> Ти створиш свою першу гіперреалістичну АІ-модель — з правильним типажем і параметрами, які дають живий результат, а не "пластик".</div>
+        <div class="lesson-hw">Домашнє завдання: згенерувати АІ-модель під свій бізнес або нішу і зробити upscale</div>
+      </div>
+    </div>
+    <div class="lesson">
+      <div class="lesson-header" onclick="toggleLesson(this)">
+        <div class="lesson-num">03</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">АІ світло, стиль, емоції та ракурси</div>
+          <div class="lesson-meta">ChatGPT · Higgsfield</div>
+        </div>
+        <div class="lesson-time">15–20 хв</div>
+      </div>
+      <div class="lesson-body">
+        <ul class="lesson-points">
+          <li>Як задати стиль фотографії через промпт — fashion, студійний спалах, ретро, натуральне світло</li>
+          <li>Як додати живі та природні емоції та міміку — посмішка, впевненість, замисленість, живий погляд</li>
+          <li>Як обрати ракурс без втрати РЕАЛІЗМУ та якості</li>
+          <li>Як вписати АІ-модель у потрібну локацію</li>
+        </ul>
+        <div class="lesson-result"><strong>Результат:</strong> Твоя АІ-модель виглядатиме як знімок з дорогої фотосесії — і клієнти питатимуть "Хто вам знімав?", не здогадуючись що це АІ.</div>
+        <div class="lesson-hw">Домашнє завдання: зробити 3 варіанти фото з різним світлом і різними емоціями</div>
+      </div>
+    </div>
+    <div class="lesson">
+      <div class="lesson-header" onclick="toggleLesson(this)">
+        <div class="lesson-num">04</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">Примірка: Як перенести реальний товар на АІ-модель?</div>
+          <div class="lesson-meta">Midjourney · Higgsfield</div>
+        </div>
+        <div class="lesson-time">15–20 хв</div>
+      </div>
+      <div class="lesson-body">
+        <ul class="lesson-points">
+          <li>ТЕХНОЛОГІЯ: як перенести реальний товар або одяг на АІ-модель</li>
+          <li>ТЕХНОЛОГІЯ: поєднання — модель + товар/одяг + локація в одній сцені</li>
+          <li>ТЕХНОЛОГІЯ: як зберегти дрібні деталі товару та колір при генерації</li>
+          <li>Як зробити реалістичні складки, посадку та матеріал</li>
+          <li>Товар: тіні, відображення, органічність</li>
+        </ul>
+        <div class="lesson-result"><strong>Результат:</strong> Ти отримаєш готові фото з твоїм товаром на моделі — зі збереженням кольору, деталей і посадки. Результат, який не відрізнити від справжньої зйомки.</div>
+        <div class="lesson-hw">Домашнє завдання: перенести реальний товар або одяг на свою АІ-модель</div>
+      </div>
+    </div>
+    <div class="lesson">
+      <div class="lesson-header" onclick="toggleLesson(this)">
+        <div class="lesson-num">05</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">Жива шкіра та максимальна якість фото</div>
+          <div class="lesson-meta">Higgsfield</div>
+        </div>
+        <div class="lesson-time">15–20 хв</div>
+      </div>
+      <div class="lesson-body">
+        <ul class="lesson-points">
+          <li>ПОВНИЙ список елементів, які потрібно додавати в промпти щоб шкіра виглядала живою</li>
+          <li>СПОСІБ 1: як покращити шкіру на генераціях готовим інструментом</li>
+          <li>СПОСІБ 2: три готові промпти для Higgsfield, які прибирають пластик</li>
+          <li>ІДЕАЛЬНА ШКІРА ≠ жива шкіра — психологія сприйняття РЕАЛІЗМУ</li>
+        </ul>
+        <div class="lesson-result"><strong>Результат:</strong> Твої генерації більше не видаватимуть "пластик" — візуал працюватиме на довіру до бренду, а не відштовхуватиме клієнта.</div>
+        <div class="lesson-hw">Домашнє завдання: застосувати обидва способи покращення шкіри на своєму фото</div>
+      </div>
+    </div>
+    <div class="lesson">
+      <div class="lesson-header" onclick="toggleLesson(this)">
+        <div class="lesson-num">06</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">Оживлюємо модель: відео з живими емоціями та жестами</div>
+          <div class="lesson-meta">ChatGPT · Kling</div>
+        </div>
+        <div class="lesson-time">15–20 хв</div>
+      </div>
+      <div class="lesson-body">
+        <ul class="lesson-points">
+          <li>Як створювати якісні промпти з емоціями, жестами, мімікою для Kling через ChatGPT</li>
+          <li>ПРАКТИКА: оживлення гіперреалістичного фото з уроку 5 та перетворення в відео</li>
+          <li>Як налаштувати реалістичний рух АІ-моделі — без роботизованості</li>
+          <li>Як уникнути деформацій і "танення" обличчя в анімації</li>
+        </ul>
+        <div class="lesson-result"><strong>Результат:</strong> Ти перетворюєш статичне АІ-фото на живе відео з природними емоціями та жестами — готове для реклами, соцмереж або маркетплейсу.</div>
+        <div class="lesson-hw">Домашнє завдання: оживити своє фото з уроку 5 та зробити фінальне відео</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ РЕЗУЛЬТАТИ ═══ -->
+<div class="section">
+  <div class="section-title">Після курсу <span>ти вмієш:</span></div>
+  <div class="results-grid">
+    <div class="res-card"><div class="res-num">01</div><h3>Розуміти весь процес від і до</h3><p>Ти знаєш як працює ланцюг із 6 АІ-нейронок — від першого промпту до фінального реалістичного відео. Більше ніякого хаосу.</p></div>
+    <div class="res-card"><div class="res-num">02</div><h3>Створювати гіперреалістичну АІ-модель під будь-який бізнес</h3><p>Ти знаєш як підібрати типаж і зовнішність — і згенерувати персонажа без пластику і без ефекту манекена з першої спроби.</p></div>
+    <div class="res-card"><div class="res-num">03</div><h3>Керувати світлом, стилем, емоціями і ракурсом</h3><p>Ти задаєш атмосферу через промпт, додаєш живий погляд і природну посмішку. Змінюєш ракурс без втрати реалізму.</p></div>
+    <div class="res-card"><div class="res-num">04</div><h3>Переносити реальний товар на АІ-модель</h3><p>Ти поєднуєш модель, товар і локацію зі збереженням кольору, деталей і тіней. Підходить для реклами, маркетплейсу і соцмереж.</p></div>
+    <div class="res-card"><div class="res-num">05</div><h3>Прибирати пластиковість шкіри</h3><p>Ти знаєш що саме робить шкіру живою — і маєш два конкретних способи це зробити. Плюс upscale якості у пару кліків.</p></div>
+    <div class="res-card"><div class="res-num">06</div><h3>Оживлювати фото в реалістичне відео</h3><p>Ти отримуєш природний рух — без роботизованих рухів і деформацій обличчя. Відео готове для реклами або соцмереж.</p></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ЯК ПРОХОДИТЬ ═══ -->
+<div class="section">
+  <div class="section-title">Як проходить <span>навчання?</span></div>
+  <div class="how-grid">
+    <div class="how-card"><div class="how-icon">📱</div><h3>Telegram-бот</h3><p>Доступ до всіх уроків у зручному форматі. Дивишся коли зручно — з телефону або комп'ютера.</p></div>
+    <div class="how-card"><div class="how-icon">⚡</div><h3>Натисни → Повтори → Результат</h3><p>Покрокові інструкції без води. Що натискати, куди завантажувати і як отримати результат — навіть якщо вперше.</p></div>
+    <div class="how-card"><div class="how-icon">📄</div><h3>PDF до кожного уроку</h3><p>Готові промпти, чек-листи і матеріали для практики — залишаються у тебе назавжди.</p></div>
+    <div class="how-card"><div class="how-icon">📝</div><h3>Домашнє завдання</h3><p>Після кожного уроку — практичне завдання. Ти закріплюєш навик одразу, не відкладаючи на потім.</p></div>
+    <div class="how-card"><div class="how-icon">🔓</div><h3>Доступ назавжди</h3><p>Купуєш один раз — отримуєш доступ до всіх матеріалів без обмежень по часу.</p></div>
+    <div class="how-card"><div class="how-icon">🚀</div><h3>Старт одразу після оплати</h3><p>Жодного очікування. Доступ відкривається миттєво — починаєш одразу.</p></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ НЕЙРОНКИ ═══ -->
+<div class="section">
+  <div class="section-title">Нейронки, з якими ти <span>будеш працювати</span></div>
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-top"><div class="tool-name">💬 ChatGPT</div><div class="tool-price">Безкоштовно / від $20/міс</div></div>
+      <div class="tool-desc">Пишемо промпти для генерації фото і відео. Безкоштовної версії вистачить для старту курсу.</div>
+      <span class="tool-badge green">🟢 Підписка не обов'язкова</span>
+    </div>
+    <div class="tool-card">
+      <div class="tool-top"><div class="tool-name">🎨 Midjourney</div><div class="tool-price">від $10/міс</div></div>
+      <div class="tool-desc">Створюємо гіперреалістичну АІ-модель з потрібним типажем і зовнішністю.</div>
+      <span class="tool-badge yellow">🟡 Можна обійтись — потрібна для моделі</span>
+    </div>
+    <div class="tool-card">
+      <div class="tool-top"><div class="tool-name">⚡ Higgsfield</div><div class="tool-price">від $15/міс</div></div>
+      <div class="tool-desc">Основний інструмент курсу. Живі емоції, міміка, ракурси, текстура шкіри, товар на моделі.</div>
+      <span class="tool-badge red">🔴 Підписка потрібна — це серце процесу</span>
+    </div>
+    <div class="tool-card">
+      <div class="tool-top"><div class="tool-name">🎬 Kling / Veo / Cinema Studio</div><div class="tool-price">Безкоштовний старт</div></div>
+      <div class="tool-desc">Оживлюємо фото в реалістичне відео з природними рухами і емоціями.</div>
+      <span class="tool-badge yellow">🟡 Починаємо з безкоштовного — платне за потреби</span>
+    </div>
+  </div>
+  <div class="tools-summary">💰 <strong>Мінімальний старт — від $15/міс</strong> (тільки Higgsfield). Повний комплект — від $25–45/міс залежно від вибору інструментів.</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ФОТО + ВІДЕО ═══ -->
+<div class="media-section">
+  <div class="media-title">Ось такі <span>фото і відео</span> ти зможеш робити вже під час курсу</div>
+  <div class="media-sub">AI REALISM — реальні приклади генерацій · жива шкіра · природні емоції · реальна якість</div>
+
+  <div style="font-size:13px;font-weight:700;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px;">📸 Фото</div>
+  <div class="media-grid" style="margin-bottom:32px;">
+    <div class="media-slot"><div class="media-slot-label">фото 1</div><div class="media-slot-icon">📸</div><div class="media-slot-text">Вставити AI фото</div></div>
+    <div class="media-slot"><div class="media-slot-label">фото 2</div><div class="media-slot-icon">📸</div><div class="media-slot-text">Вставити AI фото</div></div>
+    <div class="media-slot"><div class="media-slot-label">фото 3</div><div class="media-slot-icon">📸</div><div class="media-slot-text">Вставити AI фото</div></div>
+    <div class="media-slot"><div class="media-slot-label">фото 4</div><div class="media-slot-icon">📸</div><div class="media-slot-text">Вставити AI фото</div></div>
+    <div class="media-slot"><div class="media-slot-label">фото 5</div><div class="media-slot-icon">📸</div><div class="media-slot-text">Вставити AI фото</div></div>
+    <div class="media-slot"><div class="media-slot-label">фото 6</div><div class="media-slot-icon">📸</div><div class="media-slot-text">Вставити AI фото</div></div>
+  </div>
+
+  <div style="font-size:13px;font-weight:700;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px;">🎬 Відео</div>
+  <div class="media-grid">
+    <div class="media-slot video-slot"><div class="media-slot-label">відео 1</div><div class="media-slot-icon">🎬</div><div class="media-slot-text">Вставити AI відео</div></div>
+    <div class="media-slot video-slot"><div class="media-slot-label">відео 2</div><div class="media-slot-icon">🎬</div><div class="media-slot-text">Вставити AI відео</div></div>
+    <div class="media-slot video-slot"><div class="media-slot-label">відео 3</div><div class="media-slot-icon">🎬</div><div class="media-slot-text">Вставити AI відео</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ПОВНИЙ СПИСОК ═══ -->
+<div class="section">
+  <div class="full-list-wrap">
+    <div class="full-list-title">Отже, <span>повний список</span> того,<br>що ти отримаєш на курсі:</div>
+    <ul class="full-list">
+      <li><span class="li-icon">📘</span><div><strong>6 практичних уроків</strong> без води — кожен урок конкретний навик, одразу в практику</div></li>
+      <li><span class="li-icon">🤖</span><div><strong>Навчишся працювати з 6 нейронками:</strong> ChatGPT, Midjourney, Higgsfield, Kling, Veo, Cinema Studio</div></li>
+      <li><span class="li-icon">🧩</span><div><strong>Готові промпти,</strong> які автор курсу використовує для генерації гіперреалістичних фото і відео</div></li>
+      <li><span class="li-icon">👤</span><div><strong>ЛАЙФХАК:</strong> як обрати типаж та зовнішність АІ-моделі під конкретний бізнес або послугу</div></li>
+      <li><span class="li-icon">💡</span><div><strong>ТЕХНОЛОГІЯ:</strong> перенесення реального товару або одягу на АІ-модель зі збереженням деталей і кольору</div></li>
+      <li><span class="li-icon">🔬</span><div><strong>ТЕХНОЛОГІЯ:</strong> поєднання моделі + товару/одягу + локації в одній сцені з єдиним освітленням</div></li>
+      <li><span class="li-icon">😊</span><div><strong>СПОСІБ 1 + СПОСІБ 2:</strong> два робочих методи покращення шкіри на генераціях — прибираємо пластик назавжди</div></li>
+      <li><span class="li-icon">🎬</span><div><strong>ПРАКТИКА:</strong> оживлення гіперреалістичного фото у відео через Kling + ChatGPT</div></li>
+      <li><span class="li-icon">🎁</span><div><strong>БОНУС 1:</strong> ГАЙД — як створювати ідеальні сценарії для першого АІ реалістичного ролика</div></li>
+      <li><span class="li-icon">🎁</span><div><strong>БОНУС 2:</strong> 10 готових ідей + промптів для АІ гіперреалістичних роликів</div></li>
+      <li><span class="li-icon">♾️</span><div><strong>Доступ до курсу — назавжди</strong></div></li>
+      <li><span class="li-icon">🤝</span><div><strong>Підтримка</strong> від автора курсу</div></li>
+      <li><span class="li-icon">🛡</span><div><strong>Гарантія повернення коштів</strong> на 14 днів</div></li>
+    </ul>
+    <div class="full-list-price">
+      <span class="fl-old">2 400 грн</span>
+      <span class="fl-new">390 грн</span>
+    </div>
+    <div style="text-align:center;"><a href="#cta" class="btn-main">→ ПРИЄДНАТИСЬ — знижка 75%</a></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ГАРАНТІЯ ═══ -->
+<div class="section">
+  <div class="section-title">Нуль <span>ризиків</span></div>
+  <div class="guarantee-new">
+    <div class="guarantee-icon">🛡️</div>
+    <div>
+      <h2>14 днів — повна гарантія повернення коштів</h2>
+      <p>Я впевнений в результаті цього курсу. Якщо протягом 14 днів ти пройдеш уроки і не зможеш:</p>
+      <ul class="guarantee-conditions">
+        <li>створити гіперреалістичну АІ-модель без пластику і воскового обличчя</li>
+        <li>додати живі емоції, природний погляд і правильне освітлення</li>
+        <li>перенести реальний товар або одяг на модель зі збереженням деталей</li>
+        <li>прибрати пластиковість шкіри двома способами</li>
+        <li>оживити фото в реалістичне відео без роботизованих рухів</li>
+      </ul>
+      <p>— я без жодних питань поверну тобі кошти. Жодних ризиків.</p>
+      <div class="guarantee-final">Або ти отримуєш реалістичний AI-контент — або я повертаю гроші.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ АВТОР ═══ -->
+<div class="section">
+  <div class="section-title">Про <span>автора</span></div>
+  <div class="author-card">
+    <div class="author-avatar">👨‍💻</div>
+    <div>
+      <div class="author-name">РОМАН</div>
+      <div class="author-title">AI-контент · Реалізм · Практик</div>
+      <div class="author-bio">[Додати текст від Романа: досвід роботи з АІ, кейси, результати студентів, чому він знає про реалізм більше за інших]</div>
+      <div class="author-stats">
+        <div><div class="author-stat-num">1950+</div><div class="author-stat-label">студентів пройшли курси</div></div>
+        <div><div class="author-stat-num">6</div><div class="author-stat-label">AI-інструментів в роботі</div></div>
+        <div><div class="author-stat-num">2024</div><div class="author-stat-label">рік початку роботи з AI</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ВІДГУКИ ═══ -->
+<div class="section">
+  <div class="section-title">Ось що <span>говорять студенти</span><br>під час і після курсу</div>
+  <div class="reviews-grid">
+    <div class="review-slot"><div class="review-slot-icon">💬</div><div class="review-slot-text">Вставити відгук студента<br>(скріншот або текст)</div></div>
+    <div class="review-slot"><div class="review-slot-icon">💬</div><div class="review-slot-text">Вставити відгук студента<br>(скріншот або текст)</div></div>
+    <div class="review-slot"><div class="review-slot-icon">💬</div><div class="review-slot-text">Вставити відгук студента<br>(скріншот або текст)</div></div>
+    <div class="review-slot"><div class="review-slot-icon">💬</div><div class="review-slot-text">Вставити відгук студента<br>(скріншот або текст)</div></div>
+    <div class="review-slot"><div class="review-slot-icon">💬</div><div class="review-slot-text">Вставити відгук студента<br>(скріншот або текст)</div></div>
+    <div class="review-slot"><div class="review-slot-icon">💬</div><div class="review-slot-text">Вставити відгук студента<br>(скріншот або текст)</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ FAQ ═══ -->
+<div class="section">
+  <div class="section-title">Питання та <span>відповіді</span></div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Скільки коштують підписки на всі нейронки курсу?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">[Відповідь від Романа — вказати точну суму: мінімальний старт від $15/міс (Higgsfield), повний комплект від $25–45/міс]</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Чи підходить курс, якщо я ніколи не працював з АІ?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">Так, абсолютно. Курс побудований за принципом "натисни → повтори → отримай результат". Ти стартуєш одразу з правильного фундаменту — без технічних термінів і зайвих кроків. Після першого уроку все стане на свої місця.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Я вже генерую контент в АІ. Чи знайду тут щось нове?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">Так. Курс фокусується саме на реалізмі — тих деталях, які роблять генерацію живою. Більшість хто вже генерує, ніколи системно не опрацьовував текстуру шкіри, роботу зі світлом через промпти і налаштування відео без деформацій.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Як довго у мене буде доступ до курсу?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">Доступ до всіх матеріалів — назавжди. Купуєш один раз, матеріали залишаються у тебе без обмежень по часу.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Чи можна монетизувати навичку після курсу?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">Так. Бренди, магазини і бізнеси активно шукають тих, хто вміє створювати реалістичний АІ-контент під ключ — фото, відео, рілси, карточки товарів. Після курсу у тебе є конкретний навик, який можна продавати вже зараз.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ FINAL CTA ═══ -->
+<div class="cta-final" id="cta">
+  <h2>Готовий вийти на<br><span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">новий рівень реалізму?</span></h2>
+  <div class="cta-features">
+    <div class="cta-feat"><div class="cta-feat-dot"></div>6 уроків</div>
+    <div class="cta-feat"><div class="cta-feat-dot"></div>6 нейронок</div>
+    <div class="cta-feat"><div class="cta-feat-dot"></div>Відео + PDF</div>
+    <div class="cta-feat"><div class="cta-feat-dot"></div>Домашні завдання</div>
+    <div class="cta-feat"><div class="cta-feat-dot"></div>Доступ назавжди</div>
+    <div class="cta-feat"><div class="cta-feat-dot"></div>🛡 14 днів гарантія</div>
+  </div>
+  <div class="cta-price-block">
+    <span class="cta-price-old">2 400 грн</span>
+    <span class="cta-price-new">390 грн</span>
+    <span class="cta-badge">-75%</span>
+  </div>
+  <a href="#" class="btn-cta-final">🚀 Приєднатись до курсу за 390 грн</a>
+  <div class="cta-note">Старт одразу після оплати · Без ризиків · 14 днів гарантія повернення коштів</div>
+</div>
+
+<footer>
+  <p>© 2025 AI REALISM · Всі права захищені</p>
+  <p style="margin-top:8px;">
+    <a href="#" style="color:var(--text-muted);text-decoration:none;margin:0 12px;">Політика конфіденційності</a>
+    <a href="#" style="color:var(--text-muted);text-decoration:none;margin:0 12px;">Договір оферти</a>
+  </p>
+</footer>
+
+<script>
+function toggleLesson(header) {
+  const lesson = header.parentElement;
+  lesson.classList.toggle('open');
+}
+function toggleFaq(q) {
+  const item = q.parentElement;
+  item.classList.toggle('open');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ai-realism-landing",
+      "runtimeExecutable": "ruby",
+      "runtimeArgs": ["-e", "require 'webrick';s=WEBrick::HTTPServer.new(Port:8080,DocumentRoot:'/tmp/ai-realism-site');trap('INT'){s.shutdown};s.start"],
+      "port": 8080
+    }
+  ]
+}
