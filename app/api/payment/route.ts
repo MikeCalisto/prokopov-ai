@@ -68,23 +68,22 @@ export async function POST(req: NextRequest) {
     const responseText = await response.text();
     console.log("P24 trnRegister response:", responseText);
 
-    // Response is either "TOKEN:xxxxx" or "error=xxx&errorMessage=xxx"
-    if (responseText.startsWith("TOKEN:")) {
-      const token = responseText.replace("TOKEN:", "").trim();
+    // Parse response (format: error=0&token=XXX or error=NNN&errorMessage=XXX)
+    const resParams = new URLSearchParams(responseText);
+    const errorCode = resParams.get("error");
+    const token = resParams.get("token");
+
+    if (errorCode === "0" && token) {
+      console.log("P24 token received:", token);
       return NextResponse.json({
         redirectUrl: `${baseUrl}/trnRequest/${token}`,
       });
     }
 
-    // Parse error response
-    const errorParams = new URLSearchParams(responseText);
-    const errorCode = errorParams.get("error") || "unknown";
-    const errorMsg =
-      errorParams.get("errorMessage") || responseText.substring(0, 200);
-
+    const errorMsg = resParams.get("errorMessage") || responseText.substring(0, 200);
     console.error("P24 trnRegister error:", { errorCode, errorMsg });
     return NextResponse.json(
-      { error: `Błąd P24: ${errorMsg} (${errorCode})` },
+      { error: `Błąd płatności: ${errorMsg}` },
       { status: 500 }
     );
   } catch (error) {
