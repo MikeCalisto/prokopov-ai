@@ -167,12 +167,21 @@ export default function AiAvatarPage() {
   useEffect(() => {
     const trigger = stickyTriggerRef.current;
     if (!trigger) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setShowStickyCta(!entry.isIntersecting),
-      { threshold: 0 }
-    );
-    observer.observe(trigger);
-    return () => observer.disconnect();
+    let observer: IntersectionObserver | null = null;
+    // Delay to prevent flash on initial page load
+    const timeout = setTimeout(() => {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          setShowStickyCta(!entry.isIntersecting && window.scrollY > 100);
+        },
+        { threshold: 0 }
+      );
+      observer.observe(trigger);
+    }, 1500);
+    return () => {
+      clearTimeout(timeout);
+      observer?.disconnect();
+    };
   }, []);
 
   return (
