@@ -215,24 +215,14 @@ export default function AiAvatarPage() {
             na Reels i TikToka
           </p>
 
-          {/* Video embed — cropped to hide YT branding */}
-          <div
-            className="relative rounded-xl overflow-hidden mb-6"
-            style={{ aspectRatio: "16/12" }}
-          >
+          {/* Video embed */}
+          <div className="relative rounded-xl overflow-hidden mb-6 aspect-video">
             <iframe
               src="https://www.youtube-nocookie.com/embed/3hirtdC3CrM?autoplay=1&mute=1&loop=1&playlist=3hirtdC3CrM&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0&cc_load_policy=0"
               title="AI Avatar Demo"
               allow="autoplay; encrypted-media"
               allowFullScreen={false}
-              className="absolute border-0 pointer-events-none"
-              style={{
-                width: "100%",
-                height: "175%",
-                top: "50%",
-                left: 0,
-                transform: "translateY(-50%)",
-              }}
+              className="absolute inset-0 w-full h-full border-0 pointer-events-none"
             />
           </div>
 
@@ -444,20 +434,13 @@ export default function AiAvatarPage() {
               {/* Video placeholder */}
               <div className="mx-4 mt-4 rounded-xl overflow-hidden border-2 border-accent/40">
                 {item.videoId ? (
-                  <div className="relative overflow-hidden" style={{ aspectRatio: "16/12" }}>
+                  <div className="relative aspect-video">
                     <iframe
                       src={`https://www.youtube-nocookie.com/embed/${item.videoId}?autoplay=1&mute=1&loop=1&playlist=${item.videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0&cc_load_policy=0`}
                       title={item.title}
                       allow="autoplay; encrypted-media"
                       allowFullScreen={false}
-                      className="absolute border-0 pointer-events-none"
-                      style={{
-                        width: "100%",
-                        height: "175%",
-                        top: "50%",
-                        left: 0,
-                        transform: "translateY(-50%)",
-                      }}
+                      className="absolute inset-0 w-full h-full border-0 pointer-events-none"
                     />
                   </div>
                 ) : (
