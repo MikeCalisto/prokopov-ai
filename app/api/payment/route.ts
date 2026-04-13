@@ -38,30 +38,55 @@ export async function POST(req: NextRequest) {
 
     const siteBase = process.env.NEXT_PUBLIC_SITE_URL || "https://prokopov-ai.vercel.app";
 
+    const authString = `${posId}:${apiKey}`;
+    const authBase64 = Buffer.from(authString).toString("base64");
+
+    const requestBody = {
+      merchantId,
+      posId,
+      sessionId,
+      amount,
+      currency,
+      description: "Kurs AI Avatar",
+      email,
+      country: "PL",
+      language: "pl",
+      urlReturn: `${siteBase}/ai-avatar/thank-you`,
+      urlStatus: `${siteBase}/api/webhook`,
+      sign,
+    };
+
+    console.log("P24 Request:", {
+      url: `${baseUrl}/api/v1/transaction/register`,
+      posId,
+      merchantId,
+      isSandbox,
+      authStringPreview: `${posId}:${apiKey.substring(0, 6)}...`,
+    });
+
     // Register transaction
     const response = await fetch(`${baseUrl}/api/v1/transaction/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Basic ${Buffer.from(`${posId}:${apiKey}`).toString("base64")}`,
+        Authorization: `Basic ${authBase64}`,
       },
-      body: JSON.stringify({
-        merchantId,
-        posId,
-        sessionId,
-        amount,
-        currency,
-        description: "Kurs AI Avatar",
-        email,
-        country: "PL",
-        language: "pl",
-        urlReturn: `${siteBase}/ai-avatar/thank-you`,
-        urlStatus: `${siteBase}/api/webhook`,
-        sign,
-      }),
+      body: JSON.stringify(requestBody),
     });
 
-    const data = await response.json();
+    const responseText = await response.text();
+    console.log("P24 Response status:", response.status);
+    console.log("P24 Response body:", responseText);
+
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch {
+      return NextResponse.json(
+        { error: `P24 zwrócił nieprawidłową odpowiedź: ${responseText.substring(0, 200)}` },
+        { status: 500 }
+      );
+    }
 
     if (data.data?.token) {
       return NextResponse.json({
@@ -69,9 +94,9 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    console.error("P24 registration error:", data);
+    console.error("P24 registration error:", JSON.stringify(data));
     return NextResponse.json(
-      { error: data.error || "Błąd rejestracji płatności" },
+      { error: data.error || data.message || JSON.stringify(data) },
       { status: 500 }
     );
   } catch (error) {
