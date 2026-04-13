@@ -15,88 +15,76 @@ export async function POST(req: NextRequest) {
     const merchantId = Number(process.env.P24_MERCHANT_ID);
     const posId = Number(process.env.P24_POS_ID);
     const crcKey = process.env.P24_CRC_KEY!;
-    const apiKey = process.env.P24_API_KEY!;
     const isSandbox = process.env.P24_SANDBOX === "true";
 
     const baseUrl = isSandbox
       ? "https://sandbox.przelewy24.pl"
       : "https://secure.przelewy24.pl";
 
-    const sessionId = crypto.randomUUID();
+    const sessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
     const amount = 7900;
     const currency = "PLN";
+    const siteBase =
+      process.env.NEXT_PUBLIC_SITE_URL || "https://prokopov-ai.vercel.app";
 
-    // Generate SHA384 sign
-    const signPayload = JSON.stringify({
-      sessionId,
-      merchantId,
-      amount,
-      currency,
-      crc: crcKey,
-    });
-    const sign = crypto.createHash("sha384").update(signPayload).digest("hex");
+    // CRC sign for trnRegister: md5 of sessionId|posId|amount|currency|crc
+    const signString = `${sessionId}|${posId}|${amount}|${currency}|${crcKey}`;
+    const sign = crypto.createHash("md5").update(signString).digest("hex");
 
-    const siteBase = process.env.NEXT_PUBLIC_SITE_URL || "https://prokopov-ai.vercel.app";
-
-    const authString = `${posId}:${apiKey}`;
-    const authBase64 = Buffer.from(authString).toString("base64");
-
-    const requestBody = {
-      merchantId,
-      posId,
-      sessionId,
-      amount,
-      currency,
-      description: "Kurs AI Avatar",
-      email,
-      country: "PL",
-      language: "pl",
-      urlReturn: `${siteBase}/ai-avatar/thank-you`,
-      urlStatus: `${siteBase}/api/webhook`,
-      sign,
-    };
-
-    console.log("P24 Request:", {
-      url: `${baseUrl}/api/v1/transaction/register`,
-      posId,
-      merchantId,
-      isSandbox,
-      authStringPreview: `${posId}:${apiKey.substring(0, 6)}...`,
+    // Use classic trnRegister endpoint (form POST)
+    const params = new URLSearchParams({
+      p24_merchant_id: String(merchantId),
+      p24_pos_id: String(posId),
+      p24_session_id: sessionId,
+      p24_amount: String(amount),
+      p24_currency: currency,
+      p24_description: "Kurs AI Avatar",
+      p24_email: email,
+      p24_country: "PL",
+      p24_language: "pl",
+      p24_url_return: `${siteBase}/ai-avatar/thank-you`,
+      p24_url_status: `${siteBase}/api/webhook`,
+      p24_api_version: "3.2",
+      p24_sign: sign,
+      p24_encoding: "UTF-8",
     });
 
-    // Register transaction
-    const response = await fetch(`${baseUrl}/api/v1/transaction/register`, {
+    console.log("P24 trnRegister request:", {
+      url: `${baseUrl}/trnRegister`,
+      posId,
+      merchantId,
+      sessionId,
+      amount,
+    });
+
+    const response = await fetch(`${baseUrl}/trnRegister`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Basic ${authBase64}`,
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: JSON.stringify(requestBody),
+      body: params.toString(),
     });
 
     const responseText = await response.text();
-    console.log("P24 Response status:", response.status);
-    console.log("P24 Response body:", responseText);
+    console.log("P24 trnRegister response:", responseText);
 
-    let data;
-    try {
-      data = JSON.parse(responseText);
-    } catch {
-      return NextResponse.json(
-        { error: `P24 zwrócił nieprawidłową odpowiedź: ${responseText.substring(0, 200)}` },
-        { status: 500 }
-      );
-    }
-
-    if (data.data?.token) {
+    // Response is either "TOKEN:xxxxx" or "error=xxx&errorMessage=xxx"
+    if (responseText.startsWith("TOKEN:")) {
+      const token = responseText.replace("TOKEN:", "").trim();
       return NextResponse.json({
-        redirectUrl: `${baseUrl}/trnRequest/${data.data.token}`,
+        redirectUrl: `${baseUrl}/trnRequest/${token}`,
       });
     }
 
-    console.error("P24 registration error:", JSON.stringify(data));
+    // Parse error response
+    const errorParams = new URLSearchParams(responseText);
+    const errorCode = errorParams.get("error") || "unknown";
+    const errorMsg =
+      errorParams.get("errorMessage") || responseText.substring(0, 200);
+
+    console.error("P24 trnRegister error:", { errorCode, errorMsg });
     return NextResponse.json(
-      { error: data.error || data.message || JSON.stringify(data) },
+      { error: `Błąd P24: ${errorMsg} (${errorCode})` },
       { status: 500 }
     );
   } catch (error) {
