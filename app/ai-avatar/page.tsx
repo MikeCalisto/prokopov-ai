@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Popup from "@/components/ai-avatar/Popup";
 
@@ -160,28 +160,15 @@ export default function AiAvatarPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showStickyCta, setShowStickyCta] = useState(false);
   const startDate = useMemo(() => getTomorrowDate(), []);
-  const stickyTriggerRef = useRef<HTMLDivElement>(null);
 
   const openPopup = () => setIsPopupOpen(true);
 
   useEffect(() => {
-    const trigger = stickyTriggerRef.current;
-    if (!trigger) return;
-    let observer: IntersectionObserver | null = null;
-    // Delay to prevent flash on initial page load
-    const timeout = setTimeout(() => {
-      observer = new IntersectionObserver(
-        ([entry]) => {
-          setShowStickyCta(!entry.isIntersecting && window.scrollY > 100);
-        },
-        { threshold: 0 }
-      );
-      observer.observe(trigger);
-    }, 1500);
-    return () => {
-      clearTimeout(timeout);
-      observer?.disconnect();
+    const handleScroll = () => {
+      setShowStickyCta(window.scrollY > 600);
     };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -330,9 +317,6 @@ export default function AiAvatarPage() {
           </div>
         </div>
       </section>
-
-      {/* Trigger for sticky CTA — appears after hero */}
-      <div ref={stickyTriggerRef} />
 
       {/* Na czym to polega — 3 numbered cards */}
       <section className="px-4 py-10">
@@ -870,15 +854,12 @@ export default function AiAvatarPage() {
       </footer>
 
       {/* Sticky bottom CTA */}
-      <div
-        className={`fixed bottom-0 left-0 right-0 z-40 transition-all duration-300 ${
-          showStickyCta && !isPopupOpen
-            ? "translate-y-0 opacity-100"
-            : "translate-y-full opacity-0"
-        }`}
-      >
-        <div className="page-wrapper">
-          <div className="px-4 pb-4 pt-2 bg-gradient-to-t from-dark via-dark/95 to-transparent">
+      {showStickyCta && !isPopupOpen && (
+        <div
+          className="fixed z-40"
+          style={{ bottom: 0, left: 0, right: 0 }}
+        >
+          <div className="max-w-[480px] mx-auto px-4 pb-4 pt-3 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/95 to-transparent">
             <button
               onClick={openPopup}
               className="w-full bg-accent hover:bg-[#e07e00] text-white font-bold py-3.5 rounded-xl text-sm transition-colors uppercase tracking-wide shadow-lg shadow-accent/30"
@@ -887,7 +868,7 @@ export default function AiAvatarPage() {
             </button>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Popup */}
       <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
