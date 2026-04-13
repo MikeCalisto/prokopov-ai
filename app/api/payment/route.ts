@@ -36,6 +36,8 @@ export async function POST(req: NextRequest) {
     });
     const sign = crypto.createHash("sha384").update(signPayload).digest("hex");
 
+    const siteBase = process.env.NEXT_PUBLIC_SITE_URL || "https://prokopov-ai.vercel.app";
+
     // Register transaction
     const response = await fetch(`${baseUrl}/api/v1/transaction/register`, {
       method: "POST",
@@ -53,8 +55,8 @@ export async function POST(req: NextRequest) {
         email,
         country: "PL",
         language: "pl",
-        urlReturn: "https://prokopov-ai.vercel.app/ai-avatar/thank-you",
-        urlStatus: "https://prokopov-ai.vercel.app/api/webhook",
+        urlReturn: `${siteBase}/ai-avatar/thank-you`,
+        urlStatus: `${siteBase}/api/webhook`,
         sign,
       }),
     });
@@ -69,7 +71,7 @@ export async function POST(req: NextRequest) {
 
     console.error("P24 registration error:", data);
     return NextResponse.json(
-      { error: "Błąd rejestracji płatności" },
+      { error: data.error || "Błąd rejestracji płatności" },
       { status: 500 }
     );
   } catch (error) {

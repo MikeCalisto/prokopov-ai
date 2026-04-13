@@ -64,7 +64,7 @@ export default function Popup({ isOpen, onClose }: PopupProps) {
         setErrors({ form: data.error || "Wystąpił błąd. Spróbuj ponownie." });
       }
     } catch {
-      setErrors({ form: "Wystąpił błąd połączenia. Spróbuj ponownie." });
+      window.location.href = "/ai-avatar/payment-error";
     } finally {
       setLoading(false);
     }
