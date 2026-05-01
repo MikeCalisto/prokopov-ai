@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0A0A0B" />
+  <title>AI-аватар за 2 години — заміни себе в кадрі | Курс Романа Прокопова</title>
+  <meta name="description" content="Створи свого реалістичного AI-двійника та знімай Reels і TikTok без камери, світла і студії. Знижка −83% до кінця таймера." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SVG icon set -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </symbol>
+      <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </symbol>
+      <symbol id="i-cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M23 7l-7 5 7 5V7z"/>
+        <rect x="1" y="5" width="15" height="14" rx="2"/>
+      </symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2 L4 6 V12 C4 16.5 7.5 20.5 12 22 C16.5 20.5 20 16.5 20 12 V6 Z"/>
+        <polyline points="9 12 11 14 15 10"/>
+      </symbol>
+      <symbol id="i-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="8" width="16" height="12" rx="3"/>
+        <line x1="12" y1="3" x2="12" y2="8"/>
+        <circle cx="12" cy="3" r="1" fill="currentColor"/>
+        <circle cx="9" cy="14" r="1.2" fill="currentColor"/>
+        <circle cx="15" cy="14" r="1.2" fill="currentColor"/>
+      </symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 L4 14 H11 L9 22 L20 9 H13 Z"/></symbol>
+      <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <circle cx="12" cy="12" r="6"/>
+        <circle cx="12" cy="12" r="2" fill="currentColor"/>
+      </symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="6" y="2" width="12" height="20" rx="2"/>
+        <line x1="12" y1="18" x2="12" y2="18"/>
+      </symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+      </symbol>
+      <symbol id="i-hourglass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2h12 M6 22h12 M7 2 V8 L12 12 L17 8 V2 M7 22 V16 L12 12 L17 16 V22"/>
+      </symbol>
+      <symbol id="i-lamp-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 18h6 M10 22h4 M9 14a4 4 0 0 1-2.5-3.7c0-2.4 2-4.3 4.5-4.3 M14.5 6c2.5 0 4.5 1.9 4.5 4.3 a4 4 0 0 1-2.5 3.7"/>
+        <line x1="3" y1="3" x2="21" y2="21"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- Global tech effects -->
+  <canvas id="neural-canvas"></canvas>
+  <div id="cursor-glow"></div>
+
+
+  <main class="phone-wrap">
+
+    <!-- ================================================================
+         1. HERO
+    ================================================================ -->
+    <section class="hero">
+      <div class="hero-eyebrow-row">
+        <div class="eyebrow">ОНЛАЙН-КУРС&nbsp; · &nbsp;<span>СТАРТ 20 СІЧНЯ</span></div>
+        <div class="cam-icon" aria-hidden="true">
+          <svg><use href="#i-cam"/></svg>
+        </div>
+      </div>
+
+      <h1 class="glitch" data-text="Заміни себе в кадрі — знімай Reels і TikTok без камери, світла і студії">
+        Заміни <strong>себе в кадрі</strong> — знімай Reels і TikTok без камери, світла і студії
+      </h1>
+
+      <p class="hero-sub">
+        Створи реалістичного AI-аватара за 2 години та делегуй йому всі зйомки замість себе
+      </p>
+
+      <!-- Hero video with tech corner-bracket frame -->
+      <div class="hero-frame">
+        <span class="corner tl"></span>
+        <span class="corner tr"></span>
+        <span class="corner bl"></span>
+        <span class="corner br"></span>
+        <div class="hero-frame-label">
+          <span class="rec-dot"></span>
+          <span>LIVE · AI-DEMO</span>
+        </div>
+        <div class="video-9-16 hero-video-box">
+          <iframe
+            data-yt="NPMrWHVV18I"
+            data-src="https://www.youtube-nocookie.com/embed/NPMrWHVV18I?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1"
+            title="Промо: створи живого АІ-аватара"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen loading="lazy"></iframe>
+          <div class="click-blocker"></div>
+        </div>
+      </div>
+
+      <ul class="hero-bullets">
+        <li><span class="arr-orange">→</span><span>хочеш робити більше Reels, але втомився(лась) постійно знімати себе</span></li>
+        <li><span class="arr-orange">→</span><span>відкладаєш контент, бо немає світла, фону, настрою чи часу на зйомку</span></li>
+        <li><span class="arr-orange">→</span><span>хочеш стабільний контент і ріст підписників — без життя з камерою 24/7</span></li>
+      </ul>
+
+      <div class="price-row">
+        <span class="price-now" id="hero-counter">390<span class="price-now-cur">грн</span></span>
+        <span class="price-old">2 300 грн</span>
+        <span class="price-disc">−83%</span>
+      </div>
+
+      <div class="cta-block">
+        <a class="btn" href="https://app.zenedu.io/l/emjrXZgbeh5D6VgU" target="_blank" rel="noopener">
+          ПРИЄДНАТИСЬ ДО КУРСУ ЗА 390 ГРН
+          <svg class="arr"><use href="#i-arrow"/></svg>
+        </a>
+        <p class="tiny">Після оплати тебе одразу переадресує в Telegram-бот, де знаходиться курс</p>
+      </div>
+
+      <div class="scroll-hint">
+        <span>скрол</span>
+        <span class="arr-down" aria-hidden="true"></span>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         2. TIMER
+    ================================================================ -->
+    <section class="section">
+      <div class="container reveal">
+        <div class="timer-card" id="timer-card">
+          <div class="timer-icon"><svg><use href="#i-clock"/></svg></div>
+          <h2>Ціна 390 грн діє лише до кінця таймера</h2>
+          <p class="lead">
+            Після завершення таймера вартість повернеться до 2 300 грн. Встигни зайти зі знижкою −83%.
+          </p>
+          <div class="timer-display" id="timer-display">
+            <div class="timer-block"><span id="t-min">10</span></div>
+            <span class="timer-sep">:</span>
+            <div class="timer-block"><span id="t-sec">00</span></div>
+          </div>
+          <a class="btn" href="https://app.zenedu.io/l/emjrXZgbeh5D6VgU" target="_blank" rel="noopener">
+            ЗАБРАТИ КУРС ЗА 390 ГРН
+            <svg class="arr"><use href="#i-arrow"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         3. PROBLEM
+    ================================================================ -->
+    <section class="section bg-b problem">
+      <div class="container reveal">
+        <h2 class="h2 glitch" data-text="Година на одне Reels. І так — щотижня.">
+          Година на одне Reels. <strong>І так — щотижня.</strong>
+        </h2>
+        <p class="lead" style="margin-bottom:24px">Знайома картина?</p>
+
+        <ul class="problem-list">
+          <li class="problem-card">
+            <span class="icn"><svg><use href="#i-minus"/></svg></span>
+            Ти хочеш зняти Reels, але треба знайти світло, фон, переодягнутись, налаштувати камеру
+          </li>
+          <li class="problem-card">
+            <span class="icn"><svg><use href="#i-hourglass"/></svg></span>
+            Поки готуєшся — настрій падає, ідея забувається, відео знімається «на відчепись»
+          </li>
+          <li class="problem-card">
+            <span class="icn"><svg><use href="#i-lamp-off"/></svg></span>
+            Через тиждень ти знову на нулі: не вистачає сил знімати, охоплення падають, блог зупиняється
+          </li>
+        </ul>
+
+        <div class="quote">
+          <strong>Проблема не в тобі.</strong> Проблема — в самому процесі зйомки. Він з'їдає твій час, енергію і бажання вести блог.
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         4. SOLUTION
+    ================================================================ -->
+    <section class="section solution">
+      <div class="container reveal">
+        <h2 class="h2">Рішення — твій AI-двійник, який знімає замість тебе</h2>
+
+        <div class="video-9-16 video-vertical">
+          <iframe
+            data-yt="YqeaJ2eHHWA"
+            data-src="https://www.youtube-nocookie.com/embed/YqeaJ2eHHWA?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1"
+            title="Демо AI-аватара"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+          <div class="click-blocker"></div>
+        </div>
+
+        <p class="lead" style="margin-bottom:18px">AI-аватар — це твоя реалістична цифрова копія, яка:</p>
+
+        <ul class="solution-list">
+          <li><span class="check-orange"><svg><use href="#i-check"/></svg></span>виглядає як ти і говорить твоїм голосом</li>
+          <li><span class="check-orange"><svg><use href="#i-check"/></svg></span>знімається у відео без твоєї участі — навіть коли ти спиш</li>
+          <li><span class="check-orange"><svg><use href="#i-check"/></svg></span>повторює будь-які тренди, рухи й сценарії</li>
+          <li><span class="check-orange"><svg><use href="#i-check"/></svg></span>створює відео за 5 хвилин замість 2 годин</li>
+        </ul>
+
+        <div class="quote">
+          Ти більше не залежиш від світла, студії, фону, настрою чи «вдалого дня». <strong>Контент-машина працює навіть без тебе в кадрі.</strong>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         5. FOR WHOM
+    ================================================================ -->
+    <section class="section bg-b forwho">
+      <div class="container reveal">
+        <h2 class="h2">Цей курс для тебе, якщо:</h2>
+        <ul class="arrow-list">
+          <li><span class="arr-orange-l">→</span><span>хочеш регулярно публікувати Reels і TikTok, але не маєш ресурсу постійно знімати</span></li>
+          <li><span class="arr-orange-l">→</span><span>соромишся камери або не хочеш постійно показувати обличчя в кадрі</span></li>
+          <li><span class="arr-orange-l">→</span><span>хочеш більше охоплень і підписників — без вигорання та зйомок 24/7</span></li>
+          <li><span class="arr-orange-l">→</span><span>втомився(лась) вигадувати ідеї, ставити світло, заучувати сценарії</span></li>
+          <li><span class="arr-orange-l">→</span><span>хочеш контент-систему, яка працює стабільно, а не «коли є настрій»</span></li>
+          <li><span class="arr-orange-l">→</span><span>ведеш блог або тільки плануєш — і хочеш стартувати правильно з першого дня</span></li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         6. PROGRAM
+    ================================================================ -->
+    <section class="section program">
+      <div class="container reveal">
+        <h2 class="h2">Програма курсу — 4 уроки до твого AI-двійника</h2>
+
+        <div class="lessons">
+
+          <!-- Lesson 1 -->
+          <article class="lesson-card">
+            <div class="lesson-num">01</div>
+            <h3 class="lesson-title"><span class="lesson-emoji">🚀</span>Урок 1. Можливості AI-аватарів: що ти зможеш робити після курсу</h3>
+            <p class="lead">Вступний урок, з якого ти зрозумієш масштаб інструменту:</p>
+
+            <div class="video-9-16">
+              <iframe
+                data-yt="NPMrWHVV18I"
+                data-src="https://www.youtube-nocookie.com/embed/NPMrWHVV18I?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1"
+                title="Урок 1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen loading="lazy"></iframe>
+              <div class="click-blocker"></div>
+            </div>
+
+            <div class="lesson-result">
+              <div class="lesson-result-label">✦ Результат</div>
+              ти бачиш повну картину, розумієш свій потенціал і вибираєш формат, який підходить саме тобі.
+            </div>
+          </article>
+
+          <span class="lesson-divider" aria-hidden="true"></span>
+
+          <!-- Lesson 2 -->
+          <article class="lesson-card">
+            <div class="lesson-num">02</div>
+            <h3 class="lesson-title"><span class="lesson-emoji">🎬</span>Урок 2. Створення AI-аватара на базі відео</h3>
+            <p class="lead">Найреалістичніший спосіб — твій двійник з твого власного відео:</p>
+
+            <div class="video-9-16">
+              <iframe
+                data-yt="0cxE-ZKzvMw"
+                data-src="https://www.youtube-nocookie.com/embed/0cxE-ZKzvMw?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1"
+                title="Урок 2"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen loading="lazy"></iframe>
+              <div class="click-blocker"></div>
+            </div>
+
+            <div class="lesson-result">
+              <div class="lesson-result-label">✦ Результат</div>
+              у тебе є власний цифровий аватар, який виглядає реалістично та природньо — і знімає замість тебе.
+            </div>
+          </article>
+
+          <span class="lesson-divider" aria-hidden="true"></span>
+
+          <!-- Lesson 3 -->
+          <article class="lesson-card">
+            <div class="lesson-num">03</div>
+            <h3 class="lesson-title"><span class="lesson-emoji">📸</span>Урок 3. Створення AI-аватара на базі фото</h3>
+            <p class="lead">Спосіб для тих, у кого взагалі немає відео себе — або не хочеться знімати:</p>
+
+            <div class="video-9-16">
+              <iframe
+                data-yt="4wjnKdZQtDs"
+                data-src="https://www.youtube-nocookie.com/embed/4wjnKdZQtDs?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1"
+                title="Урок 3"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen loading="lazy"></iframe>
+              <div class="click-blocker"></div>
+            </div>
+
+            <div class="lesson-result">
+              <div class="lesson-result-label">✦ Результат</div>
+              ти створюєш аватара навіть без жодної зйомки. Можеш легко змінювати образ та оточення під різні задачі.
+            </div>
+          </article>
+
+          <span class="lesson-divider" aria-hidden="true"></span>
+
+          <!-- Lesson 4 -->
+          <article class="lesson-card">
+            <div class="lesson-num">04</div>
+            <h3 class="lesson-title"><span class="lesson-emoji">🔥</span>Урок 4. Створення AI-аватара методом Motion-контролю</h3>
+            <p class="lead">Найпотужніший спосіб — повне керування рухами й мімікою аватара:</p>
+
+            <div class="video-9-16">
+              <iframe
+                data-yt="5by98eyAMDo"
+                data-src="https://www.youtube-nocookie.com/embed/5by98eyAMDo?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1"
+                title="Урок 4"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen loading="lazy"></iframe>
+              <div class="click-blocker"></div>
+            </div>
+
+            <div class="lesson-result">
+              <div class="lesson-result-label">✦ Результат</div>
+              твій аватар може відтворювати актуальні тренди й будь-які рухи без тебе. Ти регулярно публікуєш відео, що заходять у рекомендації.
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         7. WHY COURSE (vs free)
+    ================================================================ -->
+    <section class="section bg-b whycourse">
+      <div class="container reveal">
+        <div class="big-question">
+          <span class="bq-mark">«</span>
+          <h2 class="h2">А навіщо мені курс?<br/>Я ж можу подивитись безкоштовні відео в TikTok</h2>
+          <span class="bq-mark right">»</span>
+        </div>
+        <p class="lead lead-center">Чесне питання. І чесна відповідь: можеш. <strong>Але є нюанс.</strong></p>
+
+        <!-- Stat callout: 15-20 hours -->
+        <div class="stat-callout">
+          <div class="stat-callout-num">15–20</div>
+          <div class="stat-callout-unit">годин</div>
+          <div class="stat-callout-text">витратиш на пошук уривчастих туторіалів — і отримаєш аватара з кривою мімікою, штучним голосом і дивними рухами рук</div>
+        </div>
+
+        <p class="lead"><strong style="color:var(--orange)">Чому так?</strong> Бо ніхто з блогерів не показує головне.</p>
+
+        <!-- VS Compare -->
+        <div class="versus-block">
+          <div class="versus-title">Що визначає якість аватара</div>
+          <div class="versus-cards">
+            <div class="versus-card versus-no">
+              <div class="versus-label">МІФ</div>
+              <ul class="x-list">
+                <li><span class="x-mark">✕</span>сервіс, у якому ти його робиш</li>
+                <li><span class="x-mark">✕</span>«секретні налаштування»</li>
+                <li><span class="x-mark">✕</span>платна підписка</li>
+              </ul>
+            </div>
+            <div class="versus-divider" aria-hidden="true">
+              <span>VS</span>
+            </div>
+            <div class="versus-card versus-yes">
+              <div class="versus-label">РЕАЛЬНІСТЬ</div>
+              <ul class="check-list">
+                <li><span class="check-mark"><svg><use href="#i-check"/></svg></span>якість вихідного матеріалу, який ти даєш нейромережі</li>
+              </ul>
+              <p class="versus-note">кут, світло, промт, що завантажуєш у яке поле — саме це робить різницю між реалістичним двійником і кривим аватаром.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- System checklist -->
+        <div class="system-block">
+          <div class="system-header">
+            <span class="system-prefix">[ SYSTEM ]</span>
+            <div class="whycourse-sub">Це і є та система, яку я передаю в курсі</div>
+          </div>
+          <ul class="arrow-list arrow-list-cards">
+            <li><span class="arr-orange-l">→</span><span><strong>Як правильно зняти вихідне відео</strong> (точний чек-лист, навіть якщо знімаєш на телефон)</span></li>
+            <li><span class="arr-orange-l">→</span><span><strong>Які параметри материалу критичні,</strong> а які — другорядні</span></li>
+            <li><span class="arr-orange-l">→</span><span><strong>Як писати промти,</strong> щоб аватар рухався природньо, а не як робот</span></li>
+            <li><span class="arr-orange-l">→</span><span><strong>Як взаємодіяти з нейромережею,</strong> щоб отримати потрібну міміку, голос, жестикуляцію</span></li>
+            <li><span class="arr-orange-l">→</span><span><strong>Як виправити кривого аватара</strong> без повторної зйомки</span></li>
+          </ul>
+        </div>
+
+        <!-- "What you get" with stat-grid -->
+        <div class="get-block">
+          <div class="whycourse-sub">У курсі замість хаосу безкоштовних туторіалів:</div>
+          <ul class="get-list">
+            <li><div class="get-tag">01</div><span><strong>Готова покрокова інструкція</strong> від людини, яка створила <em>2 500+ відео</em> з аватарами</span></li>
+            <li><div class="get-tag">02</div><span><strong>7 авторських промптів,</strong> які я довів до робочого стану через сотні тестів</span></li>
+            <li><div class="get-tag">03</div><span><strong>Розбір типових помилок</strong> — щоб ти не наступав на ті ж граблі</span></li>
+            <li><div class="get-tag">04</div><span><strong>Чат підтримки</strong> — застряг на якомусь кроці, отримуєш відповідь, а не пів години гуглиш</span></li>
+            <li><div class="get-tag">05</div><span><strong>Все за 2 години</strong> замість 15–20 годин самонавчання</span></li>
+          </ul>
+        </div>
+
+        <!-- Pull-quote -->
+        <div class="pull-quote">
+          <div class="pq-mark">"</div>
+          <p>По суті, ти платиш за те, щоб <strong>не витрачати тижні на пошук того, що я вже знайшов і перевірив.</strong></p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         8. PRICING (avatar work cost)
+    ================================================================ -->
+    <section class="section pricing">
+      <div class="container reveal">
+        <h2 class="h2">А скільки ще треба доплачувати за роботу з аватаром?</h2>
+        <p class="lead">Курс побудований на одному з провідних світових AI-сервісів. Розповідаю чесно про функціонал і ліміти.</p>
+
+        <div class="plan-card">
+          <div class="plan-card-head">
+            <div class="plan-label">Безкоштовний план — для тесту</div>
+            <div class="plan-hero">
+              <span class="plan-hero-curr">$</span><span class="plan-hero-num">0</span><span class="plan-hero-mo">/міс</span>
+            </div>
+          </div>
+          <p class="lead" style="margin-bottom:14px">На безкоштовній підписці ти зможеш:</p>
+          <ul class="check-list">
+            <li><span class="check-mark"><svg><use href="#i-check"/></svg></span>створити свого власного аватара</li>
+            <li><span class="check-mark"><svg><use href="#i-check"/></svg></span>згенерувати 3 відео на місяць у якості 720p</li>
+            <li><span class="check-mark"><svg><use href="#i-check"/></svg></span>тривалість одного відео — до 3 хвилин</li>
+            <li><span class="check-mark"><svg><use href="#i-check"/></svg></span>план постійний, не тріал — не згорає, не вимагає картки</li>
+          </ul>
+          <p class="lead">Цього достатньо, щоб повністю пройти курс, створити аватара і зняти перші тестові Reels. Єдиний нюанс — на безкоштовному плані відео виходять з водяним знаком сервісу.</p>
+        </div>
+
+        <div class="plan-card premium">
+          <div class="plan-ribbon">РЕКОМЕНДОВАНО</div>
+          <div class="plan-card-head">
+            <div class="plan-label">Платна підписка</div>
+            <div class="plan-hero">
+              <span class="plan-hero-curr">~$</span><span class="plan-hero-num">29</span><span class="plan-hero-mo">/міс</span>
+            </div>
+            <div class="plan-hero-note">або ~$24/міс при оплаті за рік</div>
+          </div>
+          <p class="lead" style="margin-bottom:14px">Якщо вирішуєш зробити аватара основним інструментом контенту:</p>
+          <ul class="check-list">
+            <li><span class="check-mark"><svg><use href="#i-check"/></svg></span>необмежена кількість звичайних відео</li>
+            <li><span class="check-mark"><svg><use href="#i-check"/></svg></span>якість 1080p без водяного знаку</li>
+            <li><span class="check-mark"><svg><use href="#i-check"/></svg></span>клонування твого голосу</li>
+            <li><span class="check-mark"><svg><use href="#i-check"/></svg></span>175+ мов і діалектів</li>
+            <li><span class="check-mark"><svg><use href="#i-check"/></svg></span>преміум-режим з найреалістичнішими рухами — 10–20 коротких Reels на місяць</li>
+          </ul>
+          <p class="lead">Якщо захочеш робити більше преміум-відео — додатковий пакет приблизно $15/міс.</p>
+        </div>
+
+        <!-- Visual comparison with bars -->
+        <div class="compare">
+          <div class="plan-label" style="margin-bottom:18px">Порівняй з реальністю</div>
+          <div class="compare-bar">
+            <div class="cb-label">День оренди студії зі світлом</div>
+            <div class="cb-fill" style="--w: 100%; --c: var(--t-3)"></div>
+            <div class="cb-price">2 000–5 000 грн</div>
+          </div>
+          <div class="compare-bar">
+            <div class="cb-label">Місяць роботи відеографа</div>
+            <div class="cb-fill" style="--w: 100%; --c: var(--t-3)"></div>
+            <div class="cb-price">15 000–30 000 грн</div>
+          </div>
+          <div class="compare-bar highlight">
+            <div class="cb-label">Підписка AI за безліміт</div>
+            <div class="cb-fill" style="--w: 12%; --c: var(--orange)"></div>
+            <div class="cb-price">~1 200 грн/міс</div>
+          </div>
+        </div>
+
+        <div class="quote" style="margin-top:22px">
+          Ти платиш за курс <strong>один раз.</strong> Далі ~$29/міс замінює тобі знімальну групу, студію і пів дня життя на кожне відео.
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         9. HOW IT WORKS
+    ================================================================ -->
+    <section class="section bg-b howto">
+      <div class="container reveal">
+        <h2 class="h2">Як це працює:</h2>
+
+        <ol class="timeline">
+          <li class="t-step">
+            <div class="t-node"><svg><use href="#i-phone"/></svg></div>
+            <div class="t-num">01</div>
+            <div class="t-body">
+              <strong>Доступ через Telegram-бот</strong>
+              <span>дивишся уроки коли зручно, прямо з телефону</span>
+            </div>
+          </li>
+          <li class="t-step">
+            <div class="t-node"><svg><use href="#i-bolt"/></svg></div>
+            <div class="t-num">02</div>
+            <div class="t-body">
+              <strong>7 авторських промптів-шаблонів</strong>
+              <span>копіюєш, вставляєш, отримуєш результат за хвилини</span>
+            </div>
+          </li>
+          <li class="t-step">
+            <div class="t-node"><svg><use href="#i-target"/></svg></div>
+            <div class="t-num">03</div>
+            <div class="t-body">
+              <strong>Покрокові інструкції без води</strong>
+              <span>що натиснути, куди завантажити, як отримати готове відео</span>
+            </div>
+          </li>
+          <li class="t-step">
+            <div class="t-node"><svg><use href="#i-chat"/></svg></div>
+            <div class="t-num">04</div>
+            <div class="t-body">
+              <strong>Чат з підтримкою автора</strong>
+              <span>застряг? Питаєш — отримуєш розбір без пошуку відповідей самостійно</span>
+            </div>
+          </li>
+          <li class="t-step">
+            <div class="t-node"><svg><use href="#i-phone"/></svg></div>
+            <div class="t-num">05</div>
+            <div class="t-body">
+              <strong>Усе можна зробити з телефону</strong>
+              <span>комп'ютер не потрібен</span>
+            </div>
+          </li>
+        </ol>
+
+        <div class="result-banner">
+          <div class="rb-tag">РЕЗУЛЬТАТ</div>
+          <p>за <strong>2 години</strong> ти створюєш свого AI-двійника та починаєш генерувати з ним відео вже сьогодні.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         10. RESULT
+    ================================================================ -->
+    <section class="section results">
+      <div class="container reveal">
+        <h2 class="h2">Що ти отримуєш <strong>після курсу:</strong></h2>
+
+        <div class="results-grid">
+          <article class="result-card">
+            <div class="result-icn"><svg><use href="#i-bot"/></svg></div>
+            <div class="result-num">01</div>
+            <p><strong>Готовий AI-аватар,</strong> який знімає за тебе будь-які Reels і TikTok</p>
+          </article>
+
+          <article class="result-card">
+            <div class="result-icn"><svg><use href="#i-bolt"/></svg></div>
+            <div class="result-num">02</div>
+            <p><strong>Стабільний контент-потік</strong> — більше публікацій без додаткових зусиль</p>
+          </article>
+
+          <article class="result-card">
+            <div class="result-icn"><svg><use href="#i-cam"/></svg></div>
+            <div class="result-num">03</div>
+            <p><strong>Свобода від камери:</strong> не треба думати про світло, фон, настрій, локацію</p>
+          </article>
+
+          <article class="result-card">
+            <div class="result-icn"><svg><use href="#i-target"/></svg></div>
+            <div class="result-num">04</div>
+            <p><strong>Зростання охоплень</strong> — за рахунок регулярності, а не «хайпу»</p>
+          </article>
+
+          <article class="result-card">
+            <div class="result-icn"><svg><use href="#i-bolt"/></svg></div>
+            <div class="result-num">05</div>
+            <p><strong>Тестування трендів</strong> без жодних повторних зйомок</p>
+          </article>
+
+          <article class="result-card">
+            <div class="result-icn"><svg><use href="#i-clock"/></svg></div>
+            <div class="result-num">06</div>
+            <p><strong>Час,</strong> що раніше йшов на зйомки — тепер вільний для життя або інших задач</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         11. GUARANTEE
+    ================================================================ -->
+    <section class="section bg-b guarantee">
+      <div class="container reveal">
+        <div class="guarantee-card">
+          <!-- Massive 14 mark with rotating ring -->
+          <div class="g-mega">
+            <span class="g-ring"></span>
+            <span class="g-ring g-ring-2"></span>
+            <div class="g-num">14</div>
+            <div class="g-label">ДНІВ</div>
+          </div>
+
+          <div class="shield-icon shield-floating"><svg><use href="#i-shield"/></svg></div>
+          <h2 class="h2">Повна гарантія — <strong>нуль ризиків</strong></h2>
+          <p>Я впевнений в курсі настільки, що даю тобі <strong style="color:var(--orange)">14 днів</strong> повної гарантії повернення коштів.</p>
+          <p>Заходиш, проходиш уроки, створюєш свого аватара, генеруєш перші відео.</p>
+          <p>Якщо не побачиш цінності або результату — пишеш мені, і я повертаю гроші без зайвих запитань.</p>
+          <div class="quote">
+            Ти або отримуєш AI-двійника, який знімає за тебе. <strong>Або повертаєш кошти.</strong> Третього не дано.
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         12. AUTHOR
+    ================================================================ -->
+    <section class="section author">
+      <div class="container reveal">
+        <h2 class="h2">Хто <strong>за курсом</strong></h2>
+
+        <div class="author-card">
+          <!-- Photo with HUD corner brackets -->
+          <div class="author-photo-wrap">
+            <span class="corner tl"></span>
+            <span class="corner tr"></span>
+            <span class="corner bl"></span>
+            <span class="corner br"></span>
+            <div class="author-photo" aria-label="Фото автора">
+              <svg><use href="#i-bot"/></svg>
+            </div>
+            <div class="author-tag">AUTHOR · ROMAN P.</div>
+          </div>
+
+          <div class="author-info">
+            <div class="author-name">Роман Прокопов</div>
+            <div class="author-role">Власник продакшн-агенції</div>
+
+            <div class="author-stats">
+              <div class="author-stat">
+                <div class="author-stat-num" data-counter="2500" data-suffix="+">0</div>
+                <div class="author-stat-label">відео щороку для блогів і брендів</div>
+                <span class="stat-line"></span>
+              </div>
+              <div class="author-stat">
+                <div class="author-stat-num" data-counter="10000" data-suffix="+">0</div>
+                <div class="author-stat-label">нових підписників на місяць у клієнтів</div>
+                <span class="stat-line"></span>
+              </div>
+              <div class="author-stat">
+                <div class="author-stat-num" data-counter="20" data-suffix="+">0</div>
+                <div class="author-stat-label">ніш — від експертних блогів до брендів</div>
+                <span class="stat-line"></span>
+              </div>
+            </div>
+
+            <p>Моя система з AI-аватарами приносить клієнтам до <strong style="color:var(--orange)">10 000 нових підписників на місяць</strong> — без їхньої участі у зйомках.</p>
+            <p>Цей курс — та сама система, <strong>упакована в 4 уроки.</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         13. FINAL CTA
+    ================================================================ -->
+    <section class="section bg-b final-cta">
+      <!-- Decorative rings + grid -->
+      <div class="fc-rings" aria-hidden="true">
+        <span class="fc-ring"></span>
+        <span class="fc-ring fc-ring-2"></span>
+        <span class="fc-ring fc-ring-3"></span>
+      </div>
+      <div class="fc-grid" aria-hidden="true"></div>
+
+      <div class="container reveal">
+        <div class="fc-mark">
+          <span class="rec-dot"></span>
+          <span>FINAL · STEP</span>
+        </div>
+        <h2 class="h2">Останній крок до твого <strong>AI-двійника</strong></h2>
+
+        <div class="price-row">
+          <span class="price-now">390<span class="price-now-cur">грн</span></span>
+          <span class="price-old">2 300 грн</span>
+          <span class="price-disc">−83% до кінця таймера</span>
+        </div>
+
+        <a class="btn" href="https://app.zenedu.io/l/emjrXZgbeh5D6VgU" target="_blank" rel="noopener" style="max-width:360px;margin:0 auto">
+          ПРИЄДНАТИСЬ ДО КУРСУ
+          <svg class="arr"><use href="#i-arrow"/></svg>
+        </a>
+
+        <div class="final-pills">
+          <div class="final-pill"><svg><use href="#i-shield"/></svg> 14 днів гарантії повернення коштів</div>
+          <div class="final-pill"><svg><use href="#i-phone"/></svg> Доступ одразу після оплати в Telegram</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         14. FAQ
+    ================================================================ -->
+    <section class="section faq">
+      <div class="container reveal">
+        <h2 class="h2">Питання та відповіді</h2>
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary class="faq-q">Чи виглядатиме мій аватар реалістично?<span class="faq-toggle">+</span></summary>
+            <div class="faq-a">Так. Аватар створюється з твого відео або фото та повторює міміку, голос і манеру говорити. Глядачі не відрізняють його від звичайного Reels — це підтверджують 2 500+ відео, які моя команда вже зробила за цією технологією.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Чи треба платити ще щось окрім курсу?<span class="faq-toggle">+</span></summary>
+            <div class="faq-a">Ні, не обов'язково. На безкоштовній підписці сервісу ти зможеш створити аватара і згенерувати 3 тестові відео в якості 720p — цього достатньо, щоб пройти курс. Якщо захочеш робити необмежену кількість відео в найвищій якості — платна підписка коштує ~$29/міс. Це твій вибір, а не обов'язкова умова.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Чи підійде мені курс, якщо я новачок у АІ?<span class="faq-toggle">+</span></summary>
+            <div class="faq-a">Так. Курс створений так, щоб ти міг почати з нуля, навіть якщо раніше не працював з AI, відео або контентом. Усі кроки показані покроково: що робити, куди натискати і як отримати результат.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Чи не впаде довіра до блогу, якщо я використовую AI-аватара?<span class="faq-toggle">+</span></summary>
+            <div class="faq-a">Ні. Навпаки — регулярність і якість контенту зазвичай підвищують довіру. AI-аватар — це інструмент оптимізації процесу, а не обман аудиторії.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Чи підійде курс, якщо я ще не веду блог?<span class="faq-toggle">+</span></summary>
+            <div class="faq-a">Так. Це хороший старт, тому що ти одразу будуєш контент правильно, без звички до хаотичних зйомок і вигорання.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Чи можна використовувати аватара для різних форматів і ніш?<span class="faq-toggle">+</span></summary>
+            <div class="faq-a">Так. Один і той самий аватар можна адаптувати під експертні відео, тренди, освітній контент, особистий блог. Я окремо показую, як змінювати формат без повторних зйомок.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Чи підходить курс, якщо я не технічна людина?<span class="faq-toggle">+</span></summary>
+            <div class="faq-a">Так. Усі дії показані покроково, максимально просто. Якщо вмієш користуватися телефоном — цього достатньо.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Чи можу я зробити аватара використовуючи тільки телефон?<span class="faq-toggle">+</span></summary>
+            <div class="faq-a">Так. Більшість процесів можна виконувати з телефону. Комп'ютер — необов'язковий.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Коли я побачу перші результати?<span class="faq-toggle">+</span></summary>
+            <div class="faq-a">Перші відео з AI-аватаром ти зможеш створити вже в день проходження перших уроків. Далі все залежить від регулярності публікацій.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">А якщо мені не підійде курс?<span class="faq-toggle">+</span></summary>
+            <div class="faq-a">У тебе є 14 днів гарантії повернення коштів. Ти спокійно тестуєш курс — без ризику.</div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         FOOTER
+    ================================================================ -->
+    <footer class="footer">
+      <div class="legal">
+        ФОП Прокопов Роман Ігорович<br>
+        ІПН 3557901673<br>
+        +38 (073) 588-50-39<br>
+        Запорізька обл., м. Запоріжжя, вул. Історична, 45
+      </div>
+      <div class="footer-links">
+        <a href="#">Договір оферти</a>
+        <a href="#">Політика конфіденційності</a>
+      </div>
+      <a class="btn" href="https://app.zenedu.io/l/emjrXZgbeh5D6VgU" target="_blank" rel="noopener">
+        ПРИЄДНАТИСЬ ДО КУРСУ
+        <svg class="arr"><use href="#i-arrow"/></svg>
+      </a>
+    </footer>
+
+  </main>
+
+
+  <!-- ================================================================
+       SCRIPTS
+  ================================================================ -->
+  <script>
+    /* ==================== Reveal-on-scroll (early trigger) ==================== */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px 200px 0px' }); // trigger 200px BEFORE element enters
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    /* ==================== Hero price counter (2300 → 390) ==================== */
+    (function () {
+      const el = document.getElementById('hero-counter');
+      if (!el) return;
+      const target = 390, start = 2300, dur = 1500;
+      const t0 = performance.now();
+      const tick = (now) => {
+        const p = Math.min((now - t0) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const v = Math.round(start + (target - start) * eased);
+        el.innerHTML = v + '<span class="price-now-cur">грн</span>';
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    })();
+
+    /* ==================== Author stat counters ==================== */
+    const counterIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target = parseInt(el.dataset.counter, 10);
+        const suffix = el.dataset.suffix || '';
+        const dur = 1400;
+        const t0 = performance.now();
+        const tick = (now) => {
+          const p = Math.min((now - t0) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const v = Math.floor(target * eased);
+          const formatted = v >= 1000 ? v.toLocaleString('uk-UA').replace(',', ' ') : String(v);
+          el.textContent = formatted + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        counterIO.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('[data-counter]').forEach(el => counterIO.observe(el));
+
+    /* ==================== Glitch periodic trigger ==================== */
+    function glitchCycle() {
+      document.querySelectorAll('.glitch').forEach(el => {
+        if (Math.random() < 0.4) {
+          el.classList.add('go');
+          setTimeout(() => el.classList.remove('go'), 420);
+        }
+      });
+      setTimeout(glitchCycle, 8000 + Math.random() * 4000);
+    }
+    setTimeout(glitchCycle, 1500);
+
+    /* ==================== Timer (10 min, persist in localStorage) ==================== */
+    (function () {
+      const KEY = 'aiavatar_v2_timer_end';
+      const FALLBACK = 10 * 60 * 1000;
+      let endTime = parseInt(localStorage.getItem(KEY) || '0', 10);
+      if (!endTime || isNaN(endTime)) {
+        endTime = Date.now() + FALLBACK;
+        localStorage.setItem(KEY, String(endTime));
+      }
+      const minEl = document.getElementById('t-min');
+      const secEl = document.getElementById('t-sec');
+      const card  = document.getElementById('timer-card');
+      function update() {
+        const ms = Math.max(0, endTime - Date.now());
+        const min = Math.floor(ms / 60000);
+        const sec = Math.floor((ms % 60000) / 1000);
+        if (minEl) minEl.textContent = String(min).padStart(2, '0');
+        if (secEl) secEl.textContent = String(sec).padStart(2, '0');
+        if (card) card.classList.toggle('urgent', ms > 0 && ms < 60000);
+      }
+      update();
+      setInterval(update, 1000);
+    })();
+
+    /* ==================== Cursor glow (desktop only) ==================== */
+    (function () {
+      const el = document.getElementById('cursor-glow');
+      if (!el || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      let tx = 0, ty = 0, cx = 0, cy = 0;
+      window.addEventListener('mousemove', (e) => {
+        tx = e.clientX; ty = e.clientY;
+        el.classList.add('active');
+      });
+      function loop() {
+        cx += (tx - cx) * 0.18;
+        cy += (ty - cy) * 0.18;
+        el.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+        requestAnimationFrame(loop);
+      }
+      loop();
+    })();
+
+    /* ==================== Neural network canvas (throttled 30fps + pause when offscreen) ==================== */
+    (function () {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const canvas = document.getElementById('neural-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d', { alpha: true });
+      const DPR = Math.min(window.devicePixelRatio || 1, 1.5); // cap at 1.5x for perf
+      let W = 0, H = 0;
+      let nodes = [];
+      const COUNT = window.innerWidth < 600 ? 22 : 32; // fewer nodes on mobile
+      const RADIUS = 120;
+      let mouse = { x: -9999, y: -9999, active: false };
+      let active = true; // pause when document hidden
+
+      function resize() {
+        W = window.innerWidth; H = window.innerHeight;
+        canvas.width = W * DPR; canvas.height = H * DPR;
+        canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      for (let i = 0; i < COUNT; i++) {
+        nodes.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+        });
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX; mouse.y = e.clientY; mouse.active = true;
+      }, { passive: true });
+      window.addEventListener('mouseout', () => { mouse.active = false; }, { passive: true });
+      document.addEventListener('visibilitychange', () => { active = !document.hidden; });
+
+      // Throttle to ~30fps for perf
+      const FRAME_MS = 1000 / 30;
+      let lastT = 0;
+
+      function frame(t) {
+        requestAnimationFrame(frame);
+        if (!active) return;
+        if (t - lastT < FRAME_MS) return;
+        lastT = t;
+
+        ctx.clearRect(0, 0, W, H);
+        for (let n of nodes) {
+          if (mouse.active) {
+            const dx = n.x - mouse.x, dy = n.y - mouse.y;
+            const d2 = dx*dx + dy*dy;
+            if (d2 < 10000 && d2 > 0) {
+              const d = Math.sqrt(d2);
+              const f = (100 - d) / 100 * 0.4;
+              n.vx += (dx / d) * f * 0.05;
+              n.vy += (dy / d) * f * 0.05;
+            }
+          }
+          n.x += n.vx; n.y += n.vy;
+          n.vx *= 0.99; n.vy *= 0.99;
+          const sp2 = n.vx*n.vx + n.vy*n.vy;
+          if (sp2 < 0.0225) {
+            const a = Math.random() * Math.PI * 2;
+            n.vx += Math.cos(a) * 0.05; n.vy += Math.sin(a) * 0.05;
+          }
+          if (n.x < 0) n.x = W; else if (n.x > W) n.x = 0;
+          if (n.y < 0) n.y = H; else if (n.y > H) n.y = 0;
+        }
+        // Lines
+        ctx.lineWidth = 1;
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+            const d2 = dx*dx + dy*dy;
+            if (d2 < RADIUS * RADIUS) {
+              const d = Math.sqrt(d2);
+              const a = (1 - d / RADIUS) * 0.18;
+              ctx.strokeStyle = `rgba(255,94,26,${a})`;
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+        // Dots
+        ctx.fillStyle = 'rgba(255,94,26,0.45)';
+        for (let n of nodes) {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, 1.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      requestAnimationFrame(frame);
+    })();
+
+    /* ==================== Lazy-load YT iframes + pause when offscreen ==================== */
+    /* Iframes start with data-src; src is set only when in viewport, removed when out */
+    (function () {
+      const players = new Map(); // iframe → YT.Player
+      const playerStates = new Map(); // iframe → 'ready' | 'pending'
+      let ytReady = false;
+      const ytReadyQueue = [];
+
+      // Hook into YT API readiness
+      window.onYouTubeIframeAPIReady = function () {
+        ytReady = true;
+        ytReadyQueue.forEach(fn => fn());
+        ytReadyQueue.length = 0;
+      };
+
+      function createPlayer(iframe) {
+        if (players.has(iframe)) return;
+        const init = () => {
+          try {
+            const p = new YT.Player(iframe, {
+              events: {
+                onReady: (e) => { try { e.target.mute(); e.target.playVideo(); } catch(_){} },
+                onStateChange: (e) => {
+                  if (e.data === YT.PlayerState.ENDED) {
+                    try { e.target.seekTo(0); e.target.playVideo(); } catch(_){}
+                  }
+                }
+              }
+            });
+            players.set(iframe, p);
+          } catch (_) {}
+        };
+        if (ytReady) init(); else ytReadyQueue.push(init);
+      }
+
+      function activate(iframe) {
+        const realSrc = iframe.dataset.src;
+        if (!realSrc) return;
+        if (!iframe.src || iframe.src === 'about:blank') {
+          iframe.src = realSrc;
+          createPlayer(iframe);
+        } else {
+          // already loaded, just play
+          const p = players.get(iframe);
+          if (p && p.playVideo) { try { p.playVideo(); } catch(_){} }
+        }
+      }
+      function deactivate(iframe) {
+        const p = players.get(iframe);
+        if (p && p.pauseVideo) { try { p.pauseVideo(); } catch(_){} }
+      }
+
+      // Inject the YT API once
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(tag);
+
+      // Observe iframes; load 200px before they enter viewport, pause when fully out
+      const ioVid = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) activate(e.target);
+          else deactivate(e.target);
+        });
+      }, { threshold: 0, rootMargin: '200px 0px 200px 0px' });
+
+      document.querySelectorAll('iframe[data-yt]').forEach(iframe => {
+        ioVid.observe(iframe);
+      });
+    })();
+  </script>
+
+</body>
+</html>
