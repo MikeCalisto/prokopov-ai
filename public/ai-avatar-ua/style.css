@@ -884,18 +884,28 @@ button { font: inherit; cursor: pointer; }
   /* Stronger scale on vertical to crop YT chrome top/bottom */
   transform: scale(1.32);
 }
-/* Click blocker over iframe (TZ requirement) — also masks YT chrome on load */
+/* Click blocker over iframe — also masks YT chrome on top + bottom + corners */
 .video-9-16 .click-blocker {
   position: absolute;
   inset: 0;
   z-index: 2;
   cursor: default;
-  /* Tinted gradient masks at top + bottom edges to blend over any leftover YT chrome
-     (title bar that flashes on load, watermark in corner). Center stays transparent. */
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, transparent 12%),
-    linear-gradient(0deg,   rgba(0, 0, 0, 0.55) 0%, transparent 14%);
   pointer-events: auto;
+  background:
+    /* Solid top strip — fully hides title bar, author avatar, channel info */
+    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-1) 14%, transparent 18%),
+    /* Solid bottom-right corner — hides YouTube watermark */
+    linear-gradient(315deg, var(--bg-1) 0%, var(--bg-1) 8%, transparent 12%),
+    /* Solid bottom strip — masks bottom controls / progress on hover */
+    linear-gradient(0deg,   var(--bg-1) 0%, var(--bg-1) 8%, transparent 12%);
+}
+/* Match iframe bg to page bg so any letterbox blends */
+.video-9-16 { background: var(--bg-1); }
+.section.bg-b .video-9-16 .click-blocker {
+  background:
+    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-1) 14%, transparent 18%),
+    linear-gradient(315deg, var(--bg-1) 0%, var(--bg-1) 8%, transparent 12%),
+    linear-gradient(0deg,   var(--bg-1) 0%, var(--bg-1) 8%, transparent 12%);
 }
 
 .solution-list {

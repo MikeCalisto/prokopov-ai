@@ -1081,6 +1081,9 @@
         ytReadyQueue.length = 0;
       };
 
+      // Tracks which iframes should currently be playing (in viewport)
+      const shouldPlay = new WeakSet();
+
       function createPlayer(iframe) {
         if (players.has(iframe)) return;
         const init = () => {
@@ -1089,8 +1092,14 @@
               events: {
                 onReady: (e) => { try { e.target.mute(); e.target.playVideo(); } catch(_){} },
                 onStateChange: (e) => {
+                  // Loop on end
                   if (e.data === YT.PlayerState.ENDED) {
                     try { e.target.seekTo(0); e.target.playVideo(); } catch(_){}
+                  }
+                  // Anti-pause: if paused unexpectedly while in viewport, force-resume
+                  // (prevents the big YT pause-button overlay from showing)
+                  if (e.data === YT.PlayerState.PAUSED && shouldPlay.has(iframe)) {
+                    try { e.target.playVideo(); } catch(_){}
                   }
                 }
               }
@@ -1102,6 +1111,7 @@
       }
 
       function activate(iframe) {
+        shouldPlay.add(iframe);
         const realSrc = iframe.dataset.src;
         if (!realSrc) return;
         if (!iframe.src || iframe.src === 'about:blank') {
@@ -1114,6 +1124,7 @@
         }
       }
       function deactivate(iframe) {
+        shouldPlay.delete(iframe);
         const p = players.get(iframe);
         if (p && p.pauseVideo) { try { p.pauseVideo(); } catch(_){} }
       }
