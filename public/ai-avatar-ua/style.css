@@ -1050,6 +1050,10 @@ button { font: inherit; cursor: pointer; }
   height: 1px;
   background: var(--orange);
 }
+.lesson-bullets strong {
+  color: var(--orange);
+  font-weight: 700;
+}
 
 .lesson-result {
   background: rgba(255, 94, 26, 0.06);
