@@ -979,6 +979,10 @@ button { font: inherit; cursor: pointer; }
   font-size: 18px;
   line-height: 1.5;
 }
+.arrow-list strong {
+  color: var(--orange);
+  font-weight: 700;
+}
 
 /* =================================================================
    6. PROGRAM
