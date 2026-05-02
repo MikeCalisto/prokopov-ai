@@ -1074,29 +1074,28 @@ button { font: inherit; cursor: pointer; }
   margin-bottom: 8px;
 }
 
-/* 3D-benefit result list — used in Lesson 1 */
+/* 3D-benefit result list — grid layout aligns verb column across all rows */
 .result-3d {
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 14px;
+  row-gap: 8px;
   padding: 0;
   margin: 0;
-}
-.result-3d li {
-  display: flex;
-  gap: 8px;
   font-size: 13px;
   line-height: 1.55;
   color: var(--t-2);
+}
+.result-3d li {
+  display: contents;
 }
 .result-3d li strong {
   font-family: var(--f-display);
   color: var(--orange);
   font-weight: 700;
-  flex-shrink: 0;
-  min-width: 88px;
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .lesson-divider {
