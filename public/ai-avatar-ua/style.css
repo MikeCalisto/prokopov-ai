@@ -69,9 +69,13 @@ button { font: inherit; cursor: pointer; }
   position: relative;
   width: 100%;
   max-width: 480px;
-  background: var(--bg-1);
+  background: transparent; /* lets neural canvas show through where sections are also transparent */
   z-index: 1;
-  isolation: isolate;
+}
+
+/* Hero is transparent → neural canvas dots/lines visible behind hero content */
+.hero {
+  background: transparent;
 }
 
 @media (min-width: 520px) {
