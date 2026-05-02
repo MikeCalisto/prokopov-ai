@@ -1151,6 +1151,7 @@ button { font: inherit; cursor: pointer; }
   margin-bottom: 12px;
   color: var(--t-1);
 }
+.whycourse-sub strong { color: var(--orange); font-weight: 700; }
 
 .whycourse p {
   color: var(--t-2);
