@@ -82,7 +82,7 @@
     ================================================================ -->
     <section class="hero">
       <div class="hero-eyebrow-row">
-        <div class="eyebrow">ОНЛАЙН-КУРС&nbsp; · &nbsp;<span>СТАРТ 20 СІЧНЯ</span></div>
+        <div class="eyebrow">ОНЛАЙН-КУРС&nbsp; · &nbsp;<span id="start-date">СТАРТ ЗАВТРА</span></div>
         <div class="cam-icon" aria-hidden="true">
           <svg><use href="#i-cam"/></svg>
         </div>
@@ -838,6 +838,16 @@
        SCRIPTS
   ================================================================ -->
   <script>
+    /* ==================== Dynamic start date — always tomorrow ==================== */
+    (function () {
+      const months = ['СІЧНЯ', 'ЛЮТОГО', 'БЕРЕЗНЯ', 'КВІТНЯ', 'ТРАВНЯ', 'ЧЕРВНЯ',
+                      'ЛИПНЯ', 'СЕРПНЯ', 'ВЕРЕСНЯ', 'ЖОВТНЯ', 'ЛИСТОПАДА', 'ГРУДНЯ'];
+      const t = new Date();
+      t.setDate(t.getDate() + 1);
+      const el = document.getElementById('start-date');
+      if (el) el.textContent = `СТАРТ ${t.getDate()} ${months[t.getMonth()]}`;
+    })();
+
     /* ==================== Sticky CTA — show after Solution block ==================== */
     (function () {
       const cta = document.getElementById('sticky-cta');
