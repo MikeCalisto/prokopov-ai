@@ -894,10 +894,11 @@
 
     /* ==================== Timer (10 min, persist in localStorage) ==================== */
     (function () {
-      const KEY = 'aiavatar_v2_timer_end';
+      const KEY = 'aiavatar_v2_timer_end_v2';
       const FALLBACK = 10 * 60 * 1000;
       let endTime = parseInt(localStorage.getItem(KEY) || '0', 10);
-      if (!endTime || isNaN(endTime)) {
+      // Reset timer if missing OR already expired (so users always see countdown from 10:00)
+      if (!endTime || isNaN(endTime) || endTime <= Date.now()) {
         endTime = Date.now() + FALLBACK;
         localStorage.setItem(KEY, String(endTime));
       }
