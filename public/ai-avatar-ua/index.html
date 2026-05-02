@@ -848,24 +848,19 @@
       if (el) el.textContent = `СТАРТ ${t.getDate()} ${months[t.getMonth()]}`;
     })();
 
-    /* ==================== Sticky CTA — show after Solution block ==================== */
+    /* ==================== Sticky CTA — show after Problem block scrolls past ==================== */
     (function () {
       const cta = document.getElementById('sticky-cta');
-      const trigger = document.querySelector('.solution');
+      const trigger = document.querySelector('.problem');
       if (!cta || !trigger) return;
-      let visible = false;
-      function check() {
-        const r = trigger.getBoundingClientRect();
-        // Show once user has scrolled fully past Solution (its bottom is above viewport top)
-        const shouldShow = r.bottom < 0;
-        if (shouldShow !== visible) {
-          cta.classList.toggle('show', shouldShow);
-          visible = shouldShow;
-        }
-      }
-      window.addEventListener('scroll', check, { passive: true });
-      window.addEventListener('resize', check, { passive: true });
-      check();
+
+      // IntersectionObserver fires only on state changes (no per-frame scroll work)
+      const io = new IntersectionObserver(([entry]) => {
+        // Element fully scrolled above viewport → show CTA
+        const passed = !entry.isIntersecting && entry.boundingClientRect.bottom < 0;
+        cta.classList.toggle('show', passed);
+      }, { threshold: 0 });
+      io.observe(trigger);
     })();
 
     /* ==================== Reveal-on-scroll (early trigger) ==================== */
