@@ -871,7 +871,7 @@ button { font: inherit; cursor: pointer; }
   height: 100%;
   border: 0;
   pointer-events: none; /* prevents YT chrome on hover */
-  transform: scale(1.06);
+  transform: scale(1.18);
   transform-origin: center center;
 }
 
@@ -882,14 +882,20 @@ button { font: inherit; cursor: pointer; }
 }
 .video-9-16.video-vertical iframe {
   /* Stronger scale on vertical to crop YT chrome top/bottom */
-  transform: scale(1.18);
+  transform: scale(1.32);
 }
-/* Click blocker over iframe (TZ requirement) */
+/* Click blocker over iframe (TZ requirement) — also masks YT chrome on load */
 .video-9-16 .click-blocker {
   position: absolute;
   inset: 0;
   z-index: 2;
   cursor: default;
+  /* Tinted gradient masks at top + bottom edges to blend over any leftover YT chrome
+     (title bar that flashes on load, watermark in corner). Center stays transparent. */
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, transparent 12%),
+    linear-gradient(0deg,   rgba(0, 0, 0, 0.55) 0%, transparent 14%);
+  pointer-events: auto;
 }
 
 .solution-list {
@@ -2158,6 +2164,14 @@ button { font: inherit; cursor: pointer; }
   margin: 0;
   border: none;
   box-shadow: none;
+  overflow: hidden;
+}
+.author-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
 }
 
 .author-tag {
@@ -2318,3 +2332,76 @@ button { font: inherit; cursor: pointer; }
 }
 .footer .btn { font-size: 14px; padding: 14px 18px; }
 .footer .btn .arr { transform: rotate(-45deg); }
+
+/* =================================================================
+   STICKY CTA — appears after Solution block
+================================================================= */
+
+.sticky-cta {
+  position: fixed;
+  bottom: 14px;
+  left: 50%;
+  transform: translate(-50%, calc(100% + 24px));
+  z-index: 90;
+  width: calc(100% - 24px);
+  max-width: 432px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  padding: 16px 22px;
+  border-radius: var(--r-btn);
+  background: var(--grad-fire);
+  color: #fff;
+  box-shadow:
+    0 0 0 1px rgba(255, 94, 26, 0.3),
+    0 14px 40px rgba(255, 94, 26, 0.5),
+    0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+  text-align: center;
+}
+.sticky-cta.show {
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+.sticky-cta-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+  gap: 2px;
+}
+.sticky-cta-price {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.sticky-cta-label {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 14px;
+}
+.sticky-cta-arrow {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sticky-cta-arrow svg { width: 16px; height: 16px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-cta { transition: opacity 0.2s; transform: translate(-50%, 0); opacity: 0; }
+  .sticky-cta.show { opacity: 1; }
+}

@@ -667,7 +667,7 @@
             <span class="corner bl"></span>
             <span class="corner br"></span>
             <div class="author-photo" aria-label="Фото автора">
-              <svg><use href="#i-bot"/></svg>
+              <img src="/ai-avatar-ua/author.png" alt="Роман Прокопов" />
             </div>
             <div class="author-tag">AUTHOR · ROMAN P.</div>
           </div>
@@ -695,7 +695,6 @@
             </div>
 
             <p>Моя система з AI-аватарами приносить клієнтам до <strong style="color:var(--orange)">10 000 нових підписників на місяць</strong> — без їхньої участі у зйомках.</p>
-            <p>Цей курс — та сама система, <strong>упакована в 4 уроки.</strong></p>
           </div>
         </div>
       </div>
@@ -825,11 +824,40 @@
 
   </main>
 
+  <!-- Sticky CTA — appears after user scrolls past Solution block -->
+  <a class="sticky-cta" id="sticky-cta" href="https://app.zenedu.io/l/emjrXZgbeh5D6VgU" target="_blank" rel="noopener" aria-label="Приєднатись до курсу">
+    <span class="sticky-cta-text">
+      <span class="sticky-cta-price">390 грн · −83%</span>
+      <span class="sticky-cta-label">Приєднатись до курсу</span>
+    </span>
+    <span class="sticky-cta-arrow"><svg><use href="#i-arrow"/></svg></span>
+  </a>
+
 
   <!-- ================================================================
        SCRIPTS
   ================================================================ -->
   <script>
+    /* ==================== Sticky CTA — show after Solution block ==================== */
+    (function () {
+      const cta = document.getElementById('sticky-cta');
+      const trigger = document.querySelector('.solution');
+      if (!cta || !trigger) return;
+      let visible = false;
+      function check() {
+        const r = trigger.getBoundingClientRect();
+        // Show once user has scrolled fully past Solution (its bottom is above viewport top)
+        const shouldShow = r.bottom < 0;
+        if (shouldShow !== visible) {
+          cta.classList.toggle('show', shouldShow);
+          visible = shouldShow;
+        }
+      }
+      window.addEventListener('scroll', check, { passive: true });
+      window.addEventListener('resize', check, { passive: true });
+      check();
+    })();
+
     /* ==================== Reveal-on-scroll (early trigger) ==================== */
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
