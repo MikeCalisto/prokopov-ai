@@ -905,7 +905,7 @@ button { font: inherit; cursor: pointer; }
 /* Vertical 9:16 modifier — for YouTube Shorts */
 .video-9-16.video-vertical {
   aspect-ratio: 9 / 16;
-  max-width: 320px;
+  max-width: 240px;
 }
 .video-9-16.video-vertical iframe {
   /* Stronger scale on vertical to crop YT chrome top/bottom */
