@@ -501,6 +501,33 @@ button { font: inherit; cursor: pointer; }
 }
 .hero-eyebrow-row .eyebrow span { color: var(--t-2); }
 
+/* Hero meta tags — V2 + HeyGen branding chips */
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 2;
+}
+.hero-meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--t-2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(255, 94, 26, 0.06);
+  border: 1px solid rgba(255, 94, 26, 0.22);
+  padding: 5px 10px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.hero-meta-chip strong { color: var(--orange); font-weight: 700; }
+
 /* Camera icon top-right */
 .cam-icon {
   width: 36px;
