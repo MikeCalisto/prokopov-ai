@@ -89,8 +89,29 @@ export default function RegulaminPage() {
       <Section title="5. Warunki uczestnictwa w szkoleniach i kursach">
         <p>
           Klient może uzyskać dostęp do materiałów szkoleniowych po dokonaniu
-          płatności. Usługodawca ma prawo:
+          płatności.
         </p>
+        <p>
+          Bezpośrednio po zaksięgowaniu płatności (zazwyczaj w ciągu kilku
+          minut, nie później niż w terminie 24 godzin) Klient zostaje
+          automatycznie przekierowany na stronę „Dziękujemy" (Thank you), na
+          której znajduje się link do bota w komunikatorze Telegram. Link do
+          bota udostępniany jest wyłącznie na stronie „Dziękujemy" —
+          Klient powinien zachować ten link bezpośrednio po dokonaniu
+          płatności. Bot stanowi platformę dostarczenia kursu — to właśnie w
+          nim każdy Klient otrzymuje dostęp do materiałów szkoleniowych w
+          postaci plików: lekcji wideo, materiałów PDF, linków oraz
+          dodatkowych przydatnych zasobów. Materiały udostępniane są lekcja
+          po lekcji, bezpośrednio w bocie.
+        </p>
+        <p>
+          Jeżeli z jakiegokolwiek powodu Klient nie uzyskał dostępu do kursu
+          (np. utracił link do bota, wystąpił błąd techniczny po dokonaniu
+          płatności), powinien skontaktować się z Usługodawcą poprzez dane
+          kontaktowe podane na stronie internetowej — pomoc zostanie
+          udzielona w możliwie najkrótszym czasie.
+        </p>
+        <p>Usługodawca ma prawo:</p>
         <ul>
           <li>zmienić termin wydarzenia</li>
           <li>zmienić program szkolenia</li>
@@ -123,7 +144,7 @@ export default function RegulaminPage() {
       <Section title="8. Prawo odstąpienia od umowy">
         <p>
           Zgodnie z ustawą o prawach konsumenta Klient będący konsumentem ma
-          prawo odstąpić od umowy zawartej na odległość w terminie 14 dni bez
+          prawo odstąpić od umowy zawartej na odległość w terminie 14 dni kalendarzowych bez
           podania przyczyny.
         </p>
         <p>
@@ -133,7 +154,7 @@ export default function RegulaminPage() {
         </p>
         <p>
           Dokonując zakupu Klient może zostać poproszony o wyrażenie zgody na
-          rozpoczęcie świadczenia usługi przed upływem 14 dni.
+          rozpoczęcie świadczenia usługi przed upływem 14 dni kalendarzowych.
         </p>
       </Section>
 
@@ -193,7 +214,7 @@ export default function RegulaminPage() {
           <li>dane kontaktowe Klienta</li>
           <li>opis problemu</li>
         </ul>
-        <p>Reklamacje rozpatrywane są w terminie 14 dni roboczych.</p>
+        <p>Reklamacje rozpatrywane są w terminie 14 dni kalendarzowych.</p>
       </Section>
 
       <Section title="14. Zmiany regulaminu">

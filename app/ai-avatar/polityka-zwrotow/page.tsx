@@ -22,7 +22,7 @@ export default function PolitikaZwrotowPage() {
         <p>
           Zgodnie z ustawą o prawach konsumenta z dnia 30 maja 2014 r.,
           konsument ma prawo odstąpić od umowy zawartej na odległość w terminie
-          14 dni od dnia zawarcia umowy, bez podania przyczyny.
+          14 dni kalendarzowych od dnia zawarcia umowy, bez podania przyczyny.
         </p>
         <p>
           Aby skorzystać z prawa odstąpienia od umowy, Klient powinien przesłać
@@ -34,7 +34,7 @@ export default function PolitikaZwrotowPage() {
         <p>
           Prawo odstąpienia od umowy nie przysługuje w przypadku: usług
           cyfrowych dostarczanych drogą elektroniczną, jeśli realizacja usługi
-          rozpoczęła się za wyraźną zgodą Klienta przed upływem 14 dni od
+          rozpoczęła się za wyraźną zgodą Klienta przed upływem 14 dni kalendarzowych od
           zawarcia umowy, oraz Klient został poinformowany o utracie prawa
           odstąpienia od umowy.
         </p>
@@ -67,7 +67,7 @@ export default function PolitikaZwrotowPage() {
           </li>
         </ul>
         <p>
-          Zwrot środków następuje w terminie do 14 dni od dnia pozytywnego
+          Zwrot środków następuje w terminie do 14 dni kalendarzowych od dnia pozytywnego
           rozpatrzenia wniosku.
         </p>
         <p>
@@ -88,7 +88,7 @@ export default function PolitikaZwrotowPage() {
           <li>opis problemu</li>
         </ul>
         <p>
-          Reklamacje rozpatrywane są w terminie do 14 dni roboczych od momentu
+          Reklamacje rozpatrywane są w terminie do 14 dni kalendarzowych od momentu
           ich otrzymania.
         </p>
       </Section>

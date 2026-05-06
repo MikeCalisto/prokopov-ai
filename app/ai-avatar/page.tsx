@@ -123,7 +123,7 @@ const faqItems = [
   },
   {
     q: "A CO, JEŚLI KURS NIE BĘDZIE DLA MNIE?",
-    a: "Masz 14 dni gwarancji zwrotu pieniędzy. Spokojnie testujesz kurs — bez ryzyka.",
+    a: "Masz 14 dni kalendarzowych gwarancji zwrotu pieniędzy. Spokojnie testujesz kurs — bez ryzyka.",
   },
 ];
 
@@ -585,10 +585,10 @@ export default function AiAvatarPage() {
         <div className="bg-dark-card rounded-xl p-5 border border-gray-700">
           <div className="text-5xl mb-4 text-center">🛡️</div>
           <p className="text-white font-bold text-center mb-4">
-            14 dni pełnej gwarancji zwrotu pieniędzy.
+            14 dni kalendarzowych pełnej gwarancji zwrotu pieniędzy.
           </p>
           <p className="text-gray-300 text-sm leading-relaxed mb-4">
-            Jestem pewien skuteczności tego kursu, dlatego daję Ci 14 dni, abyś
+            Jestem pewien skuteczności tego kursu, dlatego daję Ci 14 dni kalendarzowych, abyś
             spokojnie przerobił(a) lekcje, stworzył(a) swojego AI-avatara i
             spróbował(a) wygenerować wideo dla swojego bloga.
           </p>
