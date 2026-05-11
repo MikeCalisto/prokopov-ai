@@ -3,12 +3,12 @@
 ## Домен та деплой
 - **Vercel:** https://prokopov-ai.vercel.app/
 - **GitHub:** https://github.com/MikeCalisto/prokopov-ai
-- **Один репозиторій, один деплой, 4 різні сайти**
+- **Один репозиторій, один деплой, 5 різних сайтів**
 
 ## Структура проєкту
 
 ```
-Роман Прокопов/
+Сайт Роман Прокопов/               ← КОРЕНЕВА ПАПКА ПРОЄКТУ
   CLAUDE.md                        ← ЦЕЙ ФАЙЛ — прочитай перед будь-якою роботою
   
   Сайт АІ реалізм/                ← ГОЛОВНА РОБОЧА ПАПКА (тут .git, package.json)
@@ -34,21 +34,22 @@
   Сайт АІ конвеер/                ← Вихідники AI Конвеєр
 ```
 
-## 4 сайти на одному домені
+## 5 сайтів на одному домені
 
 | Сайт | URL | Тип | Вихідники | Деплой |
 |------|-----|-----|-----------|--------|
 | AI Realism | `/` (корінь) | Статичний HTML | `Сайт АІ реалізм/ai-realism-v2.html` | `public/index.html` |
 | AI Avatar (PL) | `/ai-avatar` | Next.js (app/) | `Сайт АІ аватар/` + `app/ai-avatar/` | Next.js роути |
 | AI Avatar (UA) | `/ai-avatar-ua/` | Статичний HTML | `Сайт АІ аватар укр/` | `public/ai-avatar-ua/` |
-| AI Конвеєр | `/ai-konveyer/` | Статичний HTML | `Сайт АІ конвеер/` | `public/ai-konveyer/` |
+| AI Конвеєр | `/ai-konveyer/` | Статичний HTML | `Сайт АІ конвеер/` (стара версія) | `public/ai-konveyer/` |
+| AI Конвеєр (міні-курс) | `/mini-ai-konveyer/` | Статичний HTML | `Сайт АІ конвеер/index.html` (новий дизайн) | `public/mini-ai-konveyer/` |
 
 ## КРИТИЧНІ ПРАВИЛА
 
 ### НІКОЛИ НЕ РОБИТИ:
 1. **НЕ видаляти `app/`, `package.json`, `next.config.mjs`, `tsconfig.json`** — це Next.js для польського AI Avatar
 2. **НЕ видаляти файли з `public/` що не належать твоєму сайту** — там живуть інші сайти
-3. **НЕ видаляти папки `public/ai-avatar-ua/` і `public/ai-konveyer/`** — це інші сайти
+3. **НЕ видаляти папки `public/ai-avatar-ua/`, `public/ai-konveyer/`, `public/mini-ai-konveyer/`** — це інші сайти
 4. **НЕ змінювати `package.json`** — якщо ти не працюєш з AI Avatar (PL)
 5. **НЕ робити `git rm` або масове видалення** без перевірки що саме видаляєш
 
@@ -65,9 +66,14 @@
 2. Копіюй результат в `public/ai-avatar-ua/`
 3. Пуш
 
-#### AI Конвеєр:
-1. Редагуй в папці `Сайт АІ конвеер/`
-2. Копіюй результат в `public/ai-konveyer/`
+#### AI Конвеєр (стара версія, `/ai-konveyer/`):
+1. Стара версія цього сайту збережена в `public/ai-konveyer/index.html` (НЕ перезаписувати з `Сайт АІ конвеер/index.html` — там новий дизайн міні-курсу!)
+2. Якщо потрібно редагувати стару версію — роби це безпосередньо в `public/ai-konveyer/index.html`
+3. Пуш
+
+#### AI Конвеєр міні-курс (новий, `/mini-ai-konveyer/`):
+1. Редагуй `Сайт АІ конвеер/index.html`
+2. Копіюй в `public/mini-ai-konveyer/index.html`: `cp "Сайт АІ конвеер/index.html" "Сайт АІ реалізм/public/mini-ai-konveyer/index.html"`
 3. Пуш
 
 #### AI Avatar PL (Next.js):
