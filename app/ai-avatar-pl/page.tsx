@@ -217,12 +217,16 @@ export default function AiAvatarPage() {
 
           {/* Video embed */}
           <div className="relative rounded-xl overflow-hidden mb-6 aspect-video">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/3hirtdC3CrM?autoplay=1&mute=1&loop=1&playlist=3hirtdC3CrM&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0&cc_load_policy=0"
-              title="AI Avatar Demo"
-              allow="autoplay; encrypted-media"
-              allowFullScreen={false}
-              className="absolute inset-0 w-full h-full border-0 pointer-events-none"
+            <video
+              src="/video/zastawka.mp4"
+              poster="/video/zastawka-poster.jpg"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label="AI Avatar Demo"
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             />
           </div>
 

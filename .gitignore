@@ -32,3 +32,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Large source video — only compressed version in public/video/ is tracked
+заставка.mp4
+*.mp4
+!public/**/*.mp4
+
