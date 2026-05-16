@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
+import { notifyTelegram, formatPayment } from "@/lib/notifications";
 
 export async function POST(req: NextRequest) {
   try {
@@ -50,6 +51,17 @@ export async function POST(req: NextRequest) {
 
     if (verifyText.includes("error=0")) {
       console.log("Payment verified successfully:", sessionId);
+      // amount comes in grosze, e.g. 7900 → "79.00"
+      const amountZl = amount ? (Number(amount) / 100).toFixed(2) : "?";
+      await notifyTelegram(
+        formatPayment({
+          site: "P24",
+          amount: amountZl,
+          currency: currency,
+          orderId: orderId || sessionId,
+          status: "VERIFIED",
+        })
+      );
     } else {
       console.error("Payment verification failed:", verifyText);
     }

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
+import { notifyTelegram, formatPayment } from "@/lib/notifications";
 
 // PayU notification (notifyUrl). PayU sends POST with JSON body and signature
 // in OpenPayu-Signature header (format: sender=...;signature=...;algorithm=MD5;content=DOCUMENT)
@@ -61,6 +62,20 @@ export async function POST(req: NextRequest) {
 
     if (order?.status === "COMPLETED") {
       console.log("PayU payment COMPLETED:", order.extOrderId);
+      // Convert amount from grosze to zł for readability (e.g. 7900 -> "79.00")
+      const amountZl = order.totalAmount
+        ? (Number(order.totalAmount) / 100).toFixed(2)
+        : "?";
+      await notifyTelegram(
+        formatPayment({
+          site: "PayU",
+          amount: amountZl,
+          currency: order.currencyCode || "PLN",
+          email: order.buyer?.email,
+          orderId: order.extOrderId || order.orderId || "—",
+          status: order.status,
+        })
+      );
       // TODO: tu wyślij dostęp do kursu (Telegram bot link / e-mail)
     } else if (order?.status === "CANCELED") {
       console.log("PayU payment CANCELED:", order.extOrderId);

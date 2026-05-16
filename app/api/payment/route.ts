@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
+import { notifyTelegram, formatLead } from "@/lib/notifications";
 
 export async function POST(req: NextRequest) {
   try {
@@ -75,6 +76,16 @@ export async function POST(req: NextRequest) {
 
     if (errorCode === "0" && token) {
       console.log("P24 token received:", token);
+      await notifyTelegram(
+        formatLead({
+          site: "P24",
+          page: "/ai-avatar",
+          email,
+          phone,
+          amount: "79 zł",
+          orderId: sessionId,
+        })
+      );
       return NextResponse.json({
         redirectUrl: `${baseUrl}/trnRequest/${token}`,
       });

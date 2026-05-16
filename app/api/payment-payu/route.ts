@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { notifyTelegram, formatLead } from "@/lib/notifications";
 
 export async function POST(req: NextRequest) {
   try {
@@ -105,6 +106,16 @@ export async function POST(req: NextRequest) {
 
     if (orderData.redirectUri) {
       console.log("PayU order created:", { extOrderId, status: orderData.status });
+      await notifyTelegram(
+        formatLead({
+          site: "PayU",
+          page: "/ai-avatar-pl",
+          email,
+          phone,
+          amount: "79 zł",
+          orderId: extOrderId,
+        })
+      );
       return NextResponse.json({ redirectUrl: orderData.redirectUri });
     }
 
