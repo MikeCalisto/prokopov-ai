@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>AI Конвеєр — міні-курс Романа Прокопова · 390 грн</title>
-<meta name="description" content="Як побудувати AI контент-систему, яка робить 30–60 відео на місяць для твоїх соцмереж — і економить 80% твого часу.">
+<meta name="description" content="Як створити команду AI-співробітників, які роблять 60 одиниць контенту на місяць замість 5–10 — і економлять 80% твого часу.">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -110,7 +110,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
 
 /* ─────────── HERO ─────────── */
 .hero{
-  padding:28px 22px 64px;
+  padding:24px 22px 44px;
   background:
     radial-gradient(450px 350px at 100% 0%,rgba(255,106,26,.18),transparent 60%),
     radial-gradient(400px 300px at 0% 100%,rgba(255,106,26,.08),transparent 60%),
@@ -130,7 +130,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
 .hero-inner{position:relative;z-index:2}
 .hero-top{
   display:flex;align-items:center;justify-content:space-between;
-  padding:8px 0 40px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);
+  padding:8px 0 28px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);
 }
 .hero-top .brand{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--white);letter-spacing:.1em}
 .brand-mark{
@@ -155,22 +155,14 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   border-radius:999px;margin-bottom:20px;
 }
 .kicker .sep{color:var(--accent);font-size:.5rem}
-.hero h1{margin-bottom:18px;line-height:1.12}
+.hero h1{margin-bottom:18px}
 .hero h1 .word{color:var(--accent);text-shadow:0 0 24px rgba(255,106,26,.35)}
-.hero-sub{font-size:.95rem;color:var(--gray2);line-height:1.6;margin-bottom:34px}
-.hero-lead{
-  font-size:1.02rem;line-height:1.55;color:var(--gray2);
-  margin-bottom:26px;
-}
-.hero-intro{
-  font-size:.9rem;line-height:1.55;color:var(--gray);
-  margin-bottom:14px;
-}
+.hero-sub{font-size:.95rem;color:var(--gray2);line-height:1.55;margin-bottom:24px}
 
-.bullets{list-style:none;margin:0 0 36px;padding:0;display:grid;gap:14px}
+.bullets{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:12px}
 .bullets li{
   display:flex;gap:12px;align-items:flex-start;
-  padding:14px 16px;background:rgba(255,255,255,.025);
+  padding:12px 14px;background:rgba(255,255,255,.025);
   border:1px solid var(--line);border-radius:12px;
 }
 .bullets .check{
@@ -184,10 +176,10 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
 
 .price-block{
   display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-  padding:20px;
+  padding:18px;
   background:linear-gradient(135deg,rgba(255,106,26,.12),rgba(255,106,26,.04));
   border:1px solid rgba(255,106,26,.3);
-  border-radius:16px;margin-bottom:24px;position:relative;overflow:hidden;
+  border-radius:16px;margin-bottom:18px;position:relative;overflow:hidden;
 }
 .price-block::after{
   content:'';position:absolute;top:-30%;right:-30%;
@@ -229,59 +221,6 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
 .timer-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:rgba(255,106,26,.15);border-radius:50%}
 .timer-icon svg{width:18px;height:18px;stroke:var(--accent);stroke-width:2;fill:none}
 .timer-note{font-size:.78rem;color:var(--gray);text-align:center;line-height:1.4}
-
-/* Seats progress card */
-.seats-card{
-  padding:22px 22px 20px;border-radius:18px;
-  background:radial-gradient(circle at 50% 0%,rgba(255,106,26,.14),rgba(255,106,26,.02) 70%),var(--card);
-  border:1px solid rgba(255,106,26,.28);
-  margin-bottom:26px;position:relative;overflow:hidden;
-  box-shadow:0 14px 40px rgba(0,0,0,.35);
-}
-.seats-row{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  margin-bottom:12px;
-}
-.seats-label{
-  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);font-weight:600;
-}
-.seats-count{
-  font-family:var(--display);font-weight:900;font-size:1.55rem;letter-spacing:-.02em;color:var(--white);
-  font-variant-numeric:tabular-nums;
-}
-.seats-count .ac{color:var(--accent);text-shadow:0 0 16px rgba(255,106,26,.5)}
-.seats-count .total{color:var(--gray);font-weight:700;font-size:.78em;margin-left:2px}
-.seats-bar{
-  height:9px;border-radius:5px;background:rgba(255,255,255,.06);overflow:hidden;
-  position:relative;margin-bottom:14px;
-  border:1px solid rgba(255,255,255,.04);
-}
-.seats-bar .fill{
-  height:100%;border-radius:5px;
-  background:linear-gradient(90deg,var(--accent-deep),var(--accent),var(--accent2));
-  box-shadow:0 0 14px rgba(255,106,26,.55);
-  transition:width .8s cubic-bezier(.4,.0,.2,1);
-  position:relative;overflow:hidden;
-}
-.seats-bar .fill::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.45) 50%,transparent 100%);
-  transform:translateX(-100%);
-  animation:shimmerBar 2.2s linear infinite;
-}
-@keyframes shimmerBar{
-  0%{transform:translateX(-100%)}
-  100%{transform:translateX(100%)}
-}
-.seats-end{
-  font-size:.85rem;color:var(--gray2);line-height:1.5;
-}
-.seats-end strong{color:var(--accent);font-weight:700}
-.seats-end .price{color:var(--white);font-weight:800}
-
-/* compact seats (used in final block) */
-.seats-card.compact{padding:18px 18px 16px;margin-bottom:18px}
-.seats-card.compact .seats-count{font-size:1.3rem}
 
 .bonus{
   position:relative;
@@ -399,104 +338,6 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
 .reel-stats .stat .v{font-weight:800;font-size:1rem;color:var(--white);letter-spacing:-.02em}
 .reel-stats .stat .v.big{font-size:1.25rem;color:var(--accent)}
 .reel-stats .stat .k{font-size:.65rem;color:var(--gray);letter-spacing:.04em;margin-top:2px}
-
-/* Reels horizontal carousel */
-.reel-grid{
-  display:flex;gap:12px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
-  padding:4px 22px 16px;
-  margin:0 -22px;
-  scroll-padding-left:22px;
-}
-.reel-grid::-webkit-scrollbar{display:none}
-.reel-grid .reel-card{
-  flex:0 0 72%;
-  max-width:280px;
-  scroll-snap-align:start;
-  margin-bottom:0;
-}
-.reel-reach{
-  display:flex;align-items:center;gap:8px;
-  padding:10px 12px;
-  background:rgba(255,106,26,.08);
-  border:1px solid rgba(255,106,26,.25);
-  border-radius:10px;
-}
-.reel-reach .ic{font-size:1rem;line-height:1}
-.reel-reach .v{
-  font-family:var(--display);font-weight:900;font-size:1.15rem;
-  letter-spacing:-.02em;color:var(--accent);
-  text-shadow:0 0 12px rgba(255,106,26,.35);
-  font-variant-numeric:tabular-nums;
-}
-.reel-reach .l{
-  font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;
-  color:var(--gray2);font-weight:500;
-}
-
-/* Case showcase (block 3 hero case) */
-.case-showcase{
-  margin-top:22px;
-  padding:22px 20px 18px;border-radius:20px;
-  background:
-    radial-gradient(circle at 0% 0%,rgba(255,106,26,.18),transparent 60%),
-    radial-gradient(circle at 100% 100%,rgba(255,106,26,.10),transparent 60%),
-    var(--card);
-  border:1px solid rgba(255,106,26,.4);
-  box-shadow:0 22px 60px rgba(0,0,0,.45),0 0 0 1px rgba(255,106,26,.08);
-  position:relative;overflow:hidden;
-}
-.case-showcase::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,transparent,var(--accent),transparent);
-}
-.cs-head{
-  display:flex;align-items:center;gap:14px;
-  padding-bottom:18px;margin-bottom:18px;
-  border-bottom:1px dashed var(--line2);
-}
-.cs-avatar{
-  flex:0 0 58px;width:58px;height:58px;border-radius:50%;
-  background:linear-gradient(135deg,var(--accent),var(--accent-deep));
-  display:flex;align-items:center;justify-content:center;
-  font-weight:900;font-size:1.2rem;color:#fff;letter-spacing:-.02em;
-  box-shadow:0 8px 22px rgba(255,106,26,.4);
-  border:2px solid rgba(255,255,255,.1);
-}
-.cs-meta{flex:1;min-width:0}
-.cs-name{font-size:1.15rem;font-weight:900;letter-spacing:-.02em;color:var(--white);margin-bottom:2px}
-.cs-niche{font-size:.78rem;color:var(--gray);letter-spacing:.02em}
-.cs-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:10px;
-  margin-bottom:18px;
-}
-.cs-stat{
-  padding:14px 12px;border-radius:12px;
-  background:rgba(255,255,255,.03);
-  border:1px solid var(--line);
-  text-align:center;
-}
-.cs-stat .cs-v{
-  font-family:var(--display);font-weight:900;font-size:1.45rem;letter-spacing:-.025em;
-  color:var(--accent);line-height:1.05;margin-bottom:4px;
-  text-shadow:0 0 16px rgba(255,106,26,.35);
-  font-variant-numeric:tabular-nums;
-}
-.cs-stat .cs-l{
-  font-size:.7rem;letter-spacing:.06em;color:var(--gray2);text-transform:uppercase;font-weight:500;
-}
-.cs-foot{
-  display:flex;flex-wrap:wrap;gap:6px 10px;justify-content:center;
-  font-size:.75rem;color:var(--gray2);letter-spacing:.02em;
-}
-.cs-foot span{color:var(--accent2)}
-.section-h3{
-  font-family:var(--display);font-weight:900;font-size:1.35rem;
-  letter-spacing:-.02em;line-height:1.2;color:var(--white);
-}
 
 .reel-note{
   margin:18px 0 30px;padding:14px 16px;
@@ -1010,22 +851,24 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
       <span>Міні-курс</span>
     </div>
 
+    <div class="kicker reveal">
+      <span>4 уроки</span><span class="sep">●</span>
+      <span>прямий ефір</span><span class="sep">●</span>
+      <span>підтримка від автора курсу</span>
+    </div>
+
     <h1 class="reveal d1">
-      Як <span class="mark">стабільно</span> створювати <span class="word">30–60 відео</span> на місяць для твоїх соцмереж через AI
+      Як створити собі команду <span class="word">AI&#8209;співробітників</span>, які економлять <span class="mark">80% часу</span> на створенні контенту для твоїх соцмереж
     </h1>
 
-    <p class="hero-lead reveal d2">
-      Які будуть приносити заявки на твої послуги чи навчання з твоїм мінімальним залученням у процес та без вигорання.
-    </p>
-
-    <p class="hero-intro reveal d2">
-      Я покажу тобі AI&#8209;систему, навчену на 1&nbsp;000 успішних відео, завдяки якій ти зможеш:
+    <p class="hero-sub reveal d2">
+      Топові та актуальні ідеї, сценарії, які точно зачеплять твою ЦА, зйомка за допомогою AI&#8209;аватара, постинг та аналіз результатів — усе це робить система AI&#8209;співробітників, навчених на 1&nbsp;000 успішних відео.
     </p>
 
     <ul class="bullets reveal d3">
-      <li><span class="check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7.5"/></svg></span><span class="t">Шукати топові та актуальні ідеї для відео</span></li>
-      <li><span class="check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7.5"/></svg></span><span class="t">Отримувати сценарії, які точно зачеплять твою ЦА</span></li>
-      <li><span class="check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7.5"/></svg></span><span class="t">Знімати сценарії через твого AI&#8209;двійника</span></li>
+      <li><span class="check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7.5"/></svg></span><span class="t">30–60 одиниць контенту на місяць замість 5–10</span></li>
+      <li><span class="check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7.5"/></svg></span><span class="t">5 годин роботи замість 100 годин зйомок і монтажу</span></li>
+      <li><span class="check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7.5"/></svg></span><span class="t">Сценарії в твоїй манері мовлення, а не сухий текст без емоцій</span></li>
     </ul>
 
     <div class="price-block reveal d4">
@@ -1043,40 +886,40 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
 <!-- ═══ BLOCK 2: BONUSES ═══ -->
 <section class="section">
   <h2 class="reveal" style="text-align:center">
-    Будь серед <span class="accent">перших 370</span> учасників — і отримай <span class="mark">3 бонуси</span> на додачу 🎁
+    Купи курс <span class="accent">до кінця таймера</span> — і отримай <span class="mark">3 бонуси</span> на додачу 🎁
   </h2>
 
-  <div class="seats-card reveal d1" style="margin-top:22px">
-    <div class="seats-row">
-      <div class="seats-label">Зайнято місць:</div>
-      <div class="seats-count"><span class="ac" data-seats-taken>321</span><span class="total">/ 370</span></div>
+  <div class="timer-card reveal d1" style="margin-top:22px">
+    <div class="label-tiny">До кінця акції</div>
+    <div class="timer">
+      <span class="timer-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></span>
+      <span data-timer>10:00</span>
     </div>
-    <div class="seats-bar"><div class="fill" data-seats-bar style="width:87%"></div></div>
-    <div class="seats-end">Залишилось <strong data-seats>49</strong> місць за ціною <span class="price">390 грн</span> + 3 бонуси</div>
+    <div class="timer-note">Бонуси та ціна 390 грн доступні тільки до кінця відліку</div>
   </div>
 
   <article class="bonus reveal">
     <div class="bonus-num">01</div>
     <div class="bonus-tag">🎁 Бонус №1</div>
-    <h3>«50 хуків, які залітають»</h3>
-    <div class="bonus-out"><span class="target">🎯</span><span><b>Що це дає:</b> рілси, які зупиняють великий палець у перші 2 секунди</span></div>
-    <div class="bonus-desc"><p>Підбірка перших фраз з рілсів, які дали <strong style="color:var(--accent)">+45× охоплень</strong> у моїх клієнтів. Ті самі хуки, які працюють просто зараз — використовуй їх у своїх відео або вшивай у свого AI&#8209;співробітника, щоб він одразу починав сценарій з тих фраз, що залітають.</p></div>
+    <h3>[Назва бонусу №1]</h3>
+    <div class="bonus-out"><span class="target">🎯</span><span><b>Що це дає:</b> [короткий результат — 1 рядок, який зачіпає за живе]</span></div>
+    <div class="bonus-desc"><p>[Розгорнутий опис бонусу: що саме людина отримує, як це працює, в чому користь. 2–4 речення.]</p></div>
     <button class="bonus-toggle" data-bonus><span><span class="l-closed">Детальніше про бонус</span><span class="l-open">Згорнути</span></span><span class="chev"></span></button>
   </article>
 
   <article class="bonus reveal d1">
     <div class="bonus-num">02</div>
     <div class="bonus-tag">🎁 Бонус №2</div>
-    <h3>AI&#8209;співробітник «Сторіс&#8209;агент»</h3>
-    <div class="bonus-out"><span class="target">🎯</span><span><b>Що це дає:</b> готовий план сторіс щодня — економить <strong style="color:var(--accent)">~1 годину на день</strong></span></div>
-    <div class="bonus-desc"><p>Окремий AI&#8209;співробітник, який щодня видає тобі готовий план сторіс: які знімати, які питання задавати аудиторії, які прогрівати до заявок. Ти більше не думаєш «про що сьогодні зняти» — отримуєш план і просто записуєш. Економія ~1 години твого часу щодня.</p></div>
+    <h3>[Назва бонусу №2]</h3>
+    <div class="bonus-out"><span class="target">🎯</span><span><b>Що це дає:</b> [короткий результат — 1 рядок, який зачіпає за живе]</span></div>
+    <div class="bonus-desc"><p>[Розгорнутий опис бонусу: що саме людина отримує, як це працює, в чому користь. 2–4 речення.]</p></div>
     <button class="bonus-toggle" data-bonus><span><span class="l-closed">Детальніше про бонус</span><span class="l-open">Згорнути</span></span><span class="chev"></span></button>
   </article>
 
   <article class="bonus hot reveal d2">
     <div class="bonus-num">03</div>
     <div class="bonus-tag">🎁 Бонус №3 <span class="live-badge"><span class="dot"></span>LIVE</span></div>
-    <h3>Запрошення на прямий ефір: розбір AI&#8209;системи на реальному проекті</h3>
+    <h3>Запрошення на прямий ефір з Романом</h3>
     <div class="bonus-out"><span class="target">🎯</span><span><b>Що це дає:</b> ти не просто проходиш уроки — ти бачиш, як усе працює разом у живому проекті</span></div>
     <div class="bonus-desc"><p>Фінальна частина курсу — живий ефір 90 хвилин, на якому Роман збирає всю систему в один кейс на реальному клієнті: «1, 2, 3, 4 — і готово». Ти бачиш повний процес від нуля до публікацій. Плюс відповіді на твої запитання у Q&amp;A.</p></div>
     <button class="bonus-toggle" data-bonus><span><span class="l-closed">Детальніше про бонус</span><span class="l-open">Згорнути</span></span><span class="chev"></span></button>
@@ -1085,75 +928,55 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   <p class="bonus-final reveal">Усі 3 бонуси разом економлять <strong>до 20 годин роботи</strong> на запуску твого контенту з AI.</p>
 
   <a href="#buy" class="btn reveal d1">🎁 Забрати курс + 3 бонуси за 390 грн →</a>
-  <small class="btn-note">Бонуси доступні тільки для перших 370 учасників · залишилось <strong style="color:var(--accent)" data-seats>49</strong> місць</small>
+  <small class="btn-note">Бонуси доступні тільки до кінця таймера</small>
 </section>
 
 <!-- ═══ BLOCK 3: DEMO + ECONOMICS ═══ -->
 <section class="section section-demo">
-  <h2 class="reveal">Ось як це виглядає на <span class="accent">реальному кейсі</span></h2>
-  <p class="demo-sub reveal d1" style="margin-top:14px">Ілля Палій, експертний блог. Я зібрав йому повну AI&#8209;контент&#8209;систему — і ось які цифри вона дала за 7 місяців роботи. Ідеї, сценарії, зйомка — <strong style="color:var(--white)">все через AI</strong>.</p>
+  <div class="label reveal"><span class="dot"></span>Демо результату</div>
+  <h2 class="reveal">Подивись на ці рілси — кожен зроблено <span class="accent">повністю через AI</span></h2>
+  <p class="demo-sub reveal d1" style="margin-top:14px">Ідея, сценарій, зйомка — усе AI. Монтаж — фрілансер за 10$ за відео. Жодних студій, операторів, копірайтерів і знімальних днів.</p>
 
-  <div class="case-showcase reveal d2">
-    <div class="cs-head">
-      <div class="cs-avatar">ІП</div>
-      <div class="cs-meta">
-        <div class="cs-name">Ілля Палій</div>
-        <div class="cs-niche">Експертний блог · фінанси та інвестиції</div>
-      </div>
-    </div>
-    <div class="cs-grid">
-      <div class="cs-stat"><div class="cs-v">+80 000</div><div class="cs-l">📈 підписників</div></div>
-      <div class="cs-stat"><div class="cs-v">$450K</div><div class="cs-l">💰 виторгу</div></div>
-      <div class="cs-stat"><div class="cs-v">50 млн</div><div class="cs-l">👁 переглядів</div></div>
-      <div class="cs-stat"><div class="cs-v">7 міс</div><div class="cs-l">🗓 термін</div></div>
-    </div>
-  </div>
-
-  <h3 class="reveal section-h3" style="margin-top:36px">Хочеш побачити, як виглядають <span class="accent">такі відео та сценарії?</span></h3>
-  <p class="demo-sub reveal d1" style="margin-top:10px;margin-bottom:14px">Тримай пару прикладів рілсів, зроблених повністю через мою AI&#8209;систему.</p>
-
-  <div class="who-hint reveal d1"><span class="arr">←</span>гортай<span class="arr">→</span></div>
-
-  <div class="reel-grid" id="reelGrid">
-    <div class="reel-card">
-      <div class="reel-thumb"><span class="reel-tag">REEL · 9:16</span><div class="play"></div></div>
-      <div class="reel-meta">
-        <div class="who">Експерт · фінанси та інвестиції</div>
-        <div class="reel-reach">
-          <span class="ic">📈</span>
-          <span class="v">1.2M</span>
-          <span class="l">охоплень</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="reel-card">
-      <div class="reel-thumb"><span class="reel-tag">REEL · 9:16</span><div class="play"></div></div>
-      <div class="reel-meta">
-        <div class="who">Експерт · психологія та коучинг</div>
-        <div class="reel-reach">
-          <span class="ic">📈</span>
-          <span class="v">450K</span>
-          <span class="l">охоплень</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="reel-card">
-      <div class="reel-thumb"><span class="reel-tag">REEL · 9:16</span><div class="play"></div></div>
-      <div class="reel-meta">
-        <div class="who">Бренд · продукт</div>
-        <div class="reel-reach">
-          <span class="ic">📈</span>
-          <span class="v">320K</span>
-          <span class="l">охоплень</span>
-        </div>
+  <div class="reel-card reveal">
+    <div class="reel-thumb"><span class="reel-tag">REEL · 9:16</span><div class="play"></div></div>
+    <div class="reel-meta">
+      <div class="who">Експерт · фінанси та інвестиції</div>
+      <div class="reel-stats">
+        <div class="stat"><div class="v big">12 600</div><div class="k">📈 ОХОПЛЕННЯ</div></div>
+        <div class="stat"><div class="v">+340</div><div class="k">👥 ПІДПИСНИКІВ</div></div>
+        <div class="stat"><div class="v">22</div><div class="k">💬 ЗАЯВКИ</div></div>
+        <div class="stat"><div class="v">25 хв</div><div class="k">🎬 НА СТВОРЕННЯ</div></div>
       </div>
     </div>
   </div>
-  <div class="who-dots reveal" id="reelDots"><!-- filled by js --></div>
 
-  <div class="reel-note reveal">І так роблять рілси десятки моїх клієнтів — без зйомок на камеру, без сценаристів і без агенцій за 1&nbsp;500$ на місяць.</div>
+  <div class="reel-card reveal d1">
+    <div class="reel-thumb"><span class="reel-tag">REEL · 9:16</span><div class="play"></div></div>
+    <div class="reel-meta">
+      <div class="who">Експерт · психологія та коучинг</div>
+      <div class="reel-stats">
+        <div class="stat"><div class="v big">+45×</div><div class="k">📈 ОХОПЛЕНЬ</div></div>
+        <div class="stat"><div class="v">+520</div><div class="k">👥 ПІДПИСНИКІВ</div></div>
+        <div class="stat"><div class="v">9</div><div class="k">💬 ЗАЯВКИ</div></div>
+        <div class="stat"><div class="v">20 хв</div><div class="k">🎬 НА СТВОРЕННЯ</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reel-card reveal d2">
+    <div class="reel-thumb"><span class="reel-tag">REEL · 9:16</span><div class="play"></div></div>
+    <div class="reel-meta">
+      <div class="who">Бренд · продукт</div>
+      <div class="reel-stats">
+        <div class="stat"><div class="v big">8 200</div><div class="k">📈 ОХОПЛЕННЯ</div></div>
+        <div class="stat"><div class="v">+180</div><div class="k">👥 ПІДПИСНИКІВ</div></div>
+        <div class="stat"><div class="v">14</div><div class="k">💬 ЗАЯВКИ</div></div>
+        <div class="stat"><div class="v">18 хв</div><div class="k">🎬 НА СТВОРЕННЯ</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reel-note reveal">Усе це — без зйомок на камеру, без сценаристів, без агенцій за 1&nbsp;500$ на місяць. Тільки ти, AI&#8209;співробітники і фрілансер-монтажер.</div>
 
   <h2 class="econ-h reveal">Скільки коштує робити <span class="accent">такий контент?</span></h2>
   <p class="econ-sub reveal d1">Щоб системно набирати охоплення і підписників — блогу, експерту чи бізнесу потрібно <strong style="color:var(--white)">30–60 одиниць контенту</strong> на місяць. Ось скільки це коштує двома способами.</p>
@@ -1164,25 +987,26 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
       <div class="econ-row"><div class="ic">×</div><div class="item"><div class="n">Сценарист</div><div class="c">300–500$ / місяць</div></div></div>
       <div class="econ-row"><div class="ic">×</div><div class="item"><div class="n">Знімальний день</div><div class="c">200–400$ / 1 день</div></div></div>
       <div class="econ-row"><div class="ic">×</div><div class="item"><div class="n">Монтажер у штаті</div><div class="c">800–1 200$ / місяць</div></div></div>
-      <div class="econ-total"><div class="lbl">Всього</div><div class="v">1 300 – 2 100$ <span style="font-size:.6em;color:var(--gray)">/ міс</span></div><div class="extra">+ 60–100 годин твого часу і нервів</div></div>
+      <div class="econ-row"><div class="ic">×</div><div class="item"><div class="n">SMM&#8209;менеджер</div><div class="c">400–700$ / місяць</div></div></div>
+      <div class="econ-total"><div class="lbl">Всього</div><div class="v">1 700 – 2 800$ <span style="font-size:.6em;color:var(--gray)">/ міс</span></div><div class="extra">+ 60–100 годин твого часу і нервів</div></div>
     </div>
 
     <div class="econ good reveal d1">
       <div class="econ-head"><div class="t">Шлях з AI</div><div class="s">моя система</div></div>
       <div class="econ-row"><div class="ic">✓</div><div class="item"><div class="n">Підписки для AI&#8209;співробітників</div><div class="c">40$ / місяць</div></div></div>
       <div class="econ-row"><div class="ic">✓</div><div class="item"><div class="n">AI&#8209;аватар у Heygen</div><div class="c">30$ / місяць підписка</div></div></div>
-      <div class="econ-row"><div class="ic">✓</div><div class="item"><div class="n">AI&#8209;помічник для монтажу</div><div class="c">30$ / місяць</div></div></div>
-      <div class="econ-total"><div class="lbl">Всього</div><div class="v">~100$ <span style="font-size:.6em;color:var(--gray)">/ міс</span></div><div class="extra">+ 5 годин твого часу</div></div>
+      <div class="econ-row"><div class="ic">✓</div><div class="item"><div class="n">Монтажер фрілансер</div><div class="c">10$ × 30 відео = 300$</div></div></div>
+      <div class="econ-total"><div class="lbl">Всього</div><div class="v">~370$ <span style="font-size:.6em;color:var(--gray)">/ міс</span></div><div class="extra">+ 5 годин твого часу</div></div>
     </div>
   </div>
 
   <div class="savings reveal">
-    <div class="big">14 000 – 24 000$ економії на рік</div>
+    <div class="big">17 000 – 30 000$ економії на рік</div>
     <div class="small">+ звільнені 1 100+ годин — це майже <strong>7 робочих місяців</strong> твого часу</div>
   </div>
 
   <p class="econ-end reveal">Усе це робить та сама система, яку ти побачиш зсередини на курсі.</p>
-  <a href="#buy" class="btn reveal d1">🚀 Хочу дізнатися, як працює AI&#8209;контент&#8209;система за 390 грн →</a>
+  <a href="#buy" class="btn reveal d1">🚀 Хочу дізнатися, як працює AI&#8209;команда за 390 грн →</a>
 </section>
 
 <!-- ═══ BLOCK 4: PAIN ═══ -->
@@ -1203,11 +1027,12 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
     <div class="c">А тепер уяви: цю роботу замість тебе роблять AI&#8209;співробітники, навчені на 1 000 успішних відео.</div>
   </div>
 
-  <a href="#buy" class="btn reveal d1" style="margin-top:22px">🚀 Хочу AI&#8209;контент&#8209;систему за 390 грн →</a>
+  <a href="#buy" class="btn reveal d1" style="margin-top:22px">🚀 Хочу AI&#8209;команду за 390 грн →</a>
 </section>
 
 <!-- ═══ BLOCK 5: WHO ═══ -->
 <section class="section section-who">
+  <div class="label reveal"><span class="dot"></span>Для кого</div>
   <h2 class="reveal">Цей курс — <span class="mark">для тебе</span>, якщо ти:</h2>
 
   <div class="who-hint reveal d1" style="margin-top:18px"><span class="arr">←</span>гортай<span class="arr">→</span></div>
@@ -1273,7 +1098,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
 
   <article class="lesson reveal">
     <div class="lesson-head">
-      <div class="lesson-meta"><span class="lesson-num">УРОК №1</span></div>
+      <div class="lesson-meta"><span class="lesson-num">УРОК №1</span><span class="lesson-time">⏱ 8–10 хвилин</span></div>
       <h3>Чому твій ChatGPT видає воду і нікому не цікавий контент? Як буває по-іншому?</h3>
     </div>
     <div class="lesson-body"><div class="lesson-body-inner">
@@ -1294,7 +1119,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
 
   <article class="lesson reveal d1">
     <div class="lesson-head">
-      <div class="lesson-meta"><span class="lesson-num">УРОК №2</span></div>
+      <div class="lesson-meta"><span class="lesson-num">УРОК №2</span><span class="lesson-time">⏱ 12–15 хвилин</span></div>
       <h3>Як використовувати Claude для ідей та сценаріїв, що приноситимуть охоплення, підписників і лідів</h3>
     </div>
     <div class="lesson-body"><div class="lesson-body-inner">
@@ -1316,7 +1141,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
 
   <article class="lesson reveal d2">
     <div class="lesson-head">
-      <div class="lesson-meta"><span class="lesson-num">УРОК №3</span></div>
+      <div class="lesson-meta"><span class="lesson-num">УРОК №3</span><span class="lesson-time">⏱ 10–12 хвилин</span></div>
       <h3>Зйомка контенту через реалістичного AI&#8209;аватара з новою версією Heygen 5.0</h3>
     </div>
     <div class="lesson-body"><div class="lesson-body-inner">
@@ -1326,7 +1151,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
         <li>Як один раз створити свій AI&#8209;аватар (4–5 хвилин зйомки) — і користуватися ним назавжди</li>
         <li>Як записувати голос для аватара за 5–10 хвилин у звичайну петличку вдома</li>
         <li>Монтаж за 10$ за відео: де знайти фрілансера, що віддавати в ТЗ, як отримувати готові ролики</li>
-        <li>Кейс Іллі Палія: 80 000 підписників за 7 місяців. $450 000 виторгу. 5 годин на місяць</li>
+        <li>Кейс Іллі Полія: 80 000 підписників за 7 місяців. $450 000 виторгу. 5 годин на місяць</li>
       </ul>
       <div class="lesson-quote">«Ілля витрачає 5 годин на місяць. Він не знімається. Він не монтує. Він читає сценарії в петличку — і займається своїм бізнесом.»</div>
     </div></div>
@@ -1339,7 +1164,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
 
   <article class="lesson reveal d3">
     <div class="lesson-head">
-      <div class="lesson-meta"><span class="lesson-num">УРОК №4</span></div>
+      <div class="lesson-meta"><span class="lesson-num">УРОК №4</span><span class="lesson-time">⏱ 10–12 хвилин</span></div>
       <h3>Як за допомогою AI аналізувати результати — щоб кожен наступний рілс був ефективніший</h3>
     </div>
     <div class="lesson-body"><div class="lesson-body-inner">
@@ -1361,8 +1186,8 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
 
   <article class="lesson webinar open reveal">
     <div class="lesson-head">
-      <div class="lesson-meta"><span class="lesson-num">⭐ ПРЯМИЙ ЕФІР</span><span class="live-tag"><span class="dot"></span>LIVE</span></div>
-      <h3>Як передати 80% рутини при створенні контенту на AI — від ідеї до аналізу результатів</h3>
+      <div class="lesson-meta"><span class="lesson-num">⭐ ПРЯМИЙ ЕФІР</span><span class="lesson-time">⏱ 90–120 хв</span><span class="live-tag"><span class="dot"></span>LIVE</span></div>
+      <h3>Як через AI повністю автоматизувати створення контенту — від ідеї до аналізу результатів</h3>
     </div>
     <div class="lesson-body" style="max-height:1400px"><div class="lesson-body-inner">
       <ul class="checks">
@@ -1442,7 +1267,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
     </ul>
 
     <div class="author-case">
-      <div class="h">Кейс клієнта · Ілля Палій</div>
+      <div class="h">Кейс клієнта · Ілля Полій</div>
       <div class="name-c">7 місяців на цій системі</div>
       <div class="nums">
         <div class="n"><b>+80 000</b><span>підписників</span></div>
@@ -1499,7 +1324,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
         <div class="lbl">Результат за 3 місяці</div>
         <ul class="case-stats">
           <li><span class="ic">📈</span><span><b>60</b> одиниць контенту на місяць (×2)</span></li>
-          <li><span class="ic">💰</span><span><b>~100$</b> на виробництво (економія 2 400$/міс)</span></li>
+          <li><span class="ic">💰</span><span><b>~370$</b> на виробництво (економія 2 100$/міс)</span></li>
           <li><span class="ic">⏱</span><span>Команда зменшилась з <b>3 людей до 1</b></span></li>
         </ul>
       </div>
@@ -1541,11 +1366,11 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   <div class="final-list">
     <div class="final-item reveal"><div class="ic">✓</div><div class="t"><div class="h">Урок 1: Чому ChatGPT видає воду — і як буває по-іншому</div><div class="d">Розбір системи AI&#8209;співробітників зсередини · 8–10 хв</div></div></div>
     <div class="final-item reveal d1"><div class="ic">✓</div><div class="t"><div class="h">Урок 2: Ідеї та сценарії в твоїй манері мовлення</div><div class="d">Жива демонстрація в Claude на робочому проекті · 12–15 хв</div></div></div>
-    <div class="final-item reveal d2"><div class="ic">✓</div><div class="t"><div class="h">Урок 3: Зйомка через AI&#8209;аватара з Heygen 5.0</div><div class="d">Кейс Іллі Палія: 80К підписників за 7 місяців · 10–12 хв</div></div></div>
+    <div class="final-item reveal d2"><div class="ic">✓</div><div class="t"><div class="h">Урок 3: Зйомка через AI&#8209;аватара з Heygen 5.0</div><div class="d">Кейс Іллі Полія: 80К підписників за 7 місяців · 10–12 хв</div></div></div>
     <div class="final-item reveal d3"><div class="ic">✓</div><div class="t"><div class="h">Урок 4: Аналітика, яка вчить систему працювати краще</div><div class="d">Жива демонстрація на реальній аналітиці клієнта · 10–12 хв</div></div></div>
     <div class="final-item star reveal"><div class="ic">⭐</div><div class="t"><div class="h">Живий прямий ефір з Романом · 90–120 хв</div><div class="d">Повна автоматизація контенту на реальному кейсі: 1, 2, 3, 4 — і готово</div></div></div>
-    <div class="final-item reveal d1"><div class="ic">🎁</div><div class="t"><div class="h">Бонус №1: «50 хуків, які залітають»</div><div class="d">Підбірка перших фраз з рілсів, які дали +45× охоплень</div></div></div>
-    <div class="final-item reveal d2"><div class="ic">🎁</div><div class="t"><div class="h">Бонус №2: AI&#8209;співробітник «Сторіс&#8209;агент»</div><div class="d">Готовий план сторіс щодня — економить ~1 годину на день</div></div></div>
+    <div class="final-item reveal d1"><div class="ic">🎁</div><div class="t"><div class="h">Бонус №1: AI&#8209;співробітник «Сторіс&#8209;агент»</div><div class="d">Готовий план сторіс щодня — для прогріву аудиторії</div></div></div>
+    <div class="final-item reveal d2"><div class="ic">🎁</div><div class="t"><div class="h">Бонус №2: «50 хуків, які залітають»</div><div class="d">Готова добірка перших фраз — у тому числі та, що дала +45× охоплень</div></div></div>
     <div class="final-item reveal d3"><div class="ic">♾️</div><div class="t"><div class="h">Доступ до курсу — 3 тижні</div><div class="d">Можеш переглядати і повертатися, скільки потрібно</div></div></div>
     <div class="final-item reveal d4"><div class="ic">💬</div><div class="t"><div class="h">Підтримка від автора в Telegram</div><div class="d">Запитуєш, отримуєш відповідь — без ботів і шаблонів</div></div></div>
     <div class="final-item reveal d5"><div class="ic">🛡️</div><div class="t"><div class="h">Гарантія повернення коштів — 14 днів</div><div class="d">Не зайшло — пишеш у підтримку, отримуєш гроші назад</div></div></div>
@@ -1554,18 +1379,14 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   <div class="final-price reveal">
     <div class="pl">Звичайна вартість курсу</div>
     <div class="pold">2 390 грн</div>
-    <div class="pl2">Твоя ціна для перших 370 учасників</div>
+    <div class="pl2">Твоя ціна до кінця таймера</div>
     <div class="pnew">390<small>грн</small></div>
     <div class="save">ЕКОНОМІЯ 2 000 грн · −84%</div>
   </div>
 
-  <div class="seats-card compact reveal">
-    <div class="seats-row">
-      <div class="seats-label">Зайнято місць:</div>
-      <div class="seats-count"><span class="ac" data-seats-taken>321</span><span class="total">/ 370</span></div>
-    </div>
-    <div class="seats-bar"><div class="fill" data-seats-bar style="width:87%"></div></div>
-    <div class="seats-end">Залишилось <strong data-seats>49</strong> місць за ціною <span class="price">390 грн</span></div>
+  <div class="final-timer reveal">
+    <span>До кінця акції:</span>
+    <span class="v" data-timer>10:00</span>
   </div>
 
   <a href="#" class="btn reveal" id="mainCta">🚀 Забрати курс за 390 грн →</a>
@@ -1585,7 +1406,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
     <span class="pold">2 390 ₴</span>
     <span class="arr">→</span>
     <span class="pnew">390 ₴</span>
-    <span class="stm">🪑 <span data-seats>49</span> місць</span>
+    <span class="stm">⏱ <span data-timer>10:00</span></span>
   </div>
   <a href="#buy" class="btn">🎁 Забрати курс за 390 грн →</a>
 </div>
@@ -1610,60 +1431,39 @@ document.querySelectorAll('[data-bonus]').forEach(btn => {
   btn.addEventListener('click', () => btn.closest('.bonus').classList.toggle('open'));
 });
 
-// ─── Seats counter: 49 → -1 every 15s, floors at 3, syncs across tabs ───
 (function(){
-  const KEY = 'aikon_seats';
-  const TS_KEY = 'aikon_seats_ts';
-  const INITIAL = 49;
-  const MIN = 3;
-  const STEP_MS = 15000;
+  const KEY='aikon_timer_end';
+  let end = parseInt(localStorage.getItem(KEY)||'0',10);
   const now = Date.now();
-  let seats = parseInt(localStorage.getItem(KEY) || '0', 10);
-  let lastTs = parseInt(localStorage.getItem(TS_KEY) || '0', 10);
-  if (!seats || seats > INITIAL || !lastTs) {
-    seats = INITIAL;
-    lastTs = now;
-    localStorage.setItem(KEY, seats);
-    localStorage.setItem(TS_KEY, lastTs);
-  } else {
-    // Apply elapsed decrements (e.g. after revisit)
-    const elapsedSteps = Math.floor((now - lastTs) / STEP_MS);
-    if (elapsedSteps > 0) {
-      seats = Math.max(MIN, seats - elapsedSteps);
-      lastTs = lastTs + elapsedSteps * STEP_MS;
-      localStorage.setItem(KEY, seats);
-      localStorage.setItem(TS_KEY, lastTs);
-    }
+  if(!end || end < now - 30*60*1000) {
+    end = now + 10*60*1000;
+    localStorage.setItem(KEY, end);
+  } else if (end < now) {
+    end = now + 10*60*1000;
+    localStorage.setItem(KEY, end);
   }
-  const TOTAL = 370;
-  const fSeats = document.querySelectorAll('[data-seats]');
-  const fTaken = document.querySelectorAll('[data-seats-taken]');
-  const fBar   = document.querySelectorAll('[data-seats-bar]');
-  function render(){
-    const taken = TOTAL - seats;
-    const pct = Math.min(99, Math.max(0, (taken / TOTAL) * 100));
-    fSeats.forEach(f => f.textContent = seats);
-    fTaken.forEach(f => f.textContent = taken);
-    fBar.forEach(f => f.style.width = pct.toFixed(1) + '%');
-  }
-  render();
-  setInterval(function(){
-    if (seats > MIN) {
-      seats -= 1;
-      lastTs = Date.now();
-      localStorage.setItem(KEY, seats);
-      localStorage.setItem(TS_KEY, lastTs);
-      render();
+  const fields = document.querySelectorAll('[data-timer]');
+  function tick(){
+    let left = Math.max(0, end - Date.now());
+    if(left === 0){
+      end = Date.now() + 10*60*1000;
+      localStorage.setItem(KEY, end);
+      left = end - Date.now();
     }
-  }, STEP_MS);
+    const m = Math.floor(left/60000);
+    const s = Math.floor((left%60000)/1000);
+    const txt = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    fields.forEach(f=>f.textContent=txt);
+  }
+  tick();
+  setInterval(tick, 1000);
 })();
 
-function attachCarouselDots(gridId, dotsId, cardSel){
-  const grid = document.getElementById(gridId);
-  const dotsBox = document.getElementById(dotsId);
+(function(){
+  const grid = document.getElementById('whoGrid');
+  const dotsBox = document.getElementById('whoDots');
   if(!grid || !dotsBox) return;
-  const cards = grid.querySelectorAll(cardSel);
-  if(!cards.length) return;
+  const cards = grid.querySelectorAll('.who-card');
   cards.forEach((_,i)=>{
     const d = document.createElement('span');
     if(i===0) d.classList.add('on');
@@ -1684,9 +1484,7 @@ function attachCarouselDots(gridId, dotsId, cardSel){
       dots.forEach((d,i)=>d.classList.toggle('on',i===best));
     });
   },{passive:true});
-}
-attachCarouselDots('whoGrid','whoDots','.who-card');
-attachCarouselDots('reelGrid','reelDots','.reel-card');
+})();
 
 (function(){
   const sticky = document.getElementById('sticky');
