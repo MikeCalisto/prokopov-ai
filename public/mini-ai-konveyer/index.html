@@ -163,8 +163,9 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   margin-bottom:26px;
 }
 .hero-intro{
-  font-size:.9rem;line-height:1.55;color:var(--gray);
-  margin-bottom:14px;
+  font-size:1.08rem;line-height:1.45;color:var(--white);
+  font-weight:600;letter-spacing:-.005em;
+  margin-bottom:18px;
 }
 
 .bullets{list-style:none;margin:0 0 36px;padding:0;display:grid;gap:14px}
@@ -701,6 +702,19 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M3.5 8.5l3 3 6-6.5' fill='none' stroke='%23ff6a1a' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
   background-size:contain;background-repeat:no-repeat;background-position:center;
 }
+.lesson-topic{
+  font-size:.92rem;line-height:1.4;color:var(--white);font-weight:700;
+  letter-spacing:-.005em;margin-bottom:10px;
+  display:flex;flex-wrap:wrap;gap:6px;align-items:baseline;
+}
+.lesson-topic-tag{
+  display:inline-block;padding:3px 9px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-deep));
+  color:#fff;font-size:.65rem;font-weight:800;letter-spacing:.12em;
+  border-radius:6px;text-transform:uppercase;
+  box-shadow:0 4px 12px rgba(255,106,26,.35);
+  flex-shrink:0;
+}
 .lesson-quote{
   padding:14px;margin:14px 0 0;
   background:rgba(255,106,26,.06);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;
@@ -1011,21 +1025,23 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
     </div>
 
     <h1 class="reveal d1">
-      Як <span class="mark">стабільно</span> створювати <span class="word">30–60 відео</span> на місяць для твоїх соцмереж через AI
+      Як через <span class="word">AI</span> <span class="mark">системно</span> створювати <span class="word">30–60 відео</span> на місяць для соцмереж
     </h1>
 
     <p class="hero-lead reveal d2">
-      Які будуть приносити заявки на твої послуги чи навчання з твоїм мінімальним залученням у процес та без вигорання.
+      Які будуть приносити заявки на твої послуги чи навчання з мінімальним залученням у процес та без вигорання.
     </p>
 
     <p class="hero-intro reveal d2">
-      Я покажу тобі AI&#8209;систему, навчену на 1&nbsp;000 успішних відео, завдяки якій ти зможеш:
+      Я покажу тобі, як правильно працювати з нейронками, щоб вони могли:
     </p>
 
     <ul class="bullets reveal d3">
-      <li><span class="check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7.5"/></svg></span><span class="t">Шукати топові та актуальні ідеї для відео</span></li>
-      <li><span class="check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7.5"/></svg></span><span class="t">Отримувати сценарії, які точно зачеплять твою ЦА</span></li>
-      <li><span class="check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7.5"/></svg></span><span class="t">Знімати сценарії через твого AI&#8209;двійника</span></li>
+      <li><span class="check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7.5"/></svg></span><span class="t">Знаходити актуальні ідеї, які точно зачеплять твою ЦА</span></li>
+      <li><span class="check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7.5"/></svg></span><span class="t">Писати сценарії у твоїй манері спілкування</span></li>
+      <li><span class="check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7.5"/></svg></span><span class="t">Знімати експертні відео замість тебе</span></li>
+      <li><span class="check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7.5"/></svg></span><span class="t">Виконувати рутину монтажу відео</span></li>
+      <li><span class="check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7.5"/></svg></span><span class="t">Робити дизайн каруселей</span></li>
     </ul>
 
     <div class="price-block reveal d4">
@@ -1192,7 +1208,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   <ul class="pain-list" style="list-style:none">
     <li class="pain reveal"><span class="em">😔</span><div class="t"><div class="h">Контент з'їдає половину твого робочого тижня</div><div class="d">Ідеї, тексти, зйомки, монтаж, постинг — ти все робиш сам і при тому не регулярно.</div></div></li>
     <li class="pain reveal d1"><span class="em">😔</span><div class="t"><div class="h">ChatGPT пише як підручник, а не як жива людина</div><div class="d">Використовує шаблонні фрази та пише не у тій манері, у якій ти спілкуєшся з клієнтами.</div></div></li>
-    <li class="pain reveal d2"><span class="em">😔</span><div class="t"><div class="h">Ти не знаєш чому твоє відео залетіло, і як це повторити</div><div class="d">Один рілс — 200 переглядів, інший — 12 000. Чому? Загадка. І ти не можеш повторити успіх.</div></div></li>
+    <li class="pain reveal d2"><span class="em">😔</span><div class="t"><div class="h">Контент створюєш регулярно, перегляди є, але заявок пару штук на місяць</div><div class="d">Робиш «все правильно», охоплення непогані — а в дірект тиша. І ти не розумієш, що саме виправити, щоб перегляди перетворювались на гроші.</div></div></li>
     <li class="pain reveal d3"><span class="em">😔</span><div class="t"><div class="h">Зйомки на камеру для тебе окреме пекло</div><div class="d">Світло, фон, постійно забуваєш текст, багато дублів. Знімаєш одне відео годину, монтуєш ще дві — оскільки потрібно багато моментів вирізати, а монтувати професійно у тебе не виходить.</div></div></li>
     <li class="pain reveal d4"><span class="em">😔</span><div class="t"><div class="h">Бачиш, як контент роблять агенції, хочеш так само, але ціна — від 1 500$ на місяць</div><div class="d">Для тебе не варіант. А робити самому — теж не підходить, бо часу немає.</div></div></li>
   </ul>
@@ -1264,30 +1280,36 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   <h2 class="reveal" style="text-align:center">Що саме ти отримаєш <span class="accent">всередині</span></h2>
 
   <div class="program-meta reveal d1" style="margin-top:18px">
-    <span>4 уроки в записі</span><span>прямий ефір</span><span>3 тижні доступу</span><span>підтримка від автора</span>
+    <span>3 уроки в записі</span><span>прямий ефір</span><span>3 тижні доступу</span><span>підтримка від автора</span>
   </div>
 
   <div class="program-intro reveal d2">
-    Це не курс «послухай теорію і піди робити сам». Це <strong>4 короткі уроки + прямий ефір</strong>, після яких ти бачиш повну робочу систему AI&#8209;співробітників зсередини — і знаєш, як зібрати свою.
+    Це не курс «послухай теорію і піди робити сам». Це <strong>3 короткі уроки + прямий ефір</strong>, після яких ти бачиш повну робочу систему AI&#8209;співробітників зсередини — і знаєш, як зібрати свою.
   </div>
 
   <article class="lesson reveal">
     <div class="lesson-head">
       <div class="lesson-meta"><span class="lesson-num">УРОК №1</span></div>
-      <h3>Чому твій ChatGPT видає воду і нікому не цікавий контент? Як буває по-іншому?</h3>
+      <h3>Дві теми: чому ChatGPT видає воду — та як отримувати сценарії, що приноситимуть лідів</h3>
     </div>
     <div class="lesson-body"><div class="lesson-body-inner">
+      <div class="lesson-topic"><span class="lesson-topic-tag">ТЕМА 1</span> Чому твій ChatGPT видає воду і нікому не цікавий контент? Як буває по-іншому?</div>
       <ul class="checks">
         <li>Чому AI пише шаблонні тексти — і це не його провина. Проблема не в нейронці, а в тому, що в неї завантажено</li>
         <li>Прямий контраст на екрані: сценарій з ChatGPT vs сценарій з мого AI&#8209;співробітника</li>
-        <li>Що таке повноцінний AI&#8209;співробітник: не просто промт у чаті, а помічник, у якого «вшита» методологія агенції — на базі 4 років роботи зі 100+ клієнтами</li>
-        <li>Огляд 6 основних AI&#8209;співробітників, які щодня генерують моїм клієнтам мільйони переглядів і десятки тисяч доларів</li>
+      </ul>
+
+      <div class="lesson-topic" style="margin-top:18px"><span class="lesson-topic-tag">ТЕМА 2</span> Як використовувати Claude для написання сценаріїв, що приноситимуть охоплення, підписників і лідів</div>
+      <ul class="checks">
+        <li>Три етапи роботи AI&#8209;співробітника: стратегія → ідеї → сценарій. Чому саме така послідовність</li>
+        <li>Кейс: як ми збільшили охоплення в 45 разів, генеруючи хуки через AI</li>
+        <li>Як отримати готовий сценарій у твоїй манері мовлення: з твоїми словами, конструкціями, метафорами</li>
       </ul>
       <div class="lesson-quote">«AI не робить поганий контент. Він робить хороший контент із того, що в нього завантажено. Завантажено нічого — він працює з повітрям.»</div>
     </div></div>
     <div class="lesson-result">
-      <div class="row"><span class="ic">🎯</span><span><b>Результат:</b> розумієш різницю між «промтом у ChatGPT» і «AI&#8209;співробітником з контекстом».</span></div>
-      <div class="row"><span class="ic">⚡</span><span><b>Інсайт:</b> бачиш, чому в одних AI пише вогонь, а в інших — воду. І знаєш, як це виправити.</span></div>
+      <div class="row"><span class="ic">🎯</span><span><b>Результат:</b> розумієш, чим «AI&#8209;співробітник з контекстом» відрізняється від звичайного промту — і вмієш отримувати сценарії у своїй манері мовлення.</span></div>
+      <div class="row"><span class="ic">⚡</span><span><b>Інсайт:</b> знаєш, як зашити в AI свою аудиторію, продукт і стиль — і отримувати тексти, які потрапляють точно у болі та бажання твоєї ЦА.</span></div>
     </div>
     <button class="lesson-toggle" data-lesson>Що в уроці <span class="chev"></span></button>
   </article>
@@ -1295,28 +1317,6 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   <article class="lesson reveal d1">
     <div class="lesson-head">
       <div class="lesson-meta"><span class="lesson-num">УРОК №2</span></div>
-      <h3>Як використовувати Claude для ідей та сценаріїв, що приноситимуть охоплення, підписників і лідів</h3>
-    </div>
-    <div class="lesson-body"><div class="lesson-body-inner">
-      <ul class="checks">
-        <li>Жива демонстрація в Claude — заходимо в реальний акаунт маркетолога агенції. Не теорія, а робочий проект клієнта</li>
-        <li>Три етапи роботи AI&#8209;співробітника: стратегія → ідеї → сценарій. Чому саме така послідовність</li>
-        <li>Як AI видає не «ідеї для рілсів», а ідеї з обґрунтуванням: яка біль аудиторії, який хук, чому ця тема залетить</li>
-        <li>Кейс: як ми збільшили охоплення в 45 разів, генеруючи хуки через AI</li>
-        <li>Як отримати готовий сценарій у твоїй манері мовлення: з твоїми словами, конструкціями, метафорами</li>
-      </ul>
-      <div class="lesson-quote">«Цей AI&#8209;співробітник генерує не «ідеї взагалі». Він генерує ідеї під конкретну аудиторію, продукт і рівень усвідомленості людей, які тебе читають.»</div>
-    </div></div>
-    <div class="lesson-result">
-      <div class="row"><span class="ic">🎯</span><span><b>Результат:</b> розумієш, що «під капотом» AI&#8209;співробітника, який пише в твоїй манері мовлення.</span></div>
-      <div class="row"><span class="ic">⚡</span><span><b>Інсайт:</b> знаєш, як зашити в AI свою аудиторію, продукт і стиль — і отримувати тексти, які потрапляють у болі.</span></div>
-    </div>
-    <button class="lesson-toggle" data-lesson>Що в уроці <span class="chev"></span></button>
-  </article>
-
-  <article class="lesson reveal d2">
-    <div class="lesson-head">
-      <div class="lesson-meta"><span class="lesson-num">УРОК №3</span></div>
       <h3>Зйомка контенту через реалістичного AI&#8209;аватара з новою версією Heygen 5.0</h3>
     </div>
     <div class="lesson-body"><div class="lesson-body-inner">
@@ -1337,24 +1337,26 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
     <button class="lesson-toggle" data-lesson>Що в уроці <span class="chev"></span></button>
   </article>
 
-  <article class="lesson reveal d3">
+  <article class="lesson reveal d2">
     <div class="lesson-head">
-      <div class="lesson-meta"><span class="lesson-num">УРОК №4</span></div>
-      <h3>Як за допомогою AI аналізувати результати — щоб кожен наступний рілс був ефективніший</h3>
+      <div class="lesson-meta"><span class="lesson-num">УРОК №3</span></div>
+      <h3>Монтаж відео та дизайн каруселей через AI</h3>
     </div>
     <div class="lesson-body"><div class="lesson-body-inner">
+      <div class="lesson-topic"><span class="lesson-topic-tag">ТЕМА 1</span> AI&#8209;монтаж: як делегувати рутину і працювати з чистим вихідником</div>
       <ul class="checks">
-        <li>Чому контент без аналітики — стрільба наосліп: щось залітає, щось ні, і ти не знаєш чому</li>
-        <li>Як AI&#8209;співробітник по аналітиці бере дані за місяць, аналізує топ і антитоп — і видає висновки рівня «ця фраза в хуку дала +45× охоплень — повторюємо»</li>
-        <li>Чому в першому місяці контент буде на 7/10. У другому — 8/10. Через 3 місяці — стабільні 9/10</li>
-        <li>Як отримувати готовий план на наступний місяць: що продовжуємо, що зупиняємо, які формати тестуємо</li>
-        <li>Жива демонстрація на реальній аналітиці клієнта: таблиця рілсів, висновки AI, гіпотези</li>
+        <li>Чому ручний монтаж одного рілсу — це 1–2 години роботи, і як AI скорочує це до 10–15 хвилин</li>
+        <li>AI вирізає за тебе всі «ам», «е», «мм», паузи, запинання та невдалі дублі — на виході отримуєш чистий вихідник без зайвого</li>
       </ul>
-      <div class="lesson-quote">«Система не просто виробляє контент. Вона навчається на власних даних. З кожним місяцем знає більше про те, що працює саме для твоєї аудиторії.»</div>
+
+      <div class="lesson-topic" style="margin-top:18px"><span class="lesson-topic-tag">ТЕМА 2</span> Дизайн каруселей через AI: охоплення + ліди + продажі</div>
+      <ul class="checks">
+        <li>Як через AI робити дизайнерські каруселі за 15–20 хвилин: візуал, типографіка, кольори, шаблони</li>
+      </ul>
+      <div class="lesson-quote">«Монтаж — це найдорожча рутина, яка з'їдає час експерта. AI забирає її повністю. А каруселі — це місток, який перетворює перегляди на заявки.»</div>
     </div></div>
     <div class="lesson-result">
-      <div class="row"><span class="ic">🎯</span><span><b>Результат:</b> твоя контент-машина не просто працює — вона вчиться.</span></div>
-      <div class="row"><span class="ic">⚡</span><span><b>Інсайт:</b> приймаєш контент-рішення на основі даних, а не «мені здається, що це залетить».</span></div>
+      <div class="row"><span class="ic">🎯</span><span><b>Результат:</b> ти не витрачаєш години на «вирізати ам, е, мм» — AI робить це за тебе. І вмієш створювати каруселі, які системно приносять ліди.</span></div>
     </div>
     <button class="lesson-toggle" data-lesson>Що в уроці <span class="chev"></span></button>
   </article>
@@ -1411,7 +1413,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   </div>
 
   <div class="format-summary reveal">
-    <div class="h">За 4 уроки + прямий ефір ти:</div>
+    <div class="h">За 3 уроки + прямий ефір ти:</div>
     <ul>
       <li>Розумієш, чому 99% людей отримують від AI воду — і як зробити, щоб у тебе було інакше</li>
       <li>Бачиш зсередини, як 6 AI&#8209;співробітників роблять контент на 1 500 000+ охоплень щомісяця</li>
@@ -1539,10 +1541,9 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   <h2 class="final-h reveal">Усе, що ти отримуєш <span class="mark">на курсі</span></h2>
 
   <div class="final-list">
-    <div class="final-item reveal"><div class="ic">✓</div><div class="t"><div class="h">Урок 1: Чому ChatGPT видає воду — і як буває по-іншому</div><div class="d">Розбір системи AI&#8209;співробітників зсередини · 8–10 хв</div></div></div>
-    <div class="final-item reveal d1"><div class="ic">✓</div><div class="t"><div class="h">Урок 2: Ідеї та сценарії в твоїй манері мовлення</div><div class="d">Жива демонстрація в Claude на робочому проекті · 12–15 хв</div></div></div>
-    <div class="final-item reveal d2"><div class="ic">✓</div><div class="t"><div class="h">Урок 3: Зйомка через AI&#8209;аватара з Heygen 5.0</div><div class="d">Кейс Іллі Палія: 80К підписників за 7 місяців · 10–12 хв</div></div></div>
-    <div class="final-item reveal d3"><div class="ic">✓</div><div class="t"><div class="h">Урок 4: Аналітика, яка вчить систему працювати краще</div><div class="d">Жива демонстрація на реальній аналітиці клієнта · 10–12 хв</div></div></div>
+    <div class="final-item reveal"><div class="ic">✓</div><div class="t"><div class="h">Урок 1: ChatGPT vs AI&#8209;співробітник + сценарії, які приносять лідів</div><div class="d">Розбір системи + жива демонстрація в Claude на робочому проекті</div></div></div>
+    <div class="final-item reveal d1"><div class="ic">✓</div><div class="t"><div class="h">Урок 2: Зйомка через AI&#8209;аватара з Heygen 5.0</div><div class="d">Кейс Іллі Палія: 80К підписників за 7 місяців на цій системі</div></div></div>
+    <div class="final-item reveal d2"><div class="ic">✓</div><div class="t"><div class="h">Урок 3: AI&#8209;монтаж відео + дизайн каруселей</div><div class="d">Делегуєш рутину монтажу на AI і збираєш каруселі, які приносять заявки</div></div></div>
     <div class="final-item star reveal"><div class="ic">⭐</div><div class="t"><div class="h">Живий прямий ефір з Романом · 90–120 хв</div><div class="d">Повна автоматизація контенту на реальному кейсі: 1, 2, 3, 4 — і готово</div></div></div>
     <div class="final-item reveal d1"><div class="ic">🎁</div><div class="t"><div class="h">Бонус №1: «50 хуків, які залітають»</div><div class="d">Підбірка перших фраз з рілсів, які дали +45× охоплень</div></div></div>
     <div class="final-item reveal d2"><div class="ic">🎁</div><div class="t"><div class="h">Бонус №2: AI&#8209;співробітник «Сторіс&#8209;агент»</div><div class="d">Готовий план сторіс щодня — економить ~1 годину на день</div></div></div>
