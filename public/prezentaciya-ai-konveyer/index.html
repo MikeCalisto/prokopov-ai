@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>AI Контент-Конвейер 2.0 — презентация вебинара · Роман Прокопов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060608; --bg-soft:#0a0a10; --bg-card:#0d0d12;
+  --bg-elev:#141420; --bg-card-hover:#14141c;
+  --accent:#e8921a; --accent-deep:#c77010;
+  --accent-gold:#e9b646; --accent-light:#f5b34a;
+  --accent-glow:rgba(232,146,26,.25);
+  --accent-glow-strong:rgba(232,146,26,.45);
+  --text:#f2ede3; --text-muted:#9a948a; --text-dim:#5a564e;
+  --border:#1e1e2a; --border-strong:#2a2a36;
+  --border-accent:rgba(232,146,26,.32);
+  --border-accent-strong:rgba(232,146,26,.55);
+  --danger:#ff4d4d; --danger-glow:rgba(255,77,77,.22);
+  --radius-sm:12px; --radius-md:16px; --radius-lg:22px;
+  --shadow-card:0 18px 40px rgba(0,0,0,.45);
+  --shadow-glow:0 0 50px var(--accent-glow),0 0 100px rgba(232,146,26,.08);
+  --max-w:1320px; --max-w-narrow:980px;
+  --font-display:'Tektur',sans-serif;
+  --font-body:'Manrope',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;min-width:0;}
+html,body{height:100%;}
+img,svg,video{max-width:100%;height:auto;display:block;}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:var(--font-body); font-size:17px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; overflow:hidden; position:relative;
+}
+::selection{background:var(--accent); color:#000;}
+strong{color:var(--accent-light); font-weight:700;}
+em{color:var(--text-muted); font-style:italic;}
+
+/* grain */
+body::after{
+  content:''; position:fixed; inset:0; z-index:60; pointer-events:none; opacity:.4;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* ===== DECK ===== */
+.deck{position:fixed; inset:0;}
+.slide{
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; justify-content:center;
+  padding:clamp(48px,7vh,90px) clamp(24px,5vw,80px);
+  opacity:0; visibility:hidden;
+  transform:translateY(24px) scale(.99);
+  transition:opacity .55s ease, transform .55s cubic-bezier(.2,.7,.2,1), visibility .55s;
+  overflow-y:auto; overflow-x:hidden;
+}
+.slide::-webkit-scrollbar{width:6px;}
+.slide::-webkit-scrollbar-thumb{background:var(--border-strong); border-radius:6px;}
+.slide.active{opacity:1; visibility:visible; transform:none; z-index:2;}
+.slide.prev{transform:translateY(-24px) scale(.99);}
+.slide-inner{width:100%; max-width:var(--max-w); margin:auto;}
+.slide.narrow .slide-inner{max-width:var(--max-w-narrow);}
+.slide.center{text-align:center;}
+.slide.center .slide-inner{max-width:var(--max-w-narrow);}
+
+/* dark divider glow */
+.slide.divider{text-align:center;}
+.slide.divider::before{
+  content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:radial-gradient(60% 55% at 50% 45%, var(--accent-glow) 0%, rgba(232,146,26,.06) 40%, transparent 72%);
+}
+.slide.divider .slide-inner{position:relative; z-index:1; max-width:var(--max-w-narrow);}
+
+/* ===== TYPО ===== */
+.eyebrow{
+  display:inline-flex; align-items:center; gap:9px; margin-bottom:22px;
+  font-family:var(--font-display); font-size:11px; font-weight:800;
+  letter-spacing:3px; text-transform:uppercase; color:var(--accent);
+  padding:7px 15px; background:rgba(232,146,26,.08);
+  border:1px solid var(--border-accent); border-radius:40px;
+}
+.eyebrow::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--accent); box-shadow:0 0 10px var(--accent);}
+h1.big{
+  font-family:var(--font-display); font-weight:900; text-transform:uppercase;
+  line-height:.98; letter-spacing:-1.5px;
+  font-size:clamp(34px,6vw,76px);
+}
+h2.big{
+  font-family:var(--font-display); font-weight:800;
+  line-height:1.04; letter-spacing:-.5px;
+  font-size:clamp(26px,4.2vw,50px);
+}
+h3.mid{
+  font-family:var(--font-display); font-weight:700;
+  line-height:1.1; font-size:clamp(21px,2.8vw,34px);
+}
+.lead{font-size:clamp(16px,1.6vw,20px); color:var(--text-muted); margin-top:18px; line-height:1.65;}
+.lead strong{color:var(--accent-light);}
+p{margin-top:14px;}
+p:first-child{margin-top:0;}
+.accent{color:var(--accent-light);}
+.muted{color:var(--text-muted);}
+.dim{color:var(--text-dim);}
+.mt-s{margin-top:10px;} .mt{margin-top:20px;} .mt-l{margin-top:34px;}
+.num-huge{
+  font-family:var(--font-display); font-weight:900; line-height:.9; letter-spacing:-2px;
+  font-size:clamp(52px,9vw,120px);
+  background:linear-gradient(180deg,var(--accent-light) 0%,var(--accent) 55%,var(--accent-deep) 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  text-shadow:0 4px 30px var(--accent-glow);
+}
+.kicker{font-family:var(--font-display); font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--accent); font-size:13px;}
+
+/* badges */
+.badges{position:absolute; top:clamp(20px,4vh,42px); left:0; right:0; display:flex; justify-content:space-between; padding:0 clamp(24px,5vw,80px); pointer-events:none; z-index:3; gap:12px; flex-wrap:wrap;}
+.badge{
+  font-family:var(--font-display); font-size:12px; font-weight:700; letter-spacing:.5px;
+  padding:8px 16px; border-radius:40px; background:rgba(232,146,26,.08);
+  border:1px solid var(--border-accent); color:var(--accent-light);
+  box-shadow:0 0 24px var(--accent-glow); backdrop-filter:blur(4px);
+}
+.badge.plain{background:rgba(255,255,255,.03); border-color:var(--border-strong); color:var(--text-muted); box-shadow:none;}
+
+/* ===== stat grids ===== */
+.stat-row{display:flex; flex-wrap:wrap; gap:14px; margin-top:34px;}
+.stat{flex:1 1 140px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px 18px;}
+.stat .n{font-family:var(--font-display); font-weight:900; font-size:clamp(26px,3.4vw,40px); color:var(--accent-light); line-height:1;}
+.stat .l{margin-top:8px; font-size:13px; color:var(--text-muted); line-height:1.4;}
+
+.stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:34px;}
+.stat-grid .cell{background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-md); padding:22px 18px; text-align:center; transition:.25s;}
+.stat-grid .cell:hover{background:var(--bg-card-hover); border-color:var(--border-accent);}
+.stat-grid .cell .n{font-family:var(--font-display); font-weight:900; font-size:clamp(28px,3.6vw,46px); color:var(--accent-light); line-height:1;}
+.stat-grid .cell .l{margin-top:8px; font-size:13px; color:var(--text-muted); line-height:1.4;}
+
+/* ===== compare ===== */
+.compare{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:34px;}
+.col{border-radius:var(--radius-lg); padding:26px; border:1px solid var(--border);}
+.col h4{font-family:var(--font-display); font-weight:800; font-size:19px; margin-bottom:16px; display:flex; align-items:center; gap:8px;}
+.col ul{list-style:none;}
+.col li{position:relative; padding:9px 0 9px 26px; font-size:15px; line-height:1.5; border-bottom:1px solid rgba(255,255,255,.04);}
+.col li:last-child{border-bottom:none;}
+.col li::before{position:absolute; left:0; top:9px;}
+.col-bad{background:linear-gradient(160deg,rgba(255,77,77,.06),transparent); border-color:rgba(255,77,77,.22);}
+.col-bad h4{color:#ff7a7a;}
+.col-bad li::before{content:'✕'; color:var(--danger); font-size:13px;}
+.col-good{background:linear-gradient(160deg,rgba(232,146,26,.09),transparent); border-color:var(--border-accent-strong); box-shadow:var(--shadow-glow);}
+.col-good h4{color:var(--accent-light);}
+.col-good li::before{content:'✦'; color:var(--accent);}
+
+/* ===== list-num ===== */
+.listnum{display:grid; grid-template-columns:auto 1fr; gap:clamp(24px,5vw,60px); align-items:center;}
+.listnum .n{font-family:var(--font-display); font-weight:900; font-size:clamp(90px,16vw,220px); line-height:.8; color:transparent; -webkit-text-stroke:2px var(--accent); text-shadow:0 0 60px var(--accent-glow);}
+.listnum .body h2{font-family:var(--font-display); font-weight:800; font-size:clamp(24px,3.6vw,42px); line-height:1.05; letter-spacing:-.5px;}
+.listnum .body p{font-size:clamp(15px,1.7vw,19px); color:var(--text-muted); margin-top:18px; max-width:640px;}
+
+/* ===== cards ===== */
+.cards{display:grid; gap:18px; margin-top:34px;}
+.cards.c3{grid-template-columns:repeat(3,1fr);}
+.cards.c2{grid-template-columns:repeat(2,1fr);}
+.cards.c4{grid-template-columns:repeat(4,1fr);}
+.card{background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px; transition:.25s;}
+.card:hover{background:var(--bg-card-hover); border-color:var(--border-accent); transform:translateY(-3px);}
+.card .ic{font-size:30px; margin-bottom:14px; display:block;}
+.card h4{font-family:var(--font-display); font-weight:700; font-size:18px; margin-bottom:8px; color:var(--text);}
+.card p{font-size:14.5px; color:var(--text-muted); line-height:1.55; margin-top:0;}
+.card p strong{color:var(--accent-light);}
+
+/* ===== module ===== */
+.module{background:linear-gradient(155deg,var(--bg-card),var(--bg-soft)); border:1px solid var(--border-strong); border-radius:var(--radius-lg); padding:clamp(26px,4vw,46px); position:relative; overflow:hidden;}
+.module::before{content:''; position:absolute; top:-40px; right:-40px; width:200px; height:200px; background:radial-gradient(circle,var(--accent-glow),transparent 70%); pointer-events:none;}
+.module .mhead{display:flex; align-items:center; gap:18px; margin-bottom:22px;}
+.module .mnum{font-family:var(--font-display); font-weight:900; font-size:clamp(30px,4vw,52px); color:transparent; -webkit-text-stroke:1.5px var(--accent); line-height:1;}
+.module .mtitle{font-family:var(--font-display); font-weight:800; font-size:clamp(20px,2.8vw,34px); line-height:1.05; letter-spacing:-.5px;}
+.module .mtitle .ic{margin-right:6px;}
+.module ul{list-style:none; margin:0;}
+.module li{position:relative; padding:9px 0 9px 26px; font-size:15.5px; line-height:1.55; color:var(--text); border-bottom:1px solid rgba(255,255,255,.04);}
+.module li::before{content:'→'; position:absolute; left:0; top:9px; color:var(--accent); font-weight:700;}
+.module li strong{color:var(--accent-light);}
+.result{margin-top:20px; padding:18px 20px; border:1px solid var(--border-accent-strong); border-radius:var(--radius-md); background:rgba(232,146,26,.06);}
+.result .rl{font-family:var(--font-display); font-weight:800; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:6px;}
+.result p{margin:0; font-size:15px; line-height:1.55;}
+.note{margin-top:16px; font-size:14px; color:var(--text-muted); font-style:italic;}
+.note strong{color:var(--accent-light); font-style:normal;}
+
+/* ===== agents ===== */
+.agent-list{display:grid; gap:14px; margin-top:30px;}
+.agent-row{display:flex; gap:18px; align-items:flex-start; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px 22px; transition:.25s;}
+.agent-row:hover{border-color:var(--border-accent); background:var(--bg-card-hover);}
+.agent-row .ic{font-size:26px; line-height:1; flex-shrink:0;}
+.agent-row .txt h4{font-family:var(--font-display); font-weight:700; font-size:18px; color:var(--accent-light); margin-bottom:4px;}
+.agent-row .txt p{font-size:14.5px; color:var(--text-muted); margin:0; line-height:1.5;}
+.agent-deep{background:linear-gradient(155deg,var(--bg-card),var(--bg-soft)); border:1px solid var(--border-strong); border-radius:var(--radius-lg); padding:clamp(26px,4vw,44px);}
+.agent-deep .ah{display:flex; align-items:center; gap:16px; margin-bottom:18px;}
+.agent-deep .ah .ic{font-size:40px;}
+.agent-deep .ah h3{font-family:var(--font-display); font-weight:800; font-size:clamp(22px,3vw,34px); color:var(--accent-light); line-height:1.05;}
+.agent-deep ul{list-style:none; margin:16px 0;}
+.agent-deep li{position:relative; padding:7px 0 7px 24px; font-size:15.5px; line-height:1.5;}
+.agent-deep li::before{content:'◆'; position:absolute; left:0; top:8px; color:var(--accent); font-size:11px;}
+.out{margin-top:18px; font-size:16px; padding-top:16px; border-top:1px solid var(--border);}
+.out strong{color:var(--accent-light);}
+
+/* ===== chips grid ===== */
+.chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:30px;}
+.chip{background:var(--bg-card); border:1px solid var(--border-strong); border-radius:40px; padding:9px 18px; font-size:14px; color:var(--text-muted); transition:.2s;}
+.chip:hover{border-color:var(--border-accent); color:var(--accent-light);}
+
+/* ===== feature ===== */
+.feature-box{background:linear-gradient(155deg,var(--bg-card),var(--bg-soft)); border:1px solid var(--border-strong); border-radius:var(--radius-lg); padding:clamp(28px,5vw,56px); margin-top:26px;}
+
+/* ===== pricing ===== */
+.pricing{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:32px; align-items:start;}
+.plan{background:var(--bg-card); border:1px solid var(--border-strong); border-radius:var(--radius-lg); padding:28px 24px; position:relative; display:flex; flex-direction:column; transition:.25s;}
+.plan:hover{border-color:var(--border-accent);}
+.plan.feat{border-color:var(--border-accent-strong); box-shadow:var(--shadow-glow); background:linear-gradient(160deg,rgba(232,146,26,.08),var(--bg-card));}
+.plan .tag{position:absolute; top:-13px; left:50%; transform:translateX(-50%); font-family:var(--font-display); font-weight:800; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; padding:6px 16px; border-radius:40px; background:linear-gradient(135deg,var(--accent),var(--accent-deep)); color:#1a0f00; white-space:nowrap; box-shadow:0 6px 20px var(--accent-glow-strong);}
+.plan .pname{font-family:var(--font-display); font-weight:800; font-size:22px; letter-spacing:1px; margin-bottom:6px;}
+.plan .psub{font-size:13.5px; color:var(--text-muted); margin-bottom:18px; min-height:38px;}
+.plan .price{font-family:var(--font-display); font-weight:900; font-size:clamp(34px,4.5vw,54px); color:var(--accent-light); line-height:1;}
+.plan .price .old{display:block; font-size:20px; color:var(--text-dim); text-decoration:line-through; font-weight:600; margin-bottom:4px; -webkit-text-fill-color:var(--text-dim);}
+.plan .save{display:inline-block; margin-top:10px; font-size:13px; font-weight:700; color:var(--accent); padding:4px 12px; border:1px solid var(--border-accent); border-radius:30px;}
+.plan ul{list-style:none; margin:18px 0 0;}
+.plan li{position:relative; padding:8px 0 8px 24px; font-size:14px; line-height:1.5; color:var(--text); border-bottom:1px solid rgba(255,255,255,.04);}
+.plan li::before{content:'✓'; position:absolute; left:0; top:8px; color:var(--accent); font-weight:800;}
+.plan li strong{color:var(--accent-light);}
+.plan .inc{font-size:13px; color:var(--text-muted); font-style:italic; margin:14px 0 4px;}
+
+/* price table */
+.ptable{width:100%; border-collapse:collapse; margin-top:30px; font-size:16px;}
+.ptable th,.ptable td{padding:16px 18px; text-align:left; border-bottom:1px solid var(--border);}
+.ptable th{font-family:var(--font-display); font-weight:700; color:var(--text-muted); font-size:13px; text-transform:uppercase; letter-spacing:1px;}
+.ptable .old{text-decoration:line-through; color:var(--text-dim);}
+.ptable .new{font-family:var(--font-display); font-weight:900; font-size:22px; color:var(--accent-light);}
+.ptable .save{color:var(--accent); font-weight:700;}
+.ptable tr.hot td{background:rgba(232,146,26,.06);}
+
+/* ===== objection ===== */
+.obj-head{font-family:var(--font-display); font-weight:800; font-size:clamp(24px,3.6vw,44px); line-height:1.08; letter-spacing:-.5px; display:flex; gap:14px; align-items:flex-start;}
+.obj-head .em{font-size:.9em;}
+.obj-body{font-size:clamp(16px,1.8vw,20px); color:var(--text-muted); line-height:1.65; margin-top:22px; max-width:820px;}
+.cta-line{margin-top:26px; display:inline-flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:700; font-size:clamp(15px,1.8vw,20px); color:var(--accent-light); padding:14px 26px; border-radius:14px; background:rgba(232,146,26,.08); border:1px solid var(--border-accent-strong); box-shadow:var(--shadow-glow);}
+
+/* steps */
+.steps{display:grid; gap:16px; margin-top:30px;}
+.step{display:flex; gap:20px; align-items:flex-start; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-md); padding:22px 24px;}
+.step .sn{font-family:var(--font-display); font-weight:900; font-size:34px; color:transparent; -webkit-text-stroke:1.5px var(--accent); flex-shrink:0; line-height:1;}
+.step .st h4{font-family:var(--font-display); font-weight:700; font-size:19px; margin-bottom:6px;}
+.step .st p{font-size:15px; color:var(--text-muted); margin:0; line-height:1.55;}
+
+/* math */
+.math-vs{display:flex; align-items:center; justify-content:center; gap:clamp(18px,4vw,50px); flex-wrap:wrap; margin-top:36px;}
+.math-vs .m{text-align:center; flex:1 1 220px; max-width:340px;}
+.math-vs .m .top{font-family:var(--font-display); font-weight:900; font-size:clamp(22px,3vw,34px); color:var(--accent-light); line-height:1.1;}
+.math-vs .m .bot{margin-top:10px; font-size:14.5px; color:var(--text-muted);}
+.math-vs .vs{font-family:var(--font-display); font-weight:900; font-size:clamp(28px,4vw,50px); color:var(--accent); text-shadow:0 0 30px var(--accent-glow);}
+
+/* twoside */
+.two{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:32px;}
+.side{border-radius:var(--radius-lg); padding:28px; border:1px solid var(--border-strong); background:var(--bg-card);}
+.side.warm{border-color:var(--border-accent-strong); background:linear-gradient(160deg,rgba(232,146,26,.08),var(--bg-card)); box-shadow:var(--shadow-glow);}
+.side h4{font-family:var(--font-display); font-weight:800; font-size:20px; margin-bottom:12px;}
+.side.warm h4{color:var(--accent-light);}
+.side p{font-size:15px; color:var(--text-muted); margin-top:0; line-height:1.6;}
+
+/* quote/manifest */
+.manifest{font-family:var(--font-display); font-weight:700; font-size:clamp(24px,4vw,48px); line-height:1.25; letter-spacing:-.5px; max-width:940px; margin:0 auto;}
+.manifest .accent{color:var(--accent-light);}
+.manifest::before{content:'“'; font-size:2em; color:var(--accent); line-height:0; display:block; margin-bottom:.2em;}
+
+/* faq */
+.faq{margin-top:30px; text-align:left; max-width:760px; margin-left:auto; margin-right:auto;}
+.faq details{border:1px solid var(--border); border-radius:var(--radius-md); margin-bottom:10px; background:var(--bg-card); overflow:hidden;}
+.faq summary{cursor:pointer; padding:16px 20px; font-family:var(--font-display); font-weight:600; font-size:16px; list-style:none; display:flex; justify-content:space-between; gap:12px; align-items:center;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:'+'; color:var(--accent); font-size:22px; font-weight:400; transition:.2s;}
+.faq details[open] summary::after{transform:rotate(45deg);}
+.faq details p{padding:0 20px 18px; color:var(--text-muted); font-size:15px; margin:0;}
+
+/* zone chips row (map overview legend) */
+.zones{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:26px;}
+.zone-card{border-radius:var(--radius-md); padding:20px; border:1px solid var(--border-strong); background:var(--bg-card);}
+.zone-card .zt{font-family:var(--font-display); font-weight:800; font-size:17px; display:flex; align-items:center; gap:9px;}
+.zone-card .zs{font-size:13px; color:var(--text-muted); margin-top:6px;}
+.zone-card.z1{border-color:rgba(199,112,16,.5);} .zone-card.z1 .zt{color:var(--accent-deep);}
+.zone-card.z2{border-color:rgba(232,146,26,.5);} .zone-card.z2 .zt{color:var(--accent);}
+.zone-card.z3{border-color:rgba(233,182,70,.5);} .zone-card.z3 .zt{color:var(--accent-gold);}
+
+/* ===== interactive map ===== */
+.mapwrap{position:relative; margin-top:20px;}
+.mapstage{position:relative; width:100%;}
+.map-svg{width:100%; height:auto; overflow:visible;}
+.station{cursor:pointer;}
+.station circle{transition:.3s;}
+.station .ring{fill:var(--bg-card); stroke-width:3;}
+.station.on .ring{fill:var(--sc);}
+.station .glow{opacity:0; transition:.4s;}
+.station.on .glow{opacity:.35;}
+.station text{font-family:var(--font-display); font-weight:800; fill:var(--text); font-size:15px; text-anchor:middle; dominant-baseline:central; pointer-events:none;}
+.station.on text{fill:#1a0f00;}
+.st-tip{position:absolute; transform:translate(-50%,-120%); background:var(--bg-elev); border:1px solid var(--border-accent-strong); border-radius:12px; padding:12px 14px; width:230px; opacity:0; visibility:hidden; transition:.2s; z-index:5; box-shadow:var(--shadow-card); pointer-events:none;}
+.station-node:hover .st-tip, .station-node.open .st-tip{opacity:1; visibility:visible; transform:translate(-50%,-130%);}
+.st-tip .t{font-family:var(--font-display); font-weight:700; font-size:13.5px; color:var(--text); margin-bottom:5px;}
+.st-tip .r{font-size:12.5px; color:var(--accent-light);}
+.station-node{position:absolute; width:34px; height:34px; transform:translate(-50%,-50%); border-radius:50%; cursor:pointer;}
+.maphint{text-align:center; font-size:13px; color:var(--text-dim); margin-top:14px;}
+
+/* zone detail (13-15) */
+.zone-detail{display:grid; gap:14px; margin-top:26px;}
+.zst{display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:baseline; background:var(--bg-card); border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:var(--radius-md); padding:18px 22px;}
+.zst .code{font-family:var(--font-display); font-weight:900; font-size:26px; color:var(--accent-light); line-height:1;}
+.zst .zc h4{font-family:var(--font-display); font-weight:700; font-size:17.5px; margin-bottom:5px;}
+.zst .zc .arr{font-size:14.5px; color:var(--text-muted);}
+.zst .zc .arr::before{content:'→ '; color:var(--accent);}
+.zone-sum{margin-top:20px; font-size:15px; color:var(--accent-light); font-style:italic; text-align:center; padding:14px; border:1px dashed var(--border-accent); border-radius:var(--radius-md);}
+
+/* bonus */
+.bonus-list{display:grid; gap:14px; margin-top:30px;}
+.bonus-item{display:flex; gap:16px; align-items:flex-start; background:linear-gradient(160deg,rgba(232,146,26,.06),var(--bg-card)); border:1px solid var(--border-accent); border-radius:var(--radius-md); padding:20px 22px;}
+.bonus-item .ic{font-size:26px; flex-shrink:0;}
+.bonus-item p{margin:0; font-size:15.5px; line-height:1.55;}
+.placeholder-tag{display:inline-block; margin-top:16px; font-size:12px; color:var(--text-dim); border:1px dashed var(--border-strong); border-radius:8px; padding:5px 12px;}
+
+.deadline{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:32px;}
+.dl{border-radius:var(--radius-lg); padding:26px; border:1px solid var(--border-strong); background:var(--bg-card);}
+.dl.now{border-color:var(--border-accent-strong); background:linear-gradient(160deg,rgba(232,146,26,.09),var(--bg-card)); box-shadow:var(--shadow-glow);}
+.dl .dlh{font-family:var(--font-display); font-weight:800; font-size:16px; letter-spacing:1px; text-transform:uppercase; margin-bottom:12px;}
+.dl.now .dlh{color:var(--accent-light);} .dl .dlh{color:var(--text-muted);}
+.dl p{font-size:15px; margin-top:6px; color:var(--text);}
+
+.list-plain{list-style:none; margin-top:26px; text-align:left; max-width:760px; margin-left:auto; margin-right:auto;}
+.list-plain li{position:relative; padding:11px 0 11px 30px; font-size:16px; line-height:1.55; border-bottom:1px solid var(--border);}
+.list-plain li::before{content:'✦'; position:absolute; left:0; top:11px; color:var(--accent);}
+.list-plain li strong{color:var(--accent-light);}
+
+.pill-note{display:inline-block; margin-top:22px; padding:9px 18px; border-radius:40px; background:rgba(232,146,26,.08); border:1px solid var(--border-accent); font-family:var(--font-display); font-weight:700; font-size:13px; color:var(--accent-light);}
+
+/* ===== NAV UI ===== */
+.progress{position:fixed; top:0; left:0; height:3px; background:var(--accent); box-shadow:0 0 12px var(--accent); z-index:40; transition:width .4s ease; width:0;}
+.counter{position:fixed; bottom:18px; left:22px; z-index:40; font-family:var(--font-display); font-weight:700; font-size:14px; color:var(--text-muted); letter-spacing:1px;}
+.counter b{color:var(--accent-light);}
+.navbtn{position:fixed; bottom:16px; z-index:41; width:46px; height:46px; border-radius:50%; border:1px solid var(--border-strong); background:rgba(13,13,18,.85); color:var(--text); font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:.2s; backdrop-filter:blur(6px);}
+.navbtn:hover{border-color:var(--border-accent-strong); color:var(--accent-light); box-shadow:0 0 20px var(--accent-glow);}
+.navbtn:active{transform:scale(.92);}
+.navbtn.prev{right:78px;} .navbtn.next{right:22px;}
+.navbtn:disabled{opacity:.3; cursor:default; box-shadow:none; border-color:var(--border);}
+.dots{position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:40; display:flex; flex-direction:column; gap:6px; max-height:80vh; overflow:auto; padding:6px 2px;}
+.dots::-webkit-scrollbar{display:none;}
+.dot{width:8px; height:8px; border-radius:50%; background:var(--border-strong); border:none; cursor:pointer; padding:0; transition:.2s; flex-shrink:0;}
+.dot:hover{background:var(--text-muted);}
+.dot.active{background:var(--accent); box-shadow:0 0 8px var(--accent); transform:scale(1.35);}
+.hint{position:fixed; bottom:18px; left:50%; transform:translateX(-50%); z-index:40; font-size:12px; color:var(--text-dim); pointer-events:none; transition:opacity .5s; text-align:center;}
+.tapzone{position:fixed; top:0; bottom:64px; width:22%; z-index:30; cursor:pointer;}
+.tapzone.l{left:0;} .tapzone.r{right:0;}
+
+/* mobile */
+@media(max-width:860px){
+  .stat-grid{grid-template-columns:repeat(2,1fr);}
+  .compare,.cards.c3,.cards.c2,.cards.c4,.pricing,.zones,.two,.deadline{grid-template-columns:1fr;}
+  .listnum{grid-template-columns:1fr; gap:8px; text-align:left;}
+  .listnum .n{font-size:88px;}
+  .math-vs{flex-direction:column;}
+  .dots{display:none;}
+  .badges{position:static; padding:0; margin-bottom:20px; justify-content:flex-start;}
+  .slide{padding:64px 20px 80px;}
+  .zst{grid-template-columns:1fr; gap:8px;}
+  .ptable{font-size:13px;} .ptable th,.ptable td{padding:11px 8px;}
+  .ptable .new{font-size:17px;}
+  .tapzone{width:16%;}
+  .agent-deep .ah{flex-wrap:wrap;}
+}
+@media(max-width:480px){
+  .stat-grid{grid-template-columns:repeat(2,1fr); gap:10px;}
+  .navbtn{width:42px; height:42px;}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="deck" id="deck">
+<!-- 01 HERO -->
+<section class="slide">
+  <div class="badges">
+    <span class="badge">Ведёт Роман Прокопов ✦ Поток 2.0</span>
+    <span class="badge plain">Осталось 28 из 30 мест</span>
+  </div>
+  <div class="slide-inner">
+    <div class="eyebrow">AI Контент-Конвейер · вебинар</div>
+    <h1 class="big">AI Контент-<br>Конвейер 2.0</h1>
+    <p class="lead">Ты построишь систему, которая выдаёт <strong>от 30 единиц контента в месяц</strong> — без команды маркетологов, сценаристов и даже без присутствия в кадре.</p>
+    <p class="lead"><strong>80% рутины делает AI.</strong> Твоё участие — только на двух этапах: загрузить данные и утвердить сценарии. По системе из <strong>27 AI-агентов</strong>, уже доработанной по итогам первого потока.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="n">12</div><div class="l">модулей программы</div></div>
+      <div class="stat"><div class="n">27</div><div class="l">AI-агентов с промптами</div></div>
+      <div class="stat"><div class="n">30+</div><div class="l">единиц контента в месяц</div></div>
+      <div class="stat"><div class="n">2–3</div><div class="l">часа твоего времени в неделю</div></div>
+    </div>
+    <p class="note">💬 4 недели лично со мной — разборы, созвоны, настройка под твой бизнес.</p>
+  </div>
+</section>
+
+<!-- 02 БОЛЬ -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h2 class="big">Почему после других<br>AI-курсов остаётся пустота</h2>
+    <p class="lead">Тебе показывают, как писать сценарии через нейросеть — но <strong>не твоим голосом</strong>. AI выдаёт ровный, стерильный текст «умного ассистента». Личность теряется, уникальности ноль.</p>
+    <p class="lead">Тебя учат шаблонным хукам, которые <strong>никто не досматривает</strong>. Они работали в 2023-м. Сейчас зритель пролистывает их за полсекунды.</p>
+    <p class="lead">Тебе дают отдельные инструменты <strong>без единой системы</strong>. Сценарий отдельно, съёмка отдельно, монтаж отдельно. Каждый ролик — как первый.</p>
+    <p class="lead">Итог знаком каждому: контент вроде есть, а <strong>подписчиков, охватов, продаж и клиентов — ноль</strong>.</p>
+  </div>
+</section>
+
+<!-- 03 КОНТРАСТ -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow">Другой подход</div>
+    <h2 class="big">Конвейер построен наоборот</h2>
+    <div class="compare">
+      <div class="col col-bad">
+        <h4>Как обычно ❌</h4>
+        <ul>
+          <li>Садишься с ChatGPT — получаешь шаблонный сценарий</li>
+          <li>Текст звучит как робот, а не как ты</li>
+          <li>Хуки из туториалов 2023-го, аудитория пролистывает</li>
+          <li>Видео из пресетов — стыдно закрепить в профиле</li>
+          <li>Каждый Reels с нуля: снова тема, снова текст</li>
+          <li>10–15 часов в неделю, результат непредсказуем</li>
+        </ul>
+      </div>
+      <div class="col col-good">
+        <h4>Как в конвейере ✦</h4>
+        <ul>
+          <li>Система знает твой бизнес и аудиторию как ты сам</li>
+          <li>Сценарии звучат <strong>твоим голосом</strong> — ToV в агенте</li>
+          <li>Хуки под нишу и уровень осознанности клиента</li>
+          <li>Видео уровня продакшн: 3 способа съёмки + AI-монтаж</li>
+          <li>Всё в цепочку: брифинг → идеи → сценарии → видео → автопубликации</li>
+          <li><strong>2–3 часа в неделю</strong>, 30+ единиц контента в месяц</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 ЧТО ПОЛУЧАЕШЬ -->
+<section class="slide divider">
+  <div class="slide-inner" style="max-width:var(--max-w)">
+    <h2 class="big">Что конкретно ты получаешь</h2>
+    <div class="stat-grid" style="grid-template-columns:repeat(4,1fr)">
+      <div class="cell"><div class="n">12</div><div class="l">модулей — от настройки до автопубликаций</div></div>
+      <div class="cell"><div class="n">5</div><div class="l">основных AI-агентов под твой бизнес</div></div>
+      <div class="cell"><div class="n">22</div><div class="l">доп. агента для узких задач</div></div>
+      <div class="cell"><div class="n">15+</div><div class="l">готовых промптов на все этапы</div></div>
+      <div class="cell"><div class="n">5</div><div class="l">документов-фундаментов бизнеса</div></div>
+      <div class="cell"><div class="n">7</div><div class="l">форматов контента из каждой идеи</div></div>
+      <div class="cell"><div class="n">30+</div><div class="l">единиц контента в месяц</div></div>
+      <div class="cell"><div class="n">∞</div><div class="l">система остаётся с тобой навсегда</div></div>
+      <div class="cell"><div class="n">1 год</div><div class="l">доступа к материалам и обновлениям</div></div>
+      <div class="cell"><div class="n">0%</div><div class="l">оплата частями — до 6 платежей</div></div>
+      <div class="cell"><div class="n">4 нед</div><div class="l">личного сопровождения (Премиум/ВИП)</div></div>
+      <div class="cell"><div class="n">✦</div><div class="l">отбор в фокус-группу потока 2.0</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 «У ТЕБЯ ПОЛУЧИТСЯ» -->
+<section class="slide center">
+  <div class="slide-inner">
+    <div class="eyebrow">Снятие страхов входа</div>
+    <h1 class="big">Почему у тебя получится — даже если ты никогда серьёзно не работал с AI</h1>
+    <p class="lead">Программа построена для тех, кто заходит в AI по-настоящему впервые. Ничего из этого иметь на старте <strong>не нужно:</strong></p>
+    <p class="pill-note">Дальше — 5 барьеров, которых у тебя нет 👇</p>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="listnum">
+      <div class="n">01</div>
+      <div class="body">
+        <h2>Не нужен технический бэкграунд</h2>
+        <p>Всё построено на готовых промптах и пошаговых инструкциях. Ты не программируешь и ничего не настраиваешь вручную — открываешь Claude и следуешь системе. Умеешь пользоваться браузером — этого достаточно, чтобы стартовать.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="listnum">
+      <div class="n">02</div>
+      <div class="body">
+        <h2>Не нужна команда и большой бюджет</h2>
+        <p>Никаких маркетологов за $800–1500, сценаристов и монтажёров в штате. 80% рутины делает AI. Инструменты — около <strong>$44/мес</strong> за весь стек (Claude, Perplexity, ChatGPT; Parallel AI и NotebookLM — бесплатно). Без слива денег «на пробу».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="listnum">
+      <div class="n">03</div>
+      <div class="body">
+        <h2>Не нужно много времени</h2>
+        <p><strong>2–3 часа в неделю</strong> — программа реально совмещается с работой, бизнесом и семьёй. Систему ты строишь один раз, дальше она работает на тебя. Все уроки в записи — учишься в своём темпе.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="listnum">
+      <div class="n">04</div>
+      <div class="body">
+        <h2>Неважно, есть ли у тебя аудитория</h2>
+        <p>Система стартует с нуля: исследование рынка → оффер → путь клиента → контент. База подписчиков не нужна — ты создаёшь её самой системой. Есть аудитория — растёшь быстрее. Нет — начинаешь с фундамента.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="listnum">
+      <div class="n">05</div>
+      <div class="body">
+        <h2>Неважно, если ты уже пробовал AI и разочаровался</h2>
+        <p>Если после ChatGPT осталась «вода без конкретики» — здесь мы соберём всё в систему. AI перестаёт додумывать и галлюцинировать, потому что каждый агент опирается на твои данные: <strong>ДНК бизнеса, исследование ЦА, твой Tone of Voice</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 ДЛЯ КОГО -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow">Для кого</div>
+    <h2 class="big">Для кого эта фокус-группа</h2>
+    <div class="cards c3">
+      <div class="card">
+        <span class="ic">🎯</span>
+        <p><strong>Для экспертов и наставников,</strong> у кого есть продукт, но нет системного потока клиентов через контент. Хочешь публиковать регулярно и по стратегии, а не «от идеи к идее».</p>
+      </div>
+      <div class="card">
+        <span class="ic">🏢</span>
+        <p><strong>Для предпринимателей и SMM,</strong> кому нужен постоянный поток контента без раздувания команды. 30+ единиц в месяц силами системы, а не пятерых подрядчиков.</p>
+      </div>
+      <div class="card">
+        <span class="ic">💡</span>
+        <p><strong>Для тех, кто начинает с нуля или не хочет быть в кадре.</strong> Собираешь контент-машину до первых охватов. Не хочешь снимать себя — AI-аватар и генерация закрывают это полностью.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 MAP OVERVIEW -->
+<section class="slide narrow">
+  <div class="slide-inner" style="max-width:var(--max-w)">
+    <div class="eyebrow">Карта пути</div>
+    <h2 class="big">Твой маршрут: 12 станций, 3 зоны</h2>
+    <div class="mapwrap">
+      <div class="mapstage" data-anim>
+        <svg class="map-svg" viewBox="0 0 1100 335" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <path class="route-base" d="M50,225 C100,225 100,110 150,110 C200,110 200,225 250,225 C300,225 300,110 350,110 C400,110 400,225 450,225 C500,225 500,110 550,110 C600,110 600,225 650,225 C700,225 700,110 750,110 C800,110 800,225 850,225 C900,225 900,110 950,110 C1000,110 1000,225 1050,225" fill="none" stroke="#22222e" stroke-width="6" stroke-linecap="round"/>
+          <path class="route-fill" d="M50,225 C100,225 100,110 150,110 C200,110 200,225 250,225 C300,225 300,110 350,110 C400,110 400,225 450,225 C500,225 500,110 550,110 C600,110 600,225 650,225 C700,225 700,110 750,110 C800,110 800,225 850,225 C900,225 900,110 950,110 C1000,110 1000,225 1050,225" fill="none" stroke="url(#rg)" stroke-width="6" stroke-linecap="round"/>
+          <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c77010"/><stop offset="0.5" stop-color="#e8921a"/><stop offset="1" stop-color="#e9b646"/></linearGradient></defs>
+          <!-- stations -->
+          <g class="station" style="--sc:#c77010"><circle class="glow" cx="50" cy="225" r="20" fill="#c77010"/><circle class="ring" cx="50" cy="225" r="18" stroke="#c77010"/><text x="50" y="225">00</text></g>
+          <g class="station" style="--sc:#c77010"><circle class="glow" cx="150" cy="110" r="20" fill="#c77010"/><circle class="ring" cx="150" cy="110" r="18" stroke="#c77010"/><text x="150" y="110">01</text></g>
+          <g class="station" style="--sc:#c77010"><circle class="glow" cx="250" cy="225" r="20" fill="#c77010"/><circle class="ring" cx="250" cy="225" r="18" stroke="#c77010"/><text x="250" y="225">02</text></g>
+          <g class="station" style="--sc:#c77010"><circle class="glow" cx="350" cy="110" r="20" fill="#c77010"/><circle class="ring" cx="350" cy="110" r="18" stroke="#c77010"/><text x="350" y="110">03</text></g>
+          <g class="station" style="--sc:#c77010"><circle class="glow" cx="450" cy="225" r="20" fill="#c77010"/><circle class="ring" cx="450" cy="225" r="18" stroke="#c77010"/><text x="450" y="225">04</text></g>
+          <g class="station" style="--sc:#e8921a"><circle class="glow" cx="550" cy="110" r="20" fill="#e8921a"/><circle class="ring" cx="550" cy="110" r="18" stroke="#e8921a"/><text x="550" y="110">05</text></g>
+          <g class="station" style="--sc:#e8921a"><circle class="glow" cx="650" cy="225" r="20" fill="#e8921a"/><circle class="ring" cx="650" cy="225" r="18" stroke="#e8921a"/><text x="650" y="225">06</text></g>
+          <g class="station" style="--sc:#e8921a"><circle class="glow" cx="750" cy="110" r="20" fill="#e8921a"/><circle class="ring" cx="750" cy="110" r="18" stroke="#e8921a"/><text x="750" y="110">07</text></g>
+          <g class="station" style="--sc:#e9b646"><circle class="glow" cx="850" cy="225" r="20" fill="#e9b646"/><circle class="ring" cx="850" cy="225" r="18" stroke="#e9b646"/><text x="850" y="225">08</text></g>
+          <g class="station" style="--sc:#e9b646"><circle class="glow" cx="950" cy="110" r="20" fill="#e9b646"/><circle class="ring" cx="950" cy="110" r="18" stroke="#e9b646"/><text x="950" y="110">09</text></g>
+          <g class="station" style="--sc:#e9b646"><circle class="glow" cx="1050" cy="225" r="21" fill="#e9b646"/><circle class="ring" cx="1050" cy="225" r="18" stroke="#e9b646"/><text x="1050" y="225" style="font-size:13px">🎁</text></g>
+        </svg>
+        <!-- tooltip overlay nodes -->
+        <div class="station-node" style="left:4.5%;top:67.2%"><div class="st-tip"><div class="t">00 · Установка</div><div class="r">= 5 специалистов под твой бизнес</div></div></div>
+        <div class="station-node" style="left:13.6%;top:32.8%"><div class="st-tip"><div class="t">01 · ДНК бизнеса</div><div class="r">= агенты видят бизнес твоими глазами</div></div></div>
+        <div class="station-node" style="left:22.7%;top:67.2%"><div class="st-tip"><div class="t">02 · Исследование рынка и ЦА</div><div class="r">= боли и язык клиента по данным</div></div></div>
+        <div class="station-node" style="left:31.8%;top:32.8%"><div class="st-tip"><div class="t">03 · Оффер по Хормози</div><div class="r">= ядро всей системы</div></div></div>
+        <div class="station-node" style="left:40.9%;top:67.2%"><div class="st-tip"><div class="t">04 · Путь клиента + ToV</div><div class="r">= попадание в сегмент твоим голосом</div></div></div>
+        <div class="station-node" style="left:50%;top:32.8%"><div class="st-tip"><div class="t">05 · Контент-план и сценарии</div><div class="r">= готовые сценарии, а не «о чём снять»</div></div></div>
+        <div class="station-node" style="left:59.1%;top:67.2%"><div class="st-tip"><div class="t">06 · Производство видео</div><div class="r">= контент даже без тебя в кадре</div></div></div>
+        <div class="station-node" style="left:68.2%;top:32.8%"><div class="st-tip"><div class="t">07 · Монтаж</div><div class="r">= готовые ролики с субтитрами</div></div></div>
+        <div class="station-node" style="left:77.3%;top:67.2%"><div class="st-tip"><div class="t">08 · Автопубликации</div><div class="r">= публикуется 24/7 без тебя</div></div></div>
+        <div class="station-node" style="left:86.4%;top:32.8%"><div class="st-tip"><div class="t">09 · Аналитика и масштаб</div><div class="r">= усиливаешь рабочее, режешь лишнее</div></div></div>
+        <div class="station-node" style="left:95.5%;top:67.2%"><div class="st-tip"><div class="t">🎁 Бонус · Маховик</div><div class="r">= система разгоняется сама 🏁</div></div></div>
+      </div>
+      <div class="maphint">Наведи на станцию — раскроется результат. Каждая опирается на предыдущую.</div>
+    </div>
+    <div class="zones">
+      <div class="zone-card z1"><div class="zt">🟠 Зона 1 · Фундамент</div><div class="zs">станции 00–04</div></div>
+      <div class="zone-card z2"><div class="zt">🟡 Зона 2 · Производство</div><div class="zs">станции 05–07</div></div>
+      <div class="zone-card z3"><div class="zt">🟢 Зона 3 · Автопилот</div><div class="zs">станции 08–09 + Бонус</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 ZONE 1 -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="zone-card z1" style="display:inline-block;margin-bottom:6px"><div class="zt">🟠 Зона 1 · Фундамент</div></div>
+    <div class="zone-detail">
+      <div class="zst"><div class="code">00</div><div class="zc"><h4>Установка</h4><div class="muted">Настраиваешь пространство и ставишь 5 агентов.</div><div class="arr">вместо пустого чата — 5 специалистов под твой бизнес</div></div></div>
+      <div class="zst"><div class="code">01</div><div class="zc"><h4>ДНК бизнеса</h4><div class="muted">Собираешь документ, который знает твой проект изнутри.</div><div class="arr">каждый следующий агент видит бизнес твоими глазами</div></div></div>
+      <div class="zst"><div class="code">02</div><div class="zc"><h4>Исследование рынка и ЦА</h4><div class="muted">Deep Research в 3 нейросети + кастдевы.</div><div class="arr">знаешь боли и язык клиента по данным, а не «на глаз»</div></div></div>
+      <div class="zst"><div class="code">03</div><div class="zc"><h4>Оффер по Хормози</h4><div class="muted">Собираешь предложение, от которого сложно отказаться.</div><div class="arr">ядро всей системы</div></div></div>
+      <div class="zst"><div class="code">04</div><div class="zc"><h4>Путь клиента и Tone of Voice</h4><div class="muted">6 уровней осознанности + твой стиль.</div><div class="arr">точное попадание в каждый сегмент, твоим голосом</div></div></div>
+    </div>
+    <div class="zone-sum">Итог зоны: 5 документов-фундаментов и 5 обученных агентов.</div>
+  </div>
+</section>
+
+<!-- 14 ZONE 2 -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="zone-card z2" style="display:inline-block;margin-bottom:6px"><div class="zt">🟡 Зона 2 · Производство</div></div>
+    <div class="zone-detail">
+      <div class="zst" style="border-left-color:var(--accent)"><div class="code">05</div><div class="zc"><h4>Контент-план и сценарии</h4><div class="muted">10–30 сценариев в нужной пропорции.</div><div class="arr">готовые сценарии, а не «о чём бы снять»</div></div></div>
+      <div class="zst" style="border-left-color:var(--accent)"><div class="code">06</div><div class="zc"><h4>Производство видео</h4><div class="muted">Живая съёмка / AI-аватар (HeyGen) / AI-генерация.</div><div class="arr">контент выходит, даже если ты не хочешь быть в кадре</div></div></div>
+      <div class="zst" style="border-left-color:var(--accent)"><div class="code">07</div><div class="zc"><h4>Монтаж</h4><div class="muted">На AI или монтажёру по готовому ТЗ (Claude собирает ТЗ в 2 клика).</div><div class="arr">готовые ролики с субтитрами, музыкой и эффектами</div></div></div>
+    </div>
+    <div class="zone-sum">Итог зоны: конвейер, который стабильно выдаёт готовый контент.</div>
+  </div>
+</section>
+
+<!-- 15 ZONE 3 -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="zone-card z3" style="display:inline-block;margin-bottom:6px"><div class="zt">🟢 Зона 3 · Автопилот</div></div>
+    <div class="zone-detail">
+      <div class="zst" style="border-left-color:var(--accent-gold)"><div class="code">08</div><div class="zc"><h4>Автопубликации</h4><div class="muted">Настраиваешь выход контента по расписанию.</div><div class="arr">публикуется без твоего участия, 24/7</div></div></div>
+      <div class="zst" style="border-left-color:var(--accent-gold)"><div class="code">09</div><div class="zc"><h4>Аналитика и масштабирование</h4><div class="muted">Видишь, что работает, и усиливаешь.</div><div class="arr">рабочие форматы размножаешь, лишнее отключаешь</div></div></div>
+      <div class="zst" style="border-left-color:var(--accent-gold)"><div class="code">🎁</div><div class="zc"><h4>Бонус · Маховик</h4><div class="muted">С каждым циклом стоимость клиента падает.</div><div class="arr">система разгоняется сама 🏁</div></div></div>
+    </div>
+    <div class="zone-sum">Итог зоны: система на автопилоте.</div>
+  </div>
+</section>
+
+<!-- 16 ПРОГРАММА -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <div class="kicker">Программа</div>
+    <h1 class="big" style="margin-top:14px">AI Контент-<br>Конвейер 2.0</h1>
+    <p class="lead">Каждый модуль опирается на результат предыдущего. На выходе — не набор уроков, а работающая контент-машина.</p>
+  </div>
+</section>
+
+<!-- 17 M0 -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="module">
+      <div class="mhead"><div class="mnum">00</div><div class="mtitle"><span class="ic">⚙️</span>Установка рабочего пространства и 5 агентов</div></div>
+      <ul>
+        <li>Регистрация в Perplexity, Parallel AI, ChatGPT, NotebookLM, Claude</li>
+        <li>Настройка Wisper Flow — управляешь системой голосом</li>
+        <li>Установка 5 основных AI-агентов в Claude</li>
+      </ul>
+      <div class="result"><div class="rl">✦ Результат</div><p>Открываешь Claude — и вместо пустого чата видишь пять специалистов, каждый заточен под твой бизнес.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 18 M1 -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="module">
+      <div class="mhead"><div class="mnum">01</div><div class="mtitle"><span class="ic">🧬</span>ДНК твоего бизнеса</div></div>
+      <ul>
+        <li>Открываешь Claude с готовым промптом для брифинга</li>
+        <li>Отвечаешь на вопросы: кто ты, что продаёшь, кому, чем отличаешься</li>
+        <li>Загружаешь материалы: лид-магниты, сайты, кастдевы, отзывы</li>
+        <li>Claude сам уточняет недостающее и собирает документ «ДНК Эксперта»</li>
+      </ul>
+      <div class="result"><div class="rl">✦ Результат</div><p>Всё, что ты знаешь о бизнесе — в одном структурированном документе. Без него модули 2–8 работают вхолостую. С ним — каждый шаг бьёт в цель.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 19 M2 -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="module">
+      <div class="mhead"><div class="mnum">02</div><div class="mtitle"><span class="ic">🔬</span>Глубокое AI-исследование рынка и ЦА</div></div>
+      <ul>
+        <li><strong>Ветка 1 — Deep Research:</strong> 3 промпта × 3 нейросети = 9–15 документов → выжимка в NotebookLM</li>
+        <li><strong>Ветка 2 — кастдевы:</strong> Claude собирает анкету → интервью 5–10 клиентов → анализ транскриптов</li>
+        <li>Выбор: 1 продукт, 1 аудитория, 1 боль — туда, где больше денег</li>
+      </ul>
+      <div class="result"><div class="rl">✦ Результат</div><p>Документ, где чёрным по белому — что болит, что мотивирует, какими словами клиент описывает проблему. Не одна нейросеть решила — три источника подтвердили.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 20 M3 -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="module">
+      <div class="mhead"><div class="mnum">03</div><div class="mtitle"><span class="ic">💰</span>Мастер офферов по методологии Хормози</div></div>
+      <ul>
+        <li>Загружаешь ДНК ЦА + интервью + описание продукта</li>
+        <li>Промпт «Агрессивный оффер» — видишь предел возможного</li>
+        <li>Промпт «Адаптация оффера» — Claude приземляет его под твою реальность</li>
+      </ul>
+      <div class="result"><div class="rl">✦ Результат</div><p>Предложение, от которого сложно отказаться. Не текст копирайтера, а математически выверенный оффер по методологии на $100 млн. Это ядро всей системы.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 21 M4 -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="module">
+      <div class="mhead"><div class="mnum">04</div><div class="mtitle"><span class="ic">🗺️</span>Путь клиента — карта на 6 уровней</div></div>
+      <ul>
+        <li>Агент разворачивает путь от «не знаю о проблеме» до «готов купить»</li>
+        <li>Для каждого уровня: что клиент думает, его возражения, какие смыслы посеять, какой контент транслировать</li>
+        <li>Календарный план прогрева + готовые логические цепочки</li>
+      </ul>
+      <div class="result"><div class="rl">✦ Результат</div><p>Ты видишь путь клиента как на рентгене. Контент-система дальше генерирует темы с опорой именно на эту карту.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 22 M5 -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="module">
+      <div class="mhead"><div class="mnum">05</div><div class="mtitle"><span class="ic">🎙️</span>Tone of Voice — твой уникальный стиль</div></div>
+      <ul>
+        <li>Загружаешь свои разговоры, видео, подкасты, транскрипты</li>
+        <li>Агент извлекает: характерные обороты, личный словарь, ритм речи, эмоциональные паттерны</li>
+        <li>Фиксирует конструкции, которые тебе использовать нельзя</li>
+      </ul>
+      <div class="result"><div class="rl">✦ Результат</div><p>Любой текст приводится к твоей манере за один запрос. AI пишет не «за тебя», а <strong>как ты</strong>.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 23 M6 -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="module">
+      <div class="mhead"><div class="mnum">06</div><div class="mtitle"><span class="ic">📝</span>Контент-план и сценарии</div></div>
+      <ul>
+        <li>Формируешь план: количество, форматы, пропорция (вирусный / прогревающий / продающий)</li>
+        <li>3 способа генерации: вирусные форматы под твои смыслы / уникальные темы от агента / перепаковка готового материала в 7 форматов</li>
+      </ul>
+      <div class="result"><div class="rl">✦ Результат</div><p>Персонализированный контент-план и 10–30 готовых сценариев — на данных твоей аудитории, твоём оффере, твоей карте прогрева. И все звучат твоим голосом.</p></div>
+      <div class="note">🎁 Бонус модуля: <strong>мой авторский скилл по созданию сильных лид-магнитов.</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- 24 M7 -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="module">
+      <div class="mhead"><div class="mnum">07</div><div class="mtitle"><span class="ic">🎥</span>Производство контента — снимаешь или генерируешь</div></div>
+      <ul>
+        <li><strong>Способ 1 — живое видео:</strong> снимаешь по готовому сценарию + рекомендации по свету и оборудованию</li>
+        <li><strong>Способ 2 — AI-аватар (HeyGen):</strong> цифровая копия говорит твоим голосом — без камеры</li>
+        <li><strong>Способ 3 — AI-генерация:</strong> мини-сериалы, анимации, визуал вообще без съёмки</li>
+      </ul>
+      <div class="result"><div class="rl">✦ Результат</div><p>Конвейер видеоконтента. Три способа — один результат: готовые исходники на монтаж.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 25 M8 -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="module">
+      <div class="mhead"><div class="mnum">08</div><div class="mtitle"><span class="ic">🎬</span>Монтаж — делегируй или автоматизируй</div></div>
+      <ul>
+        <li><strong>Вариант А — монтажёр:</strong> находишь по готовой воронке найма, Claude генерирует ТЗ в 2 клика</li>
+        <li><strong>Вариант Б — AI-монтаж:</strong> субтитры, музыка, базовые эффекты автоматически — без навыков</li>
+      </ul>
+      <div class="result"><div class="rl">✦ Результат</div><p>Готовые видео — смонтированные, с субтитрами и музыкой. Дальше уходят в автопубликацию.</p></div>
+      <div class="note">🤝 Программа соединяет участников с проверенными монтажёрами.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 26 M9 -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="module">
+      <div class="mhead"><div class="mnum">09</div><div class="mtitle"><span class="ic">📊</span>Аналитика и масштабирование</div></div>
+      <ul>
+        <li>Аналитика в документе: просмотры, удержание, подписчики</li>
+        <li>Еженедельный/ежемесячный срез по форматам и темам</li>
+        <li>Claude говорит, почему одно видео принесло клиентов, а другое — ноль</li>
+      </ul>
+      <div class="result"><div class="rl">✦ Результат</div><p>Ты перестаёшь гадать и начинаешь управлять. Рабочие форматы размножаешь, нерабочие убираешь. С каждым циклом стоимость клиента падает.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 27 M бонус -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="module">
+      <div class="mhead"><div class="mnum" style="-webkit-text-stroke-color:var(--accent-gold)">🎁</div><div class="mtitle"><span class="ic">📅</span>Автопубликации</div></div>
+      <ul>
+        <li>Настройка сервиса автопубликаций</li>
+        <li>Подключение всех соцсетей</li>
+        <li>Загрузка готовых видео, фото, каруселей + расписание</li>
+        <li>Отметка каждой единицы контента после выхода</li>
+      </ul>
+      <div class="result"><div class="rl">✦ Результат</div><p>Настраиваешь один раз — и контент выходит сам на все платформы 24/7. Больше не лежит мёртвым грузом.</p></div>
+      <div class="note">📋 Готовый список рекомендованных сервисов автопубликаций — в материалах.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 28 BRIDGE 27 агентов -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h1 class="big">Сердце системы —<br>27 AI-агентов</h1>
+    <p class="lead">Это не «промпты, которые надо докручивать». Это обученные специалисты: один знает твоего клиента лучше тебя, другой строит офферы на $100 млн, третий видит путь клиента на 6 уровней.</p>
+    <p class="pill-note">Дальше — знакомься с ними по очереди 👇</p>
+  </div>
+</section>
+
+<!-- 29 5 агентов -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="eyebrow">Костяк системы</div>
+    <h2 class="big">5 основных AI-агентов</h2>
+    <div class="agent-list">
+      <div class="agent-row"><span class="ic">🔬</span><div class="txt"><h4>ДНК Целевой Аудитории</h4><p>Знает клиента по 5 частям: боли, барьеры, ожидания, триггеры к покупке.</p></div></div>
+      <div class="agent-row"><span class="ic">💰</span><div class="txt"><h4>Мастер Офферов</h4><p>Обучен на «$100M Offers» Хормози, 8 готовых офферов в базе.</p></div></div>
+      <div class="agent-row"><span class="ic">🗺️</span><div class="txt"><h4>Путь Клиента</h4><p>6 уровней осознанности + стратегия прогрева с календарём.</p></div></div>
+      <div class="agent-row"><span class="ic">🎙️</span><div class="txt"><h4>Tone of Voice</h4><p>Извлекает твой стиль из любого транскрипта.</p></div></div>
+      <div class="agent-row"><span class="ic">⚡</span><div class="txt"><h4>Контент-Система</h4><p>Превращает любой материал в 7 форматов контента.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 30 agent ДНК ЦА -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="agent-deep">
+      <div class="ah"><span class="ic">🔬</span><h3>Агент «ДНК Целевой Аудитории»</h3></div>
+      <p class="muted">Глубокий анализ клиента по 5 частям:</p>
+      <ul>
+        <li>Идентичность и ценности</li>
+        <li>Боли и страхи</li>
+        <li>Барьеры и прошлый опыт</li>
+        <li>Ожидания и трансформация</li>
+        <li>Триггеры к решению</li>
+      </ul>
+      <div class="out">Знает когнитивные искажения, скрытые мотивы и эмоциональные триггеры к покупке. <strong>После него ты понимаешь клиента лучше, чем он сам.</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- 31 agent Офферы -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="agent-deep">
+      <div class="ah"><span class="ic">💰</span><h3>Агент «Мастер Офферов»</h3></div>
+      <ul>
+        <li>Обучен на книге «$100M Offers» Алекса Хормози</li>
+        <li>Анализирует продукт и находит «голодный рынок»</li>
+        <li>Формулирует уравнение ценности по 4 факторам</li>
+        <li>В базе: 8 готовых офферов + шаблон продающей страницы из 12 блоков</li>
+      </ul>
+      <div class="out"><strong>На выходе:</strong> предложение, от которого невозможно отказаться.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 32 BRIDGE 22 агента -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h1 class="big">И это ещё не всё:<br>22 агента сверху</h1>
+    <p class="lead">Пять основных агентов — это костяк. Но по ходу программы подключаются ещё <strong>22 дополнительных агента</strong> для узких задач: лид-магниты, прогревы, заголовки, разборы конкурентов и не только.</p>
+  </div>
+</section>
+
+<!-- 33 agent Путь клиента -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="agent-deep">
+      <div class="ah"><span class="ic">🗺️</span><h3>Агент «Путь Клиента»</h3></div>
+      <p class="muted">Разворачивает путь от «не знаю о проблеме» до «готов купить» — 6 уровней осознанности. Для каждого уровня:</p>
+      <ul>
+        <li>Что клиент думает прямо сейчас</li>
+        <li>Какие иллюзии и возражения в голове</li>
+        <li>Какие смыслы нужно посеять</li>
+        <li>К какому выводу он должен прийти</li>
+        <li>Какой контент транслировать</li>
+      </ul>
+      <div class="out"><strong>На выходе:</strong> стратегия прогрева с календарным планом.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 34 agent ToV -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="agent-deep">
+      <div class="ah"><span class="ic">🎙️</span><h3>Агент «Tone of Voice»</h3></div>
+      <p class="muted">Извлекает твой стиль из любого транскрипта и создаёт руководство:</p>
+      <ul>
+        <li>Обороты и личный словарь</li>
+        <li>Ритм и темп речи</li>
+        <li>Эмоциональные паттерны</li>
+        <li>Запрещённые конструкции</li>
+      </ul>
+      <div class="out"><strong>На выходе:</strong> любой текст создаёт эмоциональную связь с клиентом — потому что звучит как ты.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 35 agent Контент-Система -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="agent-deep">
+      <div class="ah"><span class="ic">⚡</span><h3>Агент «Контент-Система»</h3></div>
+      <p class="muted">Превращает любой исходный материал в <strong>7 форматов:</strong> Reels, карусели, посты, статьи, сторис, цитаты.</p>
+      <p class="muted">Внутри — полная система принципов контента, который взрывается в соцсетях: хуки, скрипты, storytelling, контент-планы.</p>
+      <div class="out"><strong>На выходе:</strong> из одной идеи — неделя контента.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 36 grid 22 агента -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="eyebrow">Расширение</div>
+    <h2 class="big">+ 22 дополнительных агента для узких задач</h2>
+    <p class="lead">Подключаются по ходу программы там, где нужны. Каждый — готовый, с промптом. Тебе не нужно придумывать — нужно выбрать под задачу.</p>
+    <div class="chips">
+      <span class="chip">Лид-магниты</span><span class="chip">Заголовки</span><span class="chip">Прогревы</span>
+      <span class="chip">Разбор конкурентов</span><span class="chip">Упаковка</span><span class="chip">Скрипты продаж</span>
+      <span class="chip">Хуки</span><span class="chip">Storytelling</span><span class="chip">Контент-планы</span>
+      <span class="chip">Воронки</span><span class="chip">Сторис</span><span class="chip">Карусели</span>
+      <span class="chip">Статьи</span><span class="chip">Рассылки</span><span class="chip">Тренды</span>
+      <span class="chip">Юнит-экономика</span><span class="chip">Каналы трафика</span><span class="chip">Оффер-тесты</span>
+      <span class="chip">Реклама</span><span class="chip">Отзывы</span><span class="chip">Питчи</span><span class="chip">…и другие</span>
+    </div>
+  </div>
+</section>
+
+<!-- 37 grid промпты+документы -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="eyebrow">Готовая база</div>
+    <h2 class="big">15+ промптов и 5 документов-фундаментов</h2>
+    <div class="cards c2" style="margin-top:26px">
+      <div class="card"><span class="ic">🧾</span><h4>15+ готовых промптов</h4><p>На все этапы — от брифинга до ТЗ монтажёру.</p></div>
+      <div class="card"><span class="ic">📚</span><h4>5 документов-фундаментов</h4><p>ДНК бизнеса, ДНК ЦА, оффер, путь клиента, Tone of Voice.</p></div>
+    </div>
+    <p class="lead">Всё связано в цепочку: результат одного модуля — вход для следующего.</p>
+    <p class="pill-note">Я не оставляю тебя один на один с материалами — я учу ими пользоваться.</p>
+  </div>
+</section>
+
+<!-- 38 feature Deep Research -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="eyebrow">Аналитическая мощь</div>
+    <h2 class="big">Мощности, которых нет у 99% конкурентов</h2>
+    <div class="feature-box">
+      <p>Ты запускаешь исследование не в одну нейросеть, а параллельно в <strong>три: Perplexity, Parallel AI, ChatGPT</strong> (по желанию — Gemini и Claude).</p>
+      <p class="lead">Пересечение нескольких источников убирает додумывание и «галлюцинации» — все выводы основаны на данных, а не на фантазии одной модели.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 39 feature Wisper Flow -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="eyebrow">Управление голосом</div>
+    <h2 class="big">Управляешь системой голосом</h2>
+    <div class="feature-box">
+      <p><strong>Wisper Flow</strong> убирает клавиатуру — ты диктуешь задачи агентам голосом, где угодно. Начитал сценарий на ходу — HeyGen наложил его на твой аватар.</p>
+      <p class="lead">Система подстраивается под твой ритм, а не наоборот.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 40 обновления -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h1 class="big">Программа живёт<br>и обновляется 🔒</h1>
+    <p class="lead">Нейросети и агенты обновляются постоянно. Все <strong>обновления агентов и новые агенты — бесплатно в течение года</strong>. Ты всегда получаешь актуальные версии без доплат.</p>
+  </div>
+</section>
+
+<!-- 41 4 недели со мной -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="eyebrow">Не самостоятельный курс</div>
+    <h2 class="big">Это 4 недели лично со мной</h2>
+    <div class="cards c2" style="margin-top:26px">
+      <div class="card"><span class="ic">🎯</span><h4>Сопровождаю на каждом этапе</h4><p>От настройки агентов до 30+ единиц контента в месяц. Ни один шаг без разбора.</p></div>
+      <div class="card"><span class="ic">📞</span><h4>Несколько ZOOM в неделю</h4><p>Встречи группы + личные разборы твоих документов, сценариев и контента.</p></div>
+      <div class="card"><span class="ic">🧠</span><h4>Мой опыт — в твой проект</h4><p>Годы практики с AI направлены на твою нишу. Никаких шаблонов.</p></div>
+      <div class="card"><span class="ic">🚀</span><h4>4 недели → готовая система</h4><p>12 модулей — и дальше система работает без меня.</p></div>
+    </div>
+    <p class="note">(Формат сопровождения зависит от тарифа — см. блок «Тарифы».)</p>
+  </div>
+</section>
+
+<!-- 42 расходы -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="eyebrow">Прозрачно</div>
+    <h2 class="big">Честно о расходах на инструменты</h2>
+    <p class="lead">Никаких скрытых подписок «сюрпризом». Весь стек — прозрачно:</p>
+    <div class="cards c4" style="margin-top:22px">
+      <div class="card"><h4>Claude Pro</h4><p><strong>$20/мес</strong> — основной инструмент</p></div>
+      <div class="card"><h4>Perplexity</h4><p><strong>$18/мес</strong></p></div>
+      <div class="card"><h4>ChatGPT</h4><p><strong>$6/мес</strong></p></div>
+      <div class="card"><h4>Parallel AI · NotebookLM</h4><p><strong>бесплатно</strong></p></div>
+    </div>
+    <p class="lead"><strong>Итого ≈ $44/мес</strong> за инструменты, которые заменяют команду маркетологов. Многие агенты работают и на бесплатных лимитах — платное подключаешь, когда система уже приносит клиентов.</p>
+  </div>
+</section>
+
+<!-- 43 без воды -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h2 class="big">Никакой воды — только система</h2>
+    <div class="math-vs" style="margin-top:30px">
+      <div class="m"><div class="top" style="font-size:clamp(48px,7vw,90px)">0%</div><div class="bot">воды</div></div>
+      <div class="vs">·</div>
+      <div class="m"><div class="top" style="font-size:clamp(48px,7vw,90px)">100%</div><div class="bot">практики</div></div>
+    </div>
+    <p class="lead">Здесь нет уроков «на 30 минут ни о чём». Каждый модуль = конкретный результат в виде документа или готового контента. Ты не «смотришь», ты <strong>собираешь работающую машину</strong> — шаг за шагом.</p>
+  </div>
+</section>
+
+<!-- 44 обновления бесплатно -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="eyebrow">Почему бесплатно</div>
+    <h2 class="big">Почему обновления агентов — бесплатно целый год</h2>
+    <p class="lead">Потому что AI-инструменты меняются каждый месяц, и моя цель — чтобы у тебя всегда была рабочая версия системы.</p>
+    <div class="steps">
+      <div class="step"><div class="sn">1</div><div class="st"><h4>Тестирую каждое обновление</h4><p>Нейросети и агенты — на своих проектах.</p></div></div>
+      <div class="step"><div class="sn">2</div><div class="st"><h4>Проверяю на своих деньгах</h4><p>Своим временем и реальными задачами.</p></div></div>
+      <div class="step"><div class="sn">3</div><div class="st"><h4>И только потом отдаю тебе</h4><p>Уже отработанное — не «пойди протестируй новую модель».</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 45 поддержка -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="eyebrow">Поддержка</div>
+    <h2 class="big">Ты не останешься один на один с системой</h2>
+    <div class="two">
+      <div class="side"><h4>Групповой формат (Премиум)</h4><p>Групповые созвоны со мной, разборы на общих встречах, закрытый Telegram-чат.</p></div>
+      <div class="side warm"><h4>Личное сопровождение (ВИП)</h4><p>Я лично проверяю твои документы, сценарии и контент, адаптирую систему под твой запрос и отвечаю в личном чате.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 46 не кнопки -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h2 class="big">Я не учу нажимать кнопки</h2>
+    <p class="lead">Кнопки в интерфейсах меняются с каждым обновлением. Я учу глубже: <strong>логике системы</strong> — какую последовательность держать, чтобы получать стабильный результат под любую задачу.</p>
+    <p class="lead">Иначе ты не сможешь адаптировать контент под конкретный бизнес, нишу или проект. А смысл системы именно в этом.</p>
+  </div>
+</section>
+
+<!-- 47 позиционирование 2.0 -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <div class="kicker">Поток 2.0</div>
+    <h1 class="big" style="margin-top:14px">Это уже второй поток.<br>И это твоё преимущество</h1>
+    <p class="lead">Первый поток фокус-группы прошёл. Я собрал обратную связь реальных участников — и <strong>усилил агентов и инструменты под их запросы</strong>, а не только под свои задачи, как задумывал изначально.</p>
+    <p class="lead">Теперь у меня есть чёткое понимание, как передать эту систему так, чтобы ты дошёл до результата. Все узкие места первого потока — закрыты.</p>
+    <p class="pill-note">Ты заходишь не в эксперимент. Ты заходишь в отлаженную систему.</p>
+  </div>
+</section>
+
+<!-- 48 манифест -->
+<section class="slide center">
+  <div class="slide-inner">
+    <div class="manifest">AI не заменяет тебя — он умножает твою экспертизу на <span class="accent">×10</span>. Ты вкладываешь смыслы и опыт. AI строит из этого систему.</div>
+  </div>
+</section>
+
+<!-- 49 ТАРИФЫ -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h1 class="big">Тарифы</h1>
+    <p class="lead">Три формата участия — от «пройти самому» до «пройти лично со мной».</p>
+  </div>
+</section>
+
+<!-- 50 три тарифа состав -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow" style="text-align:left">Выбери формат</div>
+    <h2 class="big">Выбери свой формат</h2>
+    <div class="pricing">
+      <div class="plan">
+        <div class="pname">◾ Стандарт</div>
+        <div class="psub">Для тех, кто хочет пройти систему самостоятельно.</div>
+        <ul>
+          <li>Все 12 модулей программы в записи</li>
+          <li>27 AI-агентов (5 основных + 22 доп.)</li>
+          <li>15+ промптов + 5 документов-фундаментов</li>
+          <li>Доступ к материалам — 1 год</li>
+          <li>Обновления агентов — бесплатно 1 год</li>
+        </ul>
+      </div>
+      <div class="plan feat">
+        <div class="tag">⭐ Популярный</div>
+        <div class="pname">◾ Премиум</div>
+        <div class="psub">Всё из «Стандарта» +</div>
+        <ul>
+          <li><strong>4 групповых созвона со мной</strong></li>
+          <li><strong>Проверка твоих домашних заданий</strong></li>
+          <li>Разбор твоих документов и сценариев на встречах</li>
+          <li>Закрытый Telegram-чат группы</li>
+          <!-- доп. перк -->
+        </ul>
+      </div>
+      <div class="plan">
+        <div class="pname">◾ ВИП</div>
+        <div class="psub">Всё из «Премиума» +</div>
+        <ul>
+          <li><strong>2 личных созвона со мной</strong> — адаптирую систему под твой запрос</li>
+          <li><strong>Личный чат со мной</strong></li>
+          <li>Приоритетная обратная связь по документам и контенту</li>
+          <!-- доп. перк -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 51 групповой формат -->
+<section class="slide center">
+  <div class="slide-inner">
+    <div class="eyebrow">Премиум</div>
+    <h2 class="big">Что такое групповой формат</h2>
+    <p class="lead">Мы строим систему вместе, в прямом контакте. Это не «купил уроки и разбирайся сам» — на групповых созвонах я разбираю ваши документы, сценарии и контент и подсказываю под нишу каждого.</p>
+    <p class="lead"><strong>+ я показываю новые агенты, приёмы и обновления инструментов</strong> — конкретная выжимка, а не «пустые разговоры».</p>
+  </div>
+</section>
+
+<!-- 52 ВИП формат -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h2 class="big">Что такое ВИП-формат</h2>
+    <p class="lead">Дважды за поток — личные созвоны со мной один на один. Я погружаюсь в твой проект, адаптирую систему под твой запрос и помогаю с нестандартными ситуациями. Плюс личный чат — пишешь напрямую мне.</p>
+    <p class="pill-note">Это максимум вовлечения, который я могу дать.</p>
+  </div>
+</section>
+
+<!-- 53 сколько стоит -->
+<section class="slide center">
+  <div class="slide-inner">
+    <h1 class="big">Как думаешь,<br>сколько это стоит?</h1>
+    <p class="lead">Система из 27 агентов + личное сопровождение + документы-фундаменты твоего бизнеса.</p>
+    <p class="pill-note">Пиши свой вариант в чат 👇</p>
+  </div>
+</section>
+
+<!-- 54 полная стоимость -->
+<section class="slide center">
+  <div class="slide-inner">
+    <div class="eyebrow">Полная стоимость</div>
+    <h2 class="big">Полная стоимость</h2>
+    <div class="pricing" style="margin-top:34px">
+      <div class="plan"><div class="pname">Стандарт</div><div class="price"><span class="old">$464</span></div></div>
+      <div class="plan feat"><div class="pname">Премиум</div><div class="price"><span class="old">$812</span></div></div>
+      <div class="plan"><div class="pname">ВИП</div><div class="price"><span class="old">$1435</span></div></div>
+    </div>
+    <p class="lead">Это честная цена за систему, которая заменяет команду маркетологов и работает на тебя 24/7.</p>
+  </div>
+</section>
+
+<!-- 55 почему спец-цена -->
+<section class="slide center">
+  <div class="slide-inner">
+    <div class="eyebrow">Для эфира</div>
+    <h2 class="big">Почему для эфира — специальная цена</h2>
+    <p class="lead">Я хочу, чтобы систему внедряли те, кто реально будет ею пользоваться и доведёт до результата. Поэтому для участников эфира я делаю специальную цену — чтобы ты мог начать здесь и сейчас, а не «когда-нибудь потом».</p>
+  </div>
+</section>
+
+<!-- 56 спец-цена разделитель -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h1 class="big">Для участников эфира —<br>специальная цена</h1>
+  </div>
+</section>
+
+<!-- 57 спец-цена таблица -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow" style="text-align:left">Цена для эфира</div>
+    <h2 class="big">Цена для участников эфира</h2>
+    <div class="pricing">
+      <div class="plan">
+        <div class="pname">Стандарт</div>
+        <div class="price"><span class="old">$464</span>$320</div>
+        <span class="save">выгода −$144</span>
+      </div>
+      <div class="plan feat">
+        <div class="tag">⭐ Популярный</div>
+        <div class="pname">Премиум</div>
+        <div class="price"><span class="old">$812</span>$560</div>
+        <span class="save">выгода −$252</span>
+      </div>
+      <div class="plan">
+        <div class="pname">ВИП</div>
+        <div class="price"><span class="old">$1435</span>$990</div>
+        <span class="save">выгода −$445</span>
+      </div>
+    </div>
+    <p class="note" style="text-align:center">Осталось 28 из 30 мест. Отбор — по анкете.</p>
+  </div>
+</section>
+
+<!-- 58 рассрочка -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h2 class="big">Оплата частями</h2>
+    <div class="math-vs" style="margin-top:20px"><div class="m"><div class="top" style="font-size:clamp(52px,8vw,100px)">0%</div><div class="bot">до 6 платежей, без переплат</div></div></div>
+    <div class="pricing" style="margin-top:30px">
+      <div class="plan"><div class="pname">Стандарт</div><div class="price" style="font-size:clamp(26px,3.4vw,38px)">от $54<span style="font-size:.5em;color:var(--text-muted)">/мес</span></div></div>
+      <div class="plan feat"><div class="pname">Премиум</div><div class="price" style="font-size:clamp(26px,3.4vw,38px)">от $94<span style="font-size:.5em;color:var(--text-muted)">/мес</span></div></div>
+      <div class="plan"><div class="pname">ВИП</div><div class="price" style="font-size:clamp(26px,3.4vw,38px)">от $165<span style="font-size:.5em;color:var(--text-muted)">/мес</span></div></div>
+    </div>
+    <p class="note" style="text-align:center">mono · Privat24 · А-Банк</p>
+  </div>
+</section>
+
+<!-- 59 менеджер -->
+<section class="slide center">
+  <div class="slide-inner">
+    <div class="eyebrow">Есть решение</div>
+    <h2 class="big">Нет удобного способа оплаты?</h2>
+    <p class="lead">Оставь на сайте заявку на связь с менеджером — под это будет отдельная кнопка. Менеджер поможет войти в программу и подберёт удобный вариант оплаты.</p>
+  </div>
+</section>
+
+<!-- 60 математика -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h1 class="big">Простая математика</h1>
+    <p class="lead">Маркетолог берёт <strong>$800–1500 в месяц</strong> — и выдаёт шаблонные сценарии, которые не цепляют твою ЦА.</p>
+    <p class="lead"><strong>Один месяц маркетолога дороже любого тарифа.</strong> А система остаётся с тобой навсегда и работает без зарплаты.</p>
+    <div class="math-vs">
+      <div class="m"><div class="top">$800–1500/мес</div><div class="bot">× команда, каждый месяц</div></div>
+      <div class="vs">VS</div>
+      <div class="m"><div class="top">один раз</div><div class="bot">= система на 27 агентов навсегда</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 61 окупаемость -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="eyebrow">Окупаемость</div>
+    <h2 class="big">Это не долгая перспектива</h2>
+    <div class="steps">
+      <div class="step"><div class="sn">1</div><div class="st"><h4>Входишь сейчас</h4><p>От $320 (Стандарт), при рассрочке — от $54 на старте.</p></div></div>
+      <div class="step"><div class="sn">2</div><div class="st"><h4>Отбиваешь за 1–2 клиента</h4><p>Один клиент, привлечённый через систему, окупает участие. А контент работает на тебя каждый день.</p></div></div>
+      <div class="step"><div class="sn">3</div><div class="st"><h4>Работаешь в плюс</h4><p>Система остаётся навсегда. Стоимость клиента падает с каждым циклом.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 62 маховик -->
+<section class="slide center">
+  <div class="slide-inner">
+    <div class="eyebrow">Маховик</div>
+    <h2 class="big">Система разгоняется сама</h2>
+    <p class="lead">Первые циклы ты запускаешь конвейер и смотришь, что работает. Дальше — усиливаешь рабочие форматы, отключаешь лишнее.</p>
+    <p class="lead">Контент, который приносит подписчиков и клиентов → маховик, который <strong>с каждым месяцем крутится дешевле и быстрее.</strong></p>
+    <div style="font-size:clamp(48px,9vw,90px);margin-top:20px">🔄 → 🚀</div>
+  </div>
+</section>
+
+<!-- 63 дефицит -->
+<section class="slide center">
+  <div class="slide-inner">
+    <div class="num-huge">28 / 30</div>
+    <h2 class="big" style="margin-top:16px">Осталось 28 мест — но вход по отбору</h2>
+    <p class="lead">Мест всего 30, потому что я работаю с каждым лично. Отбор — по анкете: беру в поток тех, кто действительно готов построить систему за эти 4 недели.</p>
+    <p class="pill-note">Отбор по анкете</p>
+  </div>
+</section>
+
+<!-- 64 бронь -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h2 class="big">Нет полной суммы прямо сейчас?</h2>
+    <p class="lead">Забронируй место предоплатой — она <strong>засчитывается в стоимость</strong> программы. Ты фиксируешь за собой место в фокус-группе по специальной цене до старта.</p>
+    <p class="pill-note">Предоплата = бронь по спец-цене</p>
+  </div>
+</section>
+
+<!-- 65 ещё не всё -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h1 class="big">И это ещё не всё</h1>
+    <p class="lead">🎁 Бонусы за решение сейчас</p>
+  </div>
+</section>
+
+<!-- 66 бонусы -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="eyebrow">Бонусы</div>
+    <h2 class="big">Бонусы для тех, кто входит сейчас</h2>
+    <div class="bonus-list">
+      <div class="bonus-item"><span class="ic">🎁</span><p><strong>Мой авторский скилл по сильным лид-магнитам</strong> — чтобы контент не просто набирал охваты, а собирал базу.</p></div>
+      <div class="bonus-item"><span class="ic">🎁</span><p><strong>Дополнительные промпты Deep Research</strong> по 6 блокам: каналы трафика конкурентов, неочевидные каналы, тренды 2026, юнит-экономика, декомпозиция каналов, контент-стратегия.</p></div>
+      <div class="bonus-item"><span class="ic">🎁</span><p><strong>Упаковка исследования в финальный маркетинговый план.</strong></p></div>
+    </div>
+    <p class="note">Достаётся тем, кто присоединяется или бронирует до конца дня.</p>
+    <span class="placeholder-tag">плейсхолдер — согласовать с Романом</span>
+  </div>
+</section>
+
+<!-- 67 ещё 2 бонуса -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="eyebrow">И ещё</div>
+    <h2 class="big">И ещё 2 бонуса сверху</h2>
+    <div class="bonus-list">
+      <div class="bonus-item"><span class="ic">🎬</span><p><strong>Готовая воронка найма монтажёра</strong> + список AI-инструментов для автомонтажа — чтобы производство не упиралось в тебя.</p></div>
+      <div class="bonus-item"><span class="ic">📅</span><p><strong>Список сервисов автопубликаций</strong> с настройкой под все соцсети — контент выходит сам.</p></div>
+    </div>
+    <span class="placeholder-tag">плейсхолдер — согласовать с Романом</span>
+  </div>
+</section>
+
+<!-- 68 дедлайн -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h2 class="big">Бонусы и цена эфира — только сейчас</h2>
+    <p class="lead">Как только я закрою набор потока — бонусов не будет, а цены вернутся к полным.</p>
+    <div class="deadline">
+      <div class="dl now"><div class="dlh">Сегодня · на эфире</div><p><strong>Спец-цены</strong> $320 / $560 / $990</p><p>+ все бонусы</p></div>
+      <div class="dl"><div class="dlh">Потом · для всех</div><p>Полные цены $464 / $812 / $1435</p><p>без бонусов</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 69 след слайд анкета -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h2 class="big">На следующем слайде ты сможешь пройти отбор</h2>
+    <p class="lead">Я дам ссылку на анкету и бронь. Но на этом эфир не заканчивается: заполняй, бронируй место — и возвращайся, разберём вопросы на Q&A.</p>
+  </div>
+</section>
+
+<!-- 70 как присоединиться -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="eyebrow">Как присоединиться</div>
+    <h2 class="big">Как пройти отбор</h2>
+    <div class="steps">
+      <div class="step"><div class="sn">1</div><div class="st"><h4>Нажми на кнопку</h4><p>Она появится в чате и под видео — попадёшь на сайт с анкетой.</p></div></div>
+      <div class="step"><div class="sn">2</div><div class="st"><h4>Заполни анкету отбора</h4><p>Выбери тариф и удобный способ оплаты или брони.</p></div></div>
+      <div class="step"><div class="sn">3</div><div class="st"><h4>Есть вопросы по оплате?</h4><p>Оставь заявку менеджеру — помогут с рассрочкой и способом оплаты.</p></div></div>
+    </div>
+    <div class="cta-line" style="margin-top:26px">✦ Пройти отбор в «AI Контент-Конвейер 2.0»</div>
+  </div>
+</section>
+
+<!-- 71 два пути -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow" style="text-align:left">Выбор</div>
+    <h2 class="big">Есть два пути. Выбирай свой</h2>
+    <div class="two">
+      <div class="side"><h4>Долгий путь</h4><p>Собирать систему самому — методом проб и ошибок, отдельными инструментами, месяцами. И каждый ролик — как первый.</p></div>
+      <div class="side warm"><h4>Быстрый путь</h4><p>Получить готовую систему из 27 агентов за 4 недели с моим сопровождением — и отбить вложение первыми же клиентами.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 72 да но -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h1 class="big">«Да, я хочу, но…»</h1>
+    <p class="lead">Разберём каждое сомнение честно.</p>
+  </div>
+</section>
+
+<!-- 73 objection -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="obj-head"><span class="em">💸</span><span>«Дорого. Я ещё ничего не заработал на контенте»</span></div>
+    <p class="obj-body">Один месяц маркетолога — $800–1500 за шаблонные сценарии. Здесь ты получаешь систему из 27 агентов от $320 — один раз, навсегда. Один клиент через систему окупает участие.</p>
+    <p class="obj-body">Моя задача — не «продать курс», а довести тебя до работающей контент-машины. И да — есть рассрочка до 6 платежей от $54/мес.</p>
+    <div class="cta-line">→ Переходи на сайт и проходи отбор</div>
+  </div>
+</section>
+
+<!-- 74 objection -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="obj-head"><span class="em">🧩</span><span>«У меня нет технических навыков. Точно не разберусь»</span></div>
+    <p class="obj-body">Программа рассчитана на экспертов и предпринимателей без технического бэкграунда. Всё построено на готовых промптах и пошаговых инструкциях — ты просто следуешь системе.</p>
+    <p class="obj-body">А голосом через Wisper Flow ты вообще управляешь агентами без клавиатуры. Умеешь пользоваться браузером — справишься.</p>
+    <div class="cta-line">→ Переходи на сайт и проходи отбор</div>
+  </div>
+</section>
+
+<!-- 75 objection -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="obj-head"><span class="em">⏰</span><span>«Нет времени — работа, бизнес, всё занято»</span></div>
+    <p class="obj-body">Система строится один раз, а дальше работает на тебя. Твоё вовлечение — 2–3 часа в неделю. Все уроки в записи, смотришь в своём темпе.</p>
+    <p class="obj-body">Если есть время листать чужие Reels — есть время собрать конвейер, который делает твои. Разница в том, что после остаётся система, а не «посмотрел».</p>
+    <div class="cta-line">→ Переходи на сайт и проходи отбор</div>
+  </div>
+</section>
+
+<!-- 76 objection -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="obj-head"><span class="em">😮‍💨</span><span>«Я уже пробовал AI — получил воду без конкретики»</span></div>
+    <p class="obj-body">Потому что ты давал нейросети пустой запрос. Здесь каждый агент опирается на твои данные: ДНК бизнеса, исследование ЦА по трём источникам, твой Tone of Voice. AI перестаёт додумывать — он работает на фактах.</p>
+    <p class="obj-body">Это не разрозненные инструменты, а единая система, где результат одного шага — вход для следующего. И она уже доработана по итогам первого потока.</p>
+    <div class="cta-line">→ Переходи на сайт и проходи отбор</div>
+  </div>
+</section>
+
+<!-- 77 objection -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="obj-head"><span class="em">🔄</span><span>«Приду на следующий поток. Пока не время»</span></div>
+    <p class="obj-body">Следующий поток будет — но дороже и без такого личного вовлечения. Сейчас цена для эфира и мест всего 30.</p>
+    <p class="obj-body">Пока ты ждёшь «удобного момента», конкуренты уже строят контент-системы. «Не время» почти всегда значит «ещё не решил».</p>
+    <div class="cta-line">→ Переходи на сайт и проходи отбор</div>
+  </div>
+</section>
+
+<!-- 78 Q&A -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h1 class="big">Q&amp;A</h1>
+    <p class="lead">Отвечу на все вопросы.</p>
+    <div class="faq">
+      <details><summary>Нужны ли технические навыки?</summary><p>Нет, всё на готовых промптах и пошаговых инструкциях.</p></details>
+      <details><summary>Сколько стоят инструменты?</summary><p>Около $44/мес за весь стек. Многое работает и на бесплатных лимитах.</p></details>
+      <details><summary>Подойдёт без аудитории?</summary><p>Да, система стартует с нуля — ты создаёшь базу самой системой.</p></details>
+      <details><summary>Как быстро результат?</summary><p>Первые модули дают исследование, оффер и контент-план сразу.</p></details>
+      <details><summary>Нужно ли сниматься?</summary><p>Нет, 3 способа производства, включая AI-аватар и генерацию.</p></details>
+      <details><summary>Чем 2.0 отличается от первого потока?</summary><p>Агенты и инструменты доработаны под запросы реальных участников.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 79 эфир к концу -->
+<section class="slide center">
+  <div class="slide-inner">
+    <h2 class="big">Эфир подходит к концу</h2>
+    <p class="lead">А с ним — специальная цена и бонусы.</p>
+    <p class="lead">Ещё не уверен? Пиши вопросы в чат прямо сейчас — это последняя возможность получить ответы от меня на эфире.</p>
+  </div>
+</section>
+
+<!-- 80 неочевидный бонус -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h2 class="big">Ещё один неочевидный бонус 🎁</h2>
+    <p class="lead">Сам факт, что ты досмотрел эфир до конца и разобрался в системе, означает, что ты уже знаешь чуть больше остальных — и за счёт этого уже впереди них.</p>
+  </div>
+</section>
+
+<!-- 81 финальные бонусы -->
+<section class="slide center">
+  <div class="slide-inner">
+    <div class="eyebrow">Спасибо, что был до конца</div>
+    <h2 class="big">🎁 Бонусы для тех, кто был до конца</h2>
+    <ul class="list-plain">
+      <li>🤖 <strong>Стартовый AI-агент</strong> на базе Claude</li>
+      <li>📄 <strong>Пак промптов</strong> для быстрого старта</li>
+      <li>🧭 <strong>Чек-лист запуска</strong> контент-системы</li>
+    </ul>
+    <p class="lead">Сейчас в чате и под видео появится кнопка — нажми, и бот выдаст все бонусы автоматически. Ждать ничего не нужно.</p>
+    <span class="placeholder-tag">плейсхолдер — согласовать с Романом</span>
+  </div>
+</section>
+
+</div>
+
+<div class="tapzone l" id="tapL"></div>
+<div class="tapzone r" id="tapR"></div>
+
+<button class="navbtn prev" id="prevBtn" aria-label="Назад">‹</button>
+<button class="navbtn next" id="nextBtn" aria-label="Вперёд">›</button>
+<div class="counter"><b id="cNow">01</b> / <span id="cTot">81</span></div>
+<div class="dots" id="dots"></div>
+<div class="hint" id="hint">← → · пробел · клик по краям · свайп</div>
+
+<script>
+(function(){
+  const deck=document.getElementById('deck');
+  const slides=[...deck.querySelectorAll('.slide')];
+  const total=slides.length;
+  let cur=0, locked=false;
+  const progress=document.getElementById('progress');
+  const cNow=document.getElementById('cNow'), cTot=document.getElementById('cTot');
+  const prevBtn=document.getElementById('prevBtn'), nextBtn=document.getElementById('nextBtn');
+  const dotsWrap=document.getElementById('dots'), hint=document.getElementById('hint');
+  cTot.textContent=String(total).padStart(2,'0');
+
+  // dots
+  slides.forEach((s,i)=>{
+    const d=document.createElement('button'); d.className='dot'; d.setAttribute('aria-label','Слайд '+(i+1));
+    d.addEventListener('click',()=>go(i)); dotsWrap.appendChild(d);
+  });
+  const dots=[...dotsWrap.children];
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.remove('active','prev');
+      if(i===cur) s.classList.add('active');
+      else if(i<cur) s.classList.add('prev');
+    });
+    dots.forEach((d,i)=>d.classList.toggle('active',i===cur));
+    progress.style.width=((cur)/(total-1)*100)+'%';
+    cNow.textContent=String(cur+1).padStart(2,'0');
+    prevBtn.disabled=cur===0; nextBtn.disabled=cur===total-1;
+    // keep active dot in view
+    if(dots[cur]) dots[cur].scrollIntoView({block:'nearest'});
+    // trigger map animation if present
+    const act=slides[cur]; const map=act.querySelector('.mapstage[data-anim]');
+    if(map && !map.dataset.done){ animateMap(map); map.dataset.done='1'; }
+  }
+  function go(i){
+    if(locked) return;
+    i=Math.max(0,Math.min(total-1,i));
+    if(i===cur) return;
+    locked=true; cur=i; render();
+    slides[cur].scrollTop=0;
+    setTimeout(()=>locked=false,420);
+  }
+  const next=()=>go(cur+1), prev=()=>go(cur-1);
+
+  // buttons
+  nextBtn.addEventListener('click',e=>{e.stopPropagation();next();});
+  prevBtn.addEventListener('click',e=>{e.stopPropagation();prev();});
+  document.getElementById('tapR').addEventListener('click',next);
+  document.getElementById('tapL').addEventListener('click',prev);
+
+  // keyboard
+  window.addEventListener('keydown',e=>{
+    if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();next();}
+    else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();prev();}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(total-1);}
+  });
+
+  // wheel (debounced) — only when slide not internally scrollable overflow
+  let wlock=false;
+  window.addEventListener('wheel',e=>{
+    const s=slides[cur];
+    const canScroll=s.scrollHeight>s.clientHeight+4;
+    if(canScroll){
+      const atTop=s.scrollTop<=0, atBot=s.scrollTop+s.clientHeight>=s.scrollHeight-2;
+      if(e.deltaY>0 && !atBot) return;
+      if(e.deltaY<0 && !atTop) return;
+    }
+    if(wlock) return; wlock=true;
+    if(e.deltaY>28) next(); else if(e.deltaY<-28) prev();
+    setTimeout(()=>wlock=false,600);
+  },{passive:true});
+
+  // swipe
+  let tx=0,ty=0;
+  window.addEventListener('touchstart',e=>{tx=e.changedTouches[0].clientX;ty=e.changedTouches[0].clientY;},{passive:true});
+  window.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)){ dx<0?next():prev(); }
+    else if(Math.abs(dy)>60 && Math.abs(dy)>Math.abs(dx)){
+      const s=slides[cur]; if(s.scrollHeight<=s.clientHeight+4){ dy<0?next():prev(); }
+    }
+  },{passive:true});
+
+  // hide hint
+  setTimeout(()=>hint.style.opacity='0',5000);
+
+  // station tap on mobile
+  deck.addEventListener('click',e=>{
+    const node=e.target.closest('.station-node');
+    if(node){ node.classList.toggle('open'); e.stopPropagation(); }
+  });
+
+  // map fill animation
+  function animateMap(stage){
+    const path=stage.querySelector('.route-fill');
+    const nodes=[...stage.querySelectorAll('.station')];
+    if(path){
+      const len=path.getTotalLength();
+      path.style.strokeDasharray=len; path.style.strokeDashoffset=len;
+      path.getBoundingClientRect();
+      path.style.transition='stroke-dashoffset 3.2s ease'; path.style.strokeDashoffset='0';
+    }
+    nodes.forEach((n,i)=>setTimeout(()=>n.classList.add('on'), 300+i*260));
+  }
+
+  render();
+  // hash deep-link (?s=NN)
+  const m=location.hash.match(/#(\d+)/); if(m){ go(parseInt(m[1],10)-1); }
+})();
+</script>
+</body>
+</html>
