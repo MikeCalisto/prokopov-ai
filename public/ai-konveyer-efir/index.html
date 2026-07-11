@@ -238,9 +238,9 @@ h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.01em;line-height:1.
 .module-title{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--text);flex:1;line-height:1.35}
 .module-chevron{font-size:13px;color:var(--text3);flex-shrink:0;transition:transform .25s}
 .module.open .module-chevron{transform:rotate(180deg);color:var(--accent)}
-.module-body{display:grid;grid-template-rows:0fr;overflow:hidden;transition:grid-template-rows .35s ease}
-.module.open .module-body{grid-template-rows:1fr}
-.module-inner{min-height:0;overflow:hidden;padding:0 24px 24px;padding-left:70px}
+.module-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.module.open .module-body{max-height:1600px}
+.module-inner{padding:0 24px 24px;padding-left:70px}
 .module-steps{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
 .module-steps li{font-size:14px;color:var(--text2);line-height:1.55;padding-left:20px;position:relative}
 .module-steps li::before{content:'→';position:absolute;left:0;top:0;color:var(--accent);font-weight:700}
@@ -417,9 +417,12 @@ h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.01em;line-height:1.
 .dl p{font-size:15px;margin-top:6px;color:var(--text)}
 
 /* ── MATH ── */
-.math-eq{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;font-family:var(--font-display);font-weight:900;font-size:clamp(22px,3.4vw,38px);color:var(--text)}
-.math-eq .acc{color:var(--accent)}
-.math-eq .dim{color:var(--text3)}
+.math-vs{display:flex;align-items:center;justify-content:center;gap:clamp(18px,4vw,50px);flex-wrap:wrap;max-width:900px;margin:0 auto}
+.math-vs .mv{flex:1 1 240px;max-width:360px;text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:28px 26px}
+.math-vs .mv.warm{border-color:var(--accent-soft2);background:linear-gradient(160deg,var(--accent-soft),var(--surface));box-shadow:var(--shadow-glow)}
+.math-vs .mv .top{font-family:var(--font-display);font-weight:900;font-size:clamp(20px,2.6vw,30px);line-height:1.15;color:var(--accent-light)}
+.math-vs .mv .bot{margin-top:12px;font-size:14.5px;color:var(--text2);line-height:1.5}
+.math-vs .vs{font-family:var(--font-display);font-weight:900;font-size:clamp(24px,3.4vw,42px);color:var(--accent);text-shadow:0 0 30px rgba(232,146,26,.35)}
 
 /* ── GUARANTEE ── */
 .guarantee{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;background:var(--accent-soft);border:1px solid var(--accent-soft2);border-radius:var(--rl);padding:44px 48px;box-shadow:var(--shadow-glow);max-width:980px;margin:0 auto}
@@ -539,13 +542,13 @@ footer .wrap{max-width:820px}
 <body>
 
 <!-- ═══ HERO ═══ -->
-<div class="wrap">
-<div class="hero">
+<section class="hero">
   <div class="hero-bgfx" aria-hidden="true">
     <div class="grid"></div>
     <div class="glow g1"></div>
     <div class="glow g2"></div>
   </div>
+  <div class="wrap">
   <div class="hero-grid">
     <div class="hero-left">
       <div class="hero-badges">
@@ -576,8 +579,8 @@ footer .wrap{max-width:820px}
       <div class="hc-foot"><span class="hc-lock">🔒</span><span>Сама система остаётся с тобой <b>навсегда</b> · доступ к материалам 1 год</span></div>
     </div>
   </div>
-</div>
-</div>
+  </div>
+</section>
 
 <!-- ═══ PROBLEM ═══ -->
 <section class="sec sec-divider sec-dark">
@@ -651,7 +654,7 @@ footer .wrap{max-width:820px}
 <section class="sec sec-divider">
 <div class="wrap">
   <div class="sec-head reveal">
-    <h2>Почему у тебя получится — <em>даже если</em><br>ты никогда серьёзно не работал с AI</h2>
+    <h2>Почему у тебя <em>получится</em> —<br>даже если ты никогда<br>серьёзно не работал с&nbsp;AI</h2>
     <p class="sec-desc">Программа построена для тех, кто заходит в AI по-настоящему впервые. Ничего из этого иметь на старте <strong>не нужно:</strong></p>
   </div>
 
@@ -677,7 +680,15 @@ footer .wrap{max-width:820px}
       <div class="fwy-text"><strong>Неважно, если ты уже пробовал AI и разочаровался.</strong> Если после ChatGPT осталась «вода без конкретики» — здесь мы соберём всё в систему. AI перестаёт додумывать и галлюцинировать, потому что каждый агент опирается на твои данные: <strong>ДНК бизнеса, исследование ЦА, твой Tone of Voice</strong>.</div>
     </div>
   </div>
+</div>
+</section>
 
+<!-- ═══ FOR WHOM ═══ -->
+<section class="sec sec-divider sec-dark">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Для кого <em>эта фокус-группа</em></h2>
+  </div>
   <div class="who-grid">
     <div class="who-card reveal rd1">
       <span class="ic">🎯</span>
@@ -696,7 +707,7 @@ footer .wrap{max-width:820px}
 </section>
 
 <!-- ═══ WHAT YOU GET ═══ -->
-<section class="sec sec-divider sec-dark">
+<section class="sec sec-divider">
 <div class="wrap">
   <div class="sec-head reveal">
     <h2>Что конкретно<br>ты <em>получаешь</em></h2>
@@ -763,7 +774,7 @@ footer .wrap{max-width:820px}
 
   <div class="modules-grid">
 
-  <div class="module reveal" id="m0">
+  <div class="module reveal open" id="m0">
     <div class="module-head" onclick="toggleModule('m0')">
       <span class="module-num">00</span><span class="module-icon">⚙️</span>
       <span class="module-title">Установка рабочего пространства и 5 агентов</span>
@@ -1030,7 +1041,7 @@ footer .wrap{max-width:820px}
 </section>
 
 <!-- ═══ MANIFEST QUOTE ═══ -->
-<section class="sec sec-divider">
+<section class="sec sec-divider sec-dark">
 <div class="wrap">
   <div class="quote-block reveal">
     <span class="quote-mark">“</span>
@@ -1277,8 +1288,10 @@ footer .wrap{max-width:820px}
     <h2>Простая <em>математика</em></h2>
     <p class="sec-desc">Нанимаешь маркетолога или сценариста — это <strong>$400–500 в месяц</strong>. Каждый месяц. И часто на выходе — шаблонные сценарии, которые не цепляют твою аудиторию. Пробуешь сам — тратишь десятки часов, а контент всё равно слабый.</p>
   </div>
-  <div class="math-eq reveal">
-    <span class="acc">$400–500/мес</span><span class="dim">× каждый месяц</span><span class="dim">vs</span><span class="acc">один раз</span><span>= система на 27 агентов навсегда</span>
+  <div class="math-vs reveal">
+    <div class="mv"><div class="top">$400–500/мес<br>или недели твоего времени</div><div class="bot">× каждый месяц, впустую</div></div>
+    <div class="vs">VS</div>
+    <div class="mv warm"><div class="top">один раз</div><div class="bot">= система на 27 агентов, которая работает на тебя навсегда</div></div>
   </div>
   <div class="steps3 reveal" style="margin-top:34px">
     <div class="step3"><div class="sn">1</div><h4>Входишь сейчас</h4><p>$560 (Премиум), при рассрочке — от $94 на старте.</p></div>
@@ -1308,7 +1321,7 @@ footer .wrap{max-width:820px}
 </section>
 
 <!-- ═══ GUARANTEE / поток 2.0 ═══ -->
-<section class="sec sec-divider">
+<section class="sec sec-divider sec-dark">
 <div class="wrap">
   <div class="guarantee reveal">
     <div class="shield">🛡️</div>
