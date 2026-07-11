@@ -126,7 +126,7 @@
           <span>LIVE · AI-DEMO</span>
         </div>
         <div class="video-9-16 hero-video-box">
-          <video data-vsrc="1.mp4" muted loop playsinline preload="metadata"></video>
+          <video data-vsrc="1.mp4" autoplay muted loop playsinline preload="metadata"></video>
           <div class="click-blocker"></div>
         </div>
       </div>
@@ -315,7 +315,7 @@
             <p class="lead">Найреалістичніший спосіб — твій двійник з твого власного відео.</p>
 
             <div class="video-9-16">
-              <video data-vsrc="1.mp4" muted loop playsinline preload="none"></video>
+              <video data-vsrc="1.mp4" autoplay muted loop playsinline preload="none"></video>
               <div class="click-blocker"></div>
             </div>
 
@@ -338,7 +338,7 @@
             <p class="lead">Спосіб для тих, у кого взагалі немає відео себе — або не хочеться знімати.</p>
 
             <div class="video-9-16">
-              <video data-vsrc="2.mp4" muted loop playsinline preload="none"></video>
+              <video data-vsrc="2.mp4" autoplay muted loop playsinline preload="none"></video>
               <div class="click-blocker"></div>
             </div>
 
@@ -361,7 +361,7 @@
             <p class="lead">Найпотужніший спосіб — повне керування рухами й мімікою аватара.</p>
 
             <div class="video-9-16">
-              <video data-vsrc="3.mp4" muted loop playsinline preload="none"></video>
+              <video data-vsrc="3.mp4" autoplay muted loop playsinline preload="none"></video>
               <div class="click-blocker"></div>
             </div>
 
@@ -1165,20 +1165,43 @@
     /* ==================== Lazy-load native <video> + pause when offscreen ==================== */
     /* Videos start with data-vsrc; real src is set only when first in viewport, then play/pause */
     (function () {
+      const vids = [].slice.call(document.querySelectorAll('video[data-vsrc]'));
+
+      function ensureSrc(v) {
+        if (!v.getAttribute('src')) { v.src = v.dataset.vsrc; }
+      }
+      function play(v) {
+        v.muted = true; // required for autoplay policies (incl. iOS Low Power Mode)
+        const p = v.play();
+        if (p && p.catch) p.catch(() => {
+          // Retry once the media has enough data
+          const onCan = () => { v.removeEventListener('canplay', onCan); const q = v.play(); if (q && q.catch) q.catch(() => {}); };
+          v.addEventListener('canplay', onCan);
+        });
+      }
+
       const ioNat = new IntersectionObserver((entries) => {
         entries.forEach(e => {
           const v = e.target;
-          if (e.isIntersecting) {
-            if (!v.src) { v.src = v.dataset.vsrc; }
-            const p = v.play();
-            if (p && p.catch) p.catch(() => {});
-          } else {
-            try { v.pause(); } catch (_) {}
-          }
+          if (e.isIntersecting) { ensureSrc(v); play(v); }
+          else { try { v.pause(); } catch (_) {} }
         });
       }, { threshold: 0, rootMargin: '200px 0px 200px 0px' });
 
-      document.querySelectorAll('video[data-vsrc]').forEach(v => ioNat.observe(v));
+      vids.forEach(v => ioNat.observe(v));
+
+      // Fallback for browsers/modes that block muted autoplay (e.g. iOS Low Power Mode):
+      // on the first user interaction, kick any in-view video that is still paused.
+      function kick() {
+        vids.forEach(v => {
+          const r = v.getBoundingClientRect();
+          if (r.top < window.innerHeight && r.bottom > 0) { ensureSrc(v); if (v.paused) play(v); }
+        });
+      }
+      ['touchstart', 'pointerdown', 'click', 'scroll'].forEach(ev =>
+        window.addEventListener(ev, kick, { once: true, passive: true }));
+      // Resume when tab becomes visible again
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) kick(); });
     })();
   </script>
 
