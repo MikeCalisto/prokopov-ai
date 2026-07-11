@@ -385,6 +385,61 @@ p:first-child{margin-top:0;}
   .stat-grid{grid-template-columns:repeat(2,1fr); gap:10px;}
   .navbtn{width:42px; height:42px;}
 }
+
+/* ===== HERO ANIMATED BACKGROUND ===== */
+.hero{overflow:hidden;}
+.hero .slide-inner{position:relative; z-index:3;}
+.hero-bg{position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none;}
+.hero-bg .base{position:absolute; inset:0;
+  background:
+    radial-gradient(65% 60% at 18% 28%, rgba(232,146,26,.20), transparent 62%),
+    radial-gradient(55% 55% at 88% 82%, rgba(233,182,70,.14), transparent 60%);
+}
+/* perspective grid, faded at edges */
+.hero-grid{position:absolute; inset:-2px;
+  background-image:linear-gradient(rgba(232,146,26,.07) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(232,146,26,.07) 1px,transparent 1px);
+  background-size:58px 58px;
+  -webkit-mask-image:radial-gradient(72% 72% at 45% 42%,#000,transparent 82%);
+  mask-image:radial-gradient(72% 72% at 45% 42%,#000,transparent 82%);
+}
+/* rotating tech emblem (conveyor ring) */
+.hero-emblem{position:absolute; right:-150px; top:8%; width:560px; height:560px; border-radius:50%;
+  background:conic-gradient(from 0deg, transparent 0deg, rgba(232,146,26,.14) 40deg, transparent 120deg, rgba(233,182,70,.10) 200deg, transparent 300deg);
+  -webkit-mask:radial-gradient(circle, transparent 54%, #000 55%, #000 71%, transparent 72%);
+  mask:radial-gradient(circle, transparent 54%, #000 55%, #000 71%, transparent 72%);
+  animation:heroSpin 34s linear infinite; opacity:.9;
+}
+.hero-emblem.two{width:360px; height:360px; right:-40px; top:26%; animation-duration:22s; animation-direction:reverse; opacity:.7;}
+@keyframes heroSpin{to{transform:rotate(360deg);}}
+/* floating glow orbs */
+.hero-orb{position:absolute; border-radius:50%; filter:blur(64px); mix-blend-mode:screen; opacity:.55;}
+.hero-orb.o1{width:440px; height:440px; background:radial-gradient(circle,var(--accent),transparent 70%); top:-90px; left:-70px; animation:heroFloat1 17s ease-in-out infinite;}
+.hero-orb.o2{width:380px; height:380px; background:radial-gradient(circle,var(--accent-gold),transparent 70%); bottom:-120px; right:-50px; animation:heroFloat2 21s ease-in-out infinite;}
+.hero-orb.o3{width:300px; height:300px; background:radial-gradient(circle,var(--accent-deep),transparent 70%); top:44%; left:52%; animation:heroFloat3 26s ease-in-out infinite;}
+@keyframes heroFloat1{0%,100%{transform:translate(0,0)}50%{transform:translate(64px,44px)}}
+@keyframes heroFloat2{0%,100%{transform:translate(0,0)}50%{transform:translate(-54px,-44px)}}
+@keyframes heroFloat3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-44px,32px) scale(1.16)}}
+/* conveyor flow lines */
+.hero-flow{position:absolute; height:1.5px; width:38%;
+  background:linear-gradient(90deg,transparent,var(--accent-light),transparent);
+  filter:drop-shadow(0 0 6px var(--accent)); opacity:.5;
+  animation:heroFlow 8s linear infinite;
+}
+.hero-flow.f1{top:22%; animation-duration:7.5s;}
+.hero-flow.f2{top:52%; animation-duration:10s; animation-delay:-4s; opacity:.35;}
+.hero-flow.f3{top:78%; animation-duration:12.5s; animation-delay:-6s;}
+@keyframes heroFlow{0%{transform:translateX(-120%)}100%{transform:translateX(360%)}}
+/* drifting sparkles */
+.spark{position:absolute; width:4px; height:4px; border-radius:50%; background:var(--accent-light); box-shadow:0 0 8px var(--accent); opacity:0; animation:heroDrift linear infinite;}
+@keyframes heroDrift{0%{transform:translateY(30px) scale(.6); opacity:0}12%,88%{opacity:.8}100%{transform:translateY(-170px) scale(1); opacity:0}}
+@media(prefers-reduced-motion:reduce){
+  .hero-orb,.hero-emblem,.hero-flow,.spark{animation:none!important;}
+}
+@media(max-width:860px){
+  .hero-emblem{right:-200px; opacity:.5;}
+  .hero-orb{filter:blur(48px); opacity:.4;}
+}
 </style>
 </head>
 <body>
@@ -393,7 +448,26 @@ p:first-child{margin-top:0;}
 
 <div class="deck" id="deck">
 <!-- 01 HERO -->
-<section class="slide">
+<section class="slide hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="base"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-emblem"></div>
+    <div class="hero-emblem two"></div>
+    <div class="hero-orb o1"></div>
+    <div class="hero-orb o2"></div>
+    <div class="hero-orb o3"></div>
+    <div class="hero-flow f1"></div>
+    <div class="hero-flow f2"></div>
+    <div class="hero-flow f3"></div>
+    <span class="spark" style="left:12%; top:74%; animation-duration:9s; animation-delay:-1s"></span>
+    <span class="spark" style="left:26%; top:82%; animation-duration:11s; animation-delay:-4s"></span>
+    <span class="spark" style="left:40%; top:70%; animation-duration:8s; animation-delay:-2s"></span>
+    <span class="spark" style="left:58%; top:86%; animation-duration:12s; animation-delay:-6s"></span>
+    <span class="spark" style="left:70%; top:72%; animation-duration:10s; animation-delay:-3s"></span>
+    <span class="spark" style="left:84%; top:80%; animation-duration:13s; animation-delay:-7s"></span>
+    <span class="spark" style="left:48%; top:60%; animation-duration:9.5s; animation-delay:-5s"></span>
+  </div>
   <div class="slide-inner">
     <h1 class="big">AI Контент-<br>Конвейер 2.0</h1>
     <p class="lead">Ты построишь систему, которая выдаёт <strong>от 30 единиц контента в месяц</strong> — без команды маркетологов, сценаристов и даже без присутствия в кадре.</p>
