@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>AI Контент-Конвейер 2.0 — присоединиться к обучению · Роман Прокопов</title>
+<meta name="description" content="Система из 27 AI-агентов, которая выдаёт 30+ единиц контента в месяц без команды маркетологов. 12 модулей, 4 недели лично с Романом Прокоповым. Специальная цена для участников эфира.">
+<meta property="og:title" content="AI Контент-Конвейер 2.0 — присоединиться к обучению">
+<meta property="og:description" content="27 AI-агентов · 12 модулей · 30+ единиц контента в месяц. Специальная цена для участников эфира.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#060608">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap&subset=cyrillic,latin" rel="stylesheet">
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1490743968843269');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1320081970032144&ev=PageView&noscript=1"/></noscript>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#060608;
+  --bg2:#0a0a10;
+  --surface:#0d0d12;
+  --surface2:#14141c;
+  --text:#f2ede3;
+  --text2:#9a948a;
+  --text3:#5a564e;
+  --border:#1e1e2a;
+  --border2:#2a2a36;
+  --accent:#e8921a;
+  --accent2:#e9b646;
+  --accent-deep:#c77010;
+  --accent-light:#f5b34a;
+  --accent-soft:rgba(232,146,26,.08);
+  --accent-soft2:rgba(232,146,26,.34);
+  --gold:#e9b646;
+  --teal:#e8921a;
+  --violet:#c77010;
+  --danger:#ff5a5a;
+  --danger-soft:rgba(255,90,90,.08);
+  --shadow:0 14px 34px rgba(0,0,0,.45);
+  --shadow-lg:0 30px 70px rgba(0,0,0,.55);
+  --shadow-glow:0 0 50px rgba(232,146,26,.16),0 0 100px rgba(232,146,26,.06);
+  --maxw:1180px;
+  --r:18px;--rs:12px;--rl:26px;
+  --btn-grad:linear-gradient(135deg,#e8921a 0%,#c77010 100%);
+  --font-display:'Tektur',-apple-system,sans-serif;
+  --font:'Manrope',-apple-system,'Segoe UI',sans-serif;
+}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;position:relative}
+/* grain */
+body::after{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.4;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}
+img,video{display:block;max-width:100%}
+::selection{background:var(--accent);color:#000}
+strong{color:var(--accent-light);font-weight:700}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:2}
+
+/* ── DARK BAND (warm-tinted deeper black with glow) ── */
+.sec-dark{background:var(--bg2);position:relative}
+.sec-dark::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 55% at 50% -5%,rgba(232,146,26,.10),transparent 62%)}
+
+/* ── TYPOGRAPHY ── */
+h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.01em;line-height:1.05}
+.sec h2,.cta-sec h2{font-family:var(--font-display);font-weight:800;font-size:clamp(24px,3.9vw,44px);line-height:1.1;letter-spacing:-.02em;text-transform:uppercase;margin-bottom:16px}
+.sec h2 em,.cta-sec h2 em{font-style:normal;color:var(--accent)}
+.sec-desc{font-size:16px;color:var(--text2);max-width:640px;line-height:1.65;margin:0 auto}
+.sec-desc strong{color:var(--accent-light)}
+.sec-head{text-align:center;max-width:820px;margin:0 auto 52px}
+
+/* ── BUTTON ── */
+.btn{display:inline-flex;align-items:center;gap:9px;background:var(--btn-grad);color:#1a0f00;border:none;border-radius:var(--rs);padding:15px 30px;font-family:var(--font-display);font-size:14px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;cursor:pointer;transition:.22s;white-space:nowrap;box-shadow:0 12px 28px rgba(232,146,26,.28);position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;top:0;left:-120%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);transition:left .7s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(232,146,26,.42)}
+.btn:hover::after{left:160%}
+.btn-ghost{background:transparent;color:var(--text);border:1.5px solid var(--border2);box-shadow:none}
+.btn-ghost::after{display:none}
+.btn-ghost:hover{border-color:var(--accent-soft2);color:var(--accent-light);box-shadow:0 0 26px rgba(232,146,26,.14)}
+
+/* ── SECTIONS BASE ── */
+.sec{padding:clamp(58px,8vw,110px) 0;position:relative}
+.sec-divider{border-top:1px solid var(--border)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.vis{opacity:1;transform:none}
+.rd1{transition-delay:.06s}.rd2{transition-delay:.12s}.rd3{transition-delay:.18s}.rd4{transition-delay:.24s}
+
+/* ── HERO ── */
+.hero{padding:clamp(46px,6vw,82px) 0 clamp(52px,7vw,90px);position:relative;overflow:hidden}
+.hero-bgfx{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.hero-bgfx .glow{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5}
+.hero-bgfx .g1{width:440px;height:440px;background:radial-gradient(circle,var(--accent),transparent 70%);top:-120px;left:-80px;animation:float1 18s ease-in-out infinite}
+.hero-bgfx .g2{width:360px;height:360px;background:radial-gradient(circle,var(--accent2),transparent 70%);bottom:-140px;right:-60px;opacity:.35;animation:float2 22s ease-in-out infinite}
+.hero-bgfx .grid{position:absolute;inset:-2px;background-image:linear-gradient(rgba(232,146,26,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(232,146,26,.06) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(70% 68% at 42% 34%,#000,transparent 82%);mask-image:radial-gradient(70% 68% at 42% 34%,#000,transparent 82%)}
+@keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,40px)}}
+@keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,-40px)}}
+@media(prefers-reduced-motion:reduce){.hero-bgfx .glow{animation:none}}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.08fr .92fr;gap:44px;align-items:center}
+.hero-badges{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text2);background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:8px 15px;box-shadow:var(--shadow)}
+.hero-badge .s{color:var(--accent)}
+.hero-badge.hb-live{color:var(--accent-light);border-color:var(--accent-soft2);background:var(--accent-soft)}
+.hero-badge.hb-live .d{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-left h1{font-family:var(--font-display);font-weight:900;font-size:clamp(34px,6vw,72px);line-height:.98;letter-spacing:-.03em;text-transform:uppercase;margin-bottom:22px}
+.hero-left h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{font-size:clamp(15.5px,1.4vw,18px);color:var(--text2);max-width:560px;margin:0 0 18px;line-height:1.62}
+.hero-sub strong{color:var(--accent-light);font-weight:700}
+.hero-note{display:flex;gap:14px;align-items:flex-start;background:var(--accent-soft);border:1px solid var(--accent-soft2);border-radius:var(--r);padding:16px 18px;margin-bottom:26px;max-width:560px;box-shadow:var(--shadow-glow)}
+.hn-ic{width:34px;height:34px;border-radius:10px;background:var(--btn-grad);color:#1a0f00;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.hero-note p{font-size:14.5px;color:var(--text);line-height:1.55}
+.hero-note p strong{color:var(--accent-light);font-weight:700}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.hero-btns .btn{padding:16px 30px;font-size:14px}
+/* right stats card */
+.hero-card{position:relative;z-index:2;background:linear-gradient(155deg,var(--surface),var(--bg2));border:1px solid var(--border2);border-radius:var(--rl);padding:30px;box-shadow:var(--shadow-lg);overflow:hidden}
+.hero-card::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(80% 60% at 80% 0%,rgba(232,146,26,.14),transparent 60%)}
+.hc-label{position:relative;display:flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);padding-bottom:18px;margin-bottom:20px;border-bottom:1px solid var(--border)}
+.hc-label .d{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(232,146,26,.7)}
+.hc-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.hc-stat{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:var(--r);padding:22px 20px}
+.hc-stat .n{font-family:var(--font-display);font-size:clamp(34px,3.6vw,46px);font-weight:900;color:var(--accent-light);line-height:1;margin-bottom:10px}
+.hc-stat .l{font-size:13px;color:var(--text2);line-height:1.35}
+.hc-foot{position:relative;display:flex;align-items:center;gap:11px;font-size:13.5px;color:var(--text);background:var(--accent-soft);border:1px solid var(--accent-soft2);border-radius:var(--rs);padding:14px 16px;line-height:1.4}
+.hc-foot b{color:var(--accent-light);font-weight:700}
+.hc-lock{font-size:17px;flex-shrink:0}
+
+/* ── PROBLEM ── */
+.problem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:16px}
+.problem-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px 30px;transition:.25s}
+.problem-block:hover{border-color:var(--accent-soft2);transform:translateY(-3px)}
+.problem-block .ic{font-size:28px;display:block;margin-bottom:12px}
+.problem-block h3{font-family:var(--font-display);font-weight:700;font-size:18px;margin-bottom:8px;color:var(--text)}
+.problem-block p{font-size:14.5px;color:var(--text2);line-height:1.65}
+.problem-result{background:var(--danger-soft);border:1px solid rgba(255,90,90,.28);border-radius:var(--r);padding:28px 34px;text-align:center;margin-top:6px}
+.problem-result p{font-size:16px;color:var(--text2);line-height:1.7;margin-top:10px}
+.problem-result p:first-child{margin-top:0}
+.problem-result p strong{color:#ff8a7a;font-weight:700}
+
+/* ── VS ── */
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.vs-col{border-radius:var(--r);padding:34px 32px}
+.vs-col.bad{background:linear-gradient(160deg,rgba(255,90,90,.05),transparent);border:1px solid rgba(255,90,90,.2)}
+.vs-col.good{background:linear-gradient(160deg,var(--accent-soft),transparent);border:1.5px solid var(--accent-soft2);box-shadow:var(--shadow-glow)}
+.vs-label{font-family:var(--font-display);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:22px}
+.vs-col.bad .vs-label{color:#ff8a7a}
+.vs-col.good .vs-label{color:var(--accent-light)}
+.vs-list{list-style:none;display:flex;flex-direction:column;gap:14px}
+.vs-list li{font-size:14.5px;line-height:1.5;padding-left:30px;position:relative}
+.vs-col.bad .vs-list li{color:var(--text2)}
+.vs-col.bad .vs-list li::before{content:'✕';position:absolute;left:0;color:var(--danger);font-weight:700;font-size:14px}
+.vs-col.good .vs-list li{color:var(--text)}
+.vs-col.good .vs-list li::before{content:'✦';position:absolute;left:0;color:var(--accent);font-weight:800;font-size:14px}
+.vs-list li strong{color:var(--accent-light)}
+
+/* ── FOR WHO ── */
+.forwhom-why{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:34px}
+.fwy-item{display:grid;grid-template-columns:48px 1fr;gap:18px;align-items:start;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:26px 28px;box-shadow:var(--shadow);transition:.22s}
+.fwy-item:hover{transform:translateY(-3px);border-color:var(--accent-soft2)}
+.fwy-item.wide{grid-column:1/-1}
+.fwy-num{font-family:var(--font-display);font-size:26px;font-weight:900;color:transparent;-webkit-text-stroke:1.5px var(--accent);line-height:1}
+.fwy-text{font-size:15px;color:var(--text2);line-height:1.65}
+.fwy-text strong{color:var(--accent-light);font-weight:700}
+.who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.who-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px;transition:.25s}
+.who-card:hover{transform:translateY(-4px);border-color:var(--accent-soft2)}
+.who-card .ic{font-size:30px;display:block;margin-bottom:14px}
+.who-card p{font-size:14.5px;color:var(--text2);line-height:1.6}
+.who-card p strong{color:var(--text);font-weight:700}
+
+/* ── GET ── */
+.get-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.get-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px 20px;text-align:center;transition:.25s}
+.get-card:hover{transform:translateY(-4px);border-color:var(--accent-soft2)}
+.get-n{font-family:var(--font-display);font-size:clamp(30px,3.4vw,42px);font-weight:900;color:var(--accent-light);line-height:1;margin-bottom:10px}
+.get-desc{font-size:13px;color:var(--text2);line-height:1.45}
+
+/* ── ROADMAP ── */
+.rm-phases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px}
+.rm-phase{position:relative;padding:26px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+.rm-phase::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.rm-phase.p1::before{background:var(--accent-deep)}
+.rm-phase.p2::before{background:var(--accent)}
+.rm-phase.p3::before{background:var(--gold)}
+.rm-phase-tag{font-family:var(--font-display);font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.p1 .rm-phase-tag{color:var(--accent-deep)}
+.p2 .rm-phase-tag{color:var(--accent)}
+.p3 .rm-phase-tag{color:var(--gold)}
+.rm-phase-title{font-family:var(--font-display);font-size:19px;font-weight:800;color:var(--text);margin-bottom:8px;text-transform:uppercase}
+.rm-phase-desc{font-size:14px;color:var(--text2);line-height:1.55}
+.rm-wrap{max-width:880px;margin:0 auto}
+.rm-track{position:relative;padding-left:34px}
+.rm-track::before{content:'';position:absolute;left:11px;top:14px;bottom:14px;width:2px;background:linear-gradient(var(--accent-deep),var(--accent),var(--gold))}
+.rm-item{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px 20px 26px;margin-bottom:10px;display:grid;grid-template-columns:44px 1fr;gap:14px;box-shadow:var(--shadow);transition:.2s}
+.rm-item:hover{transform:translateX(3px);border-color:var(--accent-soft2)}
+.rm-item::before{content:'';position:absolute;left:-28px;top:24px;width:11px;height:11px;border-radius:50%;border:2.5px solid;background:var(--bg)}
+.rm-item.s1::before{border-color:var(--accent-deep)}
+.rm-item.s2::before{border-color:var(--accent)}
+.rm-item.s3::before{border-color:var(--gold)}
+.rm-step{font-family:var(--font-display);font-size:16px;font-weight:900;padding-top:1px}
+.s1 .rm-step{color:var(--accent-deep)}.s2 .rm-step{color:var(--accent)}.s3 .rm-step{color:var(--gold)}
+.rm-action{font-size:15px;font-weight:600;color:var(--text);margin-bottom:5px;line-height:1.45}
+.rm-result{font-size:13.5px;color:var(--text2)}
+.rm-result b{font-weight:700;color:var(--accent-light)}
+.rm-milestone{display:flex;align-items:center;gap:13px;margin:22px 0 26px;padding:16px 22px;border-radius:var(--rs);border:1px dashed}
+.rm-milestone.m1{border-color:rgba(199,112,16,.4);background:rgba(199,112,16,.06)}
+.rm-milestone.m2{border-color:var(--accent-soft2);background:var(--accent-soft)}
+.rm-milestone.m3{border-color:rgba(233,182,70,.4);background:rgba(233,182,70,.06)}
+.rm-milestone-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.m1 .rm-milestone-dot{background:var(--accent-deep)}.m2 .rm-milestone-dot{background:var(--accent)}.m3 .rm-milestone-dot{background:var(--gold)}
+.rm-milestone p{font-size:14px;line-height:1.5;font-weight:600}
+.m1 p{color:var(--accent-deep)}.m2 p{color:var(--accent)}.m3 p{color:var(--gold)}
+
+/* ── MODULES ── */
+.modules-grid{display:grid;grid-template-columns:1fr;gap:12px;align-items:start;max-width:920px;margin:0 auto}
+.module{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .2s}
+.module:hover{border-color:var(--border2)}
+.module.open{border-color:var(--accent-soft2)}
+.module-head{display:flex;align-items:center;gap:16px;padding:22px 24px;cursor:pointer;transition:background .15s}
+.module-head:hover{background:var(--surface2)}
+.module-num{font-family:var(--font-display);font-size:15px;font-weight:900;color:var(--accent);flex-shrink:0;min-width:30px}
+.module-icon{font-size:22px;flex-shrink:0}
+.module-title{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--text);flex:1;line-height:1.35}
+.module-chevron{font-size:13px;color:var(--text3);flex-shrink:0;transition:transform .25s}
+.module.open .module-chevron{transform:rotate(180deg);color:var(--accent)}
+.module-body{display:grid;grid-template-rows:0fr;overflow:hidden;transition:grid-template-rows .35s ease}
+.module.open .module-body{grid-template-rows:1fr}
+.module-inner{min-height:0;overflow:hidden;padding:0 24px 24px;padding-left:70px}
+.module-steps{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.module-steps li{font-size:14px;color:var(--text2);line-height:1.55;padding-left:20px;position:relative}
+.module-steps li::before{content:'→';position:absolute;left:0;top:0;color:var(--accent);font-weight:700}
+.module-steps li strong{color:var(--accent-light)}
+.module-note{font-size:13.5px;color:var(--text2);font-style:italic;margin-bottom:14px}
+.module-note strong{color:var(--accent-light);font-style:normal}
+.module-outcome{background:var(--accent-soft);border:1px solid var(--accent-soft2);border-radius:var(--rs);padding:16px 18px}
+.module-outcome p{font-size:13.5px;color:var(--text);line-height:1.6}
+.module-outcome p strong{font-weight:700;color:var(--accent-light)}
+.module-outcome::before{content:'✦ Результат';display:block;font-family:var(--font-display);font-size:11px;font-weight:800;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+
+/* ── AGENTS ── */
+.agent-list{display:grid;gap:14px;max-width:920px;margin:0 auto}
+.agent-row{display:flex;gap:18px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;transition:.25s}
+.agent-row:hover{border-color:var(--accent-soft2);transform:translateX(3px)}
+.agent-row .ic{font-size:26px;line-height:1;flex-shrink:0}
+.agent-row h4{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--accent-light);margin-bottom:4px}
+.agent-row p{font-size:14.5px;color:var(--text2);margin:0;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:900px;margin:26px auto 0}
+.chip{background:var(--surface);border:1px solid var(--border2);border-radius:40px;padding:9px 18px;font-size:14px;color:var(--text2);transition:.2s}
+.chip:hover{border-color:var(--accent-soft2);color:var(--accent-light)}
+.two-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:920px;margin:0 auto}
+.info-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px;transition:.25s}
+.info-card:hover{transform:translateY(-3px);border-color:var(--accent-soft2)}
+.info-card .ic{font-size:28px;display:block;margin-bottom:12px}
+.info-card h4{font-family:var(--font-display);font-weight:700;font-size:18px;margin-bottom:8px}
+.info-card p{font-size:14.5px;color:var(--text2);line-height:1.6}
+.info-card p strong{color:var(--accent-light)}
+
+/* feature box */
+.feature-box{background:linear-gradient(155deg,var(--surface),var(--bg2));border:1px solid var(--border2);border-radius:var(--rl);padding:clamp(28px,5vw,48px);max-width:920px;margin:0 auto}
+.feature-box p{font-size:16px;color:var(--text);line-height:1.7}
+.feature-box p+p{margin-top:14px;color:var(--text2)}
+.feature-box strong{color:var(--accent-light)}
+
+/* ── STAT DUO (0% / 100%) ── */
+.stat-duo{display:flex;align-items:center;justify-content:center;gap:clamp(24px,6vw,72px);flex-wrap:wrap}
+.stat-duo .sd{text-align:center}
+.stat-duo .sd .n{font-family:var(--font-display);font-weight:900;font-size:clamp(44px,7vw,88px);line-height:1}
+.stat-duo .sd.acc .n{color:var(--accent)}
+.stat-duo .sd .l{color:var(--text2);font-size:14px;margin-top:6px}
+.stat-duo .div{width:1px;height:58px;background:var(--border2)}
+
+/* steps 3 */
+.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1040px;margin:0 auto}
+.step3{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:26px 24px}
+.step3.hot{background:var(--accent-soft);border-color:var(--accent-soft2)}
+.step3 .sn{font-family:var(--font-display);font-weight:900;font-size:28px;color:var(--accent)}
+.step3 h4{font-family:var(--font-display);font-weight:800;font-size:17px;margin:8px 0 6px;color:var(--text)}
+.step3 p{font-size:14px;color:var(--text2);line-height:1.55}
+
+/* ── QUOTE / MANIFEST ── */
+.quote-block{position:relative;text-align:center;max-width:940px;margin:0 auto;padding:62px 40px;background:var(--accent-soft);border:1px solid var(--accent-soft2);border-radius:var(--rl);box-shadow:var(--shadow-glow)}
+.quote-mark{position:absolute;top:-26px;left:50%;transform:translateX(-50%);font-family:var(--font-display);font-size:120px;line-height:1;color:var(--accent);opacity:.5;pointer-events:none}
+.quote-text{position:relative;font-family:var(--font-display);font-weight:700;font-size:clamp(20px,2.6vw,34px);line-height:1.3;letter-spacing:-.01em;color:var(--text)}
+.quote-text em{font-style:normal;color:var(--accent-light)}
+
+/* ── LIVE / cards grids ── */
+.card-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+
+/* two-side warm */
+.two-side{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1020px;margin:0 auto}
+.side-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:30px 28px;box-shadow:var(--shadow)}
+.side-card.warm{background:linear-gradient(160deg,var(--accent-soft),var(--surface));border-color:var(--accent-soft2);box-shadow:var(--shadow-glow)}
+.side-card .lbl{font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--text2);margin-bottom:6px}
+.side-card.warm .lbl{color:var(--accent)}
+.side-card h3{font-family:var(--font-display);font-size:21px;font-weight:800;color:var(--text);margin-bottom:12px}
+.side-card p{font-size:14.5px;color:var(--text2);line-height:1.6}
+
+/* ── TIERS ── */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+.tier{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:32px 28px;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:.25s;position:relative;overflow:hidden}
+.tier::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.tier--std::before{background:linear-gradient(90deg,#7a7a86,#c8c8d2,#8a8a96)}
+.tier--prem::before{background:linear-gradient(90deg,#c8962f,#f6e27a,#caa24a)}
+.tier--vip::before{background:linear-gradient(90deg,#e8921a,#f5b34a,#c77010)}
+.tier:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.tier.featured{border:1.5px solid var(--accent-soft2);box-shadow:var(--shadow-glow)}
+.tier-badge{display:inline-block;font-family:var(--font-display);background:var(--btn-grad);color:#1a0f00;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:5px 13px;border-radius:100px;margin-bottom:16px;align-self:flex-start}
+.tier-name{font-family:var(--font-display);font-size:23px;font-weight:800;margin-bottom:4px;text-transform:uppercase}
+.tier--std .tier-name{color:#c2c2cc}.tier--prem .tier-name{color:var(--gold)}.tier--vip .tier-name{color:var(--accent-light)}
+.tier-for{font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.tier-list{list-style:none;display:flex;flex-direction:column;gap:11px;flex:1}
+.tier-list li{display:flex;align-items:flex-start;gap:9px;font-size:14px;color:var(--text);line-height:1.45}
+.tier-list li::before{content:'✓';color:var(--accent);font-weight:800;flex-shrink:0;font-size:13px;margin-top:1px}
+.tier-list li strong{color:var(--accent-light)}
+.tier-list li.off{color:var(--text3)}
+.tier-list li.off::before{content:'✕';color:var(--text3);font-weight:700}
+.tier-list li.off span{text-decoration:line-through}
+
+/* ── PRICE STAGES ── */
+.price-stage{margin-top:clamp(40px,5vw,60px)}
+.price-stage-head{text-align:center;max-width:700px;margin:0 auto 26px}
+.ps-badge{display:inline-block;font-family:var(--font-display);font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);border:1px solid var(--accent-soft2);padding:6px 13px;border-radius:100px;margin-bottom:14px}
+.ps-title{font-family:var(--font-display);font-weight:800;font-size:clamp(20px,3vw,32px);text-transform:uppercase;letter-spacing:-.02em;line-height:1.1}
+.ps-title em{font-style:normal;color:var(--accent)}
+.ps-sub{font-size:15px;color:var(--text2);margin-top:12px;line-height:1.6}
+.price-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.price-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:30px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden}
+.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.price-card:nth-child(1)::before{background:linear-gradient(90deg,#7a7a86,#c8c8d2,#8a8a96)}
+.price-card:nth-child(2)::before{background:linear-gradient(90deg,#c8962f,#f6e27a,#caa24a)}
+.price-card:nth-child(3)::before{background:linear-gradient(90deg,#e8921a,#f5b34a,#c77010)}
+.price-card.featured{border:1.5px solid var(--accent-soft2);box-shadow:var(--shadow-glow)}
+.pc-name{font-family:var(--font-display);font-weight:800;font-size:19px;text-transform:uppercase;margin-bottom:12px;color:var(--text)}
+.pc-seats{font-family:var(--font-display);font-size:11.5px;font-weight:700;letter-spacing:.02em;color:var(--accent2);margin-bottom:10px;text-transform:uppercase}
+.pc-old{font-size:18px;color:var(--text3);text-decoration:line-through;margin-bottom:4px}
+.pc-amt{font-family:var(--font-display);font-weight:900;font-size:clamp(32px,3.6vw,46px);color:var(--accent-light);line-height:1}
+.pc-mo{font-size:13px;color:var(--text2);margin:10px 0 2px}
+.pc-save{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:var(--accent);padding:4px 12px;border:1px solid var(--accent-soft2);border-radius:30px}
+.pc-btns{display:flex;flex-direction:column;gap:9px;margin-top:18px;width:100%}
+.tier-btn{display:block;text-align:center;padding:14px;border-radius:var(--rs);font-family:var(--font-display);font-size:13.5px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;cursor:pointer;transition:.2s;border:1.5px solid var(--border2);background:transparent;color:var(--text);width:100%}
+.tier-btn:hover{border-color:var(--accent);color:var(--accent-light);transform:translateY(-2px)}
+.btn-pay{background:var(--btn-grad);color:#1a0f00;border-color:transparent;box-shadow:0 12px 26px rgba(232,146,26,.28)}
+.btn-pay:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(232,146,26,.42);color:#1a0f00}
+.btn-parts{background:transparent;border:1.5px solid var(--border2);color:var(--text)}
+.btn-parts:hover{border-color:var(--accent);color:var(--accent-light)}
+.btn-book{background:transparent;border:1.5px solid rgba(233,182,70,.5);color:var(--gold)}
+.btn-book:hover{border-color:var(--gold);color:var(--gold)}
+.price-tier-btn{margin-top:22px}
+.book-note{margin:22px auto 0;max-width:800px;text-align:center;font-size:13.5px;color:var(--text2);line-height:1.6}
+.book-note strong{color:var(--accent-light)}
+.price-stage--special{background:var(--accent-soft);border:1px solid var(--accent-soft2);border-radius:var(--rl);padding:clamp(28px,4vw,44px);box-shadow:var(--shadow-glow)}
+.manager-cta{margin-top:28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:28px 34px;box-shadow:var(--shadow)}
+.manager-cta h3{font-family:var(--font-display);font-size:clamp(17px,2vw,21px);font-weight:800;margin-bottom:8px;text-transform:uppercase}
+.manager-cta p{font-size:14px;color:var(--text2);line-height:1.6;max-width:720px}
+.mc-btn{width:auto;white-space:nowrap;background:var(--btn-grad);color:#1a0f00;border-color:transparent;padding:15px 28px;box-shadow:0 12px 28px rgba(232,146,26,.28)}
+.mc-btn:hover{transform:translateY(-2px);color:#1a0f00}
+
+/* ── INSTALLMENTS ── */
+.install-block{margin-top:44px}
+.install-title{font-family:var(--font-display);font-weight:800;font-size:clamp(20px,3vw,30px);text-transform:uppercase;text-align:center;letter-spacing:-.02em;margin-bottom:24px}
+.install-title em{font-style:normal;color:var(--accent)}
+.install-bar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;background:linear-gradient(155deg,var(--surface2),var(--surface));border:1px solid var(--accent-soft2);border-radius:var(--r);padding:18px 24px;box-shadow:var(--shadow-glow)}
+.ib-left{display:flex;align-items:center;gap:16px}
+.ib-zero{width:50px;height:50px;border-radius:12px;background:var(--btn-grad);color:#1a0f00;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;font-size:18px;flex-shrink:0}
+.ib-t{font-family:var(--font-display);font-weight:800;font-size:15px;text-transform:uppercase;color:var(--text)}
+.ib-s{font-size:13px;color:var(--text2);font-weight:600;margin-top:2px}
+.ib-banks{display:flex;gap:8px;flex-wrap:wrap}
+.bank{font-size:12.5px;font-weight:700;padding:8px 13px;border-radius:9px;color:#fff;letter-spacing:.01em}
+.b-mono{background:#111;box-shadow:0 0 0 1px #444 inset}
+.b-abank{background:#f2c20a;color:#1a1a1a}
+.b-otp{background:#5cb85c}
+.b-globus{background:#4a9fe0}
+.install-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.install-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px 22px;text-align:center}
+.install-card.featured{border-color:var(--accent-soft2);background:var(--accent-soft)}
+.ic-name{font-family:var(--font-display);font-size:13px;font-weight:800;text-transform:uppercase;color:var(--text2);letter-spacing:.06em;margin-bottom:12px}
+.ic-amt{font-family:var(--font-display);font-weight:900;font-size:clamp(26px,3vw,36px);color:var(--accent-light);line-height:1}
+.ic-amt span{font-family:var(--font);font-size:15px;font-weight:600;color:var(--text2)}
+.ic-sub{font-size:12.5px;color:var(--text3);margin-top:9px}
+
+/* ── BONUS ── */
+.bonus-block{margin-top:44px;border:1px solid var(--accent-soft2);border-radius:var(--rl);padding:clamp(28px,4vw,46px);background:linear-gradient(180deg,var(--accent-soft),transparent 70%);position:relative;overflow:hidden}
+.bonus-head{position:relative;text-align:center;max-width:720px;margin:0 auto 30px}
+.bonus-eyebrow{display:inline-block;font-family:var(--font-display);font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);border:1px solid var(--accent-soft2);padding:7px 14px;border-radius:100px;margin-bottom:16px}
+.bonus-title{font-family:var(--font-display);font-weight:800;font-size:clamp(22px,3.4vw,34px);text-transform:uppercase;letter-spacing:-.02em;line-height:1.1}
+.bonus-title em{font-style:normal;color:var(--accent)}
+.bonus-grid{position:relative;display:grid;gap:12px}
+.bonus-item{display:flex;gap:16px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px}
+.bonus-item .ic{font-size:26px;flex-shrink:0}
+.bonus-item p{margin:0;font-size:15px;line-height:1.55;color:var(--text)}
+.bonus-item p strong{color:var(--accent-light)}
+.bonus-timer{position:relative;display:flex;align-items:center;justify-content:center;gap:9px;margin-top:26px;font-size:14px;font-weight:700;color:var(--accent)}
+
+/* ── DEADLINE ── */
+.deadline{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:900px;margin:0 auto}
+.dl{border-radius:var(--rl);padding:28px;border:1px solid var(--border);background:var(--surface)}
+.dl.now{border-color:var(--accent-soft2);background:linear-gradient(160deg,var(--accent-soft),var(--surface));box-shadow:var(--shadow-glow)}
+.dl .dlh{font-family:var(--font-display);font-weight:800;font-size:16px;letter-spacing:.02em;text-transform:uppercase;margin-bottom:12px;color:var(--text2)}
+.dl.now .dlh{color:var(--accent-light)}
+.dl p{font-size:15px;margin-top:6px;color:var(--text)}
+
+/* ── MATH ── */
+.math-eq{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;font-family:var(--font-display);font-weight:900;font-size:clamp(22px,3.4vw,38px);color:var(--text)}
+.math-eq .acc{color:var(--accent)}
+.math-eq .dim{color:var(--text3)}
+
+/* ── GUARANTEE ── */
+.guarantee{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;background:var(--accent-soft);border:1px solid var(--accent-soft2);border-radius:var(--rl);padding:44px 48px;box-shadow:var(--shadow-glow);max-width:980px;margin:0 auto}
+.guarantee .shield{font-size:60px;flex-shrink:0}
+.guarantee h3{font-family:var(--font-display);font-size:24px;font-weight:800;margin-bottom:14px;text-transform:uppercase}
+.guarantee p{font-size:15.5px;color:var(--text2);line-height:1.7}
+.guarantee p strong{color:var(--accent-light);font-weight:700}
+.guarantee .pill{display:inline-block;margin-top:16px;padding:9px 18px;border-radius:40px;background:var(--accent-soft);border:1px solid var(--accent-soft2);font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--accent-light)}
+
+/* ── COST ── */
+.cost-block{display:grid;grid-template-columns:.85fr 1.15fr;gap:18px;align-items:stretch;max-width:980px;margin:0 auto}
+.cost-main{background:linear-gradient(155deg,var(--surface2),var(--bg2));color:var(--text);border-radius:var(--rl);padding:40px 32px;display:flex;flex-direction:column;justify-content:center;text-align:center;position:relative;overflow:hidden;border:1px solid var(--accent-soft2)}
+.cost-main::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 60% at 50% 0%,rgba(232,146,26,.16),transparent 60%)}
+.cost-tag{position:relative;font-family:var(--font-display);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.cost-amt{position:relative;font-family:var(--font-display);font-weight:900;font-size:clamp(38px,5vw,64px);line-height:1;color:var(--accent-light)}
+.cost-per{position:relative;font-size:14px;color:var(--text2);margin-top:6px;font-weight:600}
+.cost-note{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:34px 36px;display:flex;flex-direction:column;justify-content:center;gap:16px;box-shadow:var(--shadow)}
+.cost-note p{font-size:15.5px;color:var(--text2);line-height:1.65}
+.cost-note p strong{color:var(--accent-light);font-weight:700}
+.cost-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:820px;margin:26px auto 0}
+.cost-mini{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 16px;text-align:center}
+.cost-mini h5{font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--text);margin-bottom:5px}
+.cost-mini span{font-size:13px;color:var(--accent-light);font-weight:700}
+
+/* ── OBJECTIONS ── */
+.obj-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;max-width:1000px;margin:0 auto}
+.obj-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color .2s;box-shadow:var(--shadow)}
+.obj-item:hover{border-color:var(--border2)}
+.obj-item.open{border-color:var(--accent-soft2)}
+.obj-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:24px 26px}
+.obj-q{display:flex;align-items:center;gap:14px;flex:1}
+.obj-icon{font-size:24px;flex-shrink:0}
+.obj-text{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--text);line-height:1.4}
+.obj-arr{width:26px;height:26px;border-radius:50%;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--text3);flex-shrink:0;transition:.25s}
+.obj-item.open .obj-arr{transform:rotate(45deg);background:var(--btn-grad);border-color:transparent;color:#1a0f00}
+.obj-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.obj-item.open .obj-body{max-height:520px}
+.obj-inner{margin:0 26px 26px;padding-top:18px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:13px}
+.obj-inner p{font-size:14.5px;color:var(--text2);line-height:1.7}
+.obj-inner .cta-line{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--accent-light)}
+
+/* ── AUTHOR ── */
+.author-block{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:44px 48px;box-shadow:var(--shadow);max-width:900px;margin:0 auto}
+.author-photo{width:200px;height:200px;border-radius:var(--r);overflow:hidden;border:1px solid var(--accent-soft2);flex-shrink:0}
+.author-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.author-name{font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--text);margin-bottom:18px}
+.author-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.author-list li{position:relative;padding-left:30px;color:var(--text2);line-height:1.5}
+.author-list li strong{color:var(--accent-light)}
+.author-list li::before{content:"✦";position:absolute;left:0;top:0;color:var(--accent);font-weight:800}
+
+/* ── CTA ── */
+.cta-sec{padding:clamp(72px,10vw,120px) 0;text-align:center;position:relative;background:var(--bg2);overflow:hidden}
+.cta-sec::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 100% at 50% 100%,rgba(232,146,26,.16),transparent 70%),radial-gradient(50% 90% at 50% 0%,rgba(232,146,26,.1),transparent 70%)}
+.cta-sec h2{position:relative;font-family:var(--font-display);font-weight:900;font-size:clamp(32px,5vw,58px);line-height:1.04;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:20px;color:var(--text)}
+.cta-sec h2 em{font-style:normal;color:var(--accent)}
+.cta-sec p{position:relative;font-size:17px;color:var(--text2);margin:0 auto 20px;max-width:620px;line-height:1.65}
+.cta-num{position:relative;font-family:var(--font-display);font-weight:900;font-size:clamp(52px,9vw,110px);line-height:.9;background:linear-gradient(180deg,var(--accent-light),var(--accent) 55%,var(--accent-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+.cta-sec .btn{position:relative;padding:18px 44px;font-size:16px;margin-top:14px}
+
+/* ── FOOTER ── */
+footer{background:#050507;color:#7a756c;padding:clamp(48px,6vw,72px) 24px;text-align:center;font-size:13px;line-height:1.6;position:relative;z-index:2}
+footer .wrap{max-width:820px}
+.ft-support-h{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.02em;margin-bottom:14px}
+.ft-support{display:inline-flex;align-items:center;gap:8px;background:var(--accent-soft);border:1px solid var(--accent-soft2);color:var(--accent-light);font-weight:700;padding:11px 22px;border-radius:100px;font-size:14px;transition:.2s}
+.ft-support:hover{background:rgba(232,146,26,.16)}
+.ft-ents{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 44px;margin:30px 0 18px}
+.ft-ent{font-size:13px;color:#7a756c;overflow-wrap:anywhere}
+.ft-ent strong{display:block;color:#b8b2a6;font-weight:700;margin-bottom:4px;font-size:12.5px;letter-spacing:.02em}
+.ft-links{display:flex;justify-content:center;gap:8px 24px;flex-wrap:wrap;margin-bottom:22px}
+.ft-links a{color:#7a756c;text-decoration:underline;text-underline-offset:3px;font-size:13px}
+.ft-links a:hover{color:var(--accent-light)}
+.ft-disclaimer{font-size:12px;color:#5a564e;line-height:1.65;max-width:700px;margin:0 auto 20px}
+.ft-disclaimer strong{color:#8a857a}
+.ft-copy{font-size:12.5px;color:#5a564e}
+
+/* ── STICKY BUY BAR ── */
+.buybar{position:fixed;left:0;right:0;bottom:0;z-index:90;background:rgba(10,10,16,.96);border-top:1px solid var(--border2);box-shadow:0 -8px 30px rgba(0,0,0,.5);padding:11px 18px;display:none;align-items:center;justify-content:space-between;gap:12px;transform:translateY(120%);transition:transform .35s ease;backdrop-filter:blur(8px)}
+.buybar.show{transform:none}
+.buybar .bb-price{display:flex;flex-direction:column;line-height:1.1}
+.buybar .bb-old{font-size:12px;color:var(--text3);text-decoration:line-through}
+.buybar .bb-now{font-family:var(--font-display);font-size:18px;font-weight:900;color:var(--accent-light)}
+.buybar .btn{flex:1;justify-content:center;max-width:230px;padding:13px 18px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1000px){
+  .problem-grid{grid-template-columns:1fr}
+  .tiers{grid-template-columns:1fr;max-width:480px;margin:0 auto}
+  .get-grid{grid-template-columns:repeat(2,1fr)}
+  .cost-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:920px){
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .hero-card{max-width:560px}
+}
+@media(max-width:760px){
+  .wrap{padding:0 18px}
+  .why-grid,.vs-grid,.forwhom-why,.who-grid,.card-grid-2,.card-grid-3,.card-grid-4,.rm-phases,.two-side,.steps3,.price-row,.install-grid,.cost-block,.obj-grid,.deadline,.bonus-grid,.author-block,.guarantee{grid-template-columns:1fr}
+  .install-bar{flex-direction:column;align-items:flex-start;gap:14px}
+  .fwy-item.wide{grid-column:auto}
+  .forwhom-why{grid-template-columns:1fr}
+  .guarantee{text-align:center;padding:34px 26px;gap:20px}
+  .guarantee .shield{margin:0 auto}
+  .author-block{text-align:center;gap:24px;padding:32px 24px}
+  .author-photo{margin:0 auto}
+  .author-list li{text-align:left}
+  .manager-cta{flex-direction:column;align-items:stretch;text-align:center}
+  .mc-btn{width:100%}
+  .hero-btns{flex-direction:column;align-items:stretch}
+  .hero-btns .btn{justify-content:center}
+  .buybar{display:flex}
+  body{padding-bottom:72px}
+}
+@media(max-width:440px){.get-grid,.cost-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<div class="wrap">
+<div class="hero">
+  <div class="hero-bgfx" aria-hidden="true">
+    <div class="grid"></div>
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+  </div>
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="hero-badges">
+        <span class="hero-badge hb-live"><span class="d"></span>Поток 2.0 · набор открыт</span>
+        <span class="hero-badge"><span class="s">✦</span>Осталось 10 из 20 мест</span>
+      </div>
+      <h1>AI Контент-<em>Конвейер 2.0</em></h1>
+      <p class="hero-sub">Ты построишь систему, которая выдаёт <strong>от 30 единиц контента в месяц</strong> — без команды маркетологов, сценаристов и даже без присутствия в кадре.</p>
+      <p class="hero-sub"><strong>80% рутины делает AI.</strong> Твоё участие — только на двух этапах: загрузить данные и утвердить сценарии. По системе из <strong>27 AI-агентов</strong>, уже доработанной по итогам первого потока.</p>
+      <div class="hero-note">
+        <span class="hn-ic">💬</span>
+        <p>4 недели лично со мной — разборы, созвоны, настройка под твой бизнес.</p>
+      </div>
+      <div class="hero-btns">
+        <a href="#tiers" class="btn">Занять место →</a>
+        <a href="#program" class="btn btn-ghost">Смотреть программу</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hc-label"><span class="d"></span>Что в системе</div>
+      <div class="hc-grid">
+        <div class="hc-stat"><div class="n">12</div><div class="l">модулей<br>программы</div></div>
+        <div class="hc-stat"><div class="n">27</div><div class="l">AI-агентов<br>с промптами</div></div>
+        <div class="hc-stat"><div class="n">30+</div><div class="l">единиц контента<br>в месяц</div></div>
+        <div class="hc-stat"><div class="n">2–3</div><div class="l">часа твоего<br>времени в неделю</div></div>
+      </div>
+      <div class="hc-foot"><span class="hc-lock">🔒</span><span>Сама система остаётся с тобой <b>навсегда</b> · доступ к материалам 1 год</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ PROBLEM ═══ -->
+<section class="sec sec-divider sec-dark">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Чему учат на других курсах<br>по <em>AI-контенту?</em></h2>
+  </div>
+  <div class="problem-grid">
+    <div class="problem-block reveal rd1">
+      <span class="ic">🤖</span>
+      <h3>Сценарии не твоим голосом</h3>
+      <p>AI выдаёт ровный, стерильный текст — звучит как «умный ассистент», а не живой человек. Уникальности нет, личность теряется.</p>
+    </div>
+    <div class="problem-block reveal rd2">
+      <span class="ic">🎣</span>
+      <h3>Хуки, которые не цепляют</h3>
+      <p>Шаблоны работали в 2023-м. Сейчас зритель пролистывает их за 0,5 секунды — видел такое тысячу раз.</p>
+    </div>
+    <div class="problem-block reveal rd3">
+      <span class="ic">✂️</span>
+      <h3>Монтаж «по-любительски»</h3>
+      <p>Нарезка без ритма, переходы из пресетов, субтитры комиксом. Вроде контент есть — а смотреть стыдно.</p>
+    </div>
+    <div class="problem-block reveal rd4">
+      <span class="ic">🧩</span>
+      <h3>Инструменты без системы</h3>
+      <p>Сценарий отдельно, съёмка отдельно, монтаж отдельно. Каждый новый ролик — как первый: всё собираешь заново.</p>
+    </div>
+  </div>
+  <div class="problem-result reveal">
+    <p>В итоге ты получаешь контент, который не звучит как будто его делал именно ты. Хуки, которые никого не цепляют. Видео, которые стыдно закрепить в профиле. И главное — <strong>мало подписчиков, мало охватов, ноль продаж и клиентов</strong>.</p>
+    <p>Ты тратишь деньги, время и энергию — а результата, ради которого всё затевалось, так и не видишь.</p>
+  </div>
+</div>
+</section>
+
+<!-- ═══ HOW (built differently) ═══ -->
+<section class="sec sec-divider">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Курс «AI Контент-Конвейер»<br>построен <em>по-другому</em></h2>
+  </div>
+  <div class="vs-grid">
+    <div class="vs-col bad reveal rd1">
+      <div class="vs-label">Как обычно</div>
+      <ul class="vs-list">
+        <li>Сценарии не твоим голосом</li>
+        <li>Хуки, которые не цепляют</li>
+        <li>Монтаж «по-любительски»</li>
+        <li>Инструменты без системы</li>
+        <li>Мало подписчиков, мало охватов</li>
+        <li>Ноль продаж и клиентов</li>
+      </ul>
+    </div>
+    <div class="vs-col good reveal rd2">
+      <div class="vs-label">Что я даю на программе</div>
+      <ul class="vs-list">
+        <li>Покажу, как обучить нейросеть так, чтобы она знала твой бизнес/блог и аудиторию <strong>даже лучше, чем ты сам</strong></li>
+        <li>Научу писать сценарии через AI так, чтобы <strong>твоя манера речи</strong> прослеживалась в каждом предложении</li>
+        <li>Твои хуки станут <strong>в 2 раза эффективнее</strong> цеплять аудиторию</li>
+        <li>Научишь нейросеть делать контент под <strong>разные степени осознанности</strong> аудитории</li>
+        <li>Покажу, как через AI создавать видео <strong>уровня продакшн-команды</strong></li>
+        <li>Покажу способ делегировать <strong>80% рутины в монтаже на AI</strong> — и чтобы она делала это качественно</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ FOR WHO ═══ -->
+<section class="sec sec-divider">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Почему у тебя получится — <em>даже если</em><br>ты никогда серьёзно не работал с AI</h2>
+    <p class="sec-desc">Программа построена для тех, кто заходит в AI по-настоящему впервые. Ничего из этого иметь на старте <strong>не нужно:</strong></p>
+  </div>
+
+  <div class="forwhom-why">
+    <div class="fwy-item reveal rd1">
+      <div class="fwy-num">01</div>
+      <div class="fwy-text"><strong>Не нужен технический бэкграунд.</strong> Всё построено на готовых промптах и пошаговых инструкциях. Ты не программируешь и ничего не настраиваешь вручную — открываешь Claude и следуешь системе. Умеешь пользоваться браузером — этого достаточно, чтобы стартовать.</div>
+    </div>
+    <div class="fwy-item reveal rd2">
+      <div class="fwy-num">02</div>
+      <div class="fwy-text"><strong>Не нужна команда и большой бюджет.</strong> Никаких маркетологов за $800–1500, сценаристов и монтажёров в штате. 80% рутины делает AI. Инструменты — около <strong>$44/мес</strong> за весь стек (Claude, Perplexity, ChatGPT; Parallel AI и NotebookLM — бесплатно). Без слива денег «на пробу».</div>
+    </div>
+    <div class="fwy-item reveal rd1">
+      <div class="fwy-num">03</div>
+      <div class="fwy-text"><strong>Не нужно много времени.</strong> 2–3 часа в неделю — программа реально совмещается с работой, бизнесом и семьёй. Систему ты строишь один раз, дальше она работает на тебя. Все уроки в записи — учишься в своём темпе.</div>
+    </div>
+    <div class="fwy-item reveal rd2">
+      <div class="fwy-num">04</div>
+      <div class="fwy-text"><strong>Неважно, есть ли у тебя аудитория.</strong> Система стартует с нуля: исследование рынка → оффер → путь клиента → контент. База подписчиков не нужна — ты создаёшь её самой системой. Есть аудитория — растёшь быстрее. Нет — начинаешь с фундамента.</div>
+    </div>
+    <div class="fwy-item wide reveal">
+      <div class="fwy-num">05</div>
+      <div class="fwy-text"><strong>Неважно, если ты уже пробовал AI и разочаровался.</strong> Если после ChatGPT осталась «вода без конкретики» — здесь мы соберём всё в систему. AI перестаёт додумывать и галлюцинировать, потому что каждый агент опирается на твои данные: <strong>ДНК бизнеса, исследование ЦА, твой Tone of Voice</strong>.</div>
+    </div>
+  </div>
+
+  <div class="who-grid">
+    <div class="who-card reveal rd1">
+      <span class="ic">🎯</span>
+      <p><strong>Для экспертов и наставников,</strong> у кого есть продукт, но нет системного потока клиентов через контент. Хочешь публиковать регулярно и по стратегии, а не «от идеи к идее».</p>
+    </div>
+    <div class="who-card reveal rd2">
+      <span class="ic">🏢</span>
+      <p><strong>Для предпринимателей и SMM,</strong> кому нужен постоянный поток контента без раздувания команды. 30+ единиц в месяц силами системы, а не пятерых подрядчиков.</p>
+    </div>
+    <div class="who-card reveal rd3">
+      <span class="ic">💡</span>
+      <p><strong>Для тех, кто начинает с нуля или не хочет быть в кадре.</strong> Собираешь контент-машину до первых охватов. Не хочешь снимать себя — AI-аватар и генерация закрывают это полностью.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ WHAT YOU GET ═══ -->
+<section class="sec sec-divider sec-dark">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Что конкретно<br>ты <em>получаешь</em></h2>
+  </div>
+  <div class="get-grid">
+    <div class="get-card reveal rd1"><div class="get-n">12</div><div class="get-desc">модулей — от первой настройки AI до автопубликаций</div></div>
+    <div class="get-card reveal rd2"><div class="get-n">5</div><div class="get-desc">основных AI-агентов под создание AI-контента</div></div>
+    <div class="get-card reveal rd3"><div class="get-n">22</div><div class="get-desc">доп. агента для узких задач</div></div>
+    <div class="get-card reveal rd4"><div class="get-n">15+</div><div class="get-desc">готовых промптов на все этапы</div></div>
+    <div class="get-card reveal rd1"><div class="get-n">5</div><div class="get-desc">документов-фундаментов любого проекта / бизнеса / блога / продукта</div></div>
+    <div class="get-card reveal rd2"><div class="get-n">7</div><div class="get-desc">форматов контента из каждой идеи</div></div>
+    <div class="get-card reveal rd3"><div class="get-n">30+</div><div class="get-desc">единиц контента в месяц</div></div>
+    <div class="get-card reveal rd4"><div class="get-n">∞</div><div class="get-desc">сама система остаётся с тобой навсегда</div></div>
+    <div class="get-card reveal rd1"><div class="get-n">1 год</div><div class="get-desc">доступа к материалам и обновлениям</div></div>
+    <div class="get-card reveal rd2"><div class="get-n">0%</div><div class="get-desc">оплата частями — до 6 платежей</div></div>
+    <div class="get-card reveal rd3"><div class="get-n">4 нед</div><div class="get-desc">личного сопровождения (Премиум/ВИП)</div></div>
+    <div class="get-card reveal rd4"><div class="get-n">✦</div><div class="get-desc">место в фокус-группе потока 2.0</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ ROADMAP ═══ -->
+<section class="sec sec-divider" id="program">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Твой путь на обучении:<br>3 этапа = <em>10 ключевых действий</em></h2>
+    <p class="sec-desc">Каждое действие опирается на предыдущее. Три этапа — от нуля до системы на автопилоте.</p>
+  </div>
+
+  <div class="rm-phases">
+    <div class="rm-phase p1 reveal rd1"><div class="rm-phase-tag">🟠 Этап 1</div><div class="rm-phase-title">Фундамент</div><div class="rm-phase-desc">Действия 00–04. Итог: 5 документов-фундаментов и 5 обученных агентов.</div></div>
+    <div class="rm-phase p2 reveal rd2"><div class="rm-phase-tag">🟡 Этап 2</div><div class="rm-phase-title">Производство</div><div class="rm-phase-desc">Действия 05–07. Итог: конвейер, который стабильно выдаёт готовый контент.</div></div>
+    <div class="rm-phase p3 reveal rd3"><div class="rm-phase-tag">🟢 Этап 3</div><div class="rm-phase-title">Автопилот</div><div class="rm-phase-desc">Действия 08–09 + Бонус. Итог: система на автопилоте.</div></div>
+  </div>
+
+  <div class="rm-wrap">
+  <div class="rm-track">
+    <div class="rm-item s1 reveal"><div class="rm-step">00</div><div><div class="rm-action">Установка — настраиваешь пространство и ставишь 5 агентов</div><div class="rm-result">= <b>вместо пустого чата — 5 специалистов под твой бизнес</b></div></div></div>
+    <div class="rm-item s1 reveal"><div class="rm-step">01</div><div><div class="rm-action">ДНК бизнеса — собираешь документ, который знает твой проект изнутри</div><div class="rm-result">= <b>каждый следующий агент видит бизнес твоими глазами</b></div></div></div>
+    <div class="rm-item s1 reveal"><div class="rm-step">02</div><div><div class="rm-action">Исследование рынка и ЦА — Deep Research в 3 нейросети + кастдевы</div><div class="rm-result">= <b>знаешь боли и язык клиента по данным, а не «на глаз»</b></div></div></div>
+    <div class="rm-item s1 reveal"><div class="rm-step">03</div><div><div class="rm-action">Оффер по Хормози — собираешь предложение, от которого сложно отказаться</div><div class="rm-result">= <b>ядро всей системы</b></div></div></div>
+    <div class="rm-item s1 reveal"><div class="rm-step">04</div><div><div class="rm-action">Путь клиента и Tone of Voice — 6 уровней осознанности + твой стиль</div><div class="rm-result">= <b>точное попадание в каждый сегмент, твоим голосом</b></div></div></div>
+    <div class="rm-milestone m1 reveal"><div class="rm-milestone-dot"></div><p>Итог этапа: 5 документов-фундаментов и 5 обученных агентов</p></div>
+    <div class="rm-item s2 reveal"><div class="rm-step">05</div><div><div class="rm-action">Контент-план и сценарии — 10–30 сценариев в нужной пропорции</div><div class="rm-result">= <b>готовые сценарии, а не «о чём бы снять»</b></div></div></div>
+    <div class="rm-item s2 reveal"><div class="rm-step">06</div><div><div class="rm-action">Производство видео — живая съёмка / AI-аватар (HeyGen) / AI-генерация</div><div class="rm-result">= <b>контент выходит, даже если ты не хочешь быть в кадре</b></div></div></div>
+    <div class="rm-item s2 reveal"><div class="rm-step">07</div><div><div class="rm-action">Монтаж — на AI или монтажёру по готовому ТЗ (Claude собирает ТЗ в 2 клика)</div><div class="rm-result">= <b>готовые ролики с субтитрами, музыкой и эффектами</b></div></div></div>
+    <div class="rm-milestone m2 reveal"><div class="rm-milestone-dot"></div><p>Итог этапа: конвейер, который стабильно выдаёт готовый контент</p></div>
+    <div class="rm-item s3 reveal"><div class="rm-step">08</div><div><div class="rm-action">Автопубликации — настраиваешь выход контента по расписанию</div><div class="rm-result">= <b>публикуется без твоего участия, 24/7</b></div></div></div>
+    <div class="rm-item s3 reveal"><div class="rm-step">09</div><div><div class="rm-action">Аналитика и масштабирование — видишь, что работает, и усиливаешь</div><div class="rm-result">= <b>рабочие форматы размножаешь, лишнее отключаешь</b></div></div></div>
+    <div class="rm-item s3 reveal"><div class="rm-step">🎁</div><div><div class="rm-action">Бонус · Маховик — с каждым циклом стоимость клиента падает</div><div class="rm-result">= <b>система разгоняется сама 🏁</b></div></div></div>
+    <div class="rm-milestone m3 reveal"><div class="rm-milestone-dot"></div><p>Итог этапа: система на автопилоте</p></div>
+  </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ MODULES ═══ -->
+<section class="sec sec-divider sec-dark">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Что конкретно<br>в <em>каждом модуле</em></h2>
+    <p class="sec-desc">Каждый модуль опирается на результат предыдущего. На выходе — не набор уроков, а работающая контент-машина. Нажми, чтобы развернуть.</p>
+  </div>
+
+  <div class="modules-grid">
+
+  <div class="module reveal" id="m0">
+    <div class="module-head" onclick="toggleModule('m0')">
+      <span class="module-num">00</span><span class="module-icon">⚙️</span>
+      <span class="module-title">Установка рабочего пространства и 5 агентов</span>
+      <span class="module-chevron">▼</span>
+    </div>
+    <div class="module-body"><div class="module-inner">
+      <ul class="module-steps">
+        <li>Регистрация в Perplexity, Parallel AI, ChatGPT, NotebookLM, Claude</li>
+        <li>Настройка рабочего пространства под систему агентов</li>
+        <li>Установка 5 основных AI-агентов в Claude</li>
+      </ul>
+      <div class="module-outcome"><p>Открываешь Claude — и вместо пустого чата видишь пять специалистов, каждый заточен под твой бизнес.</p></div>
+    </div></div>
+  </div>
+
+  <div class="module reveal" id="m1">
+    <div class="module-head" onclick="toggleModule('m1')">
+      <span class="module-num">01</span><span class="module-icon">🧬</span>
+      <span class="module-title">ДНК твоего бизнеса</span>
+      <span class="module-chevron">▼</span>
+    </div>
+    <div class="module-body"><div class="module-inner">
+      <ul class="module-steps">
+        <li>Открываешь Claude с готовым промптом для брифинга</li>
+        <li>Отвечаешь на вопросы: кто ты, что продаёшь, кому, чем отличаешься</li>
+        <li>Загружаешь материалы: лид-магниты, сайты, кастдевы, отзывы</li>
+        <li>Claude сам уточняет недостающее и собирает документ «ДНК Эксперта»</li>
+      </ul>
+      <div class="module-outcome"><p>Всё, что ты знаешь о бизнесе — в одном структурированном документе. Без него модули 2–8 работают вхолостую. С ним — каждый шаг бьёт в цель.</p></div>
+    </div></div>
+  </div>
+
+  <div class="module reveal" id="m2">
+    <div class="module-head" onclick="toggleModule('m2')">
+      <span class="module-num">02</span><span class="module-icon">🔬</span>
+      <span class="module-title">Глубокое AI-исследование рынка и ЦА</span>
+      <span class="module-chevron">▼</span>
+    </div>
+    <div class="module-body"><div class="module-inner">
+      <ul class="module-steps">
+        <li><strong>Ветка 1 — Deep Research:</strong> 3 промпта × 3 нейросети = 9–15 документов → выжимка в NotebookLM</li>
+        <li><strong>Ветка 2 — кастдевы:</strong> Claude собирает анкету → интервью 5–10 клиентов → анализ транскриптов</li>
+        <li>Выбор: 1 продукт, 1 аудитория, 1 боль — туда, где больше денег</li>
+      </ul>
+      <div class="module-outcome"><p>Документ, где чёрным по белому — что болит, что мотивирует, какими словами клиент описывает проблему. Не одна нейросеть решила — три источника подтвердили.</p></div>
+    </div></div>
+  </div>
+
+  <div class="module reveal" id="m3">
+    <div class="module-head" onclick="toggleModule('m3')">
+      <span class="module-num">03</span><span class="module-icon">💰</span>
+      <span class="module-title">Мастер офферов по методологии Хормози</span>
+      <span class="module-chevron">▼</span>
+    </div>
+    <div class="module-body"><div class="module-inner">
+      <ul class="module-steps">
+        <li>Загружаешь ДНК ЦА + интервью + описание продукта</li>
+        <li>Промпт «Агрессивный оффер» — видишь предел возможного</li>
+        <li>Промпт «Адаптация оффера» — Claude приземляет его под твою реальность</li>
+      </ul>
+      <div class="module-outcome"><p>Предложение, от которого сложно отказаться. Не текст копирайтера, а математически выверенный оффер по методологии на $100 млн. Это ядро всей системы.</p></div>
+    </div></div>
+  </div>
+
+  <div class="module reveal" id="m4">
+    <div class="module-head" onclick="toggleModule('m4')">
+      <span class="module-num">04</span><span class="module-icon">🗺️</span>
+      <span class="module-title">Путь клиента — карта на 6 уровней</span>
+      <span class="module-chevron">▼</span>
+    </div>
+    <div class="module-body"><div class="module-inner">
+      <ul class="module-steps">
+        <li>Агент разворачивает путь от «не знаю о проблеме» до «готов купить»</li>
+        <li>Для каждого уровня: что клиент думает, его возражения, какие смыслы посеять, какой контент транслировать</li>
+        <li>Календарный план прогрева + готовые логические цепочки</li>
+      </ul>
+      <div class="module-outcome"><p>Ты видишь путь клиента как на рентгене. Контент-система дальше генерирует темы с опорой именно на эту карту.</p></div>
+    </div></div>
+  </div>
+
+  <div class="module reveal" id="m5">
+    <div class="module-head" onclick="toggleModule('m5')">
+      <span class="module-num">05</span><span class="module-icon">🎙️</span>
+      <span class="module-title">Tone of Voice — твой уникальный стиль</span>
+      <span class="module-chevron">▼</span>
+    </div>
+    <div class="module-body"><div class="module-inner">
+      <ul class="module-steps">
+        <li>Загружаешь свои разговоры, видео, подкасты, транскрипты</li>
+        <li>Агент извлекает: характерные обороты, личный словарь, ритм речи, эмоциональные паттерны</li>
+        <li>Фиксирует конструкции, которые тебе использовать нельзя</li>
+      </ul>
+      <div class="module-outcome"><p>Любой текст приводится к твоей манере за один запрос. AI пишет не «за тебя», а <strong>как ты</strong>.</p></div>
+    </div></div>
+  </div>
+
+  <div class="module reveal" id="m6">
+    <div class="module-head" onclick="toggleModule('m6')">
+      <span class="module-num">06</span><span class="module-icon">📝</span>
+      <span class="module-title">Контент-план и сценарии</span>
+      <span class="module-chevron">▼</span>
+    </div>
+    <div class="module-body"><div class="module-inner">
+      <ul class="module-steps">
+        <li>Формируешь план: количество, форматы, пропорция (вирусный / прогревающий / продающий)</li>
+        <li>3 способа генерации: вирусные форматы под твои смыслы / уникальные темы от агента / перепаковка готового материала в 7 форматов</li>
+      </ul>
+      <div class="module-outcome"><p>Персонализированный контент-план и 10–30 готовых сценариев — на данных твоей аудитории, твоём оффере, твоей карте прогрева. И все звучат твоим голосом.</p></div>
+      <div class="module-note" style="margin-top:14px">🎁 Бонус модуля: <strong>мой авторский скилл по созданию сильных лид-магнитов.</strong></div>
+    </div></div>
+  </div>
+
+  <div class="module reveal" id="m7">
+    <div class="module-head" onclick="toggleModule('m7')">
+      <span class="module-num">07</span><span class="module-icon">🎥</span>
+      <span class="module-title">Производство контента — снимаешь или генерируешь</span>
+      <span class="module-chevron">▼</span>
+    </div>
+    <div class="module-body"><div class="module-inner">
+      <ul class="module-steps">
+        <li><strong>Способ 1 — живое видео:</strong> снимаешь по готовому сценарию + рекомендации по свету и оборудованию</li>
+        <li><strong>Способ 2 — AI-аватар (HeyGen):</strong> цифровая копия говорит твоим голосом — без камеры</li>
+        <li><strong>Способ 3 — AI-генерация:</strong> мини-сериалы, анимации, визуал вообще без съёмки</li>
+      </ul>
+      <div class="module-outcome"><p>Конвейер видеоконтента. Три способа — один результат: готовые исходники на монтаж.</p></div>
+    </div></div>
+  </div>
+
+  <div class="module reveal" id="m8">
+    <div class="module-head" onclick="toggleModule('m8')">
+      <span class="module-num">08</span><span class="module-icon">🎬</span>
+      <span class="module-title">Монтаж — делегируй или автоматизируй</span>
+      <span class="module-chevron">▼</span>
+    </div>
+    <div class="module-body"><div class="module-inner">
+      <ul class="module-steps">
+        <li><strong>Вариант А — монтажёр:</strong> находишь по готовой воронке найма, Claude генерирует ТЗ в 2 клика</li>
+        <li><strong>Вариант Б — AI-монтаж:</strong> субтитры, музыка, базовые эффекты автоматически — без навыков</li>
+      </ul>
+      <div class="module-outcome"><p>Готовые видео — смонтированные, с субтитрами и музыкой. Дальше уходят в автопубликацию.</p></div>
+      <div class="module-note" style="margin-top:14px">🤝 Программа соединяет участников с проверенными монтажёрами.</div>
+    </div></div>
+  </div>
+
+  <div class="module reveal" id="m9">
+    <div class="module-head" onclick="toggleModule('m9')">
+      <span class="module-num">09</span><span class="module-icon">📊</span>
+      <span class="module-title">Аналитика и масштабирование</span>
+      <span class="module-chevron">▼</span>
+    </div>
+    <div class="module-body"><div class="module-inner">
+      <ul class="module-steps">
+        <li>Аналитика в документе: просмотры, удержание, подписчики</li>
+        <li>Еженедельный/ежемесячный срез по форматам и темам</li>
+        <li>Claude говорит, почему одно видео принесло клиентов, а другое — ноль</li>
+      </ul>
+      <div class="module-outcome"><p>Ты перестаёшь гадать и начинаешь управлять. Рабочие форматы размножаешь, нерабочие убираешь. С каждым циклом стоимость клиента падает.</p></div>
+    </div></div>
+  </div>
+
+  <div class="module reveal" id="m10">
+    <div class="module-head" onclick="toggleModule('m10')">
+      <span class="module-num">🎁</span><span class="module-icon">📅</span>
+      <span class="module-title">Автопубликации</span>
+      <span class="module-chevron">▼</span>
+    </div>
+    <div class="module-body"><div class="module-inner">
+      <ul class="module-steps">
+        <li>Настройка сервиса автопубликаций</li>
+        <li>Подключение всех соцсетей</li>
+        <li>Загрузка готовых видео, фото, каруселей + расписание</li>
+        <li>Отметка каждой единицы контента после выхода</li>
+      </ul>
+      <div class="module-outcome"><p>Настраиваешь один раз — и контент выходит сам на все платформы 24/7. Больше не лежит мёртвым грузом.</p></div>
+      <div class="module-note" style="margin-top:14px">📋 Готовый список рекомендованных сервисов автопубликаций — в материалах.</div>
+    </div></div>
+  </div>
+
+  </div>
+</div>
+</section>
+
+<!-- ═══ AGENTS ═══ -->
+<section class="sec sec-divider">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Сердце системы —<br><em>5 агентов</em></h2>
+    <p class="sec-desc">Это не «промпты, которые надо докручивать». Это обученные специалисты: один знает твоего клиента лучше тебя, другой строит офферы на $100 млн, третий видит путь клиента на 6 уровней.</p>
+  </div>
+  <div class="agent-list">
+    <div class="agent-row reveal rd1"><span class="ic">🔬</span><div><h4>ДНК Целевой Аудитории</h4><p>Знает клиента по 5 частям: боли, барьеры, ожидания, триггеры к покупке. После него ты понимаешь клиента лучше, чем он сам.</p></div></div>
+    <div class="agent-row reveal rd2"><span class="ic">💰</span><div><h4>Мастер Офферов</h4><p>Обучен на «$100M Offers» Хормози, 8 готовых офферов в базе + шаблон продающей страницы из 12 блоков. На выходе — предложение, от которого невозможно отказаться.</p></div></div>
+    <div class="agent-row reveal rd3"><span class="ic">🗺️</span><div><h4>Путь Клиента</h4><p>6 уровней осознанности + стратегия прогрева с календарём. Для каждого уровня: что клиент думает, какие возражения, какие смыслы посеять, какой контент транслировать.</p></div></div>
+    <div class="agent-row reveal rd4"><span class="ic">🎙️</span><div><h4>Tone of Voice</h4><p>Извлекает твой стиль из любого транскрипта: обороты, ритм речи, эмоциональные паттерны, запрещённые конструкции. Любой текст звучит как ты.</p></div></div>
+    <div class="agent-row reveal rd4"><span class="ic">⚡</span><div><h4>Контент-Система</h4><p>Превращает любой материал в 7 форматов: Reels, карусели, посты, статьи, сторис, цитаты. Из одной идеи — неделя контента.</p></div></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ 22 AGENTS + PROMPTS ═══ -->
+<section class="sec sec-divider sec-dark">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>И это ещё не всё:<br><em>22 агента сверху</em></h2>
+    <p class="sec-desc">Пять основных агентов — это костяк. Но по ходу программы подключаются ещё <strong>22 дополнительных агента</strong> для узких задач. Каждый — готовый, с промптом. Тебе не нужно придумывать — нужно выбрать под задачу.</p>
+  </div>
+  <div class="chips reveal">
+    <span class="chip">Лид-магниты</span><span class="chip">Заголовки</span><span class="chip">Прогревы</span>
+    <span class="chip">Разбор конкурентов</span><span class="chip">Упаковка</span><span class="chip">Скрипты продаж</span>
+    <span class="chip">Хуки</span><span class="chip">Storytelling</span><span class="chip">Контент-планы</span>
+    <span class="chip">Воронки</span><span class="chip">Сторис</span><span class="chip">Карусели</span>
+    <span class="chip">Статьи</span><span class="chip">Рассылки</span><span class="chip">Тренды</span>
+    <span class="chip">Юнит-экономика</span><span class="chip">Каналы трафика</span><span class="chip">Оффер-тесты</span>
+    <span class="chip">Реклама</span><span class="chip">Отзывы</span><span class="chip">Питчи</span><span class="chip">…и другие</span>
+  </div>
+  <div class="two-grid reveal" style="margin-top:34px">
+    <div class="info-card"><span class="ic">🧾</span><h4>15+ готовых промптов</h4><p>На все этапы — от брифинга до ТЗ монтажёру. Всё связано в цепочку: результат одного модуля — вход для следующего.</p></div>
+    <div class="info-card"><span class="ic">📚</span><h4>5 документов-фундаментов</h4><p>ДНК бизнеса, ДНК ЦА, оффер, путь клиента, Tone of Voice. Я не оставляю тебя один на один с материалами — я учу ими пользоваться.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ DEEP RESEARCH FEATURE ═══ -->
+<section class="sec sec-divider">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Мощности, которых<br>нет у <em>99% конкурентов</em></h2>
+  </div>
+  <div class="feature-box reveal">
+    <p>Ты запускаешь исследование не в одну нейросеть, а параллельно в <strong>три: Perplexity, Parallel AI, ChatGPT</strong> (по желанию — Gemini и Claude).</p>
+    <p>Пересечение нескольких источников убирает додумывание и «галлюцинации» — все выводы основаны на данных, а не на фантазии одной модели.</p>
+  </div>
+</div>
+</section>
+
+<!-- ═══ SHORT LESSONS (0/100) ═══ -->
+<section class="sec sec-divider sec-dark">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Никакой воды —<br>только <em>практика</em></h2>
+  </div>
+  <div class="stat-duo reveal">
+    <div class="sd acc"><div class="n">0%</div><div class="l">воды</div></div>
+    <div class="div"></div>
+    <div class="sd"><div class="n">100%</div><div class="l">практики</div></div>
+  </div>
+  <p class="reveal" style="text-align:center;max-width:960px;margin:26px auto 0;font-size:16px;color:var(--text2);line-height:1.65">Здесь нет уроков «на 30 минут ни о чём». Каждый модуль = конкретный результат в виде документа или готового контента. Ты не «смотришь», ты <strong style="color:var(--accent-light)">собираешь работающую машину</strong> — шаг за шагом.</p>
+</div>
+</section>
+
+<!-- ═══ UPDATES ═══ -->
+<section class="sec sec-divider">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Программа живёт<br>и <em>обновляется</em> 🔒</h2>
+    <p class="sec-desc">Нейросети и агенты обновляются постоянно. Все <strong>обновления агентов и новые агенты — бесплатно в течение года</strong>. Ты всегда получаешь актуальные версии без доплат.</p>
+  </div>
+  <div class="steps3 reveal">
+    <div class="step3"><div class="sn">1</div><h4>Тестирую каждое обновление</h4><p>Нейросети и агенты — на своих проектах.</p></div>
+    <div class="step3"><div class="sn">2</div><h4>Проверяю на своих деньгах</h4><p>Своим временем и реальными задачами.</p></div>
+    <div class="step3 hot"><div class="sn">3</div><h4>И только потом отдаю тебе</h4><p>Уже отработанное — не «пойди протестируй новую модель».</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ MANIFEST QUOTE ═══ -->
+<section class="sec sec-divider">
+<div class="wrap">
+  <div class="quote-block reveal">
+    <span class="quote-mark">“</span>
+    <p class="quote-text">AI не заменяет тебя — он умножает твою экспертизу на <em>×10</em>. Ты вкладываешь смыслы и опыт. AI строит из этого систему.</p>
+  </div>
+</div>
+</section>
+
+<!-- ═══ SUPPORT / 4 недели ═══ -->
+<section class="sec sec-divider">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Это 4 недели<br><em>лично со мной</em></h2>
+    <p class="sec-desc">Ты не останешься один на один с материалом. Формат сопровождения зависит от тарифа.</p>
+  </div>
+  <div class="card-grid-4" style="max-width:1040px;margin:0 auto">
+    <div class="info-card reveal rd1"><span class="ic">🎯</span><h4>Сопровождаю на каждом этапе</h4><p>От настройки агентов до 30+ единиц контента в месяц. Ни один шаг без разбора.</p></div>
+    <div class="info-card reveal rd2"><span class="ic">📞</span><h4>4 ZOOM-созвона за поток</h4><p>Встречи группы + разборы твоих документов, сценариев и контента.</p></div>
+    <div class="info-card reveal rd3"><span class="ic">🧠</span><h4>Мой опыт — в твой проект</h4><p>Годы практики в создании контента и работы с ИИ — направлены на твою нишу. Никаких шаблонов.</p></div>
+    <div class="info-card reveal rd4"><span class="ic">🚀</span><h4>4 недели → готовая система</h4><p>12 модулей — и дальше система работает без меня.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ FORMATS ═══ -->
+<section class="sec sec-divider sec-dark">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Форматы <em>сопровождения</em></h2>
+    <p class="sec-desc">Кроме записанных уроков — живая работа со мной. Вот что это значит на тарифах Премиум и ВИП.</p>
+  </div>
+  <div class="two-side reveal">
+    <div class="side-card">
+      <div class="lbl">Групповой формат · Премиум</div>
+      <h3>Ты растёшь в потоке</h3>
+      <p style="margin-bottom:14px">Живые созвоны: разбираю твои документы, сценарии и контент — и подсказываю под нишу каждого. Новые агенты и приёмы — конкретная выжимка, а не «пустые разговоры».</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--text2)">
+        <li>✓ Групповые созвоны со мной</li>
+        <li>✓ Разборы на общих встречах</li>
+        <li>✓ Закрытый Telegram-чат группы</li>
+      </ul>
+    </div>
+    <div class="side-card warm">
+      <div class="lbl">💎 ВИП-формат</div>
+      <h3>Я погружаюсь в твой проект</h3>
+      <p style="margin-bottom:14px">Я лично проверяю твои документы, сценарии и контент, адаптирую систему под твой запрос и отвечаю в личном чате. Твои документы и контент разбираю в первую очередь.</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--text2)">
+        <li>✓ 2 созвона 1-на-1</li>
+        <li>✓ Личный чат со мной</li>
+        <li>✓ Приоритетная обратная связь</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ TIERS ═══ -->
+<section class="sec sec-divider" id="tiers">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Выбери <em>свой формат</em></h2>
+    <p class="sec-desc">Сначала посмотри, что входит в каждый формат — цены ниже.</p>
+  </div>
+
+  <div class="tiers">
+
+    <div class="tier tier--std reveal rd1">
+      <div class="tier-name">Стандарт</div>
+      <div class="tier-for">Пройти систему самостоятельно.</div>
+      <ul class="tier-list">
+        <li>12 модулей программы в записи</li>
+        <li>5 основных AI-агентов</li>
+        <li class="off"><span>22 дополнительных агента для узких задач</span></li>
+        <li>15+ готовых промптов</li>
+        <li>5 документов-фундаментов</li>
+        <li>Доступ к материалам — полгода</li>
+        <li>Обновления агентов — бесплатно полгода</li>
+        <li class="off"><span>4 ZOOM-созвона группы за поток</span></li>
+        <li class="off"><span>Проверка домашних заданий</span></li>
+        <li class="off"><span>Закрытый Telegram-чат группы</span></li>
+        <li class="off"><span>2 личных созвона со мной 1-на-1</span></li>
+        <li class="off"><span>Личный чат со мной</span></li>
+      </ul>
+    </div>
+
+    <div class="tier featured tier--prem reveal rd2">
+      <div class="tier-badge">⭐ Популярный</div>
+      <div class="tier-name">Премиум</div>
+      <div class="tier-for">Система + сопровождение в группе.</div>
+      <ul class="tier-list">
+        <li>12 модулей программы в записи</li>
+        <li>5 основных AI-агентов</li>
+        <li>22 дополнительных агента для узких задач</li>
+        <li>15+ готовых промптов</li>
+        <li>5 документов-фундаментов</li>
+        <li>Доступ к материалам — 1 год</li>
+        <li>Обновления агентов — бесплатно 1 год</li>
+        <li><strong>4 ZOOM-созвона группы за поток</strong></li>
+        <li><strong>Проверка домашних заданий</strong></li>
+        <li>Закрытый Telegram-чат группы</li>
+        <li class="off"><span>2 личных созвона со мной 1-на-1</span></li>
+        <li class="off"><span>Личный чат со мной</span></li>
+      </ul>
+    </div>
+
+    <div class="tier tier--vip reveal rd3">
+      <div class="tier-name">ВИП</div>
+      <div class="tier-for">Система + личная работа со мной.</div>
+      <ul class="tier-list">
+        <li>12 модулей программы в записи</li>
+        <li>5 основных AI-агентов</li>
+        <li>22 дополнительных агента для узких задач</li>
+        <li>15+ готовых промптов</li>
+        <li>5 документов-фундаментов</li>
+        <li>Доступ к материалам — 1 год</li>
+        <li>Обновления агентов — бесплатно 1 год</li>
+        <li>4 ZOOM-созвона группы за поток</li>
+        <li>Проверка домашних заданий</li>
+        <li>Закрытый Telegram-чат группы</li>
+        <li><strong>2 личных созвона со мной 1-на-1</strong></li>
+        <li><strong>Личный чат со мной</strong> + приоритетная обратная связь</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- FULL PRICE -->
+  <div class="price-stage reveal">
+    <div class="price-stage-head">
+      <h3 class="ps-title">Полная <em>стоимость</em></h3>
+      <p class="ps-sub">Честная цена за систему, которая заменяет команду маркетологов и работает на тебя 24/7.</p>
+    </div>
+    <div class="price-row">
+      <div class="price-card"><div class="pc-name">Стандарт</div><div class="pc-amt">$464</div></div>
+      <div class="price-card featured"><div class="pc-name">Премиум</div><div class="pc-amt">$812</div></div>
+      <div class="price-card"><div class="pc-name">ВИП</div><div class="pc-amt">$1435</div></div>
+    </div>
+  </div>
+
+  <!-- SPECIAL PRICE -->
+  <div class="price-stage price-stage--special reveal">
+    <div class="price-stage-head">
+      <span class="ps-badge">Только для участников эфира</span>
+      <h3 class="ps-title">Специальная цена — <em>здесь и сейчас</em></h3>
+      <p class="ps-sub">Я хочу, чтобы систему внедряли те, кто реально будет ею пользоваться и доведёт до результата. Выбери тариф и удобный способ оплаты.</p>
+    </div>
+    <div class="price-row">
+      <div class="price-card">
+        <div class="pc-name">Стандарт</div>
+        <div class="pc-seats">Осталось 10 из 20 мест</div>
+        <div class="pc-old">$464</div>
+        <div class="pc-amt">$320</div>
+        <div class="pc-save">выгода −$144</div>
+        <div class="pc-mo">или от $54/мес × 6 платежей</div>
+        <div class="pc-btns">
+          <a href="#" data-buy="std-pay" class="tier-btn btn-pay">Оплатить полностью</a>
+          <a href="#" data-buy="std-parts" class="tier-btn btn-parts">Оплата частями</a>
+          <a href="#" data-buy="book" class="tier-btn btn-book">Бронь · 2000 грн</a>
+        </div>
+      </div>
+      <div class="price-card featured">
+        <div class="pc-name">Премиум</div>
+        <div class="pc-seats">Осталось 10 из 20 мест</div>
+        <div class="pc-old">$812</div>
+        <div class="pc-amt">$560</div>
+        <div class="pc-save">выгода −$252</div>
+        <div class="pc-mo">или от $94/мес × 6 платежей</div>
+        <div class="pc-btns">
+          <a href="#" data-buy="prem-pay" class="tier-btn btn-pay">Оплатить полностью</a>
+          <a href="#" data-buy="prem-parts" class="tier-btn btn-parts">Оплата частями</a>
+          <a href="#" data-buy="book" class="tier-btn btn-book">Бронь · 2000 грн</a>
+        </div>
+      </div>
+      <div class="price-card">
+        <div class="pc-name">ВИП</div>
+        <div class="pc-seats">Осталось 10 из 20 мест</div>
+        <div class="pc-old">$1435</div>
+        <div class="pc-amt">$990</div>
+        <div class="pc-save">выгода −$445</div>
+        <div class="pc-mo">или от $165/мес × 6 платежей</div>
+        <div class="pc-btns">
+          <a href="#" data-buy="vip-pay" class="tier-btn btn-pay">Оплатить полностью</a>
+          <a href="#" data-buy="vip-parts" class="tier-btn btn-parts">Оплата частями</a>
+          <a href="#" data-buy="book" class="tier-btn btn-book">Бронь · 2000 грн</a>
+        </div>
+      </div>
+    </div>
+    <p class="book-note">💡 <strong>«Бронь»</strong> — вносишь предоплату 2000 грн и фиксируешь за собой место в фокус-группе по специальной цене до старта. Эта сумма <strong>полностью засчитывается в стоимость</strong> программы.</p>
+  </div>
+
+  <!-- MANAGER -->
+  <div class="manager-cta reveal">
+    <div>
+      <h3>Нет удобного способа оплаты?</h3>
+      <p>Не проходит платёж, недоступна оплата частями в твоём банке или просто хочешь посоветоваться по тарифу — напиши менеджеру. Менеджер поможет войти в программу и подберёт удобный вариант оплаты.</p>
+    </div>
+    <a href="#" data-buy="manager" class="tier-btn mc-btn">Связаться с менеджером →</a>
+  </div>
+
+  <!-- INSTALLMENTS -->
+  <div class="install-block reveal">
+    <h3 class="install-title">Оплата <em>частями</em> — 0% и без переплат</h3>
+    <div class="install-bar">
+      <div class="ib-left">
+        <span class="ib-zero">0%</span>
+        <div><div class="ib-t">0% оплата частями</div><div class="ib-s">до 6 платежей · без переплат и процентов</div></div>
+      </div>
+      <div class="ib-banks">
+        <span class="bank b-mono">mono</span>
+        <span class="bank b-abank">А-Банк</span>
+        <span class="bank b-otp">OTP Bank</span>
+        <span class="bank b-globus">ГлобусБанк</span>
+      </div>
+    </div>
+    <div class="install-grid">
+      <div class="install-card"><div class="ic-name">Стандарт</div><div class="ic-amt">от $54<span>/мес</span></div><div class="ic-sub">6 равных платежей</div></div>
+      <div class="install-card featured"><div class="ic-name">Премиум</div><div class="ic-amt">от $94<span>/мес</span></div><div class="ic-sub">6 равных платежей</div></div>
+      <div class="install-card"><div class="ic-name">ВИП</div><div class="ic-amt">от $165<span>/мес</span></div><div class="ic-sub">6 равных платежей</div></div>
+    </div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="bonus-block reveal">
+    <div class="bonus-head">
+      <span class="bonus-eyebrow">🎁 Бонусы за решение сейчас</span>
+      <h3 class="bonus-title">И это <em>ещё не всё</em></h3>
+      <p class="ps-sub">Достаются тем, кто присоединяется или бронирует до конца дня.</p>
+    </div>
+    <div class="bonus-grid">
+      <div class="bonus-item"><span class="ic">🎁</span><p><strong>Мой авторский скилл по сильным лид-магнитам</strong> — чтобы контент не просто набирал охваты, а собирал базу.</p></div>
+      <div class="bonus-item"><span class="ic">🎁</span><p><strong>Дополнительные промпты Deep Research</strong> по 6 блокам: каналы трафика конкурентов, неочевидные каналы, тренды 2026, юнит-экономика, декомпозиция каналов, контент-стратегия.</p></div>
+      <div class="bonus-item"><span class="ic">🎁</span><p><strong>Упаковка исследования в финальный маркетинговый план.</strong></p></div>
+    </div>
+    <div class="bonus-timer">⏳ Бонусы сгорают в конце дня — успей присоединиться сегодня</div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══ MATH ═══ -->
+<section class="sec sec-divider sec-dark">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Простая <em>математика</em></h2>
+    <p class="sec-desc">Нанимаешь маркетолога или сценариста — это <strong>$400–500 в месяц</strong>. Каждый месяц. И часто на выходе — шаблонные сценарии, которые не цепляют твою аудиторию. Пробуешь сам — тратишь десятки часов, а контент всё равно слабый.</p>
+  </div>
+  <div class="math-eq reveal">
+    <span class="acc">$400–500/мес</span><span class="dim">× каждый месяц</span><span class="dim">vs</span><span class="acc">один раз</span><span>= система на 27 агентов навсегда</span>
+  </div>
+  <div class="steps3 reveal" style="margin-top:34px">
+    <div class="step3"><div class="sn">1</div><h4>Входишь сейчас</h4><p>$560 (Премиум), при рассрочке — от $94 на старте.</p></div>
+    <div class="step3"><div class="sn">2</div><h4>Отбиваешь за 1–2 клиента</h4><p>Один клиент, привлечённый через систему, окупает участие. А контент работает на тебя каждый день.</p></div>
+    <div class="step3 hot"><div class="sn">3</div><h4>Работаешь в плюс</h4><p>Система остаётся навсегда. Стоимость клиента падает с каждым циклом.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ TWO PATHS ═══ -->
+<section class="sec sec-divider">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Есть два пути. <em>Выбирай свой</em></h2>
+  </div>
+  <div class="two-side reveal">
+    <div class="side-card">
+      <div class="lbl">Долгий путь</div>
+      <p>Собирать систему самому — методом проб и ошибок, отдельными инструментами, месяцами. И каждый ролик — как первый.</p>
+    </div>
+    <div class="side-card warm">
+      <div class="lbl">Быстрый путь</div>
+      <p>Получить готовую систему из 27 агентов за 4 недели с моим сопровождением — и отбить вложение первыми же клиентами.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ GUARANTEE / поток 2.0 ═══ -->
+<section class="sec sec-divider">
+<div class="wrap">
+  <div class="guarantee reveal">
+    <div class="shield">🛡️</div>
+    <div>
+      <h3>Это уже второй поток. И это твоё преимущество</h3>
+      <p>Первый поток фокус-группы прошёл. Я собрал обратную связь реальных участников — и <strong>усилил агентов и инструменты под их запросы</strong>. Теперь у меня есть чёткое понимание, как передать эту систему так, чтобы ты дошёл до результата. Все узкие места первого потока — закрыты.</p>
+      <span class="pill">Ты заходишь не в эксперимент. Ты заходишь в отлаженную систему.</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ NEURO COSTS ═══ -->
+<section class="sec sec-divider">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Честно о расходах<br>на <em>инструменты</em></h2>
+    <p class="sec-desc">Никаких скрытых подписок «сюрпризом». Весь стек — прозрачно.</p>
+  </div>
+  <div class="cost-block reveal">
+    <div class="cost-main">
+      <div class="cost-tag">Итого</div>
+      <div class="cost-amt">≈ $44</div>
+      <div class="cost-per">в месяц за весь стек</div>
+    </div>
+    <div class="cost-note">
+      <p>Инструменты, которые <strong>заменяют команду маркетологов.</strong> Многие агенты работают и на бесплатных лимитах — платное подключаешь, когда система уже приносит клиентов.</p>
+      <p>Никаких маркетологов за $800–1500, сценаристов и монтажёров в штате. Без слива денег «на пробу».</p>
+    </div>
+  </div>
+  <div class="cost-grid reveal">
+    <div class="cost-mini"><h5>Claude Pro</h5><span>$20/мес</span></div>
+    <div class="cost-mini"><h5>Perplexity</h5><span>$18/мес</span></div>
+    <div class="cost-mini"><h5>ChatGPT</h5><span>$6/мес</span></div>
+    <div class="cost-mini"><h5>Parallel AI · NotebookLM</h5><span>бесплатно</span></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ OBJECTIONS ═══ -->
+<section class="sec sec-divider sec-dark">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>«Да, я хочу, но…»<br><em>Разберём каждое сомнение честно</em></h2>
+  </div>
+
+  <div class="obj-grid">
+
+    <div class="obj-item reveal rd1" id="obj1" onclick="toggleObj('obj1')">
+      <div class="obj-head"><div class="obj-q"><span class="obj-icon">💸</span><span class="obj-text">«Дорого. Я ещё ничего не заработал на контенте»</span></div><div class="obj-arr">+</div></div>
+      <div class="obj-body"><div class="obj-inner">
+        <p>Один месяц маркетолога — $800–1500 за шаблонные сценарии. Здесь ты получаешь систему из 27 агентов от $320 — один раз, навсегда. Один клиент через систему окупает участие.</p>
+        <p>Моя задача — не «продать курс», а довести тебя до работающей контент-машины. И да — есть рассрочка до 6 платежей от $54/мес.</p>
+        <span class="cta-line">→ Переходи по ссылке и присоединяйся</span>
+      </div></div>
+    </div>
+
+    <div class="obj-item reveal rd2" id="obj2" onclick="toggleObj('obj2')">
+      <div class="obj-head"><div class="obj-q"><span class="obj-icon">🧩</span><span class="obj-text">«У меня нет технических навыков. Точно не разберусь»</span></div><div class="obj-arr">+</div></div>
+      <div class="obj-body"><div class="obj-inner">
+        <p>Программа рассчитана на экспертов и предпринимателей без технического бэкграунда. Всё построено на готовых промптах и пошаговых инструкциях — ты просто следуешь системе.</p>
+        <p>Открываешь Claude, вставляешь готовый промпт — и следуешь шагам. Умеешь пользоваться браузером — справишься.</p>
+        <span class="cta-line">→ Переходи по ссылке и присоединяйся</span>
+      </div></div>
+    </div>
+
+    <div class="obj-item reveal rd1" id="obj3" onclick="toggleObj('obj3')">
+      <div class="obj-head"><div class="obj-q"><span class="obj-icon">⏰</span><span class="obj-text">«Нет времени — работа, бизнес, всё занято»</span></div><div class="obj-arr">+</div></div>
+      <div class="obj-body"><div class="obj-inner">
+        <p>Система строится один раз, а дальше работает на тебя. Твоё вовлечение — 2–3 часа в неделю. Все уроки в записи, смотришь в своём темпе.</p>
+        <p>Если есть время листать чужие Reels — есть время собрать конвейер, который делает твои. Разница в том, что после остаётся система, а не «посмотрел».</p>
+        <span class="cta-line">→ Переходи по ссылке и присоединяйся</span>
+      </div></div>
+    </div>
+
+    <div class="obj-item reveal rd2" id="obj4" onclick="toggleObj('obj4')">
+      <div class="obj-head"><div class="obj-q"><span class="obj-icon">😮‍💨</span><span class="obj-text">«Я уже пробовал AI — получил воду без конкретики»</span></div><div class="obj-arr">+</div></div>
+      <div class="obj-body"><div class="obj-inner">
+        <p>Потому что ты давал нейросети пустой запрос. Здесь каждый агент опирается на твои данные: ДНК бизнеса, исследование ЦА по трём источникам, твой Tone of Voice. AI перестаёт додумывать — он работает на фактах.</p>
+        <p>Это не разрозненные инструменты, а единая система, где результат одного шага — вход для следующего. И она уже доработана по итогам первого потока.</p>
+        <span class="cta-line">→ Переходи по ссылке и присоединяйся</span>
+      </div></div>
+    </div>
+
+    <div class="obj-item reveal" id="obj5" onclick="toggleObj('obj5')">
+      <div class="obj-head"><div class="obj-q"><span class="obj-icon">🔄</span><span class="obj-text">«Приду на следующий поток. Пока не время»</span></div><div class="obj-arr">+</div></div>
+      <div class="obj-body"><div class="obj-inner">
+        <p>Следующий поток будет — но дороже и без такого личного вовлечения. Сейчас цена для эфира и мест всего 20.</p>
+        <p>Пока ты ждёшь «удобного момента», конкуренты уже строят контент-системы. «Не время» почти всегда значит «ещё не решил».</p>
+        <span class="cta-line">→ Переходи по ссылке и присоединяйся</span>
+      </div></div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- ═══ AUTHOR ═══ -->
+<section class="sec sec-divider">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <h2>Кто <em>автор системы</em></h2>
+  </div>
+  <div class="author-block reveal">
+    <div class="author-photo"><img src="/ai-konveyer-efir/roman.jpg" alt="Роман Прокопов" loading="lazy" width="200" height="200"></div>
+    <div>
+      <div class="author-name">Роман Прокопов</div>
+      <ul class="author-list">
+        <li>Автор системы <strong>«AI Контент-Конвейер»</strong> из 27 AI-агентов</li>
+        <li>Годы практики в создании контента и работе с ИИ</li>
+        <li>Собрал <strong>обратную связь первого потока</strong> и усилил агентов под реальные запросы</li>
+        <li>4 недели лично сопровождаю участников — <strong>от настройки агентов до 30+ единиц контента в месяц</strong></li>
+        <li>AI — это <strong>не «магия кнопки»</strong>, а системный подход и авторские инструменты</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ FINAL CTA ═══ -->
+<section class="cta-sec">
+<div class="wrap">
+  <div class="cta-num reveal">10 / 20</div>
+  <h2 class="reveal">Успей занять<br>своё <em>место</em></h2>
+  <p class="reveal">Мест всего 20, потому что я работаю с каждым лично. Беру в поток тех, кто действительно готов построить систему за эти 4 недели.</p>
+  <div class="deadline reveal" style="margin-top:36px">
+    <div class="dl now"><div class="dlh">🔥 Сегодня, на эфире</div><p><strong>Спец-цены</strong> $320 / $560 / $990</p><p>+ все бонусы</p><p>+ бронь предоплатой 2000 грн</p></div>
+    <div class="dl"><div class="dlh">⌛ Потом, для всех</div><p>Полные цены $464 / $812 / $1435</p><p>без бонусов</p></div>
+  </div>
+  <p class="reveal" style="margin-top:26px;font-family:var(--font-display);font-weight:700;color:var(--accent-light)">Закрою набор — цены вернутся к полным. Второго такого окна не будет.</p>
+  <a href="#tiers" class="btn reveal">Занять место →</a>
+</div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="wrap">
+    <h4 class="ft-support-h">По любым вопросам пишите в поддержку ↓</h4>
+    <a href="#" data-buy="support" class="ft-support">💬 Техническая поддержка</a>
+    <div class="ft-ents">
+      <p class="ft-ent"><strong>ЗЕМЛЯНИЙ МИХАЙЛО СЕРГІЙОВИЧ ФОП</strong>ЄДРПОУ 3758302175<br>m.zemlyanie@gmail.com</p>
+    </div>
+    <div class="ft-links">
+      <a href="/politika.html">Политика конфиденциальности</a>
+      <a href="/oferta.html">Публичная оферта</a>
+    </div>
+    <p class="ft-disclaimer"><strong>ВАЖНО:</strong> все продукты и сервисы предназначены для образовательных целей. Мы не даём гарантий, что вы достигнете определённых результатов с помощью наших инструментов, стратегий или информации. Вы несёте ответственность за свои действия и результаты.</p>
+    <p class="ft-copy">© 2026 · AI Контент-Конвейер · Роман Прокопов</p>
+  </div>
+</footer>
+
+<!-- sticky mobile buy bar -->
+<div class="buybar" id="buybar">
+  <div class="bb-price">
+    <span class="bb-old">$812</span>
+    <span class="bb-now">от $560</span>
+  </div>
+  <a href="#tiers" class="btn">Занять место →</a>
+</div>
+
+<script>
+function toggleObj(id){
+  var el=document.getElementById(id);
+  var open=el.classList.contains('open');
+  document.querySelectorAll('.obj-item.open').forEach(function(i){i.classList.remove('open')});
+  if(!open)el.classList.add('open');
+}
+function toggleModule(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+/* reveal on scroll — with failsafes so content is NEVER stuck hidden */
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.reveal'));
+  function show(el){el.classList.add('vis')}
+  function revealAll(){els.forEach(show)}
+  if(!('IntersectionObserver' in window)){revealAll();return}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){show(e.target);io.unobserve(e.target)}});
+  },{threshold:0.08,rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(el){io.observe(el)});
+  function revealInView(){
+    var h=window.innerHeight||0;
+    els.forEach(function(el){
+      if(el.classList.contains('vis'))return;
+      var r=el.getBoundingClientRect();
+      if(r.top < h*0.95){show(el)}
+    });
+  }
+  revealInView();
+  window.addEventListener('load',revealInView);
+  var once=function(){revealInView();window.removeEventListener('scroll',once)};
+  window.addEventListener('scroll',once,{passive:true});
+  setTimeout(revealAll,3500);
+})();
+
+/* sticky buy bar after hero */
+var bar=document.getElementById('buybar');
+var hero=document.querySelector('.hero');
+window.addEventListener('scroll',function(){
+  if(window.scrollY>(hero?hero.offsetHeight:600)){bar.classList.add('show')}
+  else{bar.classList.remove('show')}
+},{passive:true});
+</script>
+</body>
+</html>
