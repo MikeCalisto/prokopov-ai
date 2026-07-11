@@ -126,12 +126,7 @@
           <span>LIVE · AI-DEMO</span>
         </div>
         <div class="video-9-16 hero-video-box">
-          <iframe
-            data-yt="NPMrWHVV18I"
-            data-src="https://www.youtube-nocookie.com/embed/NPMrWHVV18I?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1"
-            title="Промо: створи живого АІ-аватара"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen loading="lazy"></iframe>
+          <video data-vsrc="1.mp4" muted loop playsinline preload="metadata"></video>
           <div class="click-blocker"></div>
         </div>
       </div>
@@ -320,12 +315,7 @@
             <p class="lead">Найреалістичніший спосіб — твій двійник з твого власного відео.</p>
 
             <div class="video-9-16">
-              <iframe
-                data-yt="0cxE-ZKzvMw"
-                data-src="https://www.youtube-nocookie.com/embed/0cxE-ZKzvMw?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1"
-                title="Урок 2"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen loading="lazy"></iframe>
+              <video data-vsrc="1.mp4" muted loop playsinline preload="none"></video>
               <div class="click-blocker"></div>
             </div>
 
@@ -348,12 +338,7 @@
             <p class="lead">Спосіб для тих, у кого взагалі немає відео себе — або не хочеться знімати.</p>
 
             <div class="video-9-16">
-              <iframe
-                data-yt="4wjnKdZQtDs"
-                data-src="https://www.youtube-nocookie.com/embed/4wjnKdZQtDs?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1"
-                title="Урок 3"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen loading="lazy"></iframe>
+              <video data-vsrc="2.mp4" muted loop playsinline preload="none"></video>
               <div class="click-blocker"></div>
             </div>
 
@@ -376,12 +361,7 @@
             <p class="lead">Найпотужніший спосіб — повне керування рухами й мімікою аватара.</p>
 
             <div class="video-9-16">
-              <iframe
-                data-yt="5by98eyAMDo"
-                data-src="https://www.youtube-nocookie.com/embed/5by98eyAMDo?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1"
-                title="Урок 4"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen loading="lazy"></iframe>
+              <video data-vsrc="3.mp4" muted loop playsinline preload="none"></video>
               <div class="click-blocker"></div>
             </div>
 
@@ -1180,6 +1160,25 @@
       document.querySelectorAll('iframe[data-yt]').forEach(iframe => {
         ioVid.observe(iframe);
       });
+    })();
+
+    /* ==================== Lazy-load native <video> + pause when offscreen ==================== */
+    /* Videos start with data-vsrc; real src is set only when first in viewport, then play/pause */
+    (function () {
+      const ioNat = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          const v = e.target;
+          if (e.isIntersecting) {
+            if (!v.src) { v.src = v.dataset.vsrc; }
+            const p = v.play();
+            if (p && p.catch) p.catch(() => {});
+          } else {
+            try { v.pause(); } catch (_) {}
+          }
+        });
+      }, { threshold: 0, rootMargin: '200px 0px 200px 0px' });
+
+      document.querySelectorAll('video[data-vsrc]').forEach(v => ioNat.observe(v));
     })();
   </script>
 
