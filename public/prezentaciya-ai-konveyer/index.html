@@ -441,6 +441,18 @@ p:first-child{margin-top:0;}
   .hero-emblem{right:-200px; opacity:.5;}
   .hero-orb{filter:blur(48px); opacity:.4;}
 }
+/* reusable fancy background on key slides */
+.fx{overflow:hidden;}
+.fx .slide-inner{position:relative; z-index:3;}
+.fx.divider::before{opacity:.5;}
+/* variant B — emblem/glow on the left */
+.fx.v2 .base{background:radial-gradient(60% 60% at 84% 26%, rgba(232,146,26,.20), transparent 62%), radial-gradient(55% 55% at 12% 80%, rgba(233,182,70,.13), transparent 60%);}
+.fx.v2 .hero-emblem{right:auto; left:-150px;}
+.fx.v2 .hero-emblem.two{right:auto; left:-40px;}
+/* variant C — top-centred glow, emblem high-right */
+.fx.v3 .base{background:radial-gradient(72% 66% at 50% 14%, rgba(232,146,26,.19), transparent 66%);}
+.fx.v3 .hero-emblem{right:-180px; top:-12%;}
+.fx.v3 .hero-emblem.two{left:-60px; right:auto; top:auto; bottom:-6%;}
 </style>
 </head>
 <body>
@@ -726,7 +738,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- 16 ПРОГРАММА -->
-<section class="slide divider">
+<section class="slide divider fx">
   <div class="slide-inner">
     <div class="kicker">Программа</div>
     <h1 class="big" style="margin-top:14px">AI Контент-<br>Конвейер 2.0</h1>
@@ -903,7 +915,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- 28 BRIDGE 27 агентов -->
-<section class="slide divider">
+<section class="slide divider fx v2">
   <div class="slide-inner">
     <h1 class="big">Сердце системы —<br>5 агентов</h1>
     <p class="lead">Это не «промпты, которые надо докручивать». Это обученные специалисты: один знает твоего клиента лучше тебя, другой строит офферы на $100 млн, третий видит путь клиента на 6 уровней.</p>
@@ -1056,7 +1068,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- 40 обновления -->
-<section class="slide divider">
+<section class="slide divider fx v3">
   <div class="slide-inner">
     <h1 class="big">Программа живёт<br>и обновляется 🔒</h1>
     <p class="lead">Нейросети и агенты обновляются постоянно. Все <strong>обновления агентов и новые агенты — бесплатно в течение года</strong>. Ты всегда получаешь актуальные версии без доплат.</p>
@@ -1160,7 +1172,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- 49 ТАРИФЫ -->
-<section class="slide divider">
+<section class="slide divider fx">
   <div class="slide-inner">
     <h1 class="big">Тарифы</h1>
   </div>
@@ -1339,7 +1351,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- 60 математика -->
-<section class="slide divider">
+<section class="slide divider fx v2">
   <div class="slide-inner">
     <h1 class="big">Простая математика</h1>
     <p class="lead">Нанимаешь маркетолога или сценариста — это <strong>$400–500 в месяц</strong>. Каждый месяц. И часто на выходе — шаблонные сценарии, которые не цепляют твою аудиторию.</p>
@@ -1460,7 +1472,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- 72 да но -->
-<section class="slide divider">
+<section class="slide divider fx v3">
   <div class="slide-inner">
     <h1 class="big">«Да, я хочу, но…»</h1>
     <p class="lead">Разберём каждое сомнение честно.</p>
@@ -1651,6 +1663,20 @@ p:first-child{margin-top:0;}
     }
     nodes.forEach((n,i)=>setTimeout(()=>n.classList.add('on'), 300+i*260));
   }
+
+  // inject fancy animated background into key slides tagged .fx
+  const fxTemplate = '<div class="hero-bg" aria-hidden="true">'
+    + '<div class="base"></div><div class="hero-grid"></div>'
+    + '<div class="hero-emblem"></div><div class="hero-emblem two"></div>'
+    + '<div class="hero-orb o1"></div><div class="hero-orb o2"></div><div class="hero-orb o3"></div>'
+    + '<div class="hero-flow f1"></div><div class="hero-flow f2"></div><div class="hero-flow f3"></div>'
+    + '<span class="spark" style="left:14%;top:76%;animation-duration:9s;animation-delay:-1s"></span>'
+    + '<span class="spark" style="left:30%;top:84%;animation-duration:11s;animation-delay:-4s"></span>'
+    + '<span class="spark" style="left:52%;top:70%;animation-duration:8s;animation-delay:-2s"></span>'
+    + '<span class="spark" style="left:72%;top:82%;animation-duration:12s;animation-delay:-6s"></span>'
+    + '<span class="spark" style="left:86%;top:74%;animation-duration:10s;animation-delay:-3s"></span>'
+    + '</div>';
+  deck.querySelectorAll('.slide.fx').forEach(s=>{ if(!s.querySelector('.hero-bg')) s.insertAdjacentHTML('afterbegin', fxTemplate); });
 
   render();
   // hash deep-link (?s=NN)
