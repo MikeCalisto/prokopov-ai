@@ -106,6 +106,15 @@ h1 {
   text-transform:none;
 }
 h1 .q { color: var(--accent); }
+.video-title {
+  margin: 0 0 32px;
+  font-size: clamp(26px, 4vw, 44px);
+  line-height: 1.12;
+}
+.video-title .accent {
+  background: linear-gradient(180deg, var(--accent-light), var(--accent) 60%, var(--accent-deep));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
 .mark {
   position:relative;
   background: linear-gradient(180deg, transparent 55%, rgba(232,146,26,0.85) 55%);
@@ -260,6 +269,9 @@ h1 .q { color: var(--accent); }
 
 <!-- ============ ACTIVE PAGE ============ -->
 <main class="page wrap" id="page">
+  <!-- TITLE -->
+  <h1 class="video-title">Додаткове відео до міні-курсу<br><span class="accent">АІ аватар</span></h1>
+
   <!-- VIDEO -->
   <div class="video-wrap" id="videoWrap">
     <div class="facade" id="facade" style="background-image:url('https://i.ytimg.com/vi/ECkQnGAmGos/hqdefault.jpg')">
