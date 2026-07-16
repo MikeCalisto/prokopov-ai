@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бесплатный урок — Роман Прокопов</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://i.ytimg.com">
+<link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #060608;
+  --bg-soft: #0a0a10;
+  --bg-card: #0d0d12;
+  --bg-elev: #141420;
+  --accent: #e8921a;
+  --accent-light: #f5b34a;
+  --accent-deep: #c77010;
+  --accent-glow: rgba(232,146,26,0.25);
+  --accent-glow-strong: rgba(232,146,26,0.45);
+  --danger: #ff4d4d;
+  --danger-glow: rgba(255,77,77,0.22);
+  --text: #f2ede3;
+  --text-muted: #9a948a;
+  --text-dim: #5a564e;
+  --border: #1e1e2a;
+  --border-strong: #2a2a36;
+  --border-accent: rgba(232,146,26,0.32);
+  --font-display: 'Tektur', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; min-width:0; }
+img, svg, video, iframe { max-width:100%; display:block; }
+html { scroll-behavior:smooth; overflow-x:hidden; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+body::before {
+  content:''; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(ellipse at 70% 8%, rgba(232,146,26,0.16) 0%, transparent 45%),
+    radial-gradient(ellipse at 12% 92%, rgba(232,146,26,0.10) 0%, transparent 50%),
+    var(--bg);
+}
+body::after {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:0.5;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+::selection { background: var(--accent); color:#000; }
+
+.wrap { max-width: 900px; margin:0 auto; padding: 0 24px; }
+@media (max-width:640px){ .wrap{ padding:0 18px; } }
+
+.page {
+  min-height:100vh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding: clamp(48px,8vw,90px) 0;
+  text-align:center;
+}
+
+/* ===== EYEBROW ===== */
+.eyebrow {
+  display:inline-flex; align-items:center; gap:10px;
+  font-family: var(--font-display);
+  font-size:11px; font-weight:800; letter-spacing:3.5px; text-transform:uppercase;
+  color: var(--accent);
+  padding:8px 18px;
+  background: rgba(232,146,26,0.08);
+  border:1px solid var(--border-accent);
+  border-radius:40px;
+}
+.eyebrow::before {
+  content:''; width:6px; height:6px; border-radius:50%;
+  background: var(--accent); box-shadow:0 0 10px var(--accent);
+}
+
+.kicker {
+  margin-top:28px;
+  font-family: var(--font-display);
+  font-weight:700; font-size:15px; letter-spacing:1px;
+  color: var(--accent-light);
+  text-transform:none;
+}
+
+/* ===== HEADLINE ===== */
+h1 {
+  margin-top:18px;
+  font-family: var(--font-display);
+  font-weight:900;
+  font-size: clamp(30px, 5.4vw, 56px);
+  line-height:1.08;
+  letter-spacing:-1.5px;
+  text-transform:none;
+}
+h1 .q { color: var(--accent); }
+.mark {
+  position:relative;
+  background: linear-gradient(180deg, transparent 55%, rgba(232,146,26,0.85) 55%);
+  padding: 0 4px;
+  border-radius:3px;
+  color: var(--text);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* ===== TIMER ===== */
+.timer-wrap { margin-top:38px; }
+.timer-label {
+  font-family: var(--font-display);
+  font-size:11px; font-weight:800; letter-spacing:3px; text-transform:uppercase;
+  color: var(--text-muted);
+  margin-bottom:14px;
+}
+.timer {
+  display:inline-flex; align-items:flex-start; gap:10px;
+}
+.timer-unit { display:flex; flex-direction:column; align-items:center; gap:8px; }
+.timer-box {
+  min-width:78px; padding:14px 10px 12px;
+  background: linear-gradient(180deg, var(--bg-elev), var(--bg-card));
+  border:1px solid var(--border-accent);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45), inset 0 0 26px rgba(232,146,26,0.06);
+}
+.timer-box .num {
+  font-family: var(--font-display);
+  font-weight:900; font-size: clamp(34px,6vw,48px);
+  line-height:1;
+  background: linear-gradient(180deg, var(--accent-light), var(--accent) 60%, var(--accent-deep));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  font-variant-numeric: tabular-nums;
+}
+.timer-unit .cap {
+  font-family: var(--font-display);
+  font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  color: var(--text-dim);
+}
+.timer-sep {
+  font-family: var(--font-display);
+  font-weight:900; font-size: clamp(28px,5vw,42px);
+  color: var(--accent);
+  line-height: 1; padding-top: 18px; opacity:.6;
+}
+.timer-note {
+  margin-top:14px; font-size:13px; color: var(--text-muted);
+}
+
+/* ===== VIDEO ===== */
+.video-wrap {
+  margin-top:40px; width:100%;
+  position:relative; aspect-ratio:16/9;
+  border-radius: var(--radius-lg);
+  overflow:hidden;
+  border:1px solid var(--border-strong);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(232,146,26,0.08);
+  background:#000;
+}
+.video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+.facade {
+  position:absolute; inset:0; cursor:pointer;
+  background-size:cover; background-position:center;
+}
+.facade::after {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.2), rgba(0,0,0,0.55));
+}
+.play-btn {
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:88px; height:88px; border-radius:50%; z-index:2;
+  background: linear-gradient(135deg,#ff5f5f,#e12222);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 12px 40px rgba(225,34,34,0.5);
+  transition: transform .3s ease;
+}
+.facade:hover .play-btn { transform:translate(-50%,-50%) scale(1.08); }
+.play-btn::before {
+  content:''; position:absolute; inset:-14px; border-radius:50%;
+  border:2px solid rgba(255,95,95,0.4);
+  animation: pulse 2.2s ease-out infinite;
+}
+@keyframes pulse { 0%{transform:scale(1);opacity:.8} 100%{transform:scale(1.5);opacity:0} }
+.play-btn svg { width:34px; height:34px; margin-left:5px; fill:#fff; }
+
+/* ===== CTA BUTTON ===== */
+.cta-zone { margin-top:40px; min-height:10px; width:100%; }
+.cta-hint {
+  font-size:14px; color: var(--text-dim);
+  display:flex; align-items:center; justify-content:center; gap:10px;
+}
+.cta-hint .lock { color: var(--accent); }
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:12px;
+  font-family: var(--font-display); font-weight:800; font-size:16px;
+  letter-spacing:1.5px; text-transform:uppercase;
+  padding:22px 46px; border-radius:60px; border:none; cursor:pointer;
+  text-decoration:none; position:relative; overflow:hidden;
+  background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 45%, var(--accent-deep) 100%);
+  color:#140a00;
+  box-shadow: 0 0 0 1px rgba(255,215,130,0.35) inset, 0 0 40px var(--accent-glow), 0 14px 34px rgba(0,0,0,0.4);
+  transition: transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s;
+}
+.btn:hover { transform:translateY(-3px) scale(1.02); box-shadow:0 0 0 1px rgba(255,215,130,0.55) inset, 0 0 70px var(--accent-glow-strong), 0 16px 44px rgba(0,0,0,0.5); }
+.btn::before {
+  content:''; position:absolute; top:0; left:-80%; width:60%; height:100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform: skewX(-20deg); transition:left .8s ease;
+}
+.btn:hover::before { left:140%; }
+
+/* reveal animation */
+.reveal { animation: reveal .6s ease both; }
+@keyframes reveal { from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none} }
+
+/* ===== EXPIRED ===== */
+.expired {
+  display:flex; flex-direction:column; align-items:center; gap:22px;
+  max-width:560px; padding: clamp(36px,6vw,60px) clamp(24px,5vw,48px);
+  background: var(--bg-card);
+  border:1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow:0 30px 80px rgba(0,0,0,0.6);
+}
+.expired .ic {
+  width:78px; height:78px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background: rgba(255,77,77,0.12); border:1px solid rgba(255,77,77,0.35);
+  font-size:36px;
+}
+.expired h2 {
+  font-family: var(--font-display); font-weight:900;
+  font-size: clamp(26px,4vw,38px); line-height:1.1;
+}
+.expired p { color: var(--text-muted); font-size:16px; }
+
+.hidden { display:none !important; }
+
+@media (max-width:640px){
+  .timer-box{ min-width:60px; padding:11px 6px 9px; }
+  .timer{ gap:6px; }
+  .play-btn{ width:72px; height:72px; }
+  .play-btn svg{ width:28px; height:28px; }
+  .btn{ width:100%; padding:20px 24px; font-size:14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ ACTIVE PAGE ============ -->
+<main class="page wrap" id="page">
+  <span class="eyebrow">Бесплатный урок</span>
+
+  <div class="kicker">Посмотри стратегический урок:</div>
+
+  <h1>
+    <span class="q">«</span>Как перестать бояться
+    <span class="mark">вспышки</span> и начать делать
+    <span class="mark">дорогие кадры</span> независимо от локации<span class="q">»</span>
+  </h1>
+
+  <!-- TIMER -->
+  <div class="timer-wrap">
+    <div class="timer-label">Доступ к уроку закроется через:</div>
+    <div class="timer" id="timer">
+      <div class="timer-unit"><div class="timer-box"><div class="num" id="t-h">24</div></div><div class="cap">часов</div></div>
+      <div class="timer-sep">:</div>
+      <div class="timer-unit"><div class="timer-box"><div class="num" id="t-m">00</div></div><div class="cap">минут</div></div>
+      <div class="timer-sep">:</div>
+      <div class="timer-unit"><div class="timer-box"><div class="num" id="t-s">00</div></div><div class="cap">секунд</div></div>
+    </div>
+    <div class="timer-note">После этого запись урока станет недоступна.</div>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="video-wrap" id="videoWrap">
+    <div class="facade" id="facade" style="background-image:url('https://i.ytimg.com/vi/ECkQnGAmGos/hqdefault.jpg')">
+      <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-zone" id="ctaZone">
+    <div class="cta-hint" style="display:none">
+      <span class="lock">🔒</span> Кнопка появится по ходу урока
+    </div>
+    <a class="btn hidden" id="ctaBtn" href="https://prokopov-ai.vercel.app/ai-konveyer/" target="_blank" rel="noopener">
+      Забрать доступ →
+    </a>
+  </div>
+</main>
+
+<!-- ============ EXPIRED SCREEN ============ -->
+<main class="page wrap" id="expiredPage" style="display:none">
+  <div class="expired" id="expired">
+    <div class="ic">⏳</div>
+    <h2>Доступ к уроку закрыт</h2>
+    <p>С момента твоего первого захода прошло больше 24 часов. Запись этого бесплатного урока больше недоступна.</p>
+    <a class="btn" href="https://prokopov-ai.vercel.app/ai-konveyer/" target="_blank" rel="noopener">Смотреть предложение →</a>
+  </div>
+</main>
+
+<script>
+(function(){
+  var DAY_MS   = 24 * 60 * 60 * 1000;   // 24 часа — окно доступа
+  var BTN_MS   = 10 * 60 * 1000;        // 10 минут после ПЛЕЙ до появления кнопки
+  var VIDEO_ID = 'ECkQnGAmGos';
+
+  var K_FIRST = 'rp_urok_first_visit';
+  var K_PLAY  = 'rp_urok_play_start';
+
+  var $ = function(id){ return document.getElementById(id); };
+  var page = $('page'), expiredPage = $('expiredPage');
+
+  // ---- 1. Первый визит / дедлайн 24ч ----
+  var now = Date.now();
+  var firstVisit = parseInt(localStorage.getItem(K_FIRST), 10);
+  if (!firstVisit || isNaN(firstVisit)) {
+    firstVisit = now;
+    localStorage.setItem(K_FIRST, String(firstVisit));
+  }
+  var deadline = firstVisit + DAY_MS;
+
+  function showExpired(){
+    page.style.display = 'none';
+    expiredPage.style.display = 'flex';
+  }
+
+  if (now >= deadline) { showExpired(); return; }
+
+  // ---- 2. Таймер обратного отсчёта ----
+  var th = $('t-h'), tm = $('t-m'), ts = $('t-s');
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+  function tick(){
+    var left = deadline - Date.now();
+    if (left <= 0) { showExpired(); clearInterval(timerInt); return; }
+    var totalSec = Math.floor(left / 1000);
+    th.textContent = pad(Math.floor(totalSec / 3600));
+    tm.textContent = pad(Math.floor((totalSec % 3600) / 60));
+    ts.textContent = pad(totalSec % 60);
+  }
+  tick();
+  var timerInt = setInterval(tick, 1000);
+
+  // ---- 3. Кнопка через 10 минут после ПЛЕЙ ----
+  var ctaBtn = $('ctaBtn'), ctaHint = document.querySelector('.cta-hint');
+  var btnTimeout = null;
+
+  function scheduleButton(playStart){
+    var revealAt = playStart + BTN_MS;
+    var wait = revealAt - Date.now();
+    if (wait <= 0) { revealButton(); return; }
+    if (ctaHint) ctaHint.style.display = 'flex';
+    btnTimeout = setTimeout(revealButton, wait);
+  }
+  function revealButton(){
+    if (ctaHint) ctaHint.style.display = 'none';
+    ctaBtn.classList.remove('hidden');
+    ctaBtn.classList.add('reveal');
+  }
+
+  // если ПЛЕЙ уже нажимали раньше — восстановить отсчёт кнопки
+  var savedPlay = parseInt(localStorage.getItem(K_PLAY), 10);
+  if (savedPlay && !isNaN(savedPlay)) scheduleButton(savedPlay);
+
+  // ---- 4. Запуск видео (facade → iframe) ----
+  var facade = $('facade'), videoWrap = $('videoWrap');
+  facade.addEventListener('click', function(){
+    // зафиксировать момент старта, если ещё не зафиксирован
+    if (!savedPlay || isNaN(savedPlay)) {
+      savedPlay = Date.now();
+      localStorage.setItem(K_PLAY, String(savedPlay));
+      scheduleButton(savedPlay);
+    }
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube.com/embed/' + VIDEO_ID + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+    iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    videoWrap.innerHTML = '';
+    videoWrap.appendChild(iframe);
+  });
+})();
+</script>
+</body>
+</html>
