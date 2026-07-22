@@ -441,6 +441,14 @@ p:first-child{margin-top:0;}
   .hero-emblem{right:-200px; opacity:.5;}
   .hero-orb{filter:blur(48px); opacity:.4;}
 }
+/* screenshot placeholder */
+.shot{margin-top:24px; border:2px dashed var(--border-accent-strong); border-radius:var(--radius-lg);
+  background:linear-gradient(160deg,rgba(232,146,26,.05),var(--bg-card));
+  min-height:clamp(180px,26vh,300px); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; text-align:center; padding:24px;}
+.shot .si{font-size:38px; opacity:.8;}
+.shot .st1{font-family:var(--font-display); font-weight:700; font-size:16px; color:var(--accent-light);}
+.shot .st2{font-size:13.5px; color:var(--text-dim);}
+
 /* reusable fancy background on key slides */
 .fx{overflow:hidden;}
 .fx .slide-inner{position:relative; z-index:3;}
@@ -1127,6 +1135,20 @@ p:first-child{margin-top:0;}
   </div>
 </section>
 
+<!-- Платформа обучения -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <h2 class="big">Учишься на платформе, которую собрал AI</h2>
+    <p class="lead">Обучение проходит на платформе, которую я собрал <strong>с помощью AI</strong> — по той же логике, которой учу тебя. Уроки уже записаны, материалы готовы: к старту каждого потока я обновляю их под <strong>актуальные версии нейросетей</strong>.</p>
+    <p class="lead">То есть ты не просто учишься на уникальной платформе — ты <strong>первым получаешь обновления</strong> по всем нейросетям, которые задевают процессы из программы.</p>
+    <div class="shot">
+      <div class="si">🖥️</div>
+      <div class="st1">Здесь будет скриншот платформы</div>
+      <div class="st2">плейсхолдер — вставим реальный интерфейс</div>
+    </div>
+  </div>
+</section>
+
 <!-- 42 расходы -->
 <section class="slide narrow">
   <div class="slide-inner">
@@ -1211,6 +1233,16 @@ p:first-child{margin-top:0;}
           <li class="off">Закрытый Telegram-чат группы</li>
           <li class="off">2 личных созвона со мной 1-на-1</li>
           <li class="off">Личный чат со мной</li>
+          <li class="off">Настройка сотрудников под твой проект лично</li>
+          <li class="off">Разбор твоего контента каждую неделю</li>
+          <li class="off">Помощь с наймом монтажёра</li>
+          <li class="off">Личные наработки Романа</li>
+          <li class="off">Связь после курса</li>
+          <li class="off">Настройка сотрудников под твой проект лично</li>
+          <li class="off">Разбор твоего контента каждую неделю</li>
+          <li class="off">Помощь с наймом монтажёра</li>
+          <li class="off">Личные наработки Романа</li>
+          <li class="off">Связь после курса</li>
         </ul>
       </div>
       <div class="plan feat">
@@ -1248,6 +1280,11 @@ p:first-child{margin-top:0;}
           <li>Закрытый Telegram-чат группы</li>
           <li><strong>2 личных созвона со мной 1-на-1</strong></li>
           <li><strong>Личный чат со мной</strong> + приоритетная обратная связь</li>
+          <li><strong>Настрою сотрудников под твой проект лично</strong></li>
+          <li><strong>Разбор твоего контента каждую неделю</strong></li>
+          <li>Помогу нанять монтажёра в команду</li>
+          <li>Мои личные наработки, которых нет в общем доступе</li>
+          <li>Остаёшься на связи со мной и после курса</li>
         </ul>
       </div>
     </div>
@@ -1270,10 +1307,13 @@ p:first-child{margin-top:0;}
 <section class="slide narrow">
   <div class="slide-inner">
     <h2 class="big">ВИП — я погружаюсь в твой проект</h2>
-    <div class="cards c3" style="margin-top:26px">
-      <div class="card"><span class="ic">🤝</span><h4>2 созвона 1-на-1</h4><p>Погружаюсь в твой проект, адаптирую систему под твой запрос, помогаю с нестандартными ситуациями.</p></div>
-      <div class="card"><span class="ic">📲</span><h4>Личный чат со мной</h4><p>Пишешь напрямую — отвечаю лично, а не «в общей очереди».</p></div>
-      <div class="card"><span class="ic">🎯</span><h4>Приоритет</h4><p>Твои документы и контент разбираю в первую очередь. Максимум вовлечения, который я могу дать.</p></div>
+    <div class="cards c3" style="margin-top:24px">
+      <div class="card"><span class="ic">⚙️</span><h4>Настрою сотрудников лично</h4><p>Не «поставь по инструкции» — сажусь и настраиваю AI-сотрудников под твой проект своими руками.</p></div>
+      <div class="card"><span class="ic">🔍</span><h4>Разбор контента каждую неделю</h4><p>Смотрю, что ты выпустил, и говорю, что усилить. Каждую неделю, а не «когда дойдут руки».</p></div>
+      <div class="card"><span class="ic">🤝</span><h4>2 созвона 1-на-1</h4><p>Погружаюсь в твой проект, адаптирую систему под запрос, помогаю с нестандартными ситуациями.</p></div>
+      <div class="card"><span class="ic">🎬</span><h4>Помогу нанять монтажёра</h4><p>Подключаюсь к найму в твою команду — чтобы производство не упиралось в тебя.</p></div>
+      <div class="card"><span class="ic">🔐</span><h4>Мои личные наработки</h4><p>То, что я не отдаю в общий доступ: рабочие связки и промпты, которыми пользуюсь сам.</p></div>
+      <div class="card"><span class="ic">♾️</span><h4>Связь со мной и после курса</h4><p>Поток закончился — а я остаюсь на связи. Личный чат никуда не исчезает.</p></div>
     </div>
   </div>
 </section>
@@ -1292,9 +1332,9 @@ p:first-child{margin-top:0;}
   <div class="slide-inner">
     <h2 class="big">Полная стоимость</h2>
     <div class="pricing" style="margin-top:34px">
-      <div class="plan"><div class="pname">Стандарт</div><div class="price">$464</div></div>
-      <div class="plan feat"><div class="pname">Премиум</div><div class="price">$812</div></div>
-      <div class="plan"><div class="pname">ВИП</div><div class="price">$1435</div></div>
+      <div class="plan"><div class="pname">Стандарт</div><div class="price">$720</div></div>
+      <div class="plan feat"><div class="pname">Премиум</div><div class="price">$960</div></div>
+      <div class="plan"><div class="pname">ВИП</div><div class="price">$1470</div></div>
     </div>
     <p class="lead">Это честная цена за систему, которая заменяет команду маркетологов и работает на тебя 24/7.</p>
   </div>
@@ -1315,19 +1355,19 @@ p:first-child{margin-top:0;}
     <div class="pricing">
       <div class="plan">
         <div class="pname">Стандарт</div>
-        <div class="price"><span class="old">$464</span>$320</div>
-        <span class="save">выгода −$144</span>
+        <div class="price"><span class="old">$720</span>$420</div>
+        <span class="save">выгода −$300</span>
       </div>
       <div class="plan feat">
         <div class="tag">⭐ Популярный</div>
         <div class="pname">Премиум</div>
-        <div class="price"><span class="old">$812</span>$560</div>
-        <span class="save">выгода −$252</span>
+        <div class="price"><span class="old">$960</span>$590</div>
+        <span class="save">выгода −$370</span>
       </div>
       <div class="plan">
         <div class="pname">ВИП</div>
-        <div class="price"><span class="old">$1435</span>$990</div>
-        <span class="save">выгода −$445</span>
+        <div class="price"><span class="old">$1470</span>$990</div>
+        <span class="save">выгода −$480</span>
       </div>
     </div>
     <p class="note" style="text-align:center">Мест ограниченное количество — работаю с группой лично.</p>
@@ -1340,8 +1380,8 @@ p:first-child{margin-top:0;}
     <h2 class="big">Оплата частями</h2>
     <div class="math-vs" style="margin-top:20px"><div class="m"><div class="top" style="font-size:clamp(52px,8vw,100px)">0%</div><div class="bot">до 6 платежей, без переплат</div></div></div>
     <div class="pricing" style="margin-top:30px">
-      <div class="plan"><div class="pname">Стандарт</div><div class="price" style="font-size:clamp(26px,3.4vw,38px)">от $54<span style="font-size:.5em;color:var(--text-muted)">/мес</span></div></div>
-      <div class="plan feat"><div class="pname">Премиум</div><div class="price" style="font-size:clamp(26px,3.4vw,38px)">от $94<span style="font-size:.5em;color:var(--text-muted)">/мес</span></div></div>
+      <div class="plan"><div class="pname">Стандарт</div><div class="price" style="font-size:clamp(26px,3.4vw,38px)">от $70<span style="font-size:.5em;color:var(--text-muted)">/мес</span></div></div>
+      <div class="plan feat"><div class="pname">Премиум</div><div class="price" style="font-size:clamp(26px,3.4vw,38px)">от $99<span style="font-size:.5em;color:var(--text-muted)">/мес</span></div></div>
       <div class="plan"><div class="pname">ВИП</div><div class="price" style="font-size:clamp(26px,3.4vw,38px)">от $165<span style="font-size:.5em;color:var(--text-muted)">/мес</span></div></div>
     </div>
     <div class="banks">
@@ -1381,7 +1421,7 @@ p:first-child{margin-top:0;}
   <div class="slide-inner">
     <h2 class="big">Это не долгая перспектива</h2>
     <div class="steps">
-      <div class="step"><div class="sn">1</div><div class="st"><h4>Входишь сейчас</h4><p>$560 (Премиум), при рассрочке — от $94 на старте.</p></div></div>
+      <div class="step"><div class="sn">1</div><div class="st"><h4>Входишь сейчас</h4><p>$590 (Премиум), при рассрочке — от $99 на старте.</p></div></div>
       <div class="step"><div class="sn">2</div><div class="st"><h4>Отбиваешь за 1–2 клиента</h4><p>Один клиент, привлечённый через систему, окупает участие. А контент работает на тебя каждый день.</p></div></div>
       <div class="step"><div class="sn">3</div><div class="st"><h4>Работаешь в плюс</h4><p>Система остаётся навсегда. Стоимость клиента падает с каждым циклом.</p></div></div>
     </div>
@@ -1444,8 +1484,8 @@ p:first-child{margin-top:0;}
   <div class="slide-inner">
     <h2 class="big" style="text-align:center">⏳ Только сейчас — и больше никогда так</h2>
     <div class="deadline">
-      <div class="dl now"><div class="dlh">🔥 Сегодня, на эфире</div><p><strong>Спец-цены</strong> $320 / $560 / $990</p><p>+ все бонусы</p><p>+ бронь предоплатой 2000 грн</p></div>
-      <div class="dl"><div class="dlh">⌛ Потом, для всех</div><p>Полные цены $464 / $812 / $1435</p><p>без бонусов</p></div>
+      <div class="dl now"><div class="dlh">🔥 Сегодня, на эфире</div><p><strong>Спец-цены</strong> $420 / $590 / $990</p><p>+ все бонусы</p><p>+ бронь предоплатой 2000 грн</p></div>
+      <div class="dl"><div class="dlh">⌛ Потом, для всех</div><p>Полные цены $720 / $960 / $1470</p><p>без бонусов</p></div>
     </div>
     <p class="pill-note" style="display:block;text-align:center;margin-top:26px">Закрою набор — цены вернутся к полным. Второго такого окна не будет.</p>
   </div>
@@ -1497,7 +1537,7 @@ p:first-child{margin-top:0;}
   <div class="slide-inner">
     <div class="obj-head"><span class="em">💸</span><span>«Дорого. Я ещё ничего не заработал на контенте»</span></div>
     <p class="obj-body">Специалист или агентство — это <strong>$500–1500 в месяц</strong>. Каждый месяц, пока ты хочешь контент. Здесь ты платишь сопоставимую сумму <strong>один раз</strong> — и система остаётся с тобой навсегда. Один клиент через неё окупает участие.</p>
-    <p class="obj-body">Моя задача — не «продать курс», а довести тебя до работающей контент-машины. И да — есть рассрочка до 6 платежей от $54/мес.</p>
+    <p class="obj-body">Моя задача — не «продать курс», а довести тебя до работающей контент-машины. И да — есть рассрочка до 6 платежей — от $70/мес.</p>
     <div class="cta-line">→ Переходи по ссылке и присоединяйся</div>
   </div>
 </section>
