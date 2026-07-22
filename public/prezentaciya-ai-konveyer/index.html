@@ -213,22 +213,25 @@ p:first-child{margin-top:0;}
 
 /* ===== pricing ===== */
 .pricing{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:32px; align-items:start;}
-.plan{background:var(--bg-card); border:1px solid var(--border-strong); border-radius:var(--radius-lg); padding:28px 24px; position:relative; display:flex; flex-direction:column; transition:.25s;}
+.plan{background:var(--bg-card); border:1px solid var(--border-strong); border-radius:var(--radius-lg); padding:22px 16px; position:relative; display:flex; flex-direction:column; transition:.25s;}
 .plan:hover{border-color:var(--border-accent);}
 .plan.feat{border-color:var(--border-accent-strong); box-shadow:var(--shadow-glow); background:linear-gradient(160deg,rgba(232,146,26,.08),var(--bg-card));}
 .plan .tag{position:absolute; top:-13px; left:50%; transform:translateX(-50%); font-family:var(--font-display); font-weight:800; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; padding:6px 16px; border-radius:40px; background:linear-gradient(135deg,var(--accent),var(--accent-deep)); color:#1a0f00; white-space:nowrap; box-shadow:0 6px 20px var(--accent-glow-strong);}
 .plan .pname{font-family:var(--font-display); font-weight:800; font-size:22px; letter-spacing:1px; margin-bottom:6px;}
-.plan .psub{font-size:13.5px; color:var(--text-muted); margin-bottom:18px; min-height:38px;}
+.plan .psub{font-size:13px; color:var(--text-muted); margin-bottom:14px; min-height:34px;}
 .plan .price{font-family:var(--font-display); font-weight:900; font-size:clamp(34px,4.5vw,54px); color:var(--accent-light); line-height:1;}
 .plan .price .old{display:block; font-size:20px; color:var(--text-dim); text-decoration:line-through; font-weight:600; margin-bottom:4px; -webkit-text-fill-color:var(--text-dim);}
 .plan .save{display:inline-block; margin-top:10px; font-size:13px; font-weight:700; color:var(--accent); padding:4px 12px; border:1px solid var(--border-accent); border-radius:30px;}
-.plan ul{list-style:none; margin:18px 0 0;}
-.plan li{position:relative; padding:6.5px 0 6.5px 24px; font-size:13.5px; line-height:1.45; color:var(--text); border-bottom:1px solid rgba(255,255,255,.04);}
-.plan li::before{content:'✓'; position:absolute; left:0; top:8px; color:var(--accent); font-weight:800;}
+.plan ul{list-style:none; margin:10px 0 0;}
+.plan li{position:relative; padding:5px 8px 5px 26px; font-size:12.5px; line-height:1.3; color:var(--text); border-radius:7px; margin-bottom:2px;}
+.plan li::before{position:absolute; left:8px; top:5px; font-weight:800;}
+/* включено — подсвечено */
+.plan li.on{background:rgba(232,146,26,.10); color:var(--accent-light);}
+.plan li.on::before{content:'✓'; color:var(--accent);}
+/* не входит — зачёркнуто */
+.plan li.off{color:var(--text-dim); text-decoration:line-through; opacity:.6; background:transparent;}
+.plan li.off::before{content:'✕'; color:var(--text-dim); text-decoration:none;}
 .plan li strong{color:var(--accent-light);}
-.plan li.off{color:var(--text-dim); text-decoration:line-through; opacity:.75;}
-.plan li.off::before{content:'✕'; color:var(--text-dim);}
-.plan li.off strong{color:var(--text-dim); -webkit-text-fill-color:var(--text-dim);}
 .plan .inc{font-size:13px; color:var(--text-muted); font-style:italic; margin:14px 0 4px;}
 
 /* bank badges */
@@ -1221,28 +1224,23 @@ p:first-child{margin-top:0;}
         <div class="pname">◾ Стандарт</div>
         <div class="psub">Пройти систему самостоятельно.</div>
         <ul>
-          <li>12 модулей программы в записи</li>
-          <li>6 основных AI-сотрудников</li>
+          <li class="on">12 модулей программы в записи</li>
+          <li class="on">6 основных AI-сотрудников</li>
           <li class="off">22 дополнительных сотрудника для узких задач</li>
-          <li>15+ готовых промптов</li>
-          <li>5 документов-фундаментов</li>
-          <li>Доступ к материалам — полгода</li>
+          <li class="on">15+ готовых промптов</li>
+          <li class="on">5 документов-фундаментов</li>
+          <li class="on">Доступ к материалам — полгода</li>
           <li class="off">Обновления сотрудников — бесплатно 1 год</li>
           <li class="off">6 ZOOM-созвонов группы за поток</li>
           <li class="off">Проверка домашних заданий</li>
           <li class="off">Закрытый Telegram-чат группы</li>
           <li class="off">2 личных созвона со мной 1-на-1</li>
-          <li class="off">Личный чат со мной</li>
+          <li class="off">Личный чат + приоритетная обратная связь</li>
           <li class="off">Настройка сотрудников под твой проект лично</li>
           <li class="off">Разбор твоего контента каждую неделю</li>
-          <li class="off">Помощь с наймом монтажёра</li>
-          <li class="off">Личные наработки Романа</li>
-          <li class="off">Связь после курса</li>
-          <li class="off">Настройка сотрудников под твой проект лично</li>
-          <li class="off">Разбор твоего контента каждую неделю</li>
-          <li class="off">Помощь с наймом монтажёра</li>
-          <li class="off">Личные наработки Романа</li>
-          <li class="off">Связь после курса</li>
+          <li class="off">Помощь с наймом монтажёра в команду</li>
+          <li class="off">Личные наработки Романа, которых нет в общем доступе</li>
+          <li class="off">Связь с Романом и после курса</li>
         </ul>
       </div>
       <div class="plan feat">
@@ -1250,41 +1248,46 @@ p:first-child{margin-top:0;}
         <div class="pname">◾ Премиум</div>
         <div class="psub">Система + сопровождение в группе.</div>
         <ul>
-          <li>12 модулей программы в записи</li>
-          <li>6 основных AI-сотрудников</li>
-          <li>22 дополнительных сотрудника для узких задач</li>
-          <li>15+ готовых промптов</li>
-          <li>5 документов-фундаментов</li>
-          <li>Доступ к материалам — 1 год</li>
-          <li>Обновления сотрудников — бесплатно 1 год</li>
-          <li><strong>6 ZOOM-созвонов группы за поток</strong></li>
-          <li><strong>Проверка домашних заданий</strong></li>
-          <li>Закрытый Telegram-чат группы</li>
+          <li class="on">12 модулей программы в записи</li>
+          <li class="on">6 основных AI-сотрудников</li>
+          <li class="on">22 дополнительных сотрудника для узких задач</li>
+          <li class="on">15+ готовых промптов</li>
+          <li class="on">5 документов-фундаментов</li>
+          <li class="on">Доступ к материалам — 1 год</li>
+          <li class="on">Обновления сотрудников — бесплатно 1 год</li>
+          <li class="on">6 ZOOM-созвонов группы за поток</li>
+          <li class="on">Проверка домашних заданий</li>
+          <li class="on">Закрытый Telegram-чат группы</li>
           <li class="off">2 личных созвона со мной 1-на-1</li>
-          <li class="off">Личный чат со мной</li>
+          <li class="off">Личный чат + приоритетная обратная связь</li>
+          <li class="off">Настройка сотрудников под твой проект лично</li>
+          <li class="off">Разбор твоего контента каждую неделю</li>
+          <li class="off">Помощь с наймом монтажёра в команду</li>
+          <li class="off">Личные наработки Романа, которых нет в общем доступе</li>
+          <li class="off">Связь с Романом и после курса</li>
         </ul>
       </div>
       <div class="plan">
         <div class="pname">◾ ВИП</div>
         <div class="psub">Система + личная работа со мной.</div>
         <ul>
-          <li>12 модулей программы в записи</li>
-          <li>6 основных AI-сотрудников</li>
-          <li>22 дополнительных сотрудника для узких задач</li>
-          <li>15+ готовых промптов</li>
-          <li>5 документов-фундаментов</li>
-          <li>Доступ к материалам — 1 год</li>
-          <li>Обновления сотрудников — бесплатно 1 год</li>
-          <li>6 ZOOM-созвонов группы за поток</li>
-          <li>Проверка домашних заданий</li>
-          <li>Закрытый Telegram-чат группы</li>
-          <li><strong>2 личных созвона со мной 1-на-1</strong></li>
-          <li><strong>Личный чат со мной</strong> + приоритетная обратная связь</li>
-          <li><strong>Настрою сотрудников под твой проект лично</strong></li>
-          <li><strong>Разбор твоего контента каждую неделю</strong></li>
-          <li>Помогу нанять монтажёра в команду</li>
-          <li>Мои личные наработки, которых нет в общем доступе</li>
-          <li>Остаёшься на связи со мной и после курса</li>
+          <li class="on">12 модулей программы в записи</li>
+          <li class="on">6 основных AI-сотрудников</li>
+          <li class="on">22 дополнительных сотрудника для узких задач</li>
+          <li class="on">15+ готовых промптов</li>
+          <li class="on">5 документов-фундаментов</li>
+          <li class="on">Доступ к материалам — 1 год</li>
+          <li class="on">Обновления сотрудников — бесплатно 1 год</li>
+          <li class="on">6 ZOOM-созвонов группы за поток</li>
+          <li class="on">Проверка домашних заданий</li>
+          <li class="on">Закрытый Telegram-чат группы</li>
+          <li class="on">2 личных созвона со мной 1-на-1</li>
+          <li class="on">Личный чат + приоритетная обратная связь</li>
+          <li class="on">Настройка сотрудников под твой проект лично</li>
+          <li class="on">Разбор твоего контента каждую неделю</li>
+          <li class="on">Помощь с наймом монтажёра в команду</li>
+          <li class="on">Личные наработки Романа, которых нет в общем доступе</li>
+          <li class="on">Связь с Романом и после курса</li>
         </ul>
       </div>
     </div>
