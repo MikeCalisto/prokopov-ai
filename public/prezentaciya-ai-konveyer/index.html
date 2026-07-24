@@ -351,9 +351,19 @@ p:first-child{margin-top:0;}
 
 .pill-note{display:inline-block; margin-top:22px; padding:9px 18px; border-radius:40px; background:rgba(232,146,26,.08); border:1px solid var(--border-accent); font-family:var(--font-display); font-weight:700; font-size:13px; color:var(--accent-light);}
 
+/* ===== ТИТУЛЬНЫЙ СЛАЙД ===== */
+.title-kick{display:inline-flex; align-items:center; gap:12px; font-family:var(--font-display); font-weight:700; font-size:clamp(15px,1.5vw,20px); letter-spacing:3px; text-transform:uppercase; color:var(--accent-light); padding:10px 22px; border:1px solid var(--border-accent-strong); border-radius:40px; background:rgba(232,146,26,.07); box-shadow:0 0 30px rgba(232,146,26,.12);}
+.title-h{margin-top:30px; margin-bottom:6px;}
+.title-meta{display:flex; align-items:stretch; justify-content:center; gap:clamp(24px,4vw,60px); margin-top:44px;}
+.title-meta .tm{display:flex; flex-direction:column; gap:8px; text-align:center;}
+.title-meta .tm-lbl{font-family:var(--font-display); font-weight:700; font-size:clamp(12px,1.05vw,14px); letter-spacing:2px; text-transform:uppercase; color:var(--text-muted);}
+.title-meta .tm-val{font-family:var(--font-display); font-weight:700; font-size:clamp(22px,2.3vw,32px); color:var(--text); line-height:1.1;}
+.title-meta .tm:first-child .tm-val{color:var(--accent-light);}
+.title-meta .tm-sep{width:1px; align-self:stretch; background:linear-gradient(180deg,transparent,var(--border-accent-strong),transparent);}
+
 /* ===== NAV UI ===== */
 .progress{position:fixed; top:0; left:0; height:3px; background:var(--accent); box-shadow:0 0 12px var(--accent); z-index:40; transition:width .4s ease; width:0;}
-.counter{position:fixed; bottom:18px; left:22px; z-index:40; font-family:var(--font-display); font-weight:700; font-size:14px; color:var(--text-muted); letter-spacing:1px;}
+.counter{display:none !important;}
 .counter b{color:var(--accent-light);}
 .navbtn{position:fixed; bottom:16px; z-index:41; width:46px; height:46px; border-radius:50%; border:1px solid var(--border-strong); background:rgba(13,13,18,.85); color:var(--text); font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:.2s; backdrop-filter:blur(6px);}
 .navbtn:hover{border-color:var(--border-accent-strong); color:var(--accent-light); box-shadow:0 0 20px var(--accent-glow);}
@@ -365,7 +375,8 @@ p:first-child{margin-top:0;}
 .fsbtn svg{width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
 .fsbtn .ico-exit{display:none;}
 .fsbtn.is-full .ico-enter{display:none;} .fsbtn.is-full .ico-exit{display:block;}
-.dots{position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:40; display:flex; flex-direction:column; gap:6px; max-height:80vh; overflow:auto; padding:6px 2px;}
+.dots{display:none !important;}
+.dots-off{position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:40; flex-direction:column; gap:6px; max-height:80vh; overflow:auto; padding:6px 2px;}
 .dots::-webkit-scrollbar{display:none;}
 .dot{width:8px; height:8px; border-radius:50%; background:var(--border-strong); border:none; cursor:pointer; padding:0; transition:.2s; flex-shrink:0;}
 .dot:hover{background:var(--text-muted);}
@@ -704,10 +715,19 @@ p:first-child{margin-top:0;}
 <!-- I-01 ТИТУЛ -->
 <section class="slide pre divider fx">
   <div class="slide-inner">
-    <div class="kicker">Закрытая Zoom-встреча</div>
-    <h1 class="big" style="margin-top:14px">AI Контент-<br>Система</h1>
-    <p class="lead">Спикер — <strong>Роман Прокопов</strong></p>
-    <p class="pill-note">Старт в 13:00 по Киеву</p>
+    <div class="title-kick">Закрытая Zoom-встреча</div>
+    <h1 class="big title-h">AI Контент-<br>Система</h1>
+    <div class="title-meta">
+      <div class="tm">
+        <span class="tm-lbl">Спикер</span>
+        <span class="tm-val">Роман Прокопов</span>
+      </div>
+      <div class="tm-sep"></div>
+      <div class="tm">
+        <span class="tm-lbl">Старт эфира</span>
+        <span class="tm-val">13:00 по Киеву</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -758,16 +778,16 @@ p:first-child{margin-top:0;}
 <!-- I-06 РОМАН О СЕБЕ -->
 <section class="slide pre center">
   <div class="slide-inner">
-    <h2 class="big">Итак, меня зовут Рома</h2>
-    <div class="todo">
-      <div class="tl">◻︎ блок в работе — самопрезентация Романа</div>
-      <ul>
-        <li>Кто я и чем занимаюсь сейчас</li>
-        <li>Агентство по созданию контента — что делаем и для кого</li>
-        <li>Опыт в контенте и работе с AI — сколько лет, какие результаты</li>
-        <li>Почему я вообще веду эту встречу</li>
-      </ul>
+    <div class="kicker">Меня зовут</div>
+    <h2 class="big" style="margin-top:10px">Роман Прокопов</h2>
+    <p class="lead">Владелец продакшн-агентства. Уже <strong>4 года</strong> делаю контент на потоке — для экспертных блогов и брендов — и перевёл всё это на AI-систему из AI-сотрудников.</p>
+    <div class="stat-row" style="justify-content:center">
+      <div class="stat"><div class="n">2 500+</div><div class="l">видео в год для блогов и брендов — столько моё агентство выпускает на потоке</div></div>
+      <div class="stat"><div class="n">100+</div><div class="l">клиентов за 4 года — от экспертных блогов до бизнесов с продуктами</div></div>
+      <div class="stat"><div class="n">20+</div><div class="l">ниш, в которых система работает — психологи, коучи, юристы, бренды, школы</div></div>
+      <div class="stat"><div class="n">15+</div><div class="l">клиентов агентство ведёт одновременно — на той же AI-системе с AI-сотрудниками</div></div>
     </div>
+    <p class="pill-note">Эту встречу веду, потому что сам каждый день работаю по этой системе — и покажу её изнутри, без воды.</p>
   </div>
 </section>
 
