@@ -591,6 +591,33 @@ p:first-child{margin-top:0;}
 .carou-dots i.on{background:var(--accent); transform:scale(1.3);}
 @media(max-width:900px){ .flow6{grid-template-columns:1fr 1fr;} .macro::after{display:none;} }
 
+/* ===== РЕФЕРЕНС-ДНК для слайдов до продающей части ===== */
+/* глобальная сетка на фоне всей колоды */
+.deck::before{content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:linear-gradient(rgba(232,146,26,.038) 1px,transparent 1px),linear-gradient(90deg,rgba(232,146,26,.038) 1px,transparent 1px);
+  background-size:62px 62px;
+  -webkit-mask-image:radial-gradient(135% 115% at 50% 42%,#000 46%,transparent 85%);
+  mask-image:radial-gradient(135% 115% at 50% 42%,#000 46%,transparent 85%);}
+.slide{z-index:1;}
+.slide.active{z-index:2;}
+/* крупнее основной текст */
+.slide.pre .lead{font-size:clamp(18px,1.75vw,23px); line-height:1.62; margin-top:20px;}
+.slide.pre .note{font-size:clamp(15px,1.55vw,17px); line-height:1.6;}
+.slide.pre .listnum .body p{font-size:clamp(18px,1.95vw,22px); line-height:1.6;}
+.slide.pre .module li,.slide.pre .agent-deep li,.slide.pre .card p,.slide.pre .side p,.slide.pre .step .st p,.slide.pre .agent-row .txt p{font-size:clamp(15px,1.55vw,16.5px);}
+.slide.pre .out{font-size:clamp(16px,1.7vw,18px);}
+.slide.pre .agenda .at{font-size:clamp(14.5px,1.5vw,16px);}
+/* кикер с чёрточкой */
+.slide.pre .kicker{display:inline-flex; align-items:center; gap:12px; font-size:12.5px;}
+.slide.pre .kicker::before{content:''; width:28px; height:2px; background:var(--accent); box-shadow:0 0 8px var(--accent-glow);}
+/* декоративные уголки-скобки вокруг контента */
+.slide.pre .slide-inner{position:relative;}
+.slide.pre .slide-inner::before,.slide.pre .slide-inner::after{content:''; position:absolute; width:38px; height:38px; pointer-events:none; opacity:.55; z-index:0;}
+.slide.pre .slide-inner::before{top:clamp(-30px,-3vh,-16px); left:clamp(-26px,-2vw,-10px); border-top:2px solid var(--border-accent-strong); border-left:2px solid var(--border-accent-strong);}
+.slide.pre .slide-inner::after{bottom:clamp(-30px,-3vh,-16px); right:clamp(-26px,-2vw,-10px); border-bottom:2px solid var(--border-accent-strong); border-right:2px solid var(--border-accent-strong);}
+.slide.pre .slide-inner > *{position:relative; z-index:1;}
+@media(max-width:760px){ .slide.pre .slide-inner::before,.slide.pre .slide-inner::after{display:none;} }
+
 /* ===== HERO ANIMATED BACKGROUND ===== */
 .hero{overflow:hidden;}
 .hero .slide-inner{position:relative; z-index:3;}
@@ -675,7 +702,7 @@ p:first-child{margin-top:0;}
 <!-- ============ ЧАСТЬ 1 · ОТКРЫТИЕ ЭФИРА ============ -->
 
 <!-- I-01 ТИТУЛ -->
-<section class="slide divider fx">
+<section class="slide pre divider fx">
   <div class="slide-inner">
     <div class="kicker">Закрита Zoom-зустріч</div>
     <h1 class="big" style="margin-top:14px">AI Контент-<br>Система</h1>
@@ -685,7 +712,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- I-02 СВЯЗЬ -->
-<section class="slide center">
+<section class="slide pre center">
   <div class="slide-inner">
     <div class="giant">+</div>
     <h1 class="big">Ставьте + в чат,<br>если меня хорошо слышно и видно</h1>
@@ -693,7 +720,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- I-03 НАСТРОЕНИЕ -->
-<section class="slide center">
+<section class="slide pre center">
   <div class="slide-inner">
     <h2 class="big">Пока ждём всех — около 5 минут</h2>
     <p class="lead">Хочу поинтересоваться, что у вас по настроению на сейчас. Проставьте в чат <strong>от 1 до 10</strong>.</p>
@@ -705,7 +732,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- I-04 ПЛАН ЭФИРА -->
-<section class="slide">
+<section class="slide pre">
   <div class="slide-inner">
     <h2 class="big" style="text-align:center">Итак, стартуем.<br>Какой у нас план на этот созвон</h2>
     <div class="agenda">
@@ -721,7 +748,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- I-05 ЗНАКОМСТВО · ПОДВОДКА -->
-<section class="slide divider">
+<section class="slide pre divider">
   <div class="slide-inner">
     <h2 class="big">Теперь давайте быстренько познакомимся</h2>
     <p class="lead">Я начну первый, а потом дам каждому из вас возможность буквально на <strong>одну — полторы минуты</strong> включить микрофон и представиться.</p>
@@ -729,7 +756,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- I-06 РОМАН О СЕБЕ -->
-<section class="slide center">
+<section class="slide pre center">
   <div class="slide-inner">
     <h2 class="big">Итак, меня зовут Рома</h2>
     <div class="todo">
@@ -745,7 +772,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- I-07 ЗНАКОМСТВО · УЧАСТНИКИ -->
-<section class="slide">
+<section class="slide pre">
   <div class="slide-inner">
     <h2 class="big" style="text-align:center">Теперь по очереди включайте микрофон<br>и расскажите</h2>
     <div class="cards c3" style="margin-top:30px">
@@ -760,7 +787,7 @@ p:first-child{margin-top:0;}
 <!-- ====== ИСТОРИЯ: КАК РОДИЛАСЬ СИСТЕМА ====== -->
 
 <!-- S-01 разделитель -->
-<section class="slide divider fx v2">
+<section class="slide pre divider fx v2">
   <div class="slide-inner">
     <h1 class="big" style="font-size:clamp(30px,4.6vw,58px)">Как вообще родилась<br>эта AI Контент-Система,<br>про которую я везде говорю</h1>
     <p class="lead">Небольшая предыстория — чтобы вы понимали, откуда всё это взялось и почему выглядит именно так.</p>
@@ -768,7 +795,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-02 предыстория -->
-<section class="slide narrow">
+<section class="slide pre narrow">
   <div class="slide-inner">
     <h2 class="big">4 года я строю агентство<br>по созданию контента</h2>
     <ul class="list-plain">
@@ -780,7 +807,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-03 главный вопрос -->
-<section class="slide divider">
+<section class="slide pre divider">
   <div class="slide-inner">
     <h1 class="big">Как сделать результат<br>предсказуемым?</h1>
     <p class="lead">Не «как сделать красиво» — а как сделать так, чтобы результат был предсказуем <strong>и для меня, и для клиента</strong>.</p>
@@ -789,7 +816,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-04 от чего зависел результат -->
-<section class="slide">
+<section class="slide pre">
   <div class="slide-inner">
     <h2 class="big" style="text-align:center">От чего зависел результат</h2>
     <div class="factors">
@@ -802,7 +829,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-05 гипотеза -->
-<section class="slide center">
+<section class="slide pre center">
   <div class="slide-inner">
     <h2 class="big">Появились нейросети —<br>и я задумался</h2>
     <p class="lead">А могу ли я с их помощью этот процесс <strong>устаканить и регламентировать</strong>?</p>
@@ -811,7 +838,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-06 кто такой AI-сотрудник -->
-<section class="slide narrow">
+<section class="slide pre narrow">
   <div class="slide-inner">
     <h2 class="big">Так появились AI-сотрудники.<br>Кто это вообще такие?</h2>
     <p class="lead">Это не «промпт». Это <strong>обученный специалист</strong>: ты один раз вложил в него методологию, контекст и правила — и дальше он делает свою часть работы стабильно, раз за разом. Как сотрудник в команде: своя роль, своя зона ответственности.</p>
@@ -823,7 +850,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-07 что получилось -->
-<section class="slide center">
+<section class="slide pre center">
   <div class="slide-inner">
     <h2 class="big">Методология из 6 AI-сотрудников</h2>
     <p class="lead">Они ведут весь процесс по кругу — от идеи до готового контента.</p>
@@ -834,7 +861,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-08 почему не уволил команду -->
-<section class="slide narrow">
+<section class="slide pre narrow">
   <div class="slide-inner">
     <h2 class="big">Я не уволил ни одного<br>сценариста и маркетолога</h2>
     <p class="lead">AI довозит до <strong>7 из 10</strong> — быстро и стабильно. А мои маркетологи забирают эти 7 и выкручивают до <strong>9–10 из 10</strong>: проверяют на релевантность, усиливают, добавляют экспертизу.</p>
@@ -843,7 +870,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-09 клиенты попросили -->
-<section class="slide center">
+<section class="slide pre center">
   <div class="slide-inner">
     <h2 class="big">Мы рассказали клиентам, как работаем —<br>и они попросили это себе</h2>
     <p class="lead">Сначала мы за высокий чек заходили своей командой и настраивали систему внутри их бизнеса. Работало.</p>
@@ -851,7 +878,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-10 групповой формат -->
-<section class="slide center">
+<section class="slide pre center">
   <div class="slide-inner">
     <h2 class="big">Потом пришли ученики<br>моего курса по AI-аватару</h2>
     <p class="lead">Они спрашивали, как внедрить это <strong>самим</strong> — без моей команды. Под этот запрос и родился групповой формат.</p>
@@ -859,7 +886,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-11 инсайт -->
-<section class="slide divider">
+<section class="slide pre divider">
   <div class="slide-inner">
     <h2 class="big">Я решал вопрос для себя —<br>а оказалось, это нужно многим</h2>
     <p class="lead">То, что я построил внутри агентства <strong>для 15 клиентов</strong>, понадобилось людям, которые пока не готовы нанимать команду или искать подрядчиков.</p>
@@ -868,7 +895,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-12 два формата -->
-<section class="slide narrow">
+<section class="slide pre narrow">
   <div class="slide-inner">
     <h2 class="big" style="text-align:center">Почему это стало обучением,<br>а не услугой</h2>
     <div class="vsbox">
@@ -894,7 +921,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-13 синергия -->
-<section class="slide center">
+<section class="slide pre center">
   <div class="slide-inner">
     <h2 class="big">Почему это работает<br>только вместе с тобой</h2>
     <p class="lead">AI закрывает ту часть маркетинга, в которой большинство не разбирается так глубоко, как я и моя команда. Мы отгрузили в этих сотрудников всё, что было в нас.</p>
@@ -903,7 +930,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-14 разделитель кейсы -->
-<section class="slide divider fx v3">
+<section class="slide pre divider fx v3">
   <div class="slide-inner">
     <h1 class="big">Результат этой системы<br>уже доказан</h1>
     <p class="lead">Покажу на живых примерах — люди, с которыми мы работаем прямо сейчас.</p>
@@ -911,7 +938,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-15 кейс 1 · агентство -->
-<section class="slide">
+<section class="slide pre">
   <div class="slide-inner">
     <div class="case">
       <div class="cx">
@@ -937,7 +964,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-16 кейс 2 · Марина Берг -->
-<section class="slide">
+<section class="slide pre">
   <div class="slide-inner">
     <div class="case">
       <div class="cx">
@@ -963,7 +990,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-17 кейс 3 · CryptoBosh -->
-<section class="slide">
+<section class="slide pre">
   <div class="slide-inner">
     <div class="case">
       <div class="cx">
@@ -987,7 +1014,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- S-18 три ниши -->
-<section class="slide divider">
+<section class="slide pre divider">
   <div class="slide-inner">
     <h2 class="big">Три разные ниши —<br>одна система</h2>
     <p class="lead">Онлайн-продукты, психология, крипта. Разные аудитории, разные продукты — и везде работает <strong>одна и та же методология</strong>.</p>
@@ -997,7 +1024,7 @@ p:first-child{margin-top:0;}
 <!-- ============ КОНТЕНТНАЯ ЧАСТЬ ============ -->
 
 <!-- C0 · разделитель -->
-<section class="slide divider fx">
+<section class="slide pre divider fx">
   <div class="slide-inner">
     <h1 class="big">Теперь — самое мясо</h1>
     <p class="lead">Как и обещал, разбираем систему по шагам — от запроса до аналитики. Каждый шаг покажу и на живом проекте.</p>
@@ -1005,7 +1032,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- C1 · Claude vs GPT -->
-<section class="slide narrow">
+<section class="slide pre narrow">
   <div class="slide-inner">
     <h2 class="big">Почему я работаю через Claude</h2>
     <p class="lead">Неважно, какая нейросеть — <strong>важен нужный функционал</strong>. Дело не в названии и бренде, а в методологии и правильной постановке задач. Сейчас этот функционал лучше всего закрывает Claude.</p>
@@ -1021,7 +1048,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- C2 · карта 6 макро-шагов -->
-<section class="slide">
+<section class="slide pre">
   <div class="slide-inner" style="max-width:var(--max-w)">
     <div class="kicker">Общая карта системы</div>
     <h2 class="big" style="margin-top:12px">Весь путь — от запроса до аналитики</h2>
@@ -1038,7 +1065,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- C3 · маркетинговые исследования -->
-<section class="slide center">
+<section class="slide pre center">
   <div class="slide-inner">
     <div class="kicker">Шаг 01 · Исследование</div>
     <h2 class="big" style="margin-top:12px">Исследуем рынок сразу<br>в трёх нейросетях</h2>
@@ -1054,7 +1081,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- C4 · NotebookLM + выбор -->
-<section class="slide center">
+<section class="slide pre center">
   <div class="slide-inner">
     <div class="kicker">Шаг 02 · Фокус</div>
     <h2 class="big" style="margin-top:12px">Всё исследование — в NotebookLM</h2>
@@ -1076,7 +1103,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- C5 · что такое AI-сотрудник -->
-<section class="slide narrow">
+<section class="slide pre narrow">
   <div class="slide-inner">
     <h2 class="big">Что такое AI-сотрудник</h2>
     <p class="lead">Технология, на которой всё держится. Проще всего — через <strong>беспилотное такси</strong>: за рулём никого, машину один раз обучили — дальше едет сама.</p>
@@ -1089,7 +1116,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- C6 · 4 документа -->
-<section class="slide narrow">
+<section class="slide pre narrow">
   <div class="slide-inner">
     <div class="kicker">Шаг 03 · Фундамент</div>
     <h2 class="big" style="margin-top:12px">Четыре фундаментальных документа</h2>
@@ -1105,7 +1132,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- C7 · контент поверх фундамента -->
-<section class="slide center">
+<section class="slide pre center">
   <div class="slide-inner">
     <div class="kicker">Шаг 04 · Контент</div>
     <h2 class="big" style="margin-top:12px">На фундаменте вырастает контент</h2>
@@ -1125,7 +1152,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- C8 · производство -->
-<section class="slide narrow">
+<section class="slide pre narrow">
   <div class="slide-inner">
     <div class="kicker">Шаг 05 · Производство</div>
     <h2 class="big" style="margin-top:12px">Съёмка или AI-аватар</h2>
@@ -1139,7 +1166,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- C9 · карусели (реальная карусель) -->
-<section class="slide">
+<section class="slide pre">
   <div class="slide-inner" style="max-width:var(--max-w)">
     <div class="kicker" style="text-align:center;display:block">Шаг 05 · Производство</div>
     <h2 class="big" style="margin-top:12px;text-align:center">Карусели недооценивают — а они дают заявки</h2>
@@ -1164,7 +1191,7 @@ p:first-child{margin-top:0;}
 </section>
 
 <!-- C10 · аналитика -->
-<section class="slide divider fx v3">
+<section class="slide pre divider fx v3">
   <div class="slide-inner">
     <div class="kicker">Шаг 06 · Аналитика</div>
     <h1 class="big" style="margin-top:12px">Финишная прямая — аналитика</h1>
