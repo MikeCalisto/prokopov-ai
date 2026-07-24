@@ -521,6 +521,69 @@ p:first-child{margin-top:0;}
 .cg-grid .frame img{width:100%; aspect-ratio:.66; object-fit:cover;}
 @media(max-width:900px){ .case{grid-template-columns:1fr; gap:22px;} .case .cx h2,.chero,.chero-k{text-align:center;} .case .cx{text-align:center;} .chips2{justify-content:center;} }
 
+/* ===== КОНТЕНТНАЯ ЧАСТЬ ===== */
+/* карта 6 макро-шагов */
+.flow6{display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin-top:26px;}
+.macro{position:relative; background:var(--bg-card); border:1px solid var(--border); border-top:3px solid var(--mc,var(--accent)); border-radius:var(--radius-md); padding:16px 13px; text-align:left;}
+.macro .mn{font-family:var(--font-display); font-weight:900; font-size:15px; color:var(--mc,var(--accent)); line-height:1;}
+.macro h4{font-family:var(--font-display); font-weight:700; font-size:15px; margin:6px 0 9px; line-height:1.1;}
+.macro ul{list-style:none; margin:0;}
+.macro li{font-size:12px; color:var(--text-muted); line-height:1.4; padding:2.5px 0 2.5px 12px; position:relative;}
+.macro li::before{content:'·'; position:absolute; left:2px; color:var(--mc,var(--accent)); font-weight:900;}
+.macro::after{content:'→'; position:absolute; right:-11px; top:50%; transform:translateY(-50%); color:var(--text-dim); font-size:14px; z-index:1;}
+.macro:last-child::after{display:none;}
+/* сравнение claude/gpt */
+.vstable{width:100%; border-collapse:collapse; margin-top:28px; font-size:clamp(14px,1.6vw,17px);}
+.vstable th,.vstable td{padding:15px 18px; text-align:left; border-bottom:1px solid var(--border);}
+.vstable thead th{font-family:var(--font-display); font-weight:800; font-size:15px;}
+.vstable thead th:last-child{color:var(--accent-light);}
+.vstable td:first-child{color:var(--text-muted);}
+.vstable td.gpt{color:var(--text-dim);}
+.vstable td.cl{color:var(--accent-light); font-weight:600;}
+.vstable tbody tr:last-child td{border-bottom:none;}
+.vstable .colcl{background:rgba(232,146,26,.06);}
+/* воронка NotebookLM */
+.funnel{display:flex; flex-direction:column; align-items:center; gap:12px; margin-top:24px;}
+.funnel .docs{display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
+.funnel .doc{background:var(--bg-card); border:1px solid var(--border-accent); border-radius:10px; padding:9px 16px; font-size:14px; color:var(--text-muted);}
+.funnel .arrow{color:var(--accent); font-size:22px; line-height:1;}
+.funnel .nb{background:linear-gradient(160deg,rgba(232,146,26,.1),var(--bg-card)); border:1px solid var(--border-accent-strong); border-radius:var(--radius-md); padding:16px 26px; font-family:var(--font-display); font-weight:700; font-size:17px; color:var(--accent-light); box-shadow:var(--shadow-glow);}
+.funnel .three{display:flex; gap:14px; flex-wrap:wrap; justify-content:center;}
+.funnel .three .t{background:var(--bg-card); border:1px solid var(--border-strong); border-radius:var(--radius-md); padding:14px 22px; text-align:center; min-width:150px;}
+.funnel .three .t b{font-family:var(--font-display); color:var(--accent-light); display:block; font-size:16px; margin-bottom:3px;}
+.funnel .three .t span{font-size:13px; color:var(--text-muted);}
+.funnel .res{font-family:var(--font-display); font-weight:800; font-size:clamp(18px,2.4vw,28px); text-align:center; margin-top:4px;}
+.funnel .res b{color:var(--accent-light);}
+/* слои: документы + контент */
+.layers{display:flex; flex-direction:column; align-items:center; gap:16px; margin-top:26px;}
+.layers .lyr{border-radius:var(--radius-md); padding:18px 22px; width:100%; max-width:760px; text-align:center;}
+.layers .l-content{background:linear-gradient(160deg,rgba(232,146,26,.1),var(--bg-card)); border:1px solid var(--border-accent-strong); box-shadow:var(--shadow-glow);}
+.layers .l-docs{background:var(--bg-card); border:1px solid var(--border);}
+.layers .ll{font-family:var(--font-display); font-weight:800; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:10px;}
+.layers .row{display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
+.layers .row span{background:var(--bg-elev); border:1px solid var(--border-strong); border-radius:30px; padding:7px 16px; font-size:14px; color:var(--text);}
+.layers .l-docs .row span{font-size:12.5px; color:var(--text-muted);}
+.layers .between{color:var(--accent); font-size:22px; line-height:.6;}
+/* нейросети */
+.nns{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:28px;}
+.nn{background:var(--bg-card); border:1px solid var(--border-accent); border-radius:var(--radius-md); padding:20px 26px; text-align:center; box-shadow:var(--shadow-card);}
+.nn.main{border-color:var(--border-accent-strong); box-shadow:var(--shadow-glow);}
+.nn .nname{font-family:var(--font-display); font-weight:800; font-size:clamp(17px,2vw,22px); color:var(--accent-light);}
+.nn .nrole{font-size:12.5px; color:var(--text-muted); margin-top:5px;}
+.nn.sec{padding:14px 20px; opacity:.85;}
+.nn.sec .nname{font-size:16px; color:var(--text);}
+/* карусель-виджет */
+.carou{margin-top:22px; display:flex; flex-direction:column; align-items:center;}
+.carou-stage{position:relative; width:100%; max-width:420px; display:flex; justify-content:center;}
+.carou-stage img{width:100%; height:auto; max-height:56vh; object-fit:contain; border-radius:16px; border:1px solid var(--border-accent); box-shadow:0 20px 46px rgba(0,0,0,.55),0 0 30px rgba(232,146,26,.1);}
+.carou-nav{display:flex; align-items:center; gap:16px; margin-top:14px;}
+.carou-nav button{width:40px; height:40px; border-radius:50%; border:1px solid var(--border-strong); background:var(--bg-card); color:var(--text); font-size:18px; cursor:pointer; transition:.2s;}
+.carou-nav button:hover{border-color:var(--border-accent-strong); color:var(--accent-light);}
+.carou-dots{display:flex; gap:6px;}
+.carou-dots i{width:7px; height:7px; border-radius:50%; background:var(--border-strong); transition:.2s;}
+.carou-dots i.on{background:var(--accent); transform:scale(1.3);}
+@media(max-width:900px){ .flow6{grid-template-columns:1fr 1fr;} .macro::after{display:none;} }
+
 /* ===== HERO ANIMATED BACKGROUND ===== */
 .hero{overflow:hidden;}
 .hero .slide-inner{position:relative; z-index:3;}
@@ -924,14 +987,183 @@ p:first-child{margin-top:0;}
   </div>
 </section>
 
-<!-- I-09 ПЛЕЙСХОЛДЕР · КОНТЕНТНАЯ ЧАСТЬ -->
-<section class="slide divider">
+<!-- ============ КОНТЕНТНАЯ ЧАСТЬ ============ -->
+
+<!-- C0 · разделитель -->
+<section class="slide divider fx">
   <div class="slide-inner">
-    <h1 class="big">6 ключевых шагов</h1>
-    <p class="lead">Дальше — контентная часть: каждый шаг отдельным слайдом, потом разбор на живом проекте (сотрудники, документы, результаты).</p>
-    <div class="todo" style="text-align:center">
-      <div class="tl">◻︎ блок в работе — ждём структуру контентной части</div>
+    <h1 class="big">Теперь — самое мясо</h1>
+    <p class="lead">Как и обещал, разбираем систему по шагам — от запроса до аналитики. Каждый шаг покажу и на живом проекте.</p>
+  </div>
+</section>
+
+<!-- C1 · Claude vs GPT -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <h2 class="big">Почему я работаю через Claude</h2>
+    <p class="lead">Неважно, какая нейросеть — <strong>важен нужный функционал</strong>. Дело не в названии и бренде, а в методологии и правильной постановке задач. Сейчас этот функционал лучше всего закрывает Claude.</p>
+    <table class="vstable">
+      <thead><tr><th></th><th>ChatGPT</th><th>Claude</th></tr></thead>
+      <tbody>
+        <tr><td>Работа с файлами</td><td class="gpt">слабее</td><td class="cl colcl">сильнее</td></tr>
+        <tr><td>Skills — свои AI-сотрудники под задачу</td><td class="gpt">—</td><td class="cl colcl">✓ да</td></tr>
+        <tr><td>Сайты, приложения, кастомные инструменты</td><td class="gpt">ограниченно</td><td class="cl colcl">✓ да</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- C2 · карта 6 макро-шагов -->
+<section class="slide">
+  <div class="slide-inner" style="max-width:var(--max-w)">
+    <div class="kicker">Общая карта системы</div>
+    <h2 class="big" style="margin-top:12px">Весь путь — от запроса до аналитики</h2>
+    <div class="flow6">
+      <div class="macro" style="--mc:#c77010"><div class="mn">01</div><h4>Исследование</h4><ul><li>Фиксируем запрос и цель</li><li>Рынок, конкуренты, покупатели</li><li>CustDev — интервью с клиентами</li></ul></div>
+      <div class="macro" style="--mc:#e8921a"><div class="mn">02</div><h4>Фокус</h4><ul><li>Продуктовая линейка: где деньги</li><li>Анализ аудитории</li><li>1 продукт · 1 ЦА · 1 боль</li></ul></div>
+      <div class="macro" style="--mc:#e9b646"><div class="mn">03</div><h4>Оффер</h4><ul><li>Оффер по Хормози</li><li>Идеи лид-магнитов</li></ul></div>
+      <div class="macro" style="--mc:#f5b34a"><div class="mn">04</div><h4>Контент</h4><ul><li>Смыслы для Reels и каруселей</li><li>Стратегия · идеи · сценарии</li></ul></div>
+      <div class="macro" style="--mc:#d98a2b"><div class="mn">05</div><h4>Производство</h4><ul><li>Съёмка или AI-аватар</li><li>Монтаж и дизайн каруселей</li><li>Постинг</li></ul></div>
+      <div class="macro" style="--mc:#6bbf59"><div class="mn">06</div><h4>Аналитика</h4><ul><li>Смотрим, что сработало</li><li>Усиливаем рабочее</li></ul></div>
     </div>
+    <p class="note" style="text-align:center;margin-top:24px">6 макро-шагов, 10 ключевых действий внутри. Дальше раскрываю каждый — и показываю вживую.</p>
+  </div>
+</section>
+
+<!-- C3 · маркетинговые исследования -->
+<section class="slide center">
+  <div class="slide-inner">
+    <div class="kicker">Шаг 01 · Исследование</div>
+    <h2 class="big" style="margin-top:12px">Исследуем рынок сразу<br>в трёх нейросетях</h2>
+    <p class="lead">Deep Research параллельно — пересечение источников убирает «галлюцинации», выводы основаны на данных.</p>
+    <div class="nns">
+      <div class="nn main"><div class="nname">Perplexity</div><div class="nrole">глубокий поиск</div></div>
+      <div class="nn main"><div class="nname">Parallel AI</div><div class="nrole">параллельный анализ</div></div>
+      <div class="nn main"><div class="nname">ChatGPT</div><div class="nrole">обработка данных</div></div>
+      <div class="nn sec"><div class="nname">+ Gemini</div><div class="nrole">по желанию</div></div>
+      <div class="nn sec"><div class="nname">+ Claude</div><div class="nrole">по желанию</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- C4 · NotebookLM + выбор -->
+<section class="slide center">
+  <div class="slide-inner">
+    <div class="kicker">Шаг 02 · Фокус</div>
+    <h2 class="big" style="margin-top:12px">Всё исследование — в NotebookLM</h2>
+    <div class="funnel">
+      <div class="docs">
+        <div class="doc">Рынок</div><div class="doc">Конкуренты</div><div class="doc">CustDev</div><div class="doc">Продукт</div>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="nb">📓 NotebookLM — загружаем всё сюда</div>
+      <div class="arrow">▼</div>
+      <div class="three">
+        <div class="t"><b>Анализ</b><span>что нашли</span></div>
+        <div class="t"><b>Продукт</b><span>где деньги</span></div>
+        <div class="t"><b>Выбор</b><span>финальное решение</span></div>
+      </div>
+      <div class="res">→ <b>1 продукт · 1 целевая аудитория · 1 боль</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- C5 · что такое AI-сотрудник -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <h2 class="big">Что такое AI-сотрудник</h2>
+    <p class="lead">Технология, на которой всё держится. Проще всего — через <strong>беспилотное такси</strong>: за рулём никого, машину один раз обучили — дальше едет сама.</p>
+    <div class="steps">
+      <div class="step"><div class="sn">1</div><div class="st"><h4>Знакомый пример</h4><p>Беспилотные такси в Китае, Дубае и США уже возят людей — за рулём никого.</p></div></div>
+      <div class="step"><div class="sn">2</div><div class="st"><h4>Один раз обучили — работает само</h4><p>Технологию научили правилам: газ, тормоз, светофоры, переходы. Дальше воспроизводит сама, без человека.</p></div></div>
+      <div class="step"><div class="sn">3</div><div class="st"><h4>Это и есть skill — AI-сотрудник</h4><p>Так же оцифровали маркетинг и сценаристику. Собираем свои skills под свои задачи — из них и построена вся система.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- C6 · 4 документа -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="kicker">Шаг 03 · Фундамент</div>
+    <h2 class="big" style="margin-top:12px">Четыре фундаментальных документа</h2>
+    <p class="lead">Один раз даём нейросети контекст — дальше весь контент генерируется исходя из него.</p>
+    <div class="cards c4" style="margin-top:22px">
+      <div class="card"><span class="ic">🔬</span><h4>ДНК ЦА</h4><p>17 листов: боли, мифы, подсознание аудитории.</p></div>
+      <div class="card"><span class="ic">💰</span><h4>Оффер по Хормози</h4><p>Предложение, от которого сложно отказаться.</p></div>
+      <div class="card"><span class="ic">🗺️</span><h4>Карта смыслов</h4><p>5 уровней осознанности → прогрев и продажа.</p></div>
+      <div class="card"><span class="ic">🎙️</span><h4>Манера общения</h4><p>Лексический код — контент звучит как ты.</p></div>
+    </div>
+    <p class="note">Раньше на такой объём уходили недели, сотрудники и бюджеты. Сейчас — $20 на Claude и пара часов.</p>
+  </div>
+</section>
+
+<!-- C7 · контент поверх фундамента -->
+<section class="slide center">
+  <div class="slide-inner">
+    <div class="kicker">Шаг 04 · Контент</div>
+    <h2 class="big" style="margin-top:12px">На фундаменте вырастает контент</h2>
+    <div class="layers">
+      <div class="lyr l-content">
+        <div class="ll">Контент — 3 шага по кругу</div>
+        <div class="row"><span>Контент-стратегия</span><span>Идеи</span><span>Сценарии</span></div>
+      </div>
+      <div class="between">▲</div>
+      <div class="lyr l-docs">
+        <div class="ll">Фундамент — 4 документа</div>
+        <div class="row"><span>ДНК ЦА</span><span>Оффер</span><span>Карта смыслов</span><span>Манера общения</span></div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:20px">Каждый следующий кусок контента опирается на фундамент — и итерация повторяется.</p>
+  </div>
+</section>
+
+<!-- C8 · производство -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <div class="kicker">Шаг 05 · Производство</div>
+    <h2 class="big" style="margin-top:12px">Съёмка или AI-аватар</h2>
+    <div class="cards c3" style="margin-top:22px">
+      <div class="card"><span class="ic">🎥</span><h4>Живая съёмка</h4><p>Снимаешь по готовому сценарию — свет и минимум оборудования.</p></div>
+      <div class="card"><span class="ic">🧑‍💻</span><h4>AI-аватар</h4><p>Цифровая копия говорит твоим голосом — без камеры.</p></div>
+      <div class="card"><span class="ic">✨</span><h4>AI-генерация</h4><p>Мини-сериалы, анимации, визуал вообще без съёмки.</p></div>
+    </div>
+    <p class="pill-note">Сквозной кейс эфира — Ирина: всю цепочку показываю на её проекте, до готового результата.</p>
+  </div>
+</section>
+
+<!-- C9 · карусели (реальная карусель) -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="case">
+      <div class="cx">
+        <div class="kicker">Шаг 05 · Производство</div>
+        <h2 class="big" style="margin-top:12px">Карусели недооценивают —<br>а они дают заявки</h2>
+        <p class="note" style="margin-top:16px">Reels дают охват, <strong>карусели генерируют заявки</strong>. И делать их легче, чем видео. Справа — реальная карусель, собранная по системе.</p>
+        <p class="note" style="margin-top:12px"><strong style="color:var(--accent-light)">Листай — на каждом слайде видны просмотры, охват и подписки.</strong></p>
+      </div>
+      <div class="cg">
+        <div class="carou" data-carou>
+          <div class="carou-stage">
+            <img src="/prezentaciya-ai-konveyer/screens/carousel/c1.png" alt="Карусель" data-slides="/prezentaciya-ai-konveyer/screens/carousel/c1.png,/prezentaciya-ai-konveyer/screens/carousel/c2.png,/prezentaciya-ai-konveyer/screens/carousel/c3.png,/prezentaciya-ai-konveyer/screens/carousel/c4.png,/prezentaciya-ai-konveyer/screens/carousel/c5.png,/prezentaciya-ai-konveyer/screens/carousel/c6.png">
+          </div>
+          <div class="carou-nav">
+            <button data-prev aria-label="Назад">‹</button>
+            <div class="carou-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+            <button data-next aria-label="Вперёд">›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C10 · аналитика -->
+<section class="slide divider fx v3">
+  <div class="slide-inner">
+    <div class="kicker">Шаг 06 · Аналитика</div>
+    <h1 class="big" style="margin-top:12px">Финишная прямая — аналитика</h1>
+    <p class="lead">Смотрим, что сработало, усиливаем рабочее и режем лишнее. Сейчас покажу вживую в Claude — как выглядят документы и аналитика в реальном проекте.</p>
+    <p class="pill-note">Мы прошли всю карту — от запроса до аналитики.</p>
   </div>
 </section>
 
@@ -2233,6 +2465,18 @@ p:first-child{margin-top:0;}
     + '<span class="spark" style="left:86%;top:74%;animation-duration:10s;animation-delay:-3s"></span>'
     + '</div>';
   deck.querySelectorAll('.slide.fx').forEach(s=>{ if(!s.querySelector('.hero-bg')) s.insertAdjacentHTML('afterbegin', fxTemplate); });
+
+  // карусель-виджеты
+  deck.querySelectorAll('[data-carou]').forEach(c=>{
+    const img=c.querySelector('.carou-stage img');
+    const slides=(img.dataset.slides||'').split(',').filter(Boolean);
+    const dots=[...c.querySelectorAll('.carou-dots i')];
+    let idx=0;
+    function set(i){ idx=(i+slides.length)%slides.length; img.setAttribute('src',slides[idx]); dots.forEach((d,k)=>d.classList.toggle('on',k===idx)); }
+    c.querySelector('[data-next]').addEventListener('click',e=>{e.stopPropagation(); set(idx+1);});
+    c.querySelector('[data-prev]').addEventListener('click',e=>{e.stopPropagation(); set(idx-1);});
+    dots.forEach((d,k)=>d.addEventListener('click',e=>{e.stopPropagation(); set(k);}));
+  });
 
   render();
   // hash deep-link (?s=NN)
