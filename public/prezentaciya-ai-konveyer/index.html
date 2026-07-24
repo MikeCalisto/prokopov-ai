@@ -475,25 +475,47 @@ p:first-child{margin-top:0;}
 .shot-wide img:hover{border-color:var(--border-accent-strong); box-shadow:0 10px 34px rgba(0,0,0,.5), 0 0 22px var(--accent-glow);}
 @media(max-width:860px){ .shots.vert img{width:var(--twm,140px);} }
 
-/* ===== КЕЙС · две колонки (текст слева / картинки справа) ===== */
-.case{display:grid; grid-template-columns:0.92fr 1.08fr; gap:clamp(28px,4.5vw,60px); align-items:center;}
+/* ===== КЕЙС · exhibit-стиль ===== */
+.case{display:grid; grid-template-columns:0.82fr 1.18fr; gap:clamp(30px,4.5vw,64px); align-items:center;}
 .case .cx{text-align:left; min-width:0;}
-.case .cx h2{text-align:left; font-size:clamp(23px,3vw,40px); margin-top:14px;}
-.case .cmetrics{display:flex; gap:12px; flex-wrap:wrap; margin:22px 0;}
-.case .cmetrics .m2{padding:13px 20px; text-align:left; flex:0 0 auto;}
-.case .cmetrics .m2 .v{font-size:clamp(22px,2.6vw,34px);}
-.case .cmetrics .m2 .k{margin-top:5px;}
-.case .cx .note{margin-top:4px; font-size:15px; line-height:1.55;}
-.cg{display:flex; flex-direction:column; align-items:center; gap:12px; min-width:0;}
-.cg img{border-radius:12px; border:1px solid var(--border-strong); background:#0a0a10; cursor:zoom-in; transition:.2s;}
-.cg img:hover{border-color:var(--border-accent-strong); box-shadow:0 10px 34px rgba(0,0,0,.5),0 0 22px var(--accent-glow);}
-.cg-wide{width:auto; max-width:100%; height:clamp(70px,9vh,96px);}
-.cg-row{display:flex; gap:12px; justify-content:center; align-items:flex-start; width:100%;}
-.cg-row.charts img{flex:1 1 0; min-width:0; height:auto;}
-.cg-row.portrait img{width:auto; height:clamp(210px,38vh,340px);}
-.cg-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; justify-items:center; width:100%; max-width:420px;}
-.cg-grid img{width:100%; aspect-ratio:.66; object-fit:cover;}
-@media(max-width:900px){ .case{grid-template-columns:1fr; gap:22px;} .case .cx h2{text-align:center;} .case .cmetrics{justify-content:center;} }
+.case .cx .caseline{margin-bottom:14px;}
+.case .cx h2{text-align:left; font-size:clamp(23px,2.9vw,40px); line-height:1.05;}
+.chero{font-family:var(--font-display); font-weight:900; line-height:.86; letter-spacing:-1.5px;
+  font-size:clamp(46px,6.4vw,92px); margin:20px 0 2px;
+  background:linear-gradient(180deg,var(--accent-light) 0%,var(--accent) 55%,var(--accent-deep) 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  text-shadow:0 4px 34px var(--accent-glow);}
+.chero-k{color:var(--text-muted); font-size:15px; margin-bottom:20px;}
+.chips2{display:flex; gap:10px; flex-wrap:wrap; margin:0 0 22px;}
+.chip2{display:flex; align-items:baseline; gap:7px; background:var(--bg-card); border:1px solid var(--border-accent);
+  border-radius:40px; padding:8px 16px 8px 15px;}
+.chip2 b{font-family:var(--font-display); font-weight:800; color:var(--accent-light); font-size:18px;}
+.chip2 span{font-size:13px; color:var(--text-muted);}
+.case .cx .note{margin-top:2px; font-size:14.5px; line-height:1.6;}
+/* правый кластер + свечение */
+.cg{position:relative; display:flex; flex-direction:column; align-items:center; gap:14px; min-width:0;}
+.cg > *{position:relative; z-index:1;}
+.cg::before{content:''; position:absolute; z-index:0; inset:-6% -4%;
+  background:radial-gradient(58% 56% at 52% 46%, var(--accent-glow), rgba(232,146,26,.05) 45%, transparent 72%);}
+.cg-row{display:flex; gap:14px; justify-content:center; align-items:flex-start; width:100%;}
+/* рамка-экспонат */
+.frame{padding:5px; background:linear-gradient(158deg,#181820,#0b0b11);
+  border:1px solid var(--border-accent); border-radius:18px;
+  box-shadow:0 20px 46px rgba(0,0,0,.55), 0 0 34px rgba(232,146,26,.10); transition:transform .22s, box-shadow .22s, border-color .22s;}
+.frame:hover{transform:translateY(-4px); border-color:var(--border-accent-strong);
+  box-shadow:0 26px 60px rgba(0,0,0,.6), 0 0 42px var(--accent-glow);}
+.frame img{display:block; border-radius:13px; cursor:zoom-in; background:#0a0a10;}
+.frame.phone{border-radius:26px; padding:6px;}
+.frame.phone img{border-radius:21px;}
+/* размеры под контент */
+.f-strip img{height:clamp(60px,7.6vh,84px); width:auto; max-width:100%;}
+.f-phone img{height:clamp(196px,35vh,326px); width:auto;}
+.f-chart img{width:100%; height:auto;}
+.cg-charts{display:flex; gap:14px; width:100%;}
+.cg-charts .frame{flex:1 1 0; min-width:0;}
+.cg-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; width:100%; max-width:440px;}
+.cg-grid .frame img{width:100%; aspect-ratio:.66; object-fit:cover;}
+@media(max-width:900px){ .case{grid-template-columns:1fr; gap:22px;} .case .cx h2,.chero,.chero-k{text-align:center;} .case .cx{text-align:center;} .chips2{justify-content:center;} }
 
 /* ===== HERO ANIMATED BACKGROUND ===== */
 .hero{overflow:hidden;}
@@ -821,18 +843,19 @@ p:first-child{margin-top:0;}
       <div class="cx">
         <div class="caseline"><span class="casetag">Кейс 1 · клиент агентства</span></div>
         <h2 class="big">Цифры, которые мы делаем клиенту прямо сейчас</h2>
-        <div class="cmetrics">
-          <div class="m2"><div class="v">50 млн+</div><div class="k">просмотров</div></div>
-          <div class="m2"><div class="v">+90 000</div><div class="k">подписчиков</div></div>
-          <div class="m2"><div class="v">$500 000</div><div class="k">на онлайн-продуктах</div></div>
+        <div class="chero">$500 000</div>
+        <div class="chero-k">на онлайн-продуктах — с органического трафика, без таргета</div>
+        <div class="chips2">
+          <div class="chip2"><b>50 млн+</b><span>просмотров</span></div>
+          <div class="chip2"><b>+90 000</b><span>подписчиков</span></div>
         </div>
-        <p class="note">У клиента выстроены воронки продаж — и этот органический трафик, <strong>без таргета</strong>, принёс ему $500 000. Трафик — просмотры и подписчиков — обеспечиваем мы.</p>
+        <p class="note">У клиента выстроены воронки продаж, а трафик — просмотры и подписчиков — <strong>обеспечиваем мы</strong>.</p>
       </div>
       <div class="cg">
-        <img class="cg-wide" src="/prezentaciya-ai-konveyer/screens/case_agency_profile_strip.png" alt="Профиль клиента">
-        <div class="cg-row charts">
-          <img src="/prezentaciya-ai-konveyer/screens/case_agency_views_grid.png" alt="Просмотры по месяцам">
-          <img src="/prezentaciya-ai-konveyer/screens/case_agency_subs_grid.png" alt="Подписчики по месяцам">
+        <div class="frame f-strip"><img src="/prezentaciya-ai-konveyer/screens/case_agency_profile_strip.png" alt="Профиль клиента"></div>
+        <div class="cg-charts">
+          <div class="frame f-chart"><img src="/prezentaciya-ai-konveyer/screens/case_agency_views_grid.png" alt="Просмотры по месяцам"></div>
+          <div class="frame f-chart"><img src="/prezentaciya-ai-konveyer/screens/case_agency_subs_grid.png" alt="Подписчики по месяцам"></div>
         </div>
       </div>
     </div>
@@ -846,17 +869,19 @@ p:first-child{margin-top:0;}
       <div class="cx">
         <div class="caseline"><span class="casetag">Кейс 2 · психология · @marinaberg.pro</span></div>
         <h2 class="big">Марина Берг: не снимается. Просто читает сценарии</h2>
-        <div class="cmetrics">
-          <div class="m2"><div class="v">+3 000</div><div class="k">подписчиков</div></div>
-          <div class="m2"><div class="v">+300</div><div class="k">подписчиков в Telegram</div></div>
+        <div class="chips2" style="margin-top:22px">
+          <div class="chip2"><b>+3 000</b><span>подписчиков</span></div>
+          <div class="chip2"><b>+300</b><span>в Telegram</span></div>
+          <div class="chip2"><b>171k</b><span>просмотров у Reels</span></div>
         </div>
-        <p class="note">Весь контент — на AI-аватаре, по сценариям. Сама в кадре не снимается, просто начитывает текст. И это <strong>фото-аватар</strong> — качество даже чуть ниже видео. А рилсы всё равно улетают на сотни тысяч. <strong>Решает смысл, а не камера.</strong></p>
+        <p class="note">Весь контент — на AI-аватаре, по сценариям. Сама в кадре не снимается, просто начитывает текст. И это <strong>фото-аватар</strong> — качество даже чуть ниже видео. А рилсы всё равно улетают на сотни тысяч.</p>
+        <p class="note" style="margin-top:12px"><strong style="color:var(--accent-light)">Решает смысл, а не камера.</strong></p>
       </div>
       <div class="cg">
-        <img class="cg-wide" src="/prezentaciya-ai-konveyer/screens/marina_header.png" alt="Профиль Марины Берг">
-        <div class="cg-row portrait">
-          <img src="/prezentaciya-ai-konveyer/screens/marina_obida.png" alt="Статистика Reels">
-          <img src="/prezentaciya-ai-konveyer/screens/marina_films.png" alt="Статистика публикации">
+        <div class="frame f-strip"><img src="/prezentaciya-ai-konveyer/screens/marina_header.png" alt="Профиль Марины Берг"></div>
+        <div class="cg-row">
+          <div class="frame phone f-phone"><img src="/prezentaciya-ai-konveyer/screens/marina_obida.png" alt="Статистика Reels"></div>
+          <div class="frame phone f-phone"><img src="/prezentaciya-ai-konveyer/screens/marina_films.png" alt="Статистика публикации"></div>
         </div>
       </div>
     </div>
@@ -870,17 +895,17 @@ p:first-child{margin-top:0;}
       <div class="cx">
         <div class="caseline"><span class="casetag">Кейс 3 · крипта · @boshnikov</span></div>
         <h2 class="big">CryptoBosh — вирусится в самой недоверчивой нише</h2>
-        <div class="cmetrics">
-          <div class="m2"><div class="v">+36 000</div><div class="k">подписчиков за 3 месяца</div></div>
-        </div>
-        <p class="note">Даже в крипте залетают. <strong>Если система вытягивает крипту — вытянет что угодно.</strong></p>
+        <div class="chero">+36 000</div>
+        <div class="chero-k">подписчиков за 3 месяца</div>
+        <p class="note">Ролики по <strong>100–500 тысяч просмотров</strong> в нише, где людям вообще ничему не верят. Даже здесь система залетает.</p>
+        <p class="note" style="margin-top:12px"><strong style="color:var(--accent-light)">Если вытягивает крипту — вытянет что угодно.</strong></p>
       </div>
       <div class="cg">
         <div class="cg-grid">
-          <img src="/prezentaciya-ai-konveyer/screens/t_492k.png" alt="492k просмотров">
-          <img src="/prezentaciya-ai-konveyer/screens/t_321k.png" alt="321k просмотров">
-          <img src="/prezentaciya-ai-konveyer/screens/t_222k.png" alt="222k просмотров">
-          <img src="/prezentaciya-ai-konveyer/screens/t_112k.png" alt="112k просмотров">
+          <div class="frame phone"><img src="/prezentaciya-ai-konveyer/screens/t_492k.png" alt="492k просмотров"></div>
+          <div class="frame phone"><img src="/prezentaciya-ai-konveyer/screens/t_321k.png" alt="321k просмотров"></div>
+          <div class="frame phone"><img src="/prezentaciya-ai-konveyer/screens/t_222k.png" alt="222k просмотров"></div>
+          <div class="frame phone"><img src="/prezentaciya-ai-konveyer/screens/t_112k.png" alt="112k просмотров"></div>
         </div>
       </div>
     </div>
@@ -2114,10 +2139,10 @@ p:first-child{margin-top:0;}
   function zShow(src){ if(zi.getAttribute('src')!==src) zi.setAttribute('src',src); zv.classList.add('on'); }
   function zHide(){ if(pinned) return; zv.classList.remove('on'); }
   function zClose(){ pinned=false; zv.classList.remove('on','pinned'); zh.textContent='клик — закрепить'; }
-  deck.addEventListener('mouseover',e=>{ const im=e.target.closest('.shots img,.shot-wide img,.cg img'); if(im&&!pinned) zShow(im.getAttribute('src')); });
-  deck.addEventListener('mouseout',e=>{ if(e.target.closest('.shots img,.shot-wide img,.cg img')) zHide(); });
+  deck.addEventListener('mouseover',e=>{ const im=e.target.closest('.frame img'); if(im&&!pinned) zShow(im.getAttribute('src')); });
+  deck.addEventListener('mouseout',e=>{ if(e.target.closest('.frame img')) zHide(); });
   deck.addEventListener('click',e=>{
-    const im=e.target.closest('.shots img,.shot-wide img,.cg img');
+    const im=e.target.closest('.frame img');
     if(im){ e.stopPropagation(); zShow(im.getAttribute('src')); pinned=true; zv.classList.add('pinned'); zh.textContent='клик — закрыть'; }
   },true);
   zv.addEventListener('click',e=>{ e.stopPropagation(); zClose(); });
