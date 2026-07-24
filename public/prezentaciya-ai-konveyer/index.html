@@ -422,6 +422,34 @@ p:first-child{margin-top:0;}
 .todo li::before{content:'□'; position:absolute; left:0; color:var(--accent); font-size:13px;}
 
 
+/* ===== STORY / КЕЙСЫ ===== */
+.metrics{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:18px;}
+.metrics .m2{background:linear-gradient(160deg,rgba(232,146,26,.09),var(--bg-card)); border:1px solid var(--border-accent); border-radius:var(--radius-lg); padding:15px 14px; text-align:center;}
+.metrics .m2 .v{font-family:var(--font-display); font-weight:900; font-size:clamp(26px,3.6vw,44px); line-height:1;
+  background:linear-gradient(180deg,var(--accent-light),var(--accent) 60%,var(--accent-deep));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.metrics .m2 .k{margin-top:8px; font-size:13px; color:var(--text-muted); line-height:1.35;}
+.shots{display:grid; gap:10px; margin-top:16px; align-items:start;}
+.shots.s3{grid-template-columns:repeat(3,1fr);}
+.shots.s2{grid-template-columns:repeat(2,1fr);}
+.shots.s4{grid-template-columns:repeat(4,1fr);}
+.shots img{width:100%; max-height:clamp(130px,24vh,260px); object-fit:contain; object-position:top; border-radius:12px; border:1px solid var(--border-strong); background:var(--bg-card);}
+.caseline{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px;}
+.casetag{font-family:var(--font-display); font-weight:700; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); padding:5px 12px; border:1px solid var(--border-accent); border-radius:30px;}
+.vsbox{display:grid; grid-template-columns:1fr auto 1fr; gap:18px; align-items:stretch; margin-top:26px;}
+.vsbox .vcol{border-radius:var(--radius-lg); padding:22px; border:1px solid var(--border-strong); background:var(--bg-card);}
+.vsbox .vcol.good{border-color:var(--border-accent-strong); background:linear-gradient(160deg,rgba(232,146,26,.08),var(--bg-card)); box-shadow:var(--shadow-glow);}
+.vsbox .vcol h4{font-family:var(--font-display); font-weight:800; font-size:17px; margin-bottom:12px;}
+.vsbox .vcol.good h4{color:var(--accent-light);}
+.vsbox .vcol ul{list-style:none;}
+.vsbox .vcol li{position:relative; padding:7px 0 7px 20px; font-size:14.5px; line-height:1.45; color:var(--text-muted); border-bottom:1px solid rgba(255,255,255,.04);}
+.vsbox .vcol li:last-child{border-bottom:none;}
+.vsbox .vcol li::before{content:'—'; position:absolute; left:0; color:var(--text-dim);}
+.vsbox .vcol.good li{color:var(--text);} .vsbox .vcol.good li::before{content:'✦'; color:var(--accent);}
+.vsbox .vmid{display:flex; align-items:center; font-family:var(--font-display); font-weight:900; font-size:clamp(20px,2.6vw,32px); color:var(--accent); text-shadow:0 0 24px var(--accent-glow);}
+.factors{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:26px;}
+@media(max-width:860px){ .metrics,.factors{grid-template-columns:1fr 1fr;} .vsbox{grid-template-columns:1fr;} .vsbox .vmid{justify-content:center;} .shots.s3,.shots.s4{grid-template-columns:1fr 1fr;} }
+
 /* ===== HERO ANIMATED BACKGROUND ===== */
 .hero{overflow:hidden;}
 .hero .slide-inner{position:relative; z-index:3;}
@@ -588,22 +616,219 @@ p:first-child{margin-top:0;}
   </div>
 </section>
 
-<!-- I-08 ПЛЕЙСХОЛДЕР · ПУТЬ К СИСТЕМЕ -->
+<!-- ====== ИСТОРИЯ: КАК РОДИЛАСЬ СИСТЕМА ====== -->
+
+<!-- S-01 разделитель -->
+<section class="slide divider fx v2">
+  <div class="slide-inner">
+    <h1 class="big">Как родилась<br>эта система</h1>
+    <p class="lead">Небольшая предыстория — чтобы вы понимали, откуда всё это взялось и почему выглядит именно так.</p>
+  </div>
+</section>
+
+<!-- S-02 предыстория -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <h2 class="big">4 года я строю агентство<br>по созданию контента</h2>
+    <ul class="list-plain">
+      <li>Собирал опыт у <strong>топов рынка</strong>: сценаристика, поиск идей, контент, маркетинг</li>
+      <li>И тут же обкатывал всё <strong>на реальных проектах клиентов</strong></li>
+      <li>Методология затачивалась годами — не в теории, а в работе</li>
+    </ul>
+  </div>
+</section>
+
+<!-- S-03 главный вопрос -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h1 class="big">Как сделать результат<br>предсказуемым?</h1>
+    <p class="lead">Не «как сделать красиво» — а как сделать так, чтобы результат был предсказуем <strong>и для меня, и для клиента</strong>.</p>
+    <p class="lead">Контент — сфера творческая. А творчество плохо дружит со стабильностью.</p>
+  </div>
+</section>
+
+<!-- S-04 от чего зависел результат -->
 <section class="slide">
   <div class="slide-inner">
-    <h2 class="big" style="text-align:center">Как я пришёл к созданию этой системы</h2>
-    <div class="todo">
-      <div class="tl">◻︎ блок в работе — ждём голосовое Романа и скрины результатов</div>
-      <ul>
-        <li>У меня агентство по созданию контента — и вот с какими проблемами я столкнулся</li>
-        <li>Долго не мог найти решение</li>
-        <li>Пошёл глубоко изучать AI — нашёл разрозненные решения</li>
-        <li>Собрал всё воедино сам</li>
-        <li>Обкатал на своих проектах</li>
-        <li>Внедрил в агентство — и вот какие результаты это дало <em>(скрины)</em></li>
-        <li>Решил, что хочу делиться этим с людьми, которым нужен контент</li>
-      </ul>
+    <h2 class="big" style="text-align:center">От чего зависел результат</h2>
+    <div class="factors">
+      <div class="card"><span class="ic">🎭</span><h4>Настроение</h4><p>Сегодня человек в ресурсе, завтра — нет.</p></div>
+      <div class="card"><span class="ic">🏖</span><h4>Отпуска и выпадения</h4><p>Ушёл ключевой человек — процесс встал.</p></div>
+      <div class="card"><span class="ic">🎯</span><h4>Разный уровень погружения</h4><p>Кто-то глубоко в нише клиента, кто-то нет.</p></div>
+      <div class="card"><span class="ic">🧩</span><h4>Человеческий фактор</h4><p>Забыл применить то, что знает — и маркетинг просел.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- S-05 гипотеза -->
+<section class="slide center">
+  <div class="slide-inner">
+    <h2 class="big">Появились нейросети —<br>и я задумался</h2>
+    <p class="lead">А могу ли я с их помощью этот процесс <strong>устаканить и регламентировать</strong>?</p>
+    <p class="lead">И начал переносить на нейросети всю свою методологию — по кусочкам.</p>
+  </div>
+</section>
+
+<!-- S-06 кто такой AI-сотрудник -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <h2 class="big">Так появились AI-сотрудники.<br>Кто это вообще такие?</h2>
+    <p class="lead">Это не «промпт». Это <strong>обученный специалист</strong>: ты один раз вложил в него методологию, контекст и правила — и дальше он делает свою часть работы стабильно, раз за разом. Как сотрудник в команде: своя роль, своя зона ответственности.</p>
+    <div class="two" style="margin-top:22px">
+      <div class="side"><h4>❌ Не волшебная таблетка</h4><p>Нейросеть сама по себе ничему не научилась — её кто-то обучил. Ей нужно задать контекст и держать над ней контроль.</p></div>
+      <div class="side warm"><h4>✦ 80% рутины забирает</h4><p>Но стратегия и смыслы остаются за тобой. AI — тот, кто воплощает их в жизнь.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- S-07 что получилось -->
+<section class="slide center">
+  <div class="slide-inner">
+    <h2 class="big">Методология из 6 AI-сотрудников</h2>
+    <p class="lead">Они ведут весь процесс по кругу — от идеи до готового контента.</p>
+    <div class="num-huge" style="margin:18px 0 6px">7 / 10</div>
+    <p class="lead">По моему перфекционизму — вот такое качество они выдают. И для меня это закрыло тот самый вопрос предсказуемости.</p>
+    <p class="pill-note">И это уже в разы лучше, чем любой непрофессиональный сценарист — а это, честно говоря, каждый из вас — сделает сам.</p>
+  </div>
+</section>
+
+<!-- S-08 почему не уволил команду -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <h2 class="big">Я не уволил ни одного<br>сценариста и маркетолога</h2>
+    <p class="lead">AI довозит до <strong>7 из 10</strong> — быстро и стабильно. А мои маркетологи забирают эти 7 и выкручивают до <strong>9–10 из 10</strong>: проверяют на релевантность, усиливают, добавляют экспертизу.</p>
+    <p class="lead">Они занимаются тем, где действительно незаменимы. Всё, что было до этого — уже делает нейросеть.</p>
+  </div>
+</section>
+
+<!-- S-09 клиенты попросили -->
+<section class="slide center">
+  <div class="slide-inner">
+    <h2 class="big">Мы рассказали клиентам, как работаем —<br>и они попросили это себе</h2>
+    <p class="lead">Сначала мы за высокий чек заходили своей командой и настраивали систему внутри их бизнеса. Работало.</p>
+  </div>
+</section>
+
+<!-- S-10 групповой формат -->
+<section class="slide center">
+  <div class="slide-inner">
+    <h2 class="big">Потом пришли ученики<br>моего курса по AI-аватару</h2>
+    <p class="lead">Они спрашивали, как внедрить это <strong>самим</strong> — без моей команды. Под этот запрос и родился групповой формат.</p>
+  </div>
+</section>
+
+<!-- S-11 инсайт -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h2 class="big">Я решал вопрос для себя —<br>а оказалось, это нужно многим</h2>
+    <p class="lead">То, что я построил внутри агентства <strong>для 15 клиентов</strong>, понадобилось людям, которые пока не готовы нанимать команду или искать подрядчиков.</p>
+    <p class="lead">Они делают контент сами — и им нужна была именно <strong>система</strong>, а не услуга.</p>
+  </div>
+</section>
+
+<!-- S-12 два формата -->
+<section class="slide narrow">
+  <div class="slide-inner">
+    <h2 class="big" style="text-align:center">Почему это стало обучением,<br>а не услугой</h2>
+    <div class="vsbox">
+      <div class="vcol">
+        <h4>Услуга агентства</h4>
+        <ul>
+          <li><strong>$1700/мес</strong> за 30 единиц контента</li>
+          <li>Работает команда — время людей стоит денег</li>
+          <li>Платишь каждый месяц</li>
+        </ul>
+      </div>
+      <div class="vmid">VS</div>
+      <div class="vcol good">
+        <h4>Система у тебя</h4>
+        <ul>
+          <li><strong>Один раз</strong> — и система твоя</li>
+          <li>Работаешь ты + 6 AI-сотрудников</li>
+          <li>Дальше только применяешь</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S-13 синергия -->
+<section class="slide center">
+  <div class="slide-inner">
+    <h2 class="big">Почему это работает<br>только вместе с тобой</h2>
+    <p class="lead">AI закрывает ту часть маркетинга, в которой большинство не разбирается так глубоко, как я и моя команда. Мы отгрузили в этих сотрудников всё, что было в нас.</p>
+    <p class="lead">Но маркетинг на пустом месте не даёт ничего. За ним должна стоять <strong>твоя ниша, твой продукт, твоя экспертиза</strong>. Вот на стыке и рождается результат.</p>
+  </div>
+</section>
+
+<!-- S-14 разделитель кейсы -->
+<section class="slide divider fx v3">
+  <div class="slide-inner">
+    <h1 class="big">Результат этой системы<br>уже доказан</h1>
+    <p class="lead">Покажу на живых примерах — люди, с которыми мы работаем прямо сейчас.</p>
+  </div>
+</section>
+
+<!-- S-15 кейс 1 · агентство -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="caseline"><span class="casetag">Кейс 1 · клиент агентства</span></div>
+    <h2 class="big">Без понтов — по делу</h2>
+    <div class="metrics">
+      <div class="m2"><div class="v">50 млн+</div><div class="k">просмотров</div></div>
+      <div class="m2"><div class="v">+90 000</div><div class="k">подписчиков</div></div>
+      <div class="m2"><div class="v">$500 000</div><div class="k">на онлайн-продуктах</div></div>
+    </div>
+    <div class="shots s3">
+      <img src="screens/case_agency_profile_strip.png" alt="Профиль клиента">
+      <img src="screens/case_agency_views_grid.png" alt="Просмотры по месяцам">
+      <img src="screens/case_agency_subs_grid.png" alt="Подписчики по месяцам">
+    </div>
+    <p class="note">У клиента выстроены воронки продаж — и этот органический трафик, <strong>без таргета</strong>, принёс ему $500 000. Трафик — просмотры и подписчиков — обеспечиваем мы.</p>
+  </div>
+</section>
+
+<!-- S-16 кейс 2 · Марина Берг -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="caseline"><span class="casetag">Кейс 2 · психология · @marinaberg.pro</span></div>
+    <h2 class="big">Марина Берг: не снимается.<br>Просто читает сценарии</h2>
+    <div class="metrics" style="grid-template-columns:repeat(2,1fr); max-width:620px">
+      <div class="m2"><div class="v">+3 000</div><div class="k">подписчиков</div></div>
+      <div class="m2"><div class="v">+300</div><div class="k">подписчиков в Telegram</div></div>
+    </div>
+    <div class="shots s3">
+      <img src="screens/marina_header.png" alt="Профиль Марины Берг">
+      <img src="screens/marina_obida.png" alt="Reels">
+      <img src="screens/marina_films.png" alt="Reels">
+    </div>
+    <p class="note">Весь контент — на AI-аватаре, по сценариям. Сама в кадре не снимается, просто начитывает текст. И это <strong>фото-аватар</strong> — качество даже чуть ниже видео. А рилсы всё равно улетают на сотни тысяч. <strong>Решает смысл, а не камера.</strong></p>
+  </div>
+</section>
+
+<!-- S-17 кейс 3 · CryptoBosh -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="caseline"><span class="casetag">Кейс 3 · крипта · @boshnikov</span></div>
+    <h2 class="big">CryptoBosh — вирусится<br>в самой недоверчивой нише</h2>
+    <div class="metrics" style="grid-template-columns:1fr; max-width:380px">
+      <div class="m2"><div class="v">+36 000</div><div class="k">подписчиков за 3 месяца</div></div>
+    </div>
+    <div class="shots s4">
+      <img src="screens/t_492k.png" alt="492k просмотров">
+      <img src="screens/t_321k.png" alt="321k просмотров">
+      <img src="screens/t_222k.png" alt="222k просмотров">
+      <img src="screens/t_112k.png" alt="112k просмотров">
+    </div>
+    <p class="note">Даже в крипте залетают. <strong>Если система вытягивает крипту — вытянет что угодно.</strong></p>
+  </div>
+</section>
+
+<!-- S-18 три ниши -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h2 class="big">Три разные ниши —<br>одна система</h2>
+    <p class="lead">Онлайн-продукты, психология, крипта. Разные аудитории, разные продукты — и везде работает <strong>одна и та же методология</strong>.</p>
   </div>
 </section>
 
