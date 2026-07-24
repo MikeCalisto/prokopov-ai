@@ -450,6 +450,28 @@ p:first-child{margin-top:0;}
 .factors{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:26px;}
 @media(max-width:860px){ .metrics,.factors{grid-template-columns:1fr 1fr;} .vsbox{grid-template-columns:1fr;} .vsbox .vmid{justify-content:center;} .shots.s3,.shots.s4{grid-template-columns:1fr 1fr;} }
 
+/* ===== ZOOM превью скриншотов ===== */
+.shots img{cursor:zoom-in; transition:transform .2s, border-color .2s, box-shadow .2s;}
+.shots img:hover{transform:translateY(-3px); border-color:var(--border-accent-strong); box-shadow:0 10px 34px rgba(0,0,0,.5), 0 0 22px var(--accent-glow);}
+.zoomview{position:fixed; inset:0; z-index:70; display:flex; align-items:center; justify-content:center;
+  background:rgba(4,4,8,.92); backdrop-filter:blur(6px); opacity:0; visibility:hidden; transition:opacity .18s, visibility .18s; pointer-events:none;}
+.zoomview.on{opacity:1; visibility:visible;}
+.zoomview.pinned{pointer-events:auto; cursor:zoom-out;}
+.zoomview img{max-width:94vw; max-height:90vh; width:auto; height:auto; border-radius:14px;
+  border:1px solid var(--border-accent); box-shadow:0 30px 90px rgba(0,0,0,.7), 0 0 60px var(--accent-glow);}
+.zoomview .zhint{position:absolute; bottom:22px; left:50%; transform:translateX(-50%);
+  font-family:var(--font-display); font-weight:700; font-size:12px; letter-spacing:1px; color:var(--text-dim);
+  background:rgba(13,13,18,.8); border:1px solid var(--border-strong); padding:7px 16px; border-radius:30px;}
+
+/* вертикальные скриншоты: высота фиксирована, ширина по пропорции — без пустых полей */
+.shots.vert{display:flex; justify-content:center; align-items:flex-start; gap:12px; flex-wrap:wrap;}
+.shots.vert img{width:auto; height:clamp(230px,44vh,420px); max-height:none; object-fit:contain; object-position:center;}
+.shot-wide{margin-top:16px;}
+.shot-wide img{width:100%; max-width:760px; max-height:clamp(90px,14vh,150px); object-fit:contain; object-position:left center;
+  border-radius:12px; border:1px solid var(--border-strong); background:var(--bg-card); cursor:zoom-in; transition:.2s;}
+.shot-wide img:hover{border-color:var(--border-accent-strong); box-shadow:0 10px 34px rgba(0,0,0,.5), 0 0 22px var(--accent-glow);}
+@media(max-width:860px){ .shots.vert img{height:clamp(180px,32vh,280px);} }
+
 /* ===== HERO ANIMATED BACKGROUND ===== */
 .hero{overflow:hidden;}
 .hero .slide-inner{position:relative; z-index:3;}
@@ -797,10 +819,12 @@ p:first-child{margin-top:0;}
       <div class="m2"><div class="v">+3 000</div><div class="k">подписчиков</div></div>
       <div class="m2"><div class="v">+300</div><div class="k">подписчиков в Telegram</div></div>
     </div>
-    <div class="shots s3">
+    <div class="shot-wide">
       <img src="/prezentaciya-ai-konveyer/screens/marina_header.png" alt="Профиль Марины Берг">
-      <img src="/prezentaciya-ai-konveyer/screens/marina_obida.png" alt="Reels">
-      <img src="/prezentaciya-ai-konveyer/screens/marina_films.png" alt="Reels">
+    </div>
+    <div class="shots vert">
+      <img src="/prezentaciya-ai-konveyer/screens/marina_obida.png" alt="Статистика Reels">
+      <img src="/prezentaciya-ai-konveyer/screens/marina_films.png" alt="Статистика публикации">
     </div>
     <p class="note">Весь контент — на AI-аватаре, по сценариям. Сама в кадре не снимается, просто начитывает текст. И это <strong>фото-аватар</strong> — качество даже чуть ниже видео. А рилсы всё равно улетают на сотни тысяч. <strong>Решает смысл, а не камера.</strong></p>
   </div>
@@ -814,7 +838,7 @@ p:first-child{margin-top:0;}
     <div class="metrics" style="grid-template-columns:1fr; max-width:380px">
       <div class="m2"><div class="v">+36 000</div><div class="k">подписчиков за 3 месяца</div></div>
     </div>
-    <div class="shots s4">
+    <div class="shots vert">
       <img src="/prezentaciya-ai-konveyer/screens/t_492k.png" alt="492k просмотров">
       <img src="/prezentaciya-ai-konveyer/screens/t_321k.png" alt="321k просмотров">
       <img src="/prezentaciya-ai-konveyer/screens/t_222k.png" alt="222k просмотров">
@@ -1991,6 +2015,7 @@ p:first-child{margin-top:0;}
   <svg class="ico-enter" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
   <svg class="ico-exit" viewBox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>
 </button>
+<div class="zoomview" id="zoomView" aria-hidden="true"><img id="zoomImg" alt=""><div class="zhint" id="zoomHint">клик — закрепить</div></div>
 <div class="hint" id="hint">← → · пробел · клик по краям · свайп</div>
 
 <script>
@@ -2043,6 +2068,21 @@ p:first-child{margin-top:0;}
   prevBtn.addEventListener('click',e=>{e.stopPropagation();prev();});
   document.getElementById('tapR').addEventListener('click',next);
   document.getElementById('tapL').addEventListener('click',prev);
+
+  // zoom скриншотов: наведение — показать, клик — закрепить
+  const zv=document.getElementById('zoomView'), zi=document.getElementById('zoomImg'), zh=document.getElementById('zoomHint');
+  let pinned=false;
+  function zShow(src){ if(zi.getAttribute('src')!==src) zi.setAttribute('src',src); zv.classList.add('on'); }
+  function zHide(){ if(pinned) return; zv.classList.remove('on'); }
+  function zClose(){ pinned=false; zv.classList.remove('on','pinned'); zh.textContent='клик — закрепить'; }
+  deck.addEventListener('mouseover',e=>{ const im=e.target.closest('.shots img,.shot-wide img'); if(im&&!pinned) zShow(im.getAttribute('src')); });
+  deck.addEventListener('mouseout',e=>{ if(e.target.closest('.shots img,.shot-wide img')) zHide(); });
+  deck.addEventListener('click',e=>{
+    const im=e.target.closest('.shots img,.shot-wide img');
+    if(im){ e.stopPropagation(); zShow(im.getAttribute('src')); pinned=true; zv.classList.add('pinned'); zh.textContent='клик — закрыть'; }
+  },true);
+  zv.addEventListener('click',e=>{ e.stopPropagation(); zClose(); });
+  window.addEventListener('keydown',e=>{ if(e.key==='Escape') zClose(); });
 
   // fullscreen
   const fsBtn=document.getElementById('fsBtn');
