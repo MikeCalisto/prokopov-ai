@@ -395,6 +395,33 @@ p:first-child{margin-top:0;}
   .navbtn{width:42px; height:42px;}
 }
 
+/* ===== INTRO (контентная часть эфира) ===== */
+.agenda{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:26px; text-align:left;}
+.agenda .ai{display:flex; gap:14px; align-items:flex-start; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-md); padding:14px 16px; transition:.2s;}
+.agenda .ai:hover{border-color:var(--border-accent); background:var(--bg-card-hover);}
+.agenda .an{font-family:var(--font-display); font-weight:900; font-size:19px; color:var(--accent); line-height:1.15; flex-shrink:0; min-width:24px;}
+.agenda .at{font-size:14.5px; line-height:1.45; color:var(--text);}
+.agenda .at b{color:var(--accent-light); font-weight:700;}
+/* шкала настроения */
+.scale{display:flex; gap:9px; justify-content:center; flex-wrap:wrap; margin-top:30px;}
+.scale span{width:clamp(44px,5vw,60px); height:clamp(44px,5vw,60px); border-radius:14px; border:1px solid var(--border-strong); background:var(--bg-card); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:800; font-size:clamp(17px,2vw,22px); color:var(--text-muted); transition:.2s;}
+.scale span:nth-child(n+8){border-color:var(--border-accent); color:var(--accent-light); background:rgba(232,146,26,.07);}
+.scale span:last-child{box-shadow:0 0 20px var(--accent-glow);}
+/* гигантский знак (+) */
+.giant{font-family:var(--font-display); font-weight:900; font-size:clamp(90px,18vw,220px); line-height:1;
+  background:linear-gradient(180deg,var(--accent-light),var(--accent) 55%,var(--accent-deep));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  text-shadow:0 6px 50px var(--accent-glow); margin-bottom:10px;}
+/* блок «в работе» */
+.todo{margin-top:26px; border:2px dashed var(--border-accent-strong); border-radius:var(--radius-lg);
+  background:linear-gradient(160deg,rgba(232,146,26,.05),var(--bg-card));
+  padding:26px; text-align:left;}
+.todo .tl{font-family:var(--font-display); font-weight:800; font-size:14px; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+.todo ul{list-style:none; margin:0;}
+.todo li{position:relative; padding:6px 0 6px 22px; font-size:14.5px; color:var(--text-muted); line-height:1.5;}
+.todo li::before{content:'□'; position:absolute; left:0; color:var(--accent); font-size:13px;}
+@media(max-width:860px){ .agenda{grid-template-columns:1fr;} }
+
 /* ===== HERO ANIMATED BACKGROUND ===== */
 .hero{overflow:hidden;}
 .hero .slide-inner{position:relative; z-index:3;}
@@ -476,6 +503,123 @@ p:first-child{margin-top:0;}
 <div class="progress" id="progress"></div>
 
 <div class="deck" id="deck">
+<!-- ============ ЧАСТЬ 1 · ОТКРЫТИЕ ЭФИРА ============ -->
+
+<!-- I-01 ТИТУЛ -->
+<section class="slide divider fx">
+  <div class="slide-inner">
+    <div class="kicker">Закрита Zoom-зустріч</div>
+    <h1 class="big" style="margin-top:14px">AI Контент-<br>Система</h1>
+    <p class="lead">Спікер — <strong>Роман Прокопов</strong></p>
+    <p class="pill-note">Старт о 13:00 за Києвом</p>
+  </div>
+</section>
+
+<!-- I-02 СВЯЗЬ -->
+<section class="slide center">
+  <div class="slide-inner">
+    <div class="giant">+</div>
+    <h1 class="big">Ставьте + в чат,<br>если меня хорошо слышно и видно</h1>
+  </div>
+</section>
+
+<!-- I-03 НАСТРОЕНИЕ -->
+<section class="slide center">
+  <div class="slide-inner">
+    <h2 class="big">Пока ждём всех — около 5 минут</h2>
+    <p class="lead">Хочу поинтересоваться, что у вас по настроению на сейчас. Проставьте в чат <strong>от 1 до 10</strong>.</p>
+    <div class="scale">
+      <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+      <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+    </div>
+  </div>
+</section>
+
+<!-- I-04 ПЛАН ЭФИРА -->
+<section class="slide">
+  <div class="slide-inner">
+    <h2 class="big" style="text-align:center">Итак, стартуем.<br>Какой у нас план на этот созвон</h2>
+    <div class="agenda">
+      <div class="ai"><div class="an">1</div><div class="at"><b>Быстро познакомимся</b> — небольшая нетворк-сессия, по минутке на каждого</div></div>
+      <div class="ai"><div class="an">2</div><div class="at">Продемонстрирую <b>6 ключевых шагов</b>, которые нужно проделать, чтобы стабильно создавать и публиковать контент</div></div>
+      <div class="ai"><div class="an">3</div><div class="at">Каждый шаг покажу <b>на примере реального проекта</b> — как это работает на практике и какие результаты получаются</div></div>
+      <div class="ai"><div class="an">4</div><div class="at">Покажу <b>свою авторскую программу обучения</b>, которую я собрал вокруг этой контент-системы</div></div>
+      <div class="ai"><div class="an">5</div><div class="at">Выдам <b>уникальные условия по цене</b> для вступления в обучение и бонусы за быстрое решение</div></div>
+      <div class="ai"><div class="an">6</div><div class="at"><b>Сессия «вопрос — ответ»</b> — вникну в ваши ситуации, проекты и блоги, отвечу на вопросы</div></div>
+      <div class="ai"><div class="an">7</div><div class="at">Заберёте <b>бонусы</b>, которые я выдам всем, кто будет тут с нами до конца</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- I-05 ЗНАКОМСТВО · ПОДВОДКА -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h2 class="big">Теперь давайте быстренько познакомимся</h2>
+    <p class="lead">Я начну первый, а потом дам каждому из вас возможность буквально на <strong>одну — полторы минуты</strong> включить микрофон и представиться.</p>
+  </div>
+</section>
+
+<!-- I-06 РОМАН О СЕБЕ -->
+<section class="slide center">
+  <div class="slide-inner">
+    <h2 class="big">Итак, меня зовут Рома</h2>
+    <div class="todo">
+      <div class="tl">◻︎ блок в работе — самопрезентация Романа</div>
+      <ul>
+        <li>Кто я и чем занимаюсь сейчас</li>
+        <li>Агентство по созданию контента — что делаем и для кого</li>
+        <li>Опыт в контенте и работе с AI — сколько лет, какие результаты</li>
+        <li>Почему я вообще веду эту встречу</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- I-07 ЗНАКОМСТВО · УЧАСТНИКИ -->
+<section class="slide">
+  <div class="slide-inner">
+    <h2 class="big" style="text-align:center">Теперь по очереди включайте микрофон<br>и расскажите</h2>
+    <div class="cards c3" style="margin-top:30px">
+      <div class="card"><span class="ic">👋</span><h4>Как вас зовут</h4><p>Коротко — имя и откуда вы.</p></div>
+      <div class="card"><span class="ic">💼</span><h4>Чем вы занимаетесь</h4><p>Какой у вас блог, проект или бизнес. В чём особенности, что умеете, чем можете быть полезны.</p></div>
+      <div class="card"><span class="ic">🎯</span><h4>Ваш запрос по контенту</h4><p>Какой основной запрос, какие главные проблемы и затыки прямо сейчас.</p></div>
+    </div>
+    <p class="note" style="text-align:center">По одной — полторы минуты на каждого.</p>
+  </div>
+</section>
+
+<!-- I-08 ПЛЕЙСХОЛДЕР · ПУТЬ К СИСТЕМЕ -->
+<section class="slide">
+  <div class="slide-inner">
+    <h2 class="big" style="text-align:center">Как я пришёл к созданию этой системы</h2>
+    <div class="todo">
+      <div class="tl">◻︎ блок в работе — ждём голосовое Романа и скрины результатов</div>
+      <ul>
+        <li>У меня агентство по созданию контента — и вот с какими проблемами я столкнулся</li>
+        <li>Долго не мог найти решение</li>
+        <li>Пошёл глубоко изучать AI — нашёл разрозненные решения</li>
+        <li>Собрал всё воедино сам</li>
+        <li>Обкатал на своих проектах</li>
+        <li>Внедрил в агентство — и вот какие результаты это дало <em>(скрины)</em></li>
+        <li>Решил, что хочу делиться этим с людьми, которым нужен контент</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- I-09 ПЛЕЙСХОЛДЕР · КОНТЕНТНАЯ ЧАСТЬ -->
+<section class="slide divider">
+  <div class="slide-inner">
+    <h1 class="big">6 ключевых шагов</h1>
+    <p class="lead">Дальше — контентная часть: каждый шаг отдельным слайдом, потом разбор на живом проекте (сотрудники, документы, результаты).</p>
+    <div class="todo" style="text-align:center">
+      <div class="tl">◻︎ блок в работе — ждём структуру контентной части</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ЧАСТЬ 2 · ПРОДАЮЩАЯ ============ -->
+
 <!-- 01 HERO -->
 <section class="slide hero">
   <div class="hero-bg" aria-hidden="true">
