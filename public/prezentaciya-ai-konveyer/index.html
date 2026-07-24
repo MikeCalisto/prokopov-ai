@@ -475,6 +475,26 @@ p:first-child{margin-top:0;}
 .shot-wide img:hover{border-color:var(--border-accent-strong); box-shadow:0 10px 34px rgba(0,0,0,.5), 0 0 22px var(--accent-glow);}
 @media(max-width:860px){ .shots.vert img{width:var(--twm,140px);} }
 
+/* ===== КЕЙС · две колонки (текст слева / картинки справа) ===== */
+.case{display:grid; grid-template-columns:0.92fr 1.08fr; gap:clamp(28px,4.5vw,60px); align-items:center;}
+.case .cx{text-align:left; min-width:0;}
+.case .cx h2{text-align:left; font-size:clamp(23px,3vw,40px); margin-top:14px;}
+.case .cmetrics{display:flex; gap:12px; flex-wrap:wrap; margin:22px 0;}
+.case .cmetrics .m2{padding:13px 20px; text-align:left; flex:0 0 auto;}
+.case .cmetrics .m2 .v{font-size:clamp(22px,2.6vw,34px);}
+.case .cmetrics .m2 .k{margin-top:5px;}
+.case .cx .note{margin-top:4px; font-size:15px; line-height:1.55;}
+.cg{display:flex; flex-direction:column; align-items:center; gap:12px; min-width:0;}
+.cg img{border-radius:12px; border:1px solid var(--border-strong); background:#0a0a10; cursor:zoom-in; transition:.2s;}
+.cg img:hover{border-color:var(--border-accent-strong); box-shadow:0 10px 34px rgba(0,0,0,.5),0 0 22px var(--accent-glow);}
+.cg-wide{width:auto; max-width:100%; height:clamp(70px,9vh,96px);}
+.cg-row{display:flex; gap:12px; justify-content:center; align-items:flex-start; width:100%;}
+.cg-row.charts img{flex:1 1 0; min-width:0; height:auto;}
+.cg-row.portrait img{width:auto; height:clamp(210px,38vh,340px);}
+.cg-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; justify-items:center; width:100%; max-width:420px;}
+.cg-grid img{width:100%; aspect-ratio:.66; object-fit:cover;}
+@media(max-width:900px){ .case{grid-template-columns:1fr; gap:22px;} .case .cx h2{text-align:center;} .case .cmetrics{justify-content:center;} }
+
 /* ===== HERO ANIMATED BACKGROUND ===== */
 .hero{overflow:hidden;}
 .hero .slide-inner{position:relative; z-index:3;}
@@ -797,59 +817,73 @@ p:first-child{margin-top:0;}
 <!-- S-15 кейс 1 · агентство -->
 <section class="slide">
   <div class="slide-inner">
-    <div class="caseline"><span class="casetag">Кейс 1 · клиент агентства</span></div>
-    <h2 class="big">Цифры, которые мы делаем<br>клиенту прямо сейчас</h2>
-    <div class="metrics">
-      <div class="m2"><div class="v">50 млн+</div><div class="k">просмотров</div></div>
-      <div class="m2"><div class="v">+90 000</div><div class="k">подписчиков</div></div>
-      <div class="m2"><div class="v">$500 000</div><div class="k">на онлайн-продуктах</div></div>
+    <div class="case">
+      <div class="cx">
+        <div class="caseline"><span class="casetag">Кейс 1 · клиент агентства</span></div>
+        <h2 class="big">Цифры, которые мы делаем клиенту прямо сейчас</h2>
+        <div class="cmetrics">
+          <div class="m2"><div class="v">50 млн+</div><div class="k">просмотров</div></div>
+          <div class="m2"><div class="v">+90 000</div><div class="k">подписчиков</div></div>
+          <div class="m2"><div class="v">$500 000</div><div class="k">на онлайн-продуктах</div></div>
+        </div>
+        <p class="note">У клиента выстроены воронки продаж — и этот органический трафик, <strong>без таргета</strong>, принёс ему $500 000. Трафик — просмотры и подписчиков — обеспечиваем мы.</p>
+      </div>
+      <div class="cg">
+        <img class="cg-wide" src="/prezentaciya-ai-konveyer/screens/case_agency_profile_strip.png" alt="Профиль клиента">
+        <div class="cg-row charts">
+          <img src="/prezentaciya-ai-konveyer/screens/case_agency_views_grid.png" alt="Просмотры по месяцам">
+          <img src="/prezentaciya-ai-konveyer/screens/case_agency_subs_grid.png" alt="Подписчики по месяцам">
+        </div>
+      </div>
     </div>
-    <div class="shot-wide">
-      <img src="/prezentaciya-ai-konveyer/screens/case_agency_profile_strip.png" alt="Профиль клиента">
-    </div>
-    <div class="shots s2">
-      <img src="/prezentaciya-ai-konveyer/screens/case_agency_views_grid.png" alt="Просмотры по месяцам">
-      <img src="/prezentaciya-ai-konveyer/screens/case_agency_subs_grid.png" alt="Подписчики по месяцам">
-    </div>
-    <p class="note">У клиента выстроены воронки продаж — и этот органический трафик, <strong>без таргета</strong>, принёс ему $500 000. Трафик — просмотры и подписчиков — обеспечиваем мы.</p>
   </div>
 </section>
 
 <!-- S-16 кейс 2 · Марина Берг -->
 <section class="slide">
   <div class="slide-inner">
-    <div class="caseline"><span class="casetag">Кейс 2 · психология · @marinaberg.pro</span></div>
-    <h2 class="big">Марина Берг: не снимается.<br>Просто читает сценарии</h2>
-    <div class="metrics" style="grid-template-columns:repeat(2,1fr); max-width:620px">
-      <div class="m2"><div class="v">+3 000</div><div class="k">подписчиков</div></div>
-      <div class="m2"><div class="v">+300</div><div class="k">подписчиков в Telegram</div></div>
+    <div class="case">
+      <div class="cx">
+        <div class="caseline"><span class="casetag">Кейс 2 · психология · @marinaberg.pro</span></div>
+        <h2 class="big">Марина Берг: не снимается. Просто читает сценарии</h2>
+        <div class="cmetrics">
+          <div class="m2"><div class="v">+3 000</div><div class="k">подписчиков</div></div>
+          <div class="m2"><div class="v">+300</div><div class="k">подписчиков в Telegram</div></div>
+        </div>
+        <p class="note">Весь контент — на AI-аватаре, по сценариям. Сама в кадре не снимается, просто начитывает текст. И это <strong>фото-аватар</strong> — качество даже чуть ниже видео. А рилсы всё равно улетают на сотни тысяч. <strong>Решает смысл, а не камера.</strong></p>
+      </div>
+      <div class="cg">
+        <img class="cg-wide" src="/prezentaciya-ai-konveyer/screens/marina_header.png" alt="Профиль Марины Берг">
+        <div class="cg-row portrait">
+          <img src="/prezentaciya-ai-konveyer/screens/marina_obida.png" alt="Статистика Reels">
+          <img src="/prezentaciya-ai-konveyer/screens/marina_films.png" alt="Статистика публикации">
+        </div>
+      </div>
     </div>
-    <div class="shot-wide">
-      <img src="/prezentaciya-ai-konveyer/screens/marina_header.png" alt="Профиль Марины Берг">
-    </div>
-    <div class="shots vert" style="--tw:205px;--tar:.55;--twm:150px">
-      <img src="/prezentaciya-ai-konveyer/screens/marina_obida.png" alt="Статистика Reels">
-      <img src="/prezentaciya-ai-konveyer/screens/marina_films.png" alt="Статистика публикации">
-    </div>
-    <p class="note">Весь контент — на AI-аватаре, по сценариям. Сама в кадре не снимается, просто начитывает текст. И это <strong>фото-аватар</strong> — качество даже чуть ниже видео. А рилсы всё равно улетают на сотни тысяч. <strong>Решает смысл, а не камера.</strong></p>
   </div>
 </section>
 
 <!-- S-17 кейс 3 · CryptoBosh -->
 <section class="slide">
   <div class="slide-inner">
-    <div class="caseline"><span class="casetag">Кейс 3 · крипта · @boshnikov</span></div>
-    <h2 class="big">CryptoBosh — вирусится<br>в самой недоверчивой нише</h2>
-    <div class="metrics" style="grid-template-columns:1fr; max-width:380px">
-      <div class="m2"><div class="v">+36 000</div><div class="k">подписчиков за 3 месяца</div></div>
+    <div class="case">
+      <div class="cx">
+        <div class="caseline"><span class="casetag">Кейс 3 · крипта · @boshnikov</span></div>
+        <h2 class="big">CryptoBosh — вирусится в самой недоверчивой нише</h2>
+        <div class="cmetrics">
+          <div class="m2"><div class="v">+36 000</div><div class="k">подписчиков за 3 месяца</div></div>
+        </div>
+        <p class="note">Даже в крипте залетают. <strong>Если система вытягивает крипту — вытянет что угодно.</strong></p>
+      </div>
+      <div class="cg">
+        <div class="cg-grid">
+          <img src="/prezentaciya-ai-konveyer/screens/t_492k.png" alt="492k просмотров">
+          <img src="/prezentaciya-ai-konveyer/screens/t_321k.png" alt="321k просмотров">
+          <img src="/prezentaciya-ai-konveyer/screens/t_222k.png" alt="222k просмотров">
+          <img src="/prezentaciya-ai-konveyer/screens/t_112k.png" alt="112k просмотров">
+        </div>
+      </div>
     </div>
-    <div class="shots vert" style="--tw:196px;--tar:.66;--twm:145px">
-      <img src="/prezentaciya-ai-konveyer/screens/t_492k.png" alt="492k просмотров">
-      <img src="/prezentaciya-ai-konveyer/screens/t_321k.png" alt="321k просмотров">
-      <img src="/prezentaciya-ai-konveyer/screens/t_222k.png" alt="222k просмотров">
-      <img src="/prezentaciya-ai-konveyer/screens/t_112k.png" alt="112k просмотров">
-    </div>
-    <p class="note">Даже в крипте залетают. <strong>Если система вытягивает крипту — вытянет что угодно.</strong></p>
   </div>
 </section>
 
@@ -2080,10 +2114,10 @@ p:first-child{margin-top:0;}
   function zShow(src){ if(zi.getAttribute('src')!==src) zi.setAttribute('src',src); zv.classList.add('on'); }
   function zHide(){ if(pinned) return; zv.classList.remove('on'); }
   function zClose(){ pinned=false; zv.classList.remove('on','pinned'); zh.textContent='клик — закрепить'; }
-  deck.addEventListener('mouseover',e=>{ const im=e.target.closest('.shots img,.shot-wide img'); if(im&&!pinned) zShow(im.getAttribute('src')); });
-  deck.addEventListener('mouseout',e=>{ if(e.target.closest('.shots img,.shot-wide img')) zHide(); });
+  deck.addEventListener('mouseover',e=>{ const im=e.target.closest('.shots img,.shot-wide img,.cg img'); if(im&&!pinned) zShow(im.getAttribute('src')); });
+  deck.addEventListener('mouseout',e=>{ if(e.target.closest('.shots img,.shot-wide img,.cg img')) zHide(); });
   deck.addEventListener('click',e=>{
-    const im=e.target.closest('.shots img,.shot-wide img');
+    const im=e.target.closest('.shots img,.shot-wide img,.cg img');
     if(im){ e.stopPropagation(); zShow(im.getAttribute('src')); pinned=true; zv.classList.add('pinned'); zh.textContent='клик — закрыть'; }
   },true);
   zv.addEventListener('click',e=>{ e.stopPropagation(); zClose(); });
