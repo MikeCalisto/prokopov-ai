@@ -396,8 +396,8 @@ p:first-child{margin-top:0;}
 }
 
 /* ===== INTRO (контентная часть эфира) ===== */
-.agenda{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:26px; text-align:left;}
-.agenda .ai{display:flex; gap:14px; align-items:flex-start; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-md); padding:14px 16px; transition:.2s;}
+.agenda{display:grid; grid-template-columns:1fr; gap:9px; margin-top:22px; text-align:left; max-width:1000px; margin-left:auto; margin-right:auto;}
+.agenda .ai{display:flex; gap:16px; align-items:center; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-md); padding:12px 18px; transition:.2s;}
 .agenda .ai:hover{border-color:var(--border-accent); background:var(--bg-card-hover);}
 .agenda .an{font-family:var(--font-display); font-weight:900; font-size:19px; color:var(--accent); line-height:1.15; flex-shrink:0; min-width:24px;}
 .agenda .at{font-size:14.5px; line-height:1.45; color:var(--text);}
@@ -420,7 +420,7 @@ p:first-child{margin-top:0;}
 .todo ul{list-style:none; margin:0;}
 .todo li{position:relative; padding:6px 0 6px 22px; font-size:14.5px; color:var(--text-muted); line-height:1.5;}
 .todo li::before{content:'□'; position:absolute; left:0; color:var(--accent); font-size:13px;}
-@media(max-width:860px){ .agenda{grid-template-columns:1fr;} }
+
 
 /* ===== HERO ANIMATED BACKGROUND ===== */
 .hero{overflow:hidden;}
