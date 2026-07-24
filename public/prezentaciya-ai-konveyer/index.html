@@ -476,7 +476,7 @@ p:first-child{margin-top:0;}
 @media(max-width:860px){ .shots.vert img{width:var(--twm,140px);} }
 
 /* ===== КЕЙС · exhibit-стиль ===== */
-.case{display:grid; grid-template-columns:0.82fr 1.18fr; gap:clamp(30px,4.5vw,64px); align-items:center;}
+.case{display:grid; grid-template-columns:0.72fr 1.28fr; gap:clamp(30px,4.5vw,64px); align-items:center;}
 .case .cx{text-align:left; min-width:0;}
 .case .cx .caseline{margin-bottom:14px;}
 .case .cx h2{text-align:left; font-size:clamp(23px,2.9vw,40px); line-height:1.05;}
@@ -508,12 +508,16 @@ p:first-child{margin-top:0;}
 .frame.phone{border-radius:26px; padding:6px;}
 .frame.phone img{border-radius:21px;}
 /* размеры под контент */
-.f-strip img{height:clamp(60px,7.6vh,84px); width:auto; max-width:100%;}
-.f-phone img{height:clamp(196px,35vh,326px); width:auto;}
+.f-strip img{height:clamp(78px,9.6vh,118px); width:auto; max-width:100%;}
+.f-phone img{height:clamp(250px,46vh,440px); width:auto;}
 .f-chart img{width:100%; height:auto;}
 .cg-charts{display:flex; gap:14px; width:100%;}
 .cg-charts .frame{flex:1 1 0; min-width:0;}
-.cg-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; width:100%; max-width:440px;}
+.cg-strip{display:flex; gap:12px; justify-content:center; align-items:flex-start; width:100%; flex-wrap:nowrap;}
+.cg-strip .frame{flex:0 0 auto;}
+.cg-strip .frame img{height:clamp(300px,52vh,470px); width:auto; object-fit:contain;}
+@media(max-width:900px){ .cg-strip{flex-wrap:wrap;} .cg-strip .frame img{height:clamp(240px,40vh,320px);} }
+.cg-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; width:100%; max-width:540px;}
 .cg-grid .frame img{width:100%; aspect-ratio:.66; object-fit:cover;}
 @media(max-width:900px){ .case{grid-template-columns:1fr; gap:22px;} .case .cx h2,.chero,.chero-k{text-align:center;} .case .cx{text-align:center;} .chips2{justify-content:center;} }
 
@@ -901,11 +905,11 @@ p:first-child{margin-top:0;}
         <p class="note" style="margin-top:12px"><strong style="color:var(--accent-light)">Если вытягивает крипту — вытянет что угодно.</strong></p>
       </div>
       <div class="cg">
-        <div class="cg-grid">
-          <div class="frame phone"><img src="/prezentaciya-ai-konveyer/screens/t_492k.png" alt="492k просмотров"></div>
-          <div class="frame phone"><img src="/prezentaciya-ai-konveyer/screens/t_321k.png" alt="321k просмотров"></div>
-          <div class="frame phone"><img src="/prezentaciya-ai-konveyer/screens/t_222k.png" alt="222k просмотров"></div>
-          <div class="frame phone"><img src="/prezentaciya-ai-konveyer/screens/t_112k.png" alt="112k просмотров"></div>
+        <div class="cg-strip">
+          <div class="frame phone"><img src="/prezentaciya-ai-konveyer/screens/bosh_p1.png" alt="Профиль CryptoBosh"></div>
+          <div class="frame phone"><img src="/prezentaciya-ai-konveyer/screens/bosh_p2.png" alt="Профиль CryptoBosh"></div>
+          <div class="frame phone"><img src="/prezentaciya-ai-konveyer/screens/bosh_p3.png" alt="Профиль CryptoBosh"></div>
+          <div class="frame phone"><img src="/prezentaciya-ai-konveyer/screens/bosh_p4.png" alt="Профиль CryptoBosh"></div>
         </div>
       </div>
     </div>
