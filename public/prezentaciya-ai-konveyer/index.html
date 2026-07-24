@@ -573,6 +573,13 @@ p:first-child{margin-top:0;}
 .nn.sec{padding:14px 20px; opacity:.85;}
 .nn.sec .nname{font-size:16px; color:var(--text);}
 /* карусель-виджет */
+.carou-pair{display:flex; gap:clamp(26px,4vw,56px); justify-content:center; align-items:flex-start; margin-top:20px; flex-wrap:wrap;}
+.carou-col{display:flex; flex-direction:column; align-items:center; gap:11px;}
+.carou-label{font-family:var(--font-display); font-weight:700; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--accent);}
+.carou-pair .carou-stage{max-width:288px;}
+.carou-pair .carou-stage img{max-height:clamp(300px,48vh,440px);}
+@media(max-width:900px){ .carou-pair{gap:20px;} .carou-pair .carou-stage{max-width:220px;} }
+
 .carou{margin-top:22px; display:flex; flex-direction:column; align-items:center;}
 .carou-stage{position:relative; width:100%; max-width:420px; display:flex; justify-content:center;}
 .carou-stage img{width:100%; height:auto; max-height:56vh; object-fit:contain; border-radius:16px; border:1px solid var(--border-accent); box-shadow:0 20px 46px rgba(0,0,0,.55),0 0 30px rgba(232,146,26,.1);}
@@ -1133,24 +1140,23 @@ p:first-child{margin-top:0;}
 
 <!-- C9 · карусели (реальная карусель) -->
 <section class="slide">
-  <div class="slide-inner">
-    <div class="case">
-      <div class="cx">
-        <div class="kicker">Шаг 05 · Производство</div>
-        <h2 class="big" style="margin-top:12px">Карусели недооценивают —<br>а они дают заявки</h2>
-        <p class="note" style="margin-top:16px">Reels дают охват, <strong>карусели генерируют заявки</strong>. И делать их легче, чем видео. Справа — реальная карусель, собранная по системе.</p>
-        <p class="note" style="margin-top:12px"><strong style="color:var(--accent-light)">Листай — на каждом слайде видны просмотры, охват и подписки.</strong></p>
-      </div>
-      <div class="cg">
+  <div class="slide-inner" style="max-width:var(--max-w)">
+    <div class="kicker" style="text-align:center;display:block">Шаг 05 · Производство</div>
+    <h2 class="big" style="margin-top:12px;text-align:center">Карусели недооценивают — а они дают заявки</h2>
+    <p class="note" style="text-align:center;max-width:840px;margin:14px auto 0">Reels дают охват, <strong>карусели генерируют заявки</strong> — и делать их легче, чем видео. Слева — сама карусель, справа — её результаты. Листай обе.</p>
+    <div class="carou-pair">
+      <div class="carou-col">
+        <div class="carou-label">Сама карусель · Ирина, недвижимость</div>
         <div class="carou" data-carou>
-          <div class="carou-stage">
-            <img src="/prezentaciya-ai-konveyer/screens/carousel/c1.png" alt="Карусель" data-slides="/prezentaciya-ai-konveyer/screens/carousel/c1.png,/prezentaciya-ai-konveyer/screens/carousel/c2.png,/prezentaciya-ai-konveyer/screens/carousel/c3.png,/prezentaciya-ai-konveyer/screens/carousel/c4.png,/prezentaciya-ai-konveyer/screens/carousel/c5.png,/prezentaciya-ai-konveyer/screens/carousel/c6.png">
-          </div>
-          <div class="carou-nav">
-            <button data-prev aria-label="Назад">‹</button>
-            <div class="carou-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
-            <button data-next aria-label="Вперёд">›</button>
-          </div>
+          <div class="carou-stage"><img src="/prezentaciya-ai-konveyer/screens/ira/s2.jpg" alt="Слайд карусели" data-slides="/prezentaciya-ai-konveyer/screens/ira/s2.jpg,/prezentaciya-ai-konveyer/screens/ira/s3.jpg,/prezentaciya-ai-konveyer/screens/ira/s4.jpg,/prezentaciya-ai-konveyer/screens/ira/s5.jpg,/prezentaciya-ai-konveyer/screens/ira/s6.jpg"></div>
+          <div class="carou-nav"><button data-prev aria-label="Назад">‹</button><div class="carou-dots"><i class="on"></i><i></i><i></i><i></i><i></i></div><button data-next aria-label="Вперёд">›</button></div>
+        </div>
+      </div>
+      <div class="carou-col">
+        <div class="carou-label">Результаты · просмотры, охват, заявки</div>
+        <div class="carou" data-carou>
+          <div class="carou-stage"><img src="/prezentaciya-ai-konveyer/screens/carousel/c1.png" alt="Результаты карусели" data-slides="/prezentaciya-ai-konveyer/screens/carousel/c1.png,/prezentaciya-ai-konveyer/screens/carousel/c2.png,/prezentaciya-ai-konveyer/screens/carousel/c3.png,/prezentaciya-ai-konveyer/screens/carousel/c4.png,/prezentaciya-ai-konveyer/screens/carousel/c5.png,/prezentaciya-ai-konveyer/screens/carousel/c6.png"></div>
+          <div class="carou-nav"><button data-prev aria-label="Назад">‹</button><div class="carou-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div><button data-next aria-label="Вперёд">›</button></div>
         </div>
       </div>
     </div>
