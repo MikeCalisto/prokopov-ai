@@ -690,6 +690,10 @@ p:first-child{margin-top:0;}
 .shot .si{font-size:38px; opacity:.8;}
 .shot .st1{font-family:var(--font-display); font-weight:700; font-size:16px; color:var(--accent-light);}
 .shot .st2{font-size:13.5px; color:var(--text-dim);}
+.shotvid{margin-top:24px; border:1px solid var(--border-accent-strong); border-radius:var(--radius-lg); overflow:hidden;
+  box-shadow:0 22px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(232,146,26,.12), 0 0 46px rgba(232,146,26,.10);
+  background:#000; position:relative;}
+.shotvid video{display:block; width:100%; height:auto; max-height:56vh; object-fit:cover;}
 
 /* reusable fancy background on key slides */
 .fx{overflow:hidden;}
@@ -1902,10 +1906,8 @@ p:first-child{margin-top:0;}
     <h2 class="big">Учишься на платформе, которую собрал AI</h2>
     <p class="lead">Обучение проходит на платформе, которую я собрал <strong>с помощью AI</strong>. Уроки уже записаны, материалы готовы: к старту каждого потока я обновляю их под <strong>актуальные версии нейросетей</strong>.</p>
     <p class="lead">То есть ты не просто учишься на уникальной платформе — ты <strong>первым получаешь обновления</strong> по всем нейросетям, которые задевают процессы из программы.</p>
-    <div class="shot">
-      <div class="si">🖥️</div>
-      <div class="st1">Здесь будет скриншот платформы</div>
-      <div class="st2">плейсхолдер — вставим реальный интерфейс</div>
+    <div class="shotvid">
+      <video src="/prezentaciya-ai-konveyer/media/platforma.mp4" autoplay muted loop playsinline preload="auto"></video>
     </div>
   </div>
 </section>
