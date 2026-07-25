@@ -169,6 +169,23 @@ p:first-child{margin-top:0;}
 .card p{font-size:14.5px; color:var(--text-muted); line-height:1.55; margin-top:0;}
 .card p strong{color:var(--accent-light);}
 
+/* ===== БОНУСЫ ===== */
+.bonus-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:36px;}
+.bonus-card{position:relative; background:linear-gradient(160deg,rgba(232,146,26,.09),var(--bg-card)); border:1px solid var(--border-accent-strong); border-radius:var(--radius-lg); padding:30px 28px; overflow:hidden; box-shadow:0 18px 50px rgba(0,0,0,.4), 0 0 40px rgba(232,146,26,.06);}
+.bonus-card::after{content:""; position:absolute; top:-40px; right:-40px; width:150px; height:150px; border-radius:50%; background:radial-gradient(circle,rgba(232,146,26,.18),transparent 70%);}
+.bonus-num{position:absolute; top:20px; right:24px; font-family:var(--font-display); font-weight:900; font-size:56px; line-height:1; color:rgba(232,146,26,.16);}
+.bonus-ic{font-size:44px; display:block; margin-bottom:16px;}
+.bonus-card h4{font-family:var(--font-display); font-weight:700; font-size:clamp(20px,2vw,26px); color:var(--text); margin:0 0 12px;}
+.bonus-tag{display:inline-flex; align-items:center; gap:8px; font-family:var(--font-display); font-weight:700; font-size:12.5px; letter-spacing:1px; text-transform:uppercase; color:var(--accent-light); padding:6px 14px; border:1px solid var(--border-accent); border-radius:40px; background:rgba(232,146,26,.07); margin-bottom:14px;}
+.bonus-tag::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px var(--accent);}
+.bonus-card p{font-size:15.5px; color:var(--text-muted); line-height:1.55; margin:0;}
+
+/* ===== ЗАБРАТЬ БОНУСЫ ===== */
+.claim-box{margin-top:34px; display:inline-flex; flex-direction:column; align-items:center; gap:18px;}
+.claim-handle{font-family:var(--font-display); font-weight:800; font-size:clamp(26px,3.2vw,42px); color:var(--accent-light);}
+.claim-word{display:inline-flex; align-items:center; gap:14px; font-family:var(--font-display); font-weight:700; font-size:clamp(17px,1.7vw,22px); color:var(--text); padding:16px 30px; border:1px solid var(--border-accent-strong); border-radius:16px; background:rgba(232,146,26,.06);}
+.claim-word b{font-size:clamp(22px,2.4vw,32px); color:var(--accent-gold); letter-spacing:1px;}
+
 /* ===== module ===== */
 .module{background:linear-gradient(155deg,var(--bg-card),var(--bg-soft)); border:1px solid var(--border-strong); border-radius:var(--radius-lg); padding:clamp(26px,4vw,46px); position:relative; overflow:hidden;}
 .module::before{content:''; position:absolute; top:-40px; right:-40px; width:200px; height:200px; background:radial-gradient(circle,var(--accent-glow),transparent 70%); pointer-events:none;}
@@ -751,6 +768,31 @@ p:first-child{margin-top:0;}
     <div class="scale">
       <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
       <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+    </div>
+  </div>
+</section>
+
+<!-- I-03b БОНУСЫ ЗА АКТИВНОСТЬ -->
+<section class="slide pre">
+  <div class="slide-inner">
+    <div class="kicker">Только для активных</div>
+    <h2 class="big" style="text-align:center; margin-top:10px">Два бонуса тем, кто будет<br>с нами до самого конца</h2>
+    <p class="lead" style="text-align:center">Останься на эфире до конца и будь активным — заберёшь <strong>двух готовых AI-ассистентов</strong>, которые сразу можно подключить к своему контенту.</p>
+    <div class="bonus-grid">
+      <div class="bonus-card">
+        <span class="bonus-num">1</span>
+        <span class="bonus-ic">🎨</span>
+        <div class="bonus-tag">AI-ассистент</div>
+        <h4>AI-Дизайнер каруселей</h4>
+        <p>Упаковывает твои идеи в цепляющие карусели под ключ — структура, тексты и раскладка слайдов за пару минут.</p>
+      </div>
+      <div class="bonus-card">
+        <span class="bonus-num">2</span>
+        <span class="bonus-ic">🧵</span>
+        <div class="bonus-tag">AI-ассистент</div>
+        <h4>AI-Вирусолог Threads</h4>
+        <p>Генерирует вирусные посты для Threads на потоке — цепляющие заходы и форматы, которые набирают охваты.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -2361,6 +2403,19 @@ p:first-child{margin-top:0;}
     <p class="lead">А с ним — специальная цена и бонусы.</p>
     <p class="lead">Ещё не уверен? Пиши вопросы в чат прямо сейчас — это последняя возможность получить ответы от меня на эфире.</p>
     <p class="pill-note">Записи эфира не будет — всё только здесь и сейчас.</p>
+  </div>
+</section>
+
+<!-- 80 ЗАБРАТЬ БОНУСЫ -->
+<section class="slide center divider fx">
+  <div class="slide-inner">
+    <div class="kicker">Ты был с нами до конца</div>
+    <h2 class="big" style="margin-top:10px">Забирай свои бонусы</h2>
+    <p class="lead">Чтобы получить <strong>двух AI-ассистентов</strong> — напиши в поддержку и назови кодовое слово.</p>
+    <div class="claim-box">
+      <div class="claim-handle">@prokopov_roman</div>
+      <div class="claim-word">Кодовое слово: <b>«Бонус»</b></div>
+    </div>
   </div>
 </section>
 
