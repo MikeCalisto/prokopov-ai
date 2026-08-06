@@ -44,7 +44,7 @@
 | AI Конвеєр | `/ai-konveyer/` | Статичний HTML | `Сайт АІ конвеер/` (стара версія) | `public/ai-konveyer/` |
 | AI Конвеєр (міні-курс) | `/mini-ai-konveyer/` | Статичний HTML | `Сайт АІ конвеер/index.html` (новий дизайн) | `public/mini-ai-konveyer/` |
 | AI Конвеєр v2 | `/mini-ai-konveyer-2/` | Статичний HTML | редагується прямо в `public/` | `public/mini-ai-konveyer-2/` |
-| AI Сценарист | `/ai-scenarist/` | Статичний HTML | редагується прямо в `public/` | `public/ai-scenarist/` |
+| AI Сценарист (міні-курс v2) | `/mini-ai-konveyer-3` | Статичний HTML | редагується прямо в `public/` | `public/mini-ai-konveyer-3/` |
 
 ## КРИТИЧНІ ПРАВИЛА
 
@@ -78,12 +78,13 @@
 2. Копіюй в `public/mini-ai-konveyer/index.html`: `cp "Сайт АІ конвеер/index.html" "Сайт АІ реалізм/public/mini-ai-konveyer/index.html"`
 3. Пуш
 
-#### AI Сценарист (`/ai-scenarist/`):
-1. Редагуй `public/ai-scenarist/index.html` напряму
-2. Стилістика успадкована з `/mini-ai-konveyer-2/` (та сама палітра, phone-wrap 480px, Jost)
-3. Асети (`hero.mp4`, `hero-poster.jpg`, `roman.jpg`) лежать поруч, шляхи абсолютні: `/ai-scenarist/...`
-4. Превью: `.claude/launch.json` → `ai-scenarist-preview` (WEBrick, порт 8083, з `/tmp/ai-scenarist-preview`)
-5. Пуш
+#### AI Сценарист (`/mini-ai-konveyer-3`):
+1. Редагуй `public/mini-ai-konveyer-3/index.html` напряму
+2. НЕ плутати з `/mini-ai-konveyer-2/` — це два різні сайти
+3. Верстка успадкована з `/mini-ai-konveyer-2/`, але палітра смарагдова (`--accent:#00d09c`), а не помаранчева
+4. Асети (`hero.mp4`, `hero-poster.jpg`, `roman.jpg`) лежать поруч, шляхи абсолютні: `/mini-ai-konveyer-3/...`
+5. Превью: `.claude/launch.json` → `mini-ai-konveyer-3-preview` (WEBrick, порт 8083, з `/tmp/mini-ai-konveyer-3-preview`)
+6. Пуш
 
 #### AI Avatar PL (Next.js):
 1. Редагуй в `app/ai-avatar/` та `Сайт АІ аватар/`
