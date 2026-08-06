@@ -347,14 +347,6 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
 .key-quote strong{color:var(--accent);font-style:normal}
 
 /* ─────────── PROGRAM ─────────── */
-.program-meta{
-  display:flex;flex-wrap:wrap;gap:6px 10px;justify-content:center;
-  margin-bottom:18px;font-size:.78rem;color:var(--gray);letter-spacing:.04em;
-}
-.program-meta span{display:inline-flex;align-items:center;gap:6px}
-.program-meta span::after{content:'·';color:var(--accent);margin-left:8px}
-.program-meta span:last-child::after{display:none}
-
 .lesson{
   background:var(--card);border:1px solid var(--line);
   border-radius:16px;margin-bottom:14px;overflow:hidden;
@@ -764,11 +756,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
 <section class="section">
   <h2 class="reveal">Програма <span class="accent">курсу</span></h2>
 
-  <div class="program-meta reveal d1" style="margin-top:20px">
-    <span>Уроки в записі</span><span>закрита Zoom-зустріч</span><span>3 тижні доступу</span><span>підтримка від автора</span>
-  </div>
-
-  <article class="lesson reveal">
+  <article class="lesson reveal" style="margin-top:24px">
     <div class="lesson-head">
       <div class="lesson-meta"><span class="lesson-num">ТЕМА 1</span></div>
       <h3>Фундамент роботи з AI, без якого неможливо створювати сценарії на сотні тисяч переглядів</h3>
