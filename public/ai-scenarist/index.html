@@ -259,49 +259,41 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
 @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
 @keyframes floatR{0%,100%{transform:rotate(0)}50%{transform:rotate(8deg)}}
 
-/* ─────────── SEATS ─────────── */
-.seats-card{
-  padding:22px 22px 20px;border-radius:18px;
-  background:radial-gradient(circle at 50% 0%,rgba(0,208,156,.14),rgba(0,208,156,.02) 70%),var(--card);
+/* ─────────── TIMER ─────────── */
+.timer-card{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  padding:22px;border-radius:18px;
+  background:radial-gradient(circle at 50% 0%,rgba(0,208,156,.16),rgba(0,208,156,.02) 70%),var(--card);
   border:1px solid rgba(0,208,156,.28);
   margin-bottom:26px;position:relative;overflow:hidden;
   box-shadow:0 14px 40px rgba(0,0,0,.35);
 }
-.seats-row{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  margin-bottom:12px;
+.timer-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  opacity:.7;
 }
-.seats-label{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);font-weight:600}
-.seats-count{
-  font-family:var(--display);font-weight:900;font-size:1.55rem;letter-spacing:-.02em;color:var(--white);
-  font-variant-numeric:tabular-nums;
+.timer-card .label-tiny{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);font-weight:600}
+.timer{
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--display);font-weight:900;font-size:2.7rem;letter-spacing:-.04em;
+  color:var(--accent);text-shadow:0 0 26px rgba(0,208,156,.5);
+  font-variant-numeric:tabular-nums;line-height:1;
 }
-.seats-count .ac{color:var(--accent);text-shadow:0 0 16px rgba(0,208,156,.5)}
-.seats-count .total{color:var(--gray);font-weight:700;font-size:.78em;margin-left:2px}
-.seats-bar{
-  height:9px;border-radius:5px;background:rgba(255,255,255,.06);overflow:hidden;
-  position:relative;margin-bottom:14px;
-  border:1px solid rgba(255,255,255,.04);
+.timer-icon{
+  width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,208,156,.15);border-radius:50%;
+  animation:tickPulse 1s steps(2) infinite;
 }
-.seats-bar .fill{
-  height:100%;border-radius:5px;
-  background:linear-gradient(90deg,var(--accent-deep),var(--accent),var(--accent2));
-  box-shadow:0 0 14px rgba(0,208,156,.55);
-  transition:width .8s cubic-bezier(.4,.0,.2,1);
-  position:relative;overflow:hidden;
-}
-.seats-bar .fill::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.45) 50%,transparent 100%);
-  transform:translateX(-100%);
-  animation:shimmerBar 2.2s linear infinite;
-}
-@keyframes shimmerBar{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-.seats-end{font-size:.85rem;color:var(--gray2);line-height:1.5}
-.seats-end strong{color:var(--accent);font-weight:700}
-.seats-end .price{color:var(--white);font-weight:800}
-.seats-card.compact{padding:18px 18px 16px;margin-bottom:18px}
-.seats-card.compact .seats-count{font-size:1.3rem}
+.timer-icon svg{width:18px;height:18px;stroke:var(--accent);stroke-width:2;fill:none;stroke-linecap:round}
+@keyframes tickPulse{0%{opacity:1}50%{opacity:.55}100%{opacity:1}}
+.timer-note{font-size:.82rem;color:var(--gray2);text-align:center;line-height:1.45}
+.timer-note strong{color:var(--white);font-weight:800}
+.timer-card.compact{padding:16px 18px;margin-bottom:18px;flex-direction:row;justify-content:center;gap:14px}
+.timer-card.compact .label-tiny{margin:0}
+.timer-card.compact .timer{font-size:1.7rem;gap:9px}
+.timer-card.compact .timer-icon{width:26px;height:26px}
+.timer-card.compact .timer-icon svg{width:14px;height:14px}
 
 /* ─────────── BONUSES ─────────── */
 .bonus{
@@ -777,7 +769,6 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   <div class="hero-inner">
     <div class="hero-top">
       <div class="brand"><span class="brand-mark">📅</span><span>СТАРТ <span id="startDate">завтра</span></span></div>
-      <span>Міні-курс</span>
     </div>
 
     <h1 class="reveal d1">
@@ -811,23 +802,22 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
     </div>
 
     <a href="https://app.zenedu.io/l/YuNUSjsQmmAn4ZCb" target="_blank" rel="noopener" class="btn reveal d5">🎁 Забрати курс за 390 грн →</a>
-    <small class="btn-note">Після оплати тебе одразу переадресує в Telegram&#8209;бот з уроками</small>
   </div>
 </section>
 
 <!-- ═══ БЛОК 2: БОНУСИ + ДЕФІЦИТ ═══ -->
 <section class="section">
   <h2 class="reveal" style="text-align:center">
-    Перші <span class="accent">370 учасників</span> отримують <span class="mark">3 бонуси</span> 🎁
+    Забери курс за <span class="accent">10 хвилин</span> — і отримай <span class="mark">3 бонуси</span> 🎁
   </h2>
 
-  <div class="seats-card reveal d1" style="margin-top:22px">
-    <div class="seats-row">
-      <div class="seats-label">Зайнято місць:</div>
-      <div class="seats-count"><span class="ac" data-seats-taken>321</span><span class="total">/ 370</span></div>
+  <div class="timer-card reveal d1" style="margin-top:22px">
+    <div class="label-tiny">До кінця акції</div>
+    <div class="timer">
+      <span class="timer-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></span>
+      <span data-timer>10:00</span>
     </div>
-    <div class="seats-bar"><div class="fill" data-seats-bar style="width:87%"></div></div>
-    <div class="seats-end">Залишилось <strong data-seats>49</strong> місць за ціною <span class="price">390 грн</span> + 3 бонуси</div>
+    <div class="timer-note">Ціна <strong>390 грн</strong> і всі 3 бонуси доступні тільки до кінця відліку</div>
   </div>
 
   <article class="bonus reveal">
@@ -867,7 +857,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   <p class="bonus-final reveal">Усі 3 бонуси разом економлять <strong>до 20 годин роботи</strong> на запуску твого контенту.</p>
 
   <a href="https://app.zenedu.io/l/YuNUSjsQmmAn4ZCb" target="_blank" rel="noopener" class="btn reveal d1">🎁 Забрати курс + 3 бонуси за 390 грн →</a>
-  <small class="btn-note">Бонуси доступні тільки для перших 370 учасників · залишилось <strong style="color:var(--accent)" data-seats>49</strong> місць</small>
+  <small class="btn-note">Бонуси зникають разом з таймером · залишилось <strong style="color:var(--accent)" data-timer>10:00</strong></small>
 </section>
 
 <!-- ═══ БЛОК 3: БОЛІ ═══ -->
@@ -1163,18 +1153,17 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   <div class="final-price reveal">
     <div class="pl">Звичайна вартість курсу</div>
     <div class="pold">2 390 грн</div>
-    <div class="pl2">Твоя ціна для перших 370 учасників</div>
+    <div class="pl2">Твоя ціна до кінця відліку</div>
     <div class="pnew">390<small>грн</small></div>
     <div class="save">ЕКОНОМІЯ 2 000 грн · −84%</div>
   </div>
 
-  <div class="seats-card compact reveal">
-    <div class="seats-row">
-      <div class="seats-label">Зайнято місць:</div>
-      <div class="seats-count"><span class="ac" data-seats-taken>321</span><span class="total">/ 370</span></div>
+  <div class="timer-card compact reveal">
+    <div class="label-tiny">До кінця акції</div>
+    <div class="timer">
+      <span class="timer-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></span>
+      <span data-timer>10:00</span>
     </div>
-    <div class="seats-bar"><div class="fill" data-seats-bar style="width:87%"></div></div>
-    <div class="seats-end">Залишилось <strong data-seats>49</strong> місць за ціною <span class="price">390 грн</span></div>
   </div>
 
   <a href="https://app.zenedu.io/l/YuNUSjsQmmAn4ZCb" target="_blank" rel="noopener" class="btn reveal" id="mainCta">🚀 Забрати курс за 390 грн →</a>
@@ -1196,7 +1185,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
     <span class="pold">2 390 ₴</span>
     <span class="arr">→</span>
     <span class="pnew">390 ₴</span>
-    <span class="stm">🪑 <span data-seats>49</span> місць</span>
+    <span class="stm">⏱ <span data-timer>10:00</span></span>
   </div>
   <a href="https://app.zenedu.io/l/YuNUSjsQmmAn4ZCb" target="_blank" rel="noopener" class="btn">🎁 Забрати курс за 390 грн →</a>
 </div>
@@ -1232,51 +1221,31 @@ document.querySelectorAll('[data-bonus]').forEach(btn => {
   document.addEventListener('click', tryPlay, {once:true});
 })();
 
-// ─── Seats counter: 49 → -1 every 15s, floors at 3, syncs across tabs ───
+// ─── 10-хвилинний таймер: тримається в localStorage, рестартує на нулі ───
 (function(){
-  const KEY = 'aiscen_seats';
-  const TS_KEY = 'aiscen_seats_ts';
-  const INITIAL = 49;
-  const MIN = 3;
-  const STEP_MS = 15000;
+  const KEY = 'aiscen_timer_end';
+  const SPAN = 10 * 60 * 1000;
   const now = Date.now();
-  let seats = parseInt(localStorage.getItem(KEY) || '0', 10);
-  let lastTs = parseInt(localStorage.getItem(TS_KEY) || '0', 10);
-  if (!seats || seats > INITIAL || !lastTs) {
-    seats = INITIAL;
-    lastTs = now;
-    localStorage.setItem(KEY, seats);
-    localStorage.setItem(TS_KEY, lastTs);
-  } else {
-    const elapsedSteps = Math.floor((now - lastTs) / STEP_MS);
-    if (elapsedSteps > 0) {
-      seats = Math.max(MIN, seats - elapsedSteps);
-      lastTs = lastTs + elapsedSteps * STEP_MS;
-      localStorage.setItem(KEY, seats);
-      localStorage.setItem(TS_KEY, lastTs);
-    }
+  let end = parseInt(localStorage.getItem(KEY) || '0', 10);
+  if (!end || end < now || end > now + SPAN) {
+    end = now + SPAN;
+    localStorage.setItem(KEY, end);
   }
-  const TOTAL = 370;
-  const fSeats = document.querySelectorAll('[data-seats]');
-  const fTaken = document.querySelectorAll('[data-seats-taken]');
-  const fBar   = document.querySelectorAll('[data-seats-bar]');
-  function render(){
-    const taken = TOTAL - seats;
-    const pct = Math.min(99, Math.max(0, (taken / TOTAL) * 100));
-    fSeats.forEach(f => f.textContent = seats);
-    fTaken.forEach(f => f.textContent = taken);
-    fBar.forEach(f => f.style.width = pct.toFixed(1) + '%');
-  }
-  render();
-  setInterval(function(){
-    if (seats > MIN) {
-      seats -= 1;
-      lastTs = Date.now();
-      localStorage.setItem(KEY, seats);
-      localStorage.setItem(TS_KEY, lastTs);
-      render();
+  const fields = document.querySelectorAll('[data-timer]');
+  function tick(){
+    let left = end - Date.now();
+    if (left <= 0) {
+      end = Date.now() + SPAN;
+      localStorage.setItem(KEY, end);
+      left = SPAN;
     }
-  }, STEP_MS);
+    const m = Math.floor(left / 60000);
+    const s = Math.floor((left % 60000) / 1000);
+    const txt = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    fields.forEach(f => f.textContent = txt);
+  }
+  tick();
+  setInterval(tick, 1000);
 })();
 
 function attachCarouselDots(gridId, dotsId, cardSel){
