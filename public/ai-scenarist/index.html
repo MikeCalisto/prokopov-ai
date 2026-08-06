@@ -372,6 +372,8 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   transform:rotate(45deg);margin-top:-3px;
 }
 .lesson.open .lesson-toggle .chev{transform:rotate(180deg)}
+.lesson.open .lesson-toggle .l-closed{display:none}
+.lesson:not(.open) .lesson-toggle .l-open{display:none}
 .lesson-body{max-height:0;overflow:hidden;transition:max-height .5s ease}
 .lesson.open .lesson-body{max-height:1400px}
 .lesson-body-inner{padding:18px;border-top:1px dashed var(--line2)}
@@ -756,7 +758,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
 <section class="section">
   <h2 class="reveal">Програма <span class="accent">курсу</span></h2>
 
-  <article class="lesson reveal" style="margin-top:24px">
+  <article class="lesson open reveal" style="margin-top:24px">
     <div class="lesson-head">
       <div class="lesson-meta"><span class="lesson-num">ТЕМА 1</span></div>
       <h3>Фундамент роботи з AI, без якого неможливо створювати сценарії на сотні тисяч переглядів</h3>
@@ -771,7 +773,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
     <div class="lesson-result">
       <div class="row"><span class="ic">🎯</span><span><b>Результат:</b> розумієш, що саме потрібно змінити у своєму підході до роботи з AI, щоб отримувати справді топові сценарії.</span></div>
     </div>
-    <button class="lesson-toggle" data-lesson>Детальніше <span class="chev"></span></button>
+    <button class="lesson-toggle" data-lesson><span><span class="l-closed">Детальніше</span><span class="l-open">Згорнути</span></span><span class="chev"></span></button>
   </article>
 
   <article class="lesson reveal d1">
@@ -789,7 +791,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
     <div class="lesson-result">
       <div class="row"><span class="ic">🎯</span><span><b>Результат:</b> у тебе є налаштований AI&#8209;сценарист, який видає готовий сценарій у твоїй манері мовлення за лічені хвилини.</span></div>
     </div>
-    <button class="lesson-toggle" data-lesson>Детальніше <span class="chev"></span></button>
+    <button class="lesson-toggle" data-lesson><span><span class="l-closed">Детальніше</span><span class="l-open">Згорнути</span></span><span class="chev"></span></button>
   </article>
 
   <article class="lesson reveal d2">
@@ -808,7 +810,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
     <div class="lesson-result">
       <div class="row"><span class="ic">🎯</span><span><b>Результат:</b> кожен твій сценарій починається з фрази, яка змушує твою аудиторію звернути на тебе увагу.</span></div>
     </div>
-    <button class="lesson-toggle" data-lesson>Детальніше <span class="chev"></span></button>
+    <button class="lesson-toggle" data-lesson><span><span class="l-closed">Детальніше</span><span class="l-open">Згорнути</span></span><span class="chev"></span></button>
   </article>
 
   <div class="divider reveal"><span>А ще в комплекті</span></div>
@@ -830,7 +832,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
     <div class="lesson-result">
       <div class="row"><span class="ic">🎯</span><span><b>Результат:</b> твої сценарії перетворюються у готове відео без жодної зйомки на камеру.</span></div>
     </div>
-    <button class="lesson-toggle" data-lesson>Детальніше <span class="chev"></span></button>
+    <button class="lesson-toggle" data-lesson><span><span class="l-closed">Детальніше</span><span class="l-open">Згорнути</span></span><span class="chev"></span></button>
   </article>
 
   <article class="lesson reveal d1">
@@ -847,7 +849,7 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
     <div class="lesson-result">
       <div class="row"><span class="ic">🎯</span><span><b>Результат:</b> ти вмієш робити каруселі, які приносять лідів на твої послуги, товар чи навчання.</span></div>
     </div>
-    <button class="lesson-toggle" data-lesson>Детальніше <span class="chev"></span></button>
+    <button class="lesson-toggle" data-lesson><span><span class="l-closed">Детальніше</span><span class="l-open">Згорнути</span></span><span class="chev"></span></button>
   </article>
 
   <article class="lesson webinar open reveal" style="margin-top:22px">
