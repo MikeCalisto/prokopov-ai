@@ -43,6 +43,8 @@
 | AI Avatar (UA) | `/ai-avatar-ua/` | Статичний HTML | `Сайт АІ аватар укр/` | `public/ai-avatar-ua/` |
 | AI Конвеєр | `/ai-konveyer/` | Статичний HTML | `Сайт АІ конвеер/` (стара версія) | `public/ai-konveyer/` |
 | AI Конвеєр (міні-курс) | `/mini-ai-konveyer/` | Статичний HTML | `Сайт АІ конвеер/index.html` (новий дизайн) | `public/mini-ai-konveyer/` |
+| AI Конвеєр v2 | `/mini-ai-konveyer-2/` | Статичний HTML | редагується прямо в `public/` | `public/mini-ai-konveyer-2/` |
+| AI Сценарист | `/ai-scenarist/` | Статичний HTML | редагується прямо в `public/` | `public/ai-scenarist/` |
 
 ## КРИТИЧНІ ПРАВИЛА
 
@@ -75,6 +77,13 @@
 1. Редагуй `Сайт АІ конвеер/index.html`
 2. Копіюй в `public/mini-ai-konveyer/index.html`: `cp "Сайт АІ конвеер/index.html" "Сайт АІ реалізм/public/mini-ai-konveyer/index.html"`
 3. Пуш
+
+#### AI Сценарист (`/ai-scenarist/`):
+1. Редагуй `public/ai-scenarist/index.html` напряму
+2. Стилістика успадкована з `/mini-ai-konveyer-2/` (та сама палітра, phone-wrap 480px, Jost)
+3. Асети (`hero.mp4`, `hero-poster.jpg`, `roman.jpg`) лежать поруч, шляхи абсолютні: `/ai-scenarist/...`
+4. Превью: `.claude/launch.json` → `ai-scenarist-preview` (WEBrick, порт 8083, з `/tmp/ai-scenarist-preview`)
+5. Пуш
 
 #### AI Avatar PL (Next.js):
 1. Редагуй в `app/ai-avatar/` та `Сайт АІ аватар/`
