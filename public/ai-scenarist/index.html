@@ -315,40 +315,10 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
   background:var(--red);color:#fff;font-size:.6rem;letter-spacing:.14em;
 }
 .bonus.hot .live-badge .dot{width:6px;height:6px;border-radius:50%;background:#fff;animation:pulse 1.5s infinite}
-.bonus h3{margin-bottom:10px;font-size:1.1rem}
-.bonus-desc{max-height:0;overflow:hidden;transition:max-height .5s ease,margin .3s ease}
-.bonus.open .bonus-desc{max-height:600px}
-.bonus-desc p{font-size:.88rem;line-height:1.55;color:var(--gray2);padding-top:4px}
-.bonus-desc .checks{margin-top:10px}
-.bonus-toggle{
-  width:100%;margin-top:14px;padding:11px 14px;
-  display:flex;align-items:center;justify-content:space-between;gap:8px;
-  border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02);
-  color:var(--accent);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
-  transition:background .2s,border-color .2s;
-}
-.bonus-toggle:hover{background:rgba(0,208,156,.06);border-color:rgba(0,208,156,.35)}
-.bonus-toggle .chev{
-  width:20px;height:20px;border-radius:50%;background:rgba(0,208,156,.15);
-  display:flex;align-items:center;justify-content:center;
-  transition:transform .3s;
-}
-.bonus-toggle .chev::after{
-  content:'';width:6px;height:6px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);
-  transform:rotate(45deg);margin-top:-3px;
-}
-.bonus.open .bonus-toggle .chev{transform:rotate(180deg)}
-.bonus.open .bonus-toggle .l-closed{display:none}
-.bonus:not(.open) .bonus-toggle .l-open{display:none}
-.bonus-out{
-  margin-top:14px;padding:10px 12px;
-  background:rgba(0,208,156,.08);
-  border-left:3px solid var(--accent);
-  border-radius:6px;
-  font-size:.83rem;color:var(--white);line-height:1.45;
-  display:flex;gap:8px;align-items:flex-start;
-}
-.bonus-out .target{font-size:1rem;line-height:1.2;flex-shrink:0}
+.bonus h3{margin-bottom:12px;font-size:1.1rem;padding-right:52px}
+.bonus-body p{font-size:.9rem;line-height:1.6;color:var(--gray2)}
+.bonus-body p strong{color:var(--accent);font-weight:800}
+.bonus-body .checks{gap:9px}
 .bonus-final{
   text-align:center;padding:18px;
   margin:8px 0 18px;
@@ -759,26 +729,21 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
     <div class="bonus-num">01</div>
     <div class="bonus-tag">🎁 Бонус №1</div>
     <h3>«50 хуків, які залітають»</h3>
-    <div class="bonus-out"><span class="target">🎯</span><span><b>Що це дає:</b> перші 2 секунди, після яких палець зупиняється</span></div>
-    <div class="bonus-desc"><p>Підбірка перших фраз з рілсів, які дали <strong style="color:var(--accent)">+45× охоплень</strong> у моїх клієнтів. Бери їх готовими — або завантаж у свого Claude, щоб він починав кожен сценарій саме з таких формулювань і генерував нові за тим самим принципом.</p></div>
-    <button class="bonus-toggle" data-bonus><span><span class="l-closed">Детальніше про бонус</span><span class="l-open">Згорнути</span></span><span class="chev"></span></button>
+    <div class="bonus-body"><p>Підбірка перших фраз з рілсів, які дали <strong>+45× охоплень</strong> у моїх клієнтів. Бери їх готовими — або завантаж у свого Claude, щоб він починав кожен сценарій саме з таких формулювань і генерував нові за тим самим принципом.</p></div>
   </article>
 
   <article class="bonus reveal d1">
     <div class="bonus-num">02</div>
     <div class="bonus-tag">🎁 Бонус №2</div>
     <h3>AI&#8209;співробітник «Сторіс&#8209;агент»</h3>
-    <div class="bonus-out"><span class="target">🎯</span><span><b>Що це дає:</b> готовий план сторіс щодня — економить <strong style="color:var(--accent)">~1 годину на день</strong></span></div>
-    <div class="bonus-desc"><p>Окремий AI&#8209;співробітник, який щодня видає план сторіс: які знімати, які питання ставити аудиторії, які прогрівати до заявок. Сценарії на рілси в тебе вже є — цей бонус закриває другу половину контенту.</p></div>
-    <button class="bonus-toggle" data-bonus><span><span class="l-closed">Детальніше про бонус</span><span class="l-open">Згорнути</span></span><span class="chev"></span></button>
+    <div class="bonus-body"><p>Окремий AI&#8209;співробітник, який щодня видає план сторіс: які знімати, які питання ставити аудиторії, які прогрівати до заявок. Сценарії на рілси в тебе вже є — цей бонус закриває другу половину контенту.</p></div>
   </article>
 
   <article class="bonus hot reveal d2">
     <div class="bonus-num">03</div>
     <div class="bonus-tag">🎁 Бонус №3 <span class="live-badge"><span class="dot"></span>LIVE</span></div>
     <h3>Запрошення на закриту Zoom&#8209;зустріч з Романом</h3>
-    <div class="bonus-out"><span class="target">🎯</span><span><b>Що це дає:</b> ще <strong style="color:var(--accent)">2 години</strong> контенту, яких немає в уроках</span></div>
-    <div class="bonus-desc">
+    <div class="bonus-body">
       <ul class="checks">
         <li>Додаткові <b>2 години</b> корисного контенту</li>
         <li>Презентація авторської розробки: <b>«AI контент-система»</b>, яка забирає на себе 80% роботи при створенні контенту для блогу</li>
@@ -786,7 +751,6 @@ p{line-height:1.6;color:var(--gray2);font-size:.95rem}
         <li>Живе спілкування з автором курсу та відповіді на твої запитання</li>
       </ul>
     </div>
-    <button class="bonus-toggle" data-bonus><span><span class="l-closed">Детальніше про бонус</span><span class="l-open">Згорнути</span></span><span class="chev"></span></button>
   </article>
 
   <p class="bonus-final reveal">Усі 3 бонуси разом економлять <strong>до 20 годин роботи</strong> на запуску твого контенту.</p>
@@ -1100,9 +1064,6 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 document.querySelectorAll('[data-lesson]').forEach(btn => {
   btn.addEventListener('click', () => btn.closest('.lesson').classList.toggle('open'));
-});
-document.querySelectorAll('[data-bonus]').forEach(btn => {
-  btn.addEventListener('click', () => btn.closest('.bonus').classList.toggle('open'));
 });
 
 (function(){
