@@ -45,6 +45,8 @@
 | AI Конвеєр (міні-курс) | `/mini-ai-konveyer/` | Статичний HTML | `Сайт АІ конвеер/index.html` (новий дизайн) | `public/mini-ai-konveyer/` |
 | AI Конвеєр v2 | `/mini-ai-konveyer-2/` | Статичний HTML | редагується прямо в `public/` | `public/mini-ai-konveyer-2/` |
 | AI Сценарист (міні-курс v2) | `/mini-ai-konveyer-3` | Статичний HTML | редагується прямо в `public/` | `public/mini-ai-konveyer-3/` |
+| Презентація вебінару | `/prezentaciya-ai-konveyer/` | Статичний HTML | редагується прямо в `public/` | `public/prezentaciya-ai-konveyer/` |
+| Слайди до VSL №1 | `/vsl-slides/` | Статичний HTML | редагується прямо в `public/` | `public/vsl-slides/` |
 
 ## КРИТИЧНІ ПРАВИЛА
 
@@ -85,6 +87,15 @@
 4. Асети (`hero.mp4`, `hero-poster.jpg`, `roman.jpg`) лежать поруч, шляхи абсолютні: `/mini-ai-konveyer-3/...`
 5. Превью: `.claude/launch.json` → `mini-ai-konveyer-3-preview` (WEBrick, порт 8083, з `/tmp/mini-ai-konveyer-3-preview`)
 6. Пуш
+
+#### Слайди до VSL (`/vsl-slides/`):
+1. Редагуй `public/vsl-slides/index.html` напряму — весь текст лежить у масиві `SLIDES` вгорі `<script>`, вёрстку не чіпаємо
+2. Канвас **1280×1080** (права частина кадру 1920×1080), змінні `--slide-w` / `--slide-h`
+3. Стиль успадкований з `/prezentaciya-ai-konveyer/` (Tektur + Manrope, помаранчева палітра)
+4. Скріншоти — `public/vsl-slides/screens/`, шляхи абсолютні: `/vsl-slides/screens/...`. Нема файла — рендериться плейсхолдер з іменем
+5. Клавіші: `H` — службові елементи, `P` — режим монтажера (cue), номер+`Enter` — перехід
+6. Превью: `.claude/launch.json` → `vsl-slides-preview` (WEBrick, порт 8084, з `/tmp/vsl-slides-preview`)
+7. Пуш
 
 #### AI Avatar PL (Next.js):
 1. Редагуй в `app/ai-avatar/` та `Сайт АІ аватар/`

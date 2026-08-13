@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>VSL №1 — слайды · Роман Прокопов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ГЕОМЕТРИЯ КАНВАСА — правая часть кадра 1920×1080 */
+  --slide-w:1280px;
+  --slide-h:1080px;
+  --pad:72px;          /* безопасные поля */
+  --subzone:90px;      /* нижняя зона субтитров */
+  --rightres:40px;     /* правый запас на обрезку */
+
+  /* ПАЛИТРА — из /prezentaciya-ai-konveyer */
+  --bg:#060608; --bg-soft:#0a0a10; --bg-card:#0d0d12; --bg-card-hover:#14141c;
+  --accent:#e8921a; --accent-deep:#c77010; --accent-gold:#e9b646; --accent-light:#f5b34a;
+  --accent-glow:rgba(232,146,26,.25); --accent-glow-strong:rgba(232,146,26,.45);
+  --text:#f2ede3; --text-muted:#a9a396; --text-dim:#6b665d;
+  --border:#1e1e2a; --border-strong:#2a2a36;
+  --border-accent:rgba(232,146,26,.32); --border-accent-strong:rgba(232,146,26,.55);
+  --danger:#ff5c5c;
+  --radius-sm:14px; --radius-md:18px; --radius-lg:24px;
+  --shadow-card:0 18px 40px rgba(0,0,0,.45);
+  --shadow-glow:0 0 50px var(--accent-glow),0 0 100px rgba(232,146,26,.08);
+  --font-display:'Tektur',sans-serif;
+  --font-body:'Manrope',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;min-width:0;}
+html,body{height:100%;overflow:hidden;background:#000;}
+img,svg{max-width:100%;display:block;}
+body{font-family:var(--font-body);color:var(--text);-webkit-font-smoothing:antialiased;}
+::selection{background:var(--accent);color:#000;}
+
+/* ===== СЦЕНА · масштабирование канваса ===== */
+.stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#000;}
+.canvas{
+  position:relative;flex:0 0 auto;
+  width:var(--slide-w);height:var(--slide-h);
+  background:var(--bg);overflow:hidden;
+  transform-origin:center center;
+}
+/* зерно */
+.canvas::after{
+  content:'';position:absolute;inset:0;z-index:60;pointer-events:none;opacity:.4;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* ===== СЛАЙД ===== */
+.slide{
+  position:absolute;inset:0;
+  padding:var(--pad) calc(var(--pad) + var(--rightres)) calc(var(--pad) + var(--subzone)) var(--pad);
+  display:flex;flex-direction:column;justify-content:center;
+  opacity:0;visibility:hidden;
+  /* уходящий гаснет быстро, приходящий проявляется с небольшой задержкой:
+     ~200 мс на переход и почти без наложения двух слайдов */
+  transition:opacity .08s ease,visibility 0s linear .08s;
+  overflow:hidden;
+}
+.slide.active{opacity:1;visibility:visible;z-index:2;transition:opacity .14s ease .06s,visibility 0s;}
+.inner{width:100%;transform-origin:center center;}
+.slide.center{text-align:center;}
+.slide.center .inner{max-width:1000px;margin:0 auto;}
+/* свечение на титульных */
+.slide.glow::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(58% 50% at 50% 44%,var(--accent-glow) 0%,rgba(232,146,26,.06) 42%,transparent 72%);
+}
+.slide.glow .inner{position:relative;z-index:1;}
+
+/* ===== ТИПОГРАФИКА (шкала под 1280×1080) ===== */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:26px;
+  font-family:var(--font-display);font-size:26px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--accent);
+  padding:10px 24px;background:rgba(232,146,26,.09);
+  border:1px solid var(--border-accent);border-radius:60px;
+}
+.eyebrow::before{content:'';width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent);flex:0 0 auto;}
+.slide.center .eyebrow{margin-left:auto;margin-right:auto;}
+h1{font-family:var(--font-display);font-weight:800;font-size:104px;line-height:1.05;letter-spacing:-1.5px;}
+h2{font-family:var(--font-display);font-weight:700;font-size:72px;line-height:1.1;letter-spacing:-.5px;}
+h2.sm{font-size:64px;}
+.lead{font-size:40px;font-weight:400;line-height:1.35;color:var(--text-muted);margin-top:28px;}
+.lead strong{color:var(--accent-light);font-weight:700;}
+h1 strong,h2 strong{color:var(--accent-light);font-weight:inherit;}
+.note{margin-top:30px;font-size:28px;line-height:1.4;color:var(--text-muted);}
+.note strong{color:var(--accent-light);font-weight:700;}
+strong{color:var(--accent-light);font-weight:700;}
+
+/* ===== СПИСОК ПУНКТОВ ===== */
+.bullets{list-style:none;margin-top:40px;}
+.bullets li{position:relative;padding:16px 0 16px 52px;font-size:34px;font-weight:400;line-height:1.35;border-bottom:1px solid var(--border);}
+.bullets li:last-child{border-bottom:none;}
+.bullets li::before{content:'✦';position:absolute;left:6px;top:16px;color:var(--accent);font-size:30px;}
+.bullets.num{counter-reset:b;}
+.bullets.num li::before{
+  counter-increment:b;content:counter(b);left:0;top:14px;
+  font-family:var(--font-display);font-weight:800;font-size:32px;color:var(--accent);
+}
+.bullets.compact li{padding:12px 0 12px 48px;font-size:30px;line-height:1.32;}
+.bullets.compact li::before{top:12px;font-size:27px;}
+.bullets.quotes li{font-style:italic;}
+
+/* ===== ЦИФРЫ ===== */
+.stats{display:grid;gap:20px;margin-top:44px;}
+.stats.n2{grid-template-columns:repeat(2,1fr);}
+.stats.n3{grid-template-columns:repeat(3,1fr);}
+.stats.n4{grid-template-columns:repeat(4,1fr);}
+.stats .cell{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 22px;text-align:center;display:flex;flex-direction:column;justify-content:flex-start;}
+.stats .n{
+  font-family:var(--font-display);font-weight:800;font-size:132px;line-height:.92;letter-spacing:-2px;white-space:nowrap;
+  background:linear-gradient(180deg,var(--accent-light) 0%,var(--accent) 55%,var(--accent-deep) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.stats .u{font-family:var(--font-display);font-weight:700;font-size:34px;color:var(--accent-light);margin-top:2px;}
+.stats .l{margin-top:14px;font-size:26px;font-weight:500;line-height:1.3;color:var(--text-muted);}
+/* инлайн-строка цифр для кейсов */
+.statline{display:flex;gap:18px;margin-top:28px;}
+.statline .c{flex:1 1 0;background:var(--bg-card);border:1px solid var(--border-accent);border-radius:var(--radius-md);padding:16px 14px;text-align:center;}
+.statline .n{font-family:var(--font-display);font-weight:800;font-size:52px;line-height:1;color:var(--accent-light);white-space:nowrap;}
+.statline .l{margin-top:8px;font-size:24px;color:var(--text-muted);line-height:1.25;}
+
+/* ===== ЦЕПОЧКА ===== */
+.chain{display:grid;gap:14px;margin-top:38px;}
+.chain .ci{
+  display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;
+  background:var(--bg-card);border:1px solid var(--border);border-left:4px solid var(--accent);
+  border-radius:var(--radius-md);padding:18px 28px;
+}
+.chain .cn{font-family:var(--font-display);font-weight:800;font-size:40px;line-height:1;color:var(--accent-light);min-width:46px;}
+.chain .ct{font-size:34px;line-height:1.3;}
+.chain.compact{gap:12px;}
+.chain.compact .ci{padding:13px 24px;}
+.chain.compact .cn{font-size:34px;min-width:40px;}
+.chain.compact .ct{font-size:30px;line-height:1.25;}
+
+/* ===== СРАВНЕНИЕ ===== */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:42px;align-items:stretch;}
+.compare .col{border-radius:var(--radius-lg);padding:34px 30px;border:1px solid var(--border);display:flex;flex-direction:column;}
+.compare .col h4{font-family:var(--font-display);font-weight:800;font-size:38px;line-height:1.1;margin-bottom:22px;}
+.compare .col ul{list-style:none;}
+.compare .col li{position:relative;padding:13px 0 13px 40px;font-size:30px;line-height:1.35;border-bottom:1px solid rgba(255,255,255,.05);}
+.compare .col li:last-child{border-bottom:none;}
+.compare .col li::before{position:absolute;left:0;top:13px;font-size:26px;}
+.compare .col p{font-size:32px;line-height:1.35;color:var(--text-muted);}
+.compare .big{font-family:var(--font-display);font-weight:800;font-size:118px;line-height:1;letter-spacing:-2px;margin-bottom:12px;white-space:nowrap;}
+/* обе колонки — только крупная цифра: центрируем и добавляем воздуха */
+.compare.num .col{text-align:center;justify-content:center;padding:52px 30px;}
+.compare .bigsub{font-size:30px;line-height:1.3;color:var(--text-muted);}
+.compare .col-bad{background:linear-gradient(160deg,rgba(255,92,92,.05),transparent);border-color:rgba(255,92,92,.24);}
+.compare .col-bad h4,.compare .col-bad .big{color:#ff8f8f;}
+.compare .col-bad li::before{content:'✕';color:var(--danger);}
+.compare .col-good{background:linear-gradient(160deg,rgba(232,146,26,.09),transparent);border-color:var(--border-accent-strong);box-shadow:var(--shadow-glow);}
+.compare .col-good h4,.compare .col-good .big{color:var(--accent-light);}
+.compare .col-good li::before{content:'✦';color:var(--accent);}
+.compare .col-good p{color:var(--text);}
+
+/* ===== ТАБЛИЦА ===== */
+.tbl{width:100%;border-collapse:collapse;margin-top:38px;table-layout:fixed;}
+.tbl th:nth-child(1){width:30%;} .tbl th:nth-child(2){width:32%;}
+.tbl th{
+  font-family:var(--font-display);font-weight:700;font-size:24px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent);text-align:left;padding:0 20px 16px;border-bottom:2px solid var(--border-accent);
+}
+.tbl td{font-size:30px;line-height:1.25;padding:17px 20px;border-bottom:1px solid var(--border);}
+.tbl td:first-child{font-weight:600;}
+.tbl td.was{color:var(--text-muted);}
+.tbl td.now{color:var(--accent-light);font-weight:700;}
+.tbl tr:last-child td{border-bottom:none;}
+
+/* ===== ЦИТАТЫ ===== */
+.quotes-list{display:grid;gap:22px;margin-top:44px;}
+.quotes-list .q{
+  position:relative;background:var(--bg-card);border:1px solid var(--border);border-left:4px solid var(--accent);
+  border-radius:var(--radius-md);padding:26px 30px 26px 78px;
+  font-size:38px;line-height:1.28;font-style:italic;
+}
+.quotes-list .q::before{content:'“';position:absolute;left:24px;top:24px;font-family:var(--font-display);font-size:76px;line-height:.7;color:var(--accent);}
+
+/* ===== СКРИНШОТЫ ===== */
+.shots{display:grid;gap:22px;margin-top:34px;}
+.shots.k1{grid-template-columns:1fr;}
+.shots.k2{grid-template-columns:1fr 1fr;}
+.shots.k3{grid-template-columns:repeat(3,1fr);}
+.shot{
+  background:linear-gradient(158deg,#181820,#0b0b11);
+  border:1px solid var(--border-accent);border-radius:20px;padding:8px;
+  box-shadow:0 20px 46px rgba(0,0,0,.55),0 0 34px rgba(232,146,26,.10);
+  display:flex;flex-direction:column;
+}
+.shot img{width:100%;height:var(--sh,360px);object-fit:contain;border-radius:13px;background:#0a0a10;}
+.shot .cap{font-size:24px;line-height:1.25;color:var(--text-muted);text-align:center;padding:12px 6px 4px;}
+.shot .ph{
+  width:100%;height:var(--sh,360px);border-radius:13px;background:repeating-linear-gradient(45deg,#101018,#101018 14px,#0c0c12 14px,#0c0c12 28px);
+  border:2px dashed var(--border-accent-strong);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px;
+}
+.shot .ph .pi{font-size:44px;}
+.shot .ph .pf{font-family:var(--font-display);font-weight:700;font-size:26px;color:var(--accent-light);word-break:break-all;}
+.shot .ph .pt{font-size:24px;color:var(--text-dim);}
+
+/* ===== ФИНАЛ ===== */
+.final-steps{display:grid;gap:16px;margin-top:40px;counter-reset:f;text-align:left;}
+.final-steps .fs{
+  display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:18px 28px;
+}
+.final-steps .fs .fn{font-family:var(--font-display);font-weight:800;font-size:38px;color:transparent;-webkit-text-stroke:2px var(--accent);line-height:1;min-width:36px;}
+.final-steps .fs .ft{font-size:32px;line-height:1.3;}
+.cta{
+  display:inline-flex;align-items:center;justify-content:center;gap:14px;margin-top:38px;
+  font-family:var(--font-display);font-weight:800;font-size:40px;letter-spacing:.5px;
+  padding:26px 56px;border-radius:20px;color:#1a0f00;
+  background:linear-gradient(135deg,var(--accent-gold),var(--accent) 55%,var(--accent-deep));
+  box-shadow:0 18px 50px var(--accent-glow-strong),0 0 60px rgba(232,146,26,.22);
+}
+.terms{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:30px;}
+.terms span{
+  font-family:var(--font-display);font-weight:700;font-size:26px;color:var(--accent-light);
+  padding:12px 24px;border:1px solid var(--border-accent);border-radius:60px;background:rgba(232,146,26,.07);
+}
+
+/* ===== СЛУЖЕБНОЕ (скрыто в режиме записи) ===== */
+.chrome{position:fixed;inset:0;z-index:80;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .18s;}
+body.ui .chrome{opacity:1;visibility:visible;}
+.chrome .counter{
+  position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+  font-family:var(--font-display);font-weight:700;font-size:24px;color:var(--text-muted);
+  background:rgba(10,10,16,.85);border:1px solid var(--border-strong);border-radius:60px;padding:8px 22px;backdrop-filter:blur(6px);
+}
+.chrome .counter b{color:var(--accent-light);}
+.chrome .keys{
+  position:absolute;top:16px;left:50%;transform:translateX(-50%);
+  font-size:15px;color:var(--text-dim);background:rgba(10,10,16,.8);border:1px solid var(--border);
+  border-radius:60px;padding:8px 20px;letter-spacing:.3px;
+}
+.chrome .navbtn{
+  position:absolute;bottom:16px;width:52px;height:52px;border-radius:50%;pointer-events:auto;
+  border:1px solid var(--border-strong);background:rgba(13,13,18,.85);color:var(--text);
+  font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);transition:.2s;
+}
+.chrome .navbtn:hover{border-color:var(--border-accent-strong);color:var(--accent-light);}
+.chrome .navbtn.prev{right:90px;} .chrome .navbtn.next{right:24px;}
+.chrome .navbtn:disabled{opacity:.3;cursor:default;}
+
+/* режим монтажёра (P) */
+.cuebar{
+  position:fixed;left:0;right:0;bottom:0;z-index:90;
+  background:linear-gradient(0deg,rgba(4,4,8,.97),rgba(4,4,8,.86));
+  border-top:1px solid var(--border-accent);
+  padding:14px 24px;display:none;gap:16px;align-items:baseline;
+}
+body.cue .cuebar{display:flex;}
+.cuebar .cb{font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:1px;text-transform:uppercase;color:var(--accent);white-space:nowrap;}
+.cuebar .ct{font-size:19px;color:var(--text);line-height:1.35;font-style:italic;}
+.cuebar .cn{margin-left:auto;font-family:var(--font-display);font-weight:800;font-size:19px;color:var(--text-muted);white-space:nowrap;}
+.cuebar .warn{color:var(--danger);font-weight:700;font-size:15px;white-space:nowrap;}
+
+/* ввод номера слайда */
+.goto{
+  position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:95;
+  font-family:var(--font-display);font-weight:800;font-size:88px;color:var(--accent-light);
+  background:rgba(6,6,10,.92);border:2px solid var(--border-accent-strong);border-radius:24px;
+  padding:24px 48px;box-shadow:var(--shadow-glow);display:none;letter-spacing:4px;
+}
+body.goto-on .goto{display:block;}
+
+/* зоны клика: левая половина — назад, правая — вперёд */
+.tap{position:fixed;top:0;bottom:0;width:50%;z-index:70;cursor:pointer;}
+.tap.l{left:0;} .tap.r{right:0;}
+/* в режиме монтажёра поднимаем служебное над строкой cue */
+body.cue .chrome .counter,body.cue .chrome .navbtn{bottom:74px;}
+body.cue .tap{bottom:56px;}
+</style>
+</head>
+<body class="rec">
+
+<div class="stage" id="stage">
+  <div class="canvas" id="canvas"></div>
+</div>
+
+<div class="tap l" id="tapL"></div>
+<div class="tap r" id="tapR"></div>
+
+<div class="chrome">
+  <div class="keys">← → · пробел · номер+Enter · <b>H</b> — служебное · <b>P</b> — монтажёр · <b>F</b> — фулскрин</div>
+  <div class="counter"><b id="cNow">01</b> / <span id="cTot">48</span></div>
+  <button class="navbtn prev" id="prevBtn" aria-label="Назад">‹</button>
+  <button class="navbtn next" id="nextBtn" aria-label="Вперёд">›</button>
+</div>
+
+<div class="cuebar" id="cuebar">
+  <span class="cb" id="cueBlock"></span>
+  <span class="ct" id="cueText"></span>
+  <span class="warn" id="cueWarn"></span>
+  <span class="cn" id="cueNum"></span>
+</div>
+
+<div class="goto" id="gotoBox"></div>
+
+<script>
+/* ============================================================
+   ДАННЫЕ СЛАЙДОВ — весь текст живёт здесь
+   block / cue — только для режима монтажёра (P), в записи не видны
+   ============================================================ */
+const S = "/vsl-slides/screens/";
+
+const SLIDES = [
+/* ---------- БЛОК 1 — Открытие ---------- */
+{
+  id:1, block:"Блок 1", cue:"Привет. Прежде чем начнём…",
+  type:"title",
+  eyebrow:"Пара слов перед стартом",
+  title:"Почему это видео на русском",
+  lead:"В профессиональных вещах я эффективнее на русском. В жизни на украинском — без проблем."
+},
+{
+  id:2, block:"Блок 1", cue:"Если ты тратишь на создание одного Reels…",
+  type:"stats",
+  title:"Знакомая математика?",
+  stats:[
+    {n:"3–4", u:"часа", l:"на одно видео: идея, съёмка, восемь дублей, монтаж"},
+    {n:"200", l:"просмотров на выходе"},
+    {n:"0", l:"регулярности — после такого не хочется повторять"}
+  ]
+},
+{
+  id:3, block:"Блок 1", cue:"Меня зовут Роман Прокопов…",
+  type:"stats",
+  eyebrow:"Кто я",
+  title:"Роман Прокопов",
+  lead:"Владелец агентства по контенту",
+  stats:[
+    {n:"12", l:"человек в команде"},
+    {n:"2 500+", l:"видео в год"},
+    {n:"15", l:"проектов одновременно"},
+    {n:"100+", l:"клиентов за 4 года"}
+  ]
+},
+{
+  id:4, block:"Блок 1", cue:"Давай сразу покажу, как она выглядит",
+  type:"chain",
+  eyebrow:"AI Контент-Система",
+  title:"Шесть AI-сотрудников в одной цепочке",
+  items:[
+    "ДНК целевой аудитории",
+    "Мастер офферов",
+    "Путь клиента",
+    "Твоя манера общения",
+    "Контент-система",
+    "Очеловечивание текста"
+  ],
+  note:"Каждый следующий не работает без предыдущего: то, что собрал первый, идёт на вход второму."
+},
+{
+  id:5, block:"Блок 1", cue:"И вот эти шесть сотрудников делают за меня восемьдесят процентов рутины",
+  type:"bullets",
+  title:"80% рутины — это что конкретно",
+  items:[
+    "Собирают карусели под ключ",
+    "Пишут сценарии твоим голосом",
+    "Генерят идеи под твою аудиторию",
+    "Разбирают аналитику вышедших роликов"
+  ],
+  note:"Каждый день. В моём аккаунте, в моём контенте."
+},
+{
+  id:6, block:"Блок 1", cue:"В этом видео я сделаю три вещи",
+  type:"bullets", numbered:true,
+  title:"План на это видео",
+  items:[
+    "Почему контент высасывает все соки и не даёт результата",
+    "Что такое AI-сотрудник — покажу одного изнутри",
+    "Приглашу на закрытую встречу, где разберу систему по шагам"
+  ]
+},
+{
+  id:7, block:"Блок 1", cue:"Сразу скажу про встречу",
+  type:"screens",
+  eyebrow:"Закрытая встреча в Zoom",
+  title:"13–15 мест. Живая, не автовебинар",
+  shotH:420,
+  shots:[
+    {src:S+"meeting_1.png", cap:"Первая встреча"},
+    {src:S+"meeting_2.png", cap:"Вторая встреча"}
+  ],
+  note:"Веду лично и работаю с каждым, кто пришёл."
+},
+
+/* ---------- БЛОК 2 — Проблема ---------- */
+{
+  id:8, block:"Блок 2", cue:"Ко мне в агентство приходят люди…",
+  type:"quote",
+  title:"Три запроса, которые я слышу четыре года",
+  items:[
+    "Я снимаю, стараюсь, делаю регулярно — а просмотров нет",
+    "Просмотры есть, охваты хорошие — а заявок ноль",
+    "Я больше не могу. Меня тошнит от того, что надо опять снимать"
+  ]
+},
+{
+  id:9, block:"Блок 2", cue:"Ты ведь не только контент делаешь",
+  type:"bullets",
+  title:"Что ты уже закрываешь собой",
+  items:[
+    "**Эксперт** — практикуешь и растёшь в своей теме",
+    "**Продажник** — продаёшь",
+    "**Исполнитель** — доставляешь продукт или оказываешь услугу",
+    "И поверх этого — **работа целой контент-команды**"
+  ]
+},
+{
+  id:10, block:"Блок 2", cue:"Потому что над одним роликом работают минимум четверо",
+  type:"chain",
+  title:"Над **одним** роликом работают четверо",
+  items:[
+    "**Маркетолог** — решает, о чём снимать и какую мысль донести",
+    "**Сценарист** — пишет текст, хук и структуру",
+    "**Эксперт** — снимает",
+    "**Монтажёр** — собирает одно готовое видео"
+  ],
+  note:"У меня в агентстве это четыре разных человека с зарплатой. У тебя — ты один, вечером, после работы."
+},
+
+/* ---------- БЛОК 3 — Как я пришёл к системе ---------- */
+{
+  id:11, block:"Блок 3", cue:"Теперь честно про то, как я вообще пришёл к созданию…",
+  type:"title",
+  title:"Как появилась AI Контент-Система",
+  lead:"Небольшая предыстория — откуда всё это взялось."
+},
+{
+  id:12, block:"Блок 3", cue:"И я упёрся в конкретную проблему",
+  type:"bullets",
+  eyebrow:"Моя проблема как владельца агентства",
+  title:"Результат не получался предсказуемым",
+  items:[
+    "Сегодня человек в ресурсе, завтра нет",
+    "Отпуск, болезнь, выпал ключевой человек — процесс встал",
+    "Знает нужную фишку, но забыл применить",
+    "Одно видео залетело, другое нет — и непонятно почему"
+  ]
+},
+{
+  id:13, block:"Блок 3", cue:"Не «как мне сгенерить видосик», а…",
+  type:"statement",
+  eyebrow:"Вопрос, который я себе задал",
+  title:"Могу ли я регламентировать производство контента на AI?",
+  lead:"И начал переносить внутрь нейросетей методологию, которую четыре года обтачивал на клиентах. По кусочкам."
+},
+{
+  id:14, block:"Блок 3", cue:"Дальше менеджеры, которые работают у меня в агентстве…",
+  type:"chain",
+  title:"Как система вышла наружу",
+  items:[
+    "Собрал для себя — чтобы держать 15 проектов",
+    "Клиенты попросили настроить им внутри, под их блог",
+    "Ученики курса по AI-аватару спросили, как сделать самим",
+    "Так родилось обучение"
+  ]
+},
+
+/* ---------- БЛОК 4 — Что такое AI-сотрудник ---------- */
+{
+  id:15, block:"Блок 4", cue:"Ты видел беспилотные такси",
+  type:"chain",
+  eyebrow:"Проще всего объяснить так",
+  title:"Беспилотное такси",
+  items:[
+    "Машина везёт людей, за рулём никого",
+    "Один раз загрузили правила, светофоры, распознавание пешеходов",
+    "Дальше повторяющийся процесс идёт без человека"
+  ],
+  note:"AI-сотрудник — то же самое, только про маркетинг."
+},
+{
+  id:16, block:"Блок 4", cue:"Что вообще внутри такого сотрудника?",
+  type:"stats",
+  title:"Что внутри каждого сотрудника",
+  stats:[
+    {n:"6", l:"обучений — сценаристика, маркетинг, контент + управление"},
+    {n:"4", u:"года", l:"практики на живых клиентских проектах"},
+    {n:"десятки", u:"тысяч $", l:"столько стоило это собрать"}
+  ],
+  note:"Всё это по кускам перенесено внутрь AI-сотрудников."
+},
+{
+  id:17, block:"Блок 4", cue:"Промпт — это просьба. Сотрудник — это обученный специалист",
+  type:"compare",
+  title:"Промпт ≠ сотрудник",
+  left:{title:"Промпт", items:[
+    "Разовая просьба",
+    "Про тебя не знает ничего",
+    "Достаёт усреднённое из интернета",
+    "Результат каждый раз разный"
+  ]},
+  right:{title:"AI-сотрудник", items:[
+    "Загруженная методология",
+    "Знает твою аудиторию и твой голос",
+    "Своя роль и зона ответственности",
+    "Стабильный результат, раз за разом"
+  ]}
+},
+{
+  id:18, block:"Блок 4", cue:"Давай покажу одного изнутри",
+  type:"screens",
+  eyebrow:"Сотрудник «Твоя манера общения»",
+  title:"Как он разбирает твою речь",
+  shotH:400,
+  shots:[
+    {src:S+"tone_of_voice_doc.png", cap:"Готовый документ манеры общения"}
+  ],
+  note:"Обороты · ритм и темп · эмоциональные паттерны · слова-паразиты · конструкции, которые тебе нельзя"
+},
+{
+  id:19, block:"Блок 4", cue:"AI не пишет воду",
+  type:"statement",
+  title:"AI не пишет воду",
+  lead:"AI делает хороший контент из того, что в него загружено. Загружено ничего — он работает с воздухом."
+},
+{
+  id:20, block:"Блок 4", cue:"Поэтому перед созданием контента у меня идут четыре документа",
+  type:"bullets",
+  title:"Четыре документа-фундамента",
+  items:[
+    "**ДНК аудитории** — 17 листов: боли, страхи, мифы, прошлый опыт. Пишет AI, не я",
+    "**Оффер по Хормози** — автор «$100M Offers», по нему сейчас собирают предложения по всему миру. Собирает AI",
+    "**Карта смыслов** — путь клиента от «не вижу проблемы» до «готов купить»",
+    "**Твоя манера общения** — тот самый документ со слайда выше"
+  ]
+},
+{
+  id:21, block:"Блок 4", cue:"Четыре документа — и всё",
+  type:"statement",
+  title:"Больше ты никогда не объясняешь нейросети, кто ты",
+  lead:"Просто прикладываешь их к запросу — и получаешь другое качество на выходе. Саму методологию передам на встрече: открытый экран и реальные документы реального клиента."
+},
+
+/* ---------- БЛОК 5 — Рыночная ситуация ---------- */
+{
+  id:22, block:"Блок 5", cue:"Пару слов про то, где мы сейчас находимся",
+  type:"chain",
+  title:"Три фазы рынка контента",
+  items:[
+    "**Раньше** — контента мало, руками работало",
+    "**Сейчас** — видео пролистывают за полсекунды, нужно больше попыток",
+    "**Прямо сейчас** — кто перевёл производство на AI, делает 30–60 единиц силами одного человека"
+  ]
+},
+{
+  id:23, block:"Блок 5", cue:"Не пять видео в месяц, а тридцать-шестьдесят",
+  type:"compare",
+  title:"Разница в объёме",
+  left:{big:"5", sub:"единиц в месяц — руками, на пределе"},
+  right:{big:"30–60", sub:"единиц в месяц — один человек с системой"}
+},
+{
+  id:24, block:"Блок 5", cue:"Отдельно скажу тем, кто зарабатывает на контенте",
+  type:"compare",
+  eyebrow:"Если ты зарабатываешь на контенте",
+  title:"Два пути",
+  left:{title:"Не внедряешь", text:"Пройдёт время, и нейросети в руках других людей заменят тебя полностью"},
+  right:{title:"Внедряешь", text:"Становишься тем, кто выдаёт втрое больше за те же деньги"},
+  note:"Через год это будет базой, а не преимуществом."
+},
+
+/* ---------- БЛОК 6 — Честность об ограничениях ---------- */
+{
+  id:25, block:"Блок 6", cue:"Теперь то, чего ты обычно не услышишь",
+  type:"bullets",
+  title:"Чего я не обещаю",
+  items:[
+    "Я не гуру AI и не программист",
+    "Это не волшебная кнопка — сотрудника надо обучить и контролировать",
+    "Гарантий на цифры не даю",
+    "Маркетинг вокруг видео сам по себе денег не приносит"
+  ]
+},
+{
+  id:26, block:"Блок 6", cue:"По моему внутреннему перфекционизму система выдаёт качество семь из десяти",
+  type:"chain",
+  title:"7 из 10 — и это честно",
+  items:[
+    "**AI довозит до 7 из 10** — быстро и стабильно",
+    "**Человек забирает эти 7** и докручивает",
+    "**9–10 из 10** на выходе"
+  ],
+  note:"Я не уволил ни одного сценариста и маркетолога. AI забрал у них рутину — они взяли больше проектов."
+},
+{
+  id:27, block:"Блок 6", cue:"Результат рождается на стыке",
+  type:"statement",
+  title:"Результат рождается на стыке",
+  lead:"Твои смыслы, твоя ниша, твоя экспертиза — плюс система, которая всё это упаковывает и выпускает. Ищешь кнопку «красиво за пять минут и ничего не контролировать» — тебе не ко мне."
+},
+
+/* ---------- БЛОК 7 — Сколько это стоит в часах и деньгах ---------- */
+{
+  id:28, block:"Блок 7", cue:"Давай посчитаем",
+  type:"table",
+  title:"Каждый ролик проходит эти этапы",
+  head:["Этап","Было","Стало"],
+  rows:[
+    ["Исследование рынка","$2 000+ и 3 недели","$40 и 3 часа"],
+    ["Сценарий","1,5–2 часа","20 минут"],
+    ["Съёмка","час на свет, фон, дубли","5 минут на петличку"],
+    ["Монтаж","1–2 часа","15 минут"],
+    ["Публикация","руками, в каждую сеть","автоматически"],
+    ["Команда","от $1 500 в месяц","~$100 на инструменты"]
+  ]
+},
+{
+  id:29, block:"Блок 7", cue:"Сложи",
+  type:"compare",
+  title:"Итого на один ролик",
+  left:{title:"Было", big:"~4 часа", sub:"и от $1 500 в месяц на команду"},
+  right:{title:"Стало", big:"~40 мин", sub:"и около $100 в месяц на инструменты"}
+},
+{
+  id:30, block:"Блок 7", cue:"У меня клиентка Марина вообще не любит камеру",
+  type:"screens",
+  eyebrow:"Кейс · психология",
+  title:"Марина не снимается. Просто начитывает сценарии",
+  shotH:340,
+  shots:[
+    {src:S+"marina_profile.png", cap:"Профиль"},
+    {src:S+"marina_reels.png", cap:"Reels на 100+ тысяч"}
+  ],
+  note:"AI-аватар по фото — заведомо хуже, чем по видео. Reels всё равно на 100+ тысяч. Решает **смысл**, а не внешний вид эксперта или монтаж."
+},
+{
+  id:31, block:"Блок 7", cue:"Поменяли только хук в начале ролика",
+  type:"screens",
+  eyebrow:"Аналитика подсветила: менять надо не тему",
+  title:"Один хук — охваты ×45",
+  shotH:380,
+  shots:[
+    {src:S+"hook_before.png", cap:"До"},
+    {src:S+"hook_after.png", cap:"После"}
+  ],
+  note:"Тот же контент, та же тема. Другая первая фраза."
+},
+{
+  id:32, block:"Блок 7", cue:"Илья — экспертный блог, ниша финансы и инвестиции",
+  type:"screens",
+  eyebrow:"Кейс · финансы и инвестиции",
+  title:"10 месяцев на этой системе",
+  statline:[
+    {n:"50 млн+", l:"просмотров"},
+    {n:"+90 000", l:"подписчиков"},
+    {n:"$500 000", l:"выручки"}
+  ],
+  shotH:300,
+  shots:[
+    {src:S+"ilya_profile.png", cap:"Профиль блога"},
+    {src:S+"ilya_views.png", cap:"Просмотры по месяцам"},
+    {src:S+"ilya_subs.png", cap:"Подписчики по месяцам"}
+  ],
+  note:"Чистая органика, ни доллара на таргет. Продажи делает он и его отдел продаж — наша зона ответственности — трафик и контент."
+},
+
+/* ---------- БЛОК 8 — Для кого это ---------- */
+{
+  id:33, block:"Блок 8", cue:"Давай честно про то, кому моя закрытая Zoom-встреча реально нужна",
+  type:"bullets",
+  title:"Тебе стоит прийти, если ты",
+  items:[
+    "**Эксперт с блогом** — психолог, коуч, юрист, тренер. Блог живёт рывками",
+    "**Предприниматель с продуктом** — нужен поток клиентов, но не хочешь быть контент-мейкером",
+    "**Онлайн-школа или запуск** — контент нужен каждый день, команда выгорает",
+    "**Зарабатываешь на контенте** — сммщик, таргетолог, монтажёр, агентство",
+    "**Пробовал AI и разочаровался** — получил воду и решил, что не работает"
+  ]
+},
+{
+  id:34, block:"Блок 8", cue:"А вот кому не надо",
+  type:"bullets",
+  title:"А вот кому не надо",
+  items:[
+    "Ищешь волшебную кнопку и чтобы всё делалось без тебя",
+    "Нет своей темы, продукта или экспертизы — AI не из чего строить маркетинг"
+  ]
+},
+
+/* ---------- БЛОК 9 — Что разбираем на встрече ---------- */
+{
+  id:35, block:"Блок 9", cue:"Я разберу всю AI Контент-Систему целиком",
+  type:"chain",
+  eyebrow:"Что разбираем на встрече",
+  title:"Шесть шагов — и на каждом работает AI",
+  items:[
+    "**AI-исследование** — рынок, конкуренты, покупатели за 3 часа",
+    "**AI-фокус** — 1 продукт · 1 аудитория · 1 боль",
+    "**AI-оффер** — по методологии Хормози",
+    "**AI-контент** — стратегия, идеи, сценарии",
+    "**AI-производство** — съёмка или аватар, монтаж, карусели",
+    "**AI-аналитика** — что залетело и почему"
+  ]
+},
+{
+  id:36, block:"Блок 9", cue:"А контент это только четвёртый шаг",
+  type:"statement",
+  title:"Контент — это ШАГ 4",
+  lead:"Люди приходят с запросом «хотим делать контент» — и начинают сразу отсюда. До него есть три шага. Пропустил их — снимаешь в пустоту, просто ещё об этом не знаешь."
+},
+{
+  id:37, block:"Блок 9", cue:"Моя система собирает карусель в два клика",
+  type:"screens",
+  eyebrow:"Шаг 05 · AI-производство",
+  title:"Карусель в два клика",
+  shotH:400,
+  shots:[
+    {src:S+"carousel_student.png", cap:"Сделала участница после встречи"}
+  ],
+  note:"Карусели недооценивают, а заявки они дают часто лучше видео."
+},
+{
+  id:38, block:"Блок 9", cue:"Всё это я показываю не на слайдах",
+  type:"statement",
+  title:"Показываю на открытом экране",
+  lead:"Захожу в аккаунт своего маркетолога и показываю на живом клиентском проекте: вот документы, вот сотрудники, вот сценарии, вот цифры."
+},
+
+/* ---------- БЛОК 10 — Что ты унесёшь со встречи ---------- */
+{
+  id:39, block:"Блок 10", cue:"Что у тебя будет в голове после этих двух часов",
+  type:"bullets",
+  title:"Что ты унесёшь — даже если пойдёшь делать сам",
+  items:[
+    "Поймёшь, **какого шага не хватало** именно тебе",
+    "Научишься задавать нейросети контекст, чтобы она писала твоим голосом",
+    "Увидишь контент-план и сценарии на месяц, **собранные AI** из данных твоей аудитории",
+    "Поймёшь, что быть в кадре не обязательно вообще",
+    "Получишь ответ, сработает ли это в твоей нише"
+  ],
+  note:"Для этого встреча и ограничена 13–15 людьми."
+},
+
+/* ---------- БЛОК 11 — Антипродажа ---------- */
+{
+  id:40, block:"Блок 11", cue:"Теперь честно, чтобы у тебя не было иллюзий",
+  type:"bullets",
+  title:"Чего на встрече не будет",
+  items:[
+    "**Не вебинар-распродажа.** 80% времени — система, разбор и открытый экран",
+    "**Не волшебная таблетка.** Я покажу логику, внедрять придётся руками",
+    "**Не запись.** Клиентские проекты под NDA — показать можно только живой группе"
+  ]
+},
+{
+  id:41, block:"Блок 11", cue:"Я прошу приходить с включённым микрофоном и камерой",
+  type:"bullets",
+  title:"Как мы там общаемся",
+  items:[
+    "Приходи с микрофоном и камерой — это живая встреча, а не зал чёрных квадратов",
+    "Начинаем со знакомства: каждый коротко о себе и с чем пришёл",
+    "В комнате предприниматели, эксперты, владельцы бизнесов — контакты завязываются сами",
+    "Дальше веду встречу под запросы тех, кто пришёл"
+  ]
+},
+{
+  id:42, block:"Блок 11", cue:"Поэтому приходи со своим запросом",
+  type:"bullets", quotes:true,
+  title:"Приходи со своим запросом",
+  items:[
+    "«Не понимаю, о чём снимать»",
+    "«Снимаю, но не заходит»",
+    "«Нет времени на контент»",
+    "«Не хочу быть в кадре»"
+  ],
+  note:"Чем конкретнее сформулируешь — тем полезнее будет лично для тебя."
+},
+
+/* ---------- БЛОК 12 — Как проходит встреча ---------- */
+{
+  id:43, block:"Блок 12", cue:"По формату всё просто",
+  type:"bullets", numbered:true,
+  eyebrow:"Раз в неделю · 19:00 по Киеву · ~2 часа + Q&A",
+  title:"Как проходит встреча",
+  items:[
+    "Знакомство — по минуте-полторы на каждого",
+    "Шесть шагов системы на открытом экране, на реальном проекте",
+    "Свободный блок — вникаю в твою нишу, блог и продукт",
+    "Бонусы для тех, кто досидел до конца"
+  ]
+},
+{
+  id:44, block:"Блок 12", cue:"Про запись важное",
+  type:"statement",
+  eyebrow:"Почему мест всего 13–15",
+  title:"Записываю я лично",
+  lead:"Ты оставляешь контакт — дальше я сам тебе пишу, согласовываю дату и присылаю ссылку. Написать сотне человек и разобрать сотню ситуаций я физически не могу."
+},
+
+/* ---------- БЛОК 13 — Сколько это стоит ---------- */
+{
+  id:45, block:"Блок 13", cue:"Про цену. Денег — ноль",
+  type:"compare",
+  title:"Сколько стоит участие",
+  left:{title:"Деньгами", big:"0", sub:"встреча бесплатная, предоплаты нет"},
+  right:{title:"По факту", big:"2 часа", sub:"времени · включённый микрофон и камера"}
+},
+{
+  id:46, block:"Блок 13", cue:"А теперь прикинь, сколько стоит по рынку сделать то, что я на этой встрече показываю",
+  type:"bullets",
+  title:"Сколько это стоит по рынку",
+  items:[
+    "Исследование рынка — от **$2 000** у агентства",
+    "Разработка оффера — отдельная услуга",
+    "Контент-стратегия — ещё одна",
+    "Ведение контента моей командой — **$1 700/мес** за 30 единиц"
+  ],
+  note:"Ничего из этого я на встрече не продаю. Услуги агентства там не обсуждаются — я показываю, как это устроено внутри, и отдаю логику."
+},
+
+/* ---------- БЛОК 14 — Гарантия и бонусы ---------- */
+{
+  id:47, block:"Блок 14", cue:"И третье — бонусы",
+  type:"bullets",
+  eyebrow:"Тем, кто досидит до конца",
+  title:"Два готовых AI-сотрудника в подарок",
+  items:[
+    "🎨 **AI-Дизайнер каруселей** — кидаешь текст, получаешь карусель послайдово, готовую к публикации",
+    "🧵 **AI-Вирусолог Threads** — сценарии и заходы под вирусные посты",
+    "К обоим — короткая инструкция: как подключить, обслуживать и докрутить под себя"
+  ],
+  note:"Ушёл на середине — возможность закрывается навсегда. Второй раз я их не отдаю."
+},
+
+/* ---------- БЛОК 15 — Закрытие ---------- */
+{
+  id:48, block:"Блок 15", cue:"Тогда сделай одно действие",
+  type:"final",
+  title:"Займи своё место",
+  steps:[
+    "Нажми кнопку под этим видео",
+    "Оставь имя и контакт — это 30 секунд",
+    "Я пишу тебе лично, согласовываю дату и присылаю ссылку на Zoom"
+  ],
+  terms:["13–15 мест","Записи не будет","Веду лично"],
+  button:"Занять место на встрече"
+}
+];
+
+/* ============================================================
+   РЕНДЕР
+   ============================================================ */
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const md  = s => esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+
+const eyebrow = d => d.eyebrow ? `<div class="eyebrow">${md(d.eyebrow)}</div>` : '';
+const title   = (d,tag='h2') => d.title ? `<${tag}>${md(d.title)}</${tag}>` : '';
+const lead    = d => d.lead ? `<p class="lead">${md(d.lead)}</p>` : '';
+const note    = d => d.note ? `<p class="note">${md(d.note)}</p>` : '';
+
+function shotHTML(sh, h){
+  const file = sh.src.split('/').pop();
+  return `<figure class="shot" style="--sh:${h}px">
+    <img src="${sh.src}" alt="${esc(sh.cap||'')}" data-file="${file}">
+    ${sh.cap?`<figcaption class="cap">${md(sh.cap)}</figcaption>`:''}
+  </figure>`;
+}
+
+const RENDER = {
+  title(d){
+    return `<div class="inner">${eyebrow(d)}<h1>${md(d.title)}</h1>${lead(d)}</div>`;
+  },
+  statement(d){
+    return `<div class="inner">${eyebrow(d)}${title(d)}${lead(d)}${note(d)}</div>`;
+  },
+  bullets(d){
+    const cls = ['bullets'];
+    if(d.numbered) cls.push('num');
+    if(d.quotes) cls.push('quotes');
+    if(d.items.length >= 5) cls.push('compact');
+    const li = d.items.map(t=>`<li>${md(t)}</li>`).join('');
+    return `<div class="inner">${eyebrow(d)}${title(d)}${lead(d)}<ul class="${cls.join(' ')}">${li}</ul>${note(d)}</div>`;
+  },
+  stats(d){
+    /* если хоть у одной цифры есть единица — строку резервируем во всех, чтобы подписи шли по одной линии */
+    const anyU = d.stats.some(s=>s.u);
+    const cells = d.stats.map(s=>`<div class="cell">
+      <div class="n">${md(s.n)}</div>
+      ${anyU?`<div class="u">${s.u?md(s.u):'&nbsp;'}</div>`:''}
+      <div class="l">${md(s.l)}</div>
+    </div>`).join('');
+    return `<div class="inner">${eyebrow(d)}${title(d)}${lead(d)}
+      <div class="stats n${d.stats.length}">${cells}</div>${note(d)}</div>`;
+  },
+  chain(d){
+    const compact = d.items.length >= 5 ? ' compact' : '';
+    const items = d.items.map((t,i)=>`<div class="ci"><div class="cn">${String(i+1).padStart(2,'0')}</div><div class="ct">${md(t)}</div></div>`).join('');
+    return `<div class="inner">${eyebrow(d)}${title(d)}<div class="chain${compact}">${items}</div>${note(d)}</div>`;
+  },
+  compare(d){
+    const col = (c,kind)=>{
+      let body = '';
+      if(c.big) body += `<div class="big">${md(c.big)}</div><div class="bigsub">${md(c.sub||'')}</div>`;
+      if(c.text) body += `<p>${md(c.text)}</p>`;
+      if(c.items) body += `<ul>${c.items.map(t=>`<li>${md(t)}</li>`).join('')}</ul>`;
+      return `<div class="col col-${kind}">${c.title?`<h4>${md(c.title)}</h4>`:''}${body}</div>`;
+    };
+    const onlyBig = c => c.big && !c.items && !c.text;
+    const num = onlyBig(d.left) && onlyBig(d.right) ? ' num' : '';
+    return `<div class="inner">${eyebrow(d)}${title(d)}
+      <div class="compare${num}">${col(d.left,'bad')}${col(d.right,'good')}</div>${note(d)}</div>`;
+  },
+  table(d){
+    const th = d.head.map(h=>`<th>${md(h)}</th>`).join('');
+    const tr = d.rows.map(r=>`<tr><td>${md(r[0])}</td><td class="was">${md(r[1])}</td><td class="now">${md(r[2])}</td></tr>`).join('');
+    return `<div class="inner">${eyebrow(d)}${title(d)}
+      <table class="tbl"><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table>${note(d)}</div>`;
+  },
+  quote(d){
+    const q = d.items.map(t=>`<div class="q">${md(t)}</div>`).join('');
+    return `<div class="inner">${eyebrow(d)}${title(d)}<div class="quotes-list">${q}</div>${note(d)}</div>`;
+  },
+  screens(d){
+    const h = d.shotH || 360;
+    const line = d.statline ? `<div class="statline">${d.statline.map(s=>`<div class="c"><div class="n">${md(s.n)}</div><div class="l">${md(s.l)}</div></div>`).join('')}</div>` : '';
+    const shots = d.shots.map(s=>shotHTML(s,h)).join('');
+    return `<div class="inner">${eyebrow(d)}${title(d)}${line}
+      <div class="shots k${d.shots.length}">${shots}</div>${note(d)}</div>`;
+  },
+  final(d){
+    const steps = d.steps.map((t,i)=>`<div class="fs"><div class="fn">${i+1}</div><div class="ft">${md(t)}</div></div>`).join('');
+    const terms = d.terms.map(t=>`<span>${md(t)}</span>`).join('');
+    return `<div class="inner">${eyebrow(d)}<h1>${md(d.title)}</h1>
+      <div class="final-steps">${steps}</div>
+      <div class="cta">${md(d.button)}</div>
+      <div class="terms">${terms}</div></div>`;
+  }
+};
+
+const canvas = document.getElementById('canvas');
+canvas.innerHTML = SLIDES.map(d=>{
+  const centered = (d.type==='title'||d.type==='final') ? ' center glow' : '';
+  return `<section class="slide${centered}" data-id="${d.id}">${RENDER[d.type](d)}</section>`;
+}).join('');
+
+const slides = [...canvas.querySelectorAll('.slide')];
+
+/* плейсхолдер вместо отсутствующего скриншота */
+canvas.querySelectorAll('.shot img').forEach(img=>{
+  img.addEventListener('error',()=>{
+    const f = img.dataset.file;
+    const h = img.closest('.shot').style.getPropertyValue('--sh') || '360px';
+    img.outerHTML = `<div class="ph" style="--sh:${h}">
+      <div class="pi">🖼</div><div class="pf">${esc(f)}</div><div class="pt">файл ещё не положен в /vsl-slides/screens/</div></div>`;
+  });
+});
+
+/* ============================================================
+   ПОДГОНКА: масштаб канваса + контроль переполнения слайда
+   ============================================================ */
+const W = 1280, H = 1080;
+function fitCanvas(){
+  const s = Math.min(window.innerWidth / W, window.innerHeight / H);
+  canvas.style.transform = `scale(${s})`;
+}
+window.addEventListener('resize', fitCanvas);
+window.addEventListener('orientationchange', fitCanvas);
+if(window.ResizeObserver) new ResizeObserver(fitCanvas).observe(document.documentElement);
+fitCanvas();
+
+/* крупные цифры не должны вылезать из колонки */
+function fitNumbers(){
+  canvas.querySelectorAll('.stats .n, .statline .n, .compare .big').forEach(el=>{
+    el.style.fontSize = '';
+    const box = el.parentElement, cs = getComputedStyle(box);
+    const room = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    let size = parseFloat(getComputedStyle(el).fontSize);
+    let guard = 0;
+    while(el.scrollWidth > room && size > 40 && guard++ < 60){
+      size -= 4;
+      el.style.fontSize = size + 'px';
+    }
+  });
+}
+
+/* страховка: если контент всё же выше безопасной зоны — мягко ужимаем (не ниже .9) */
+const overflow = new Set();
+function fitSlides(){
+  slides.forEach((sl,i)=>{
+    const inner = sl.querySelector('.inner');
+    inner.style.transform = '';
+    const avail = H - 72*2 - 90;          /* безопасная высота: 846px */
+    const need  = inner.scrollHeight;
+    if(need > avail){
+      const k = Math.max(.9, avail / need);
+      inner.style.transform = `scale(${k})`;
+      if(need / avail > 1.11) overflow.add(i+1);
+      console.warn(`[vsl-slides] слайд ${i+1}: контент ${Math.round(need)}px > ${avail}px, ужат до ${k.toFixed(3)}`);
+    }
+  });
+}
+function measure(){
+  slides.forEach(s=>s.style.visibility='visible');
+  fitNumbers(); fitSlides();
+  slides.forEach(s=>s.style.visibility='');
+}
+if(document.fonts && document.fonts.ready){ document.fonts.ready.then(measure); } else { window.addEventListener('load', measure); }
+window.addEventListener('load', measure);
+
+/* ============================================================
+   НАВИГАЦИЯ
+   ============================================================ */
+const total = slides.length;
+let cur = 0;
+const cNow = document.getElementById('cNow'), cTot = document.getElementById('cTot');
+const prevBtn = document.getElementById('prevBtn'), nextBtn = document.getElementById('nextBtn');
+const cueBlock = document.getElementById('cueBlock'), cueText = document.getElementById('cueText'),
+      cueNum = document.getElementById('cueNum'), cueWarn = document.getElementById('cueWarn');
+cTot.textContent = String(total).padStart(2,'0');
+
+function render(){
+  slides.forEach((s,i)=>s.classList.toggle('active', i===cur));
+  cNow.textContent = String(cur+1).padStart(2,'0');
+  prevBtn.disabled = cur===0; nextBtn.disabled = cur===total-1;
+  const d = SLIDES[cur];
+  cueBlock.textContent = d.block || '';
+  cueText.textContent  = d.cue ? '«'+d.cue+'»' : '';
+  cueNum.textContent   = 'слайд ' + (cur+1) + ' / ' + total;
+  cueWarn.textContent  = overflow.has(cur+1) ? '⚠ переполнение' : '';
+  if(location.hash !== '#'+(cur+1)) history.replaceState(null,'','#'+(cur+1));
+}
+function go(i){
+  i = Math.max(0, Math.min(total-1, i));
+  if(i===cur) return;
+  cur = i; render();
+}
+const next = ()=>go(cur+1), prev = ()=>go(cur-1);
+
+nextBtn.addEventListener('click', e=>{e.stopPropagation(); next();});
+prevBtn.addEventListener('click', e=>{e.stopPropagation(); prev();});
+document.getElementById('tapR').addEventListener('click', next);
+document.getElementById('tapL').addEventListener('click', prev);
+
+/* режимы */
+function toggleUI(){ document.body.classList.toggle('ui'); }
+function toggleCue(){ document.body.classList.toggle('cue'); }
+function toggleFs(){
+  const r = document.documentElement;
+  if(!document.fullscreenElement){ (r.requestFullscreen||r.webkitRequestFullscreen).call(r); }
+  else{ (document.exitFullscreen||document.webkitExitFullscreen).call(document); }
+}
+
+/* ввод номера слайда */
+const gotoBox = document.getElementById('gotoBox');
+let buf = '', bufTimer = null;
+function showBuf(){
+  gotoBox.textContent = buf || '';
+  document.body.classList.toggle('goto-on', !!buf);
+  clearTimeout(bufTimer);
+  if(buf) bufTimer = setTimeout(clearBuf, 2500);
+}
+function clearBuf(){ buf=''; showBuf(); }
+
+window.addEventListener('keydown', e=>{
+  if(e.metaKey||e.ctrlKey||e.altKey) return;
+  const k = e.key;
+  if(/^[0-9]$/.test(k)){ e.preventDefault(); buf = (buf+k).slice(0,2); showBuf(); return; }
+  if(k==='Enter'){ e.preventDefault(); if(buf){ go(parseInt(buf,10)-1); clearBuf(); } return; }
+  if(k==='Backspace'){ e.preventDefault(); buf = buf.slice(0,-1); showBuf(); return; }
+  if(k==='Escape'){ clearBuf(); return; }
+  if(k==='ArrowRight'||k===' '||k==='PageDown'||k==='ArrowDown'){ e.preventDefault(); next(); return; }
+  if(k==='ArrowLeft'||k==='PageUp'||k==='ArrowUp'){ e.preventDefault(); prev(); return; }
+  if(k==='Home'){ e.preventDefault(); go(0); return; }
+  if(k==='End'){ e.preventDefault(); go(total-1); return; }
+  const c = k.toLowerCase();
+  if(c==='h'||c==='р'){ e.preventDefault(); toggleUI(); return; }   /* служебное */
+  if(c==='p'||c==='з'){ e.preventDefault(); toggleCue(); return; }  /* монтажёр */
+  if(c==='f'||c==='а'){ e.preventDefault(); toggleFs(); return; }   /* фулскрин */
+});
+
+/* свайп */
+let tx=0, ty=0;
+window.addEventListener('touchstart', e=>{ tx=e.changedTouches[0].clientX; ty=e.changedTouches[0].clientY; }, {passive:true});
+window.addEventListener('touchend', e=>{
+  const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+  if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)) dx<0 ? next() : prev();
+}, {passive:true});
+
+/* старт: режим записи включён, служебного нет */
+const m = location.hash.match(/#(\d+)/);
+if(m) cur = Math.max(0, Math.min(total-1, parseInt(m[1],10)-1));
+render();
+</script>
+</body>
+</html>
