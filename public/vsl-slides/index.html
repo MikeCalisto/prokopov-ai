@@ -289,11 +289,34 @@ strong{color:var(--accent-light);font-weight:700;}
 .shot .ph .pf{font-family:var(--font-display);font-weight:700;font-size:26px;color:var(--accent-light);word-break:break-all;}
 .shot .ph .pt{font-size:24px;color:var(--text-dim);}
 
+/* ===== КАРУСЕЛЬ · листается стрелками и точками ===== */
+.carou{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:24px;}
+.carou-row{display:flex;align-items:center;gap:24px;}
+.carou-stage{
+  background:linear-gradient(158deg,#181820,#0b0b11);
+  border:1px solid var(--border-accent);border-radius:20px;padding:8px;
+  box-shadow:0 20px 46px rgba(0,0,0,.55),0 0 34px rgba(232,146,26,.10);
+}
+.carou-stage img{display:block;height:var(--ch,470px);width:auto;border-radius:13px;background:#0a0a10;}
+.carou-btn{
+  flex:0 0 auto;width:66px;height:66px;border-radius:50%;
+  border:1px solid var(--border-accent-strong);background:rgba(13,13,18,.85);
+  color:var(--accent-light);font-size:36px;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:.2s;
+}
+.carou-btn:hover{background:rgba(232,146,26,.14);box-shadow:0 0 22px var(--accent-glow);}
+.carou-btn:active{transform:scale(.93);}
+.carou-nav{display:flex;align-items:center;gap:18px;}
+.carou-dots{display:flex;gap:11px;align-items:center;}
+.carou-dots i{width:12px;height:12px;border-radius:50%;background:var(--border-strong);cursor:pointer;transition:.2s;}
+.carou-dots i.on{background:var(--accent);box-shadow:0 0 12px var(--accent);transform:scale(1.35);}
+.carou-count{font-family:var(--font-display);font-weight:700;font-size:24px;color:var(--text-muted);white-space:nowrap;}
+
 /* ===== ЛУПА · наведение на скриншот показывает его крупно =====
    Служебная вещь для просмотра в браузере: появляется только под курсором,
    в записи её не будет — просто не наводи мышь на скриншот. */
-.shot img{cursor:zoom-in;transition:transform .2s,box-shadow .2s;}
-.shot img:hover{transform:translateY(-3px);}
+.shot img,.carou-stage img{cursor:zoom-in;transition:transform .2s,box-shadow .2s;}
+.shot img:hover,.carou-stage img:hover{transform:translateY(-3px);}
 .zoomview{
   position:fixed;inset:0;z-index:95;display:flex;align-items:center;justify-content:center;
   background:rgba(4,4,8,.86);backdrop-filter:blur(6px);
@@ -867,14 +890,15 @@ const SLIDES = [
 },
 {
   id:35, block:"Блок 9", cue:"Моя система собирает карусель в два клика",
-  type:"screens",
+  type:"carousel",
   eyebrow:"Шаг 05 · AI-производство",
   title:"Карусель в два клика",
-  shotH:400,
-  shots:[
-    {src:S+"carousel_student.png", cap:"Сделала участница после встречи"}
+  carouH:460,
+  images:[
+    S+"carousel_1.jpg", S+"carousel_2.jpg", S+"carousel_3.jpg", S+"carousel_4.jpg",
+    S+"carousel_5.jpg", S+"carousel_6.jpg", S+"carousel_7.jpg", S+"carousel_8.jpg"
   ],
-  note:"Карусели недооценивают, а заявки они дают часто лучше видео."
+  note:"Сделала участница после встречи. Карусели недооценивают, а заявки они дают часто лучше видео."
 },
 {
   id:36, hero:"v2", block:"Блок 9", cue:"Всё это я показываю не на слайдах",
@@ -1112,6 +1136,24 @@ const RENDER = {
     const q = d.items.map(t=>`<div class="q">${md(t)}</div>`).join('');
     return `<div class="inner">${eyebrow(d)}${title(d)}<div class="quotes-list">${q}</div>${note(d)}</div>`;
   },
+  carousel(d){
+    const h = d.carouH || 470;
+    const dots = d.images.map((_,i)=>`<i${i?'':' class="on"'}></i>`).join('');
+    return `<div class="inner">${eyebrow(d)}${title(d)}
+      <div class="carou" data-carou>
+        <div class="carou-row">
+          <button class="carou-btn" data-prev aria-label="Предыдущий слайд">‹</button>
+          <div class="carou-stage" style="--ch:${h}px">
+            <img src="${d.images[0]}" alt="${esc(d.title||'')}" data-list="${d.images.join(',')}">
+          </div>
+          <button class="carou-btn" data-next aria-label="Следующий слайд">›</button>
+        </div>
+        <div class="carou-nav">
+          <div class="carou-dots">${dots}</div>
+          <div class="carou-count">1 / ${d.images.length}</div>
+        </div>
+      </div>${note(d)}</div>`;
+  },
   screens(d){
     const h = d.shotH || 360;
     const line = d.statline ? `<div class="statline">${d.statline.map(s=>`<div class="c"><div class="n">${md(s.n)}</div><div class="l">${md(s.l)}</div></div>`).join('')}</div>` : '';
@@ -1239,7 +1281,7 @@ const remeasure = () => { clearTimeout(mTimer); mTimer = setTimeout(measure, 60)
 if(document.fonts && document.fonts.ready){ document.fonts.ready.then(measure); } else { window.addEventListener('load', measure); }
 window.addEventListener('load', measure);
 /* картинки грузятся асинхронно — пересчитываем, когда станут известны их размеры */
-canvas.querySelectorAll('.shot img').forEach(img=>img.addEventListener('load', remeasure));
+canvas.querySelectorAll('.shot img, .carou-stage img').forEach(img=>img.addEventListener('load', remeasure));
 
 /* ============================================================
    НАВИГАЦИЯ
@@ -1274,6 +1316,26 @@ const next = ()=>go(cur+1), prev = ()=>go(cur-1);
 nextBtn.addEventListener('click', e=>{e.stopPropagation(); next();});
 prevBtn.addEventListener('click', e=>{e.stopPropagation(); prev();});
 
+/* карусель: стрелки, точки, счётчик */
+canvas.querySelectorAll('[data-carou]').forEach(c=>{
+  const img = c.querySelector('.carou-stage img');
+  const list = (img.dataset.list || '').split(',').filter(Boolean);
+  const dots = [...c.querySelectorAll('.carou-dots i')];
+  const cnt = c.querySelector('.carou-count');
+  let idx = 0;
+  function set(i){
+    idx = (i + list.length) % list.length;
+    img.setAttribute('src', list[idx]);
+    dots.forEach((d,k)=>d.classList.toggle('on', k===idx));
+    cnt.textContent = (idx+1) + ' / ' + list.length;
+  }
+  c.querySelector('[data-next]').addEventListener('click', e=>{e.stopPropagation(); set(idx+1);});
+  c.querySelector('[data-prev]').addEventListener('click', e=>{e.stopPropagation(); set(idx-1);});
+  dots.forEach((d,k)=>d.addEventListener('click', e=>{e.stopPropagation(); set(k);}));
+  /* предзагрузка, чтобы листалось без морганий */
+  list.slice(1).forEach(src=>{ const p = new Image(); p.src = src; });
+});
+
 /* лупа: наведение показывает скриншот крупно, клик закрепляет */
 const zv = document.getElementById('zoomView'), zi = document.getElementById('zoomImg'), zh = document.getElementById('zoomHint');
 let zPinned = false;
@@ -1281,12 +1343,12 @@ function zShow(src){ if(zi.getAttribute('src') !== src) zi.setAttribute('src', s
 function zHide(){ if(!zPinned) zv.classList.remove('on'); }
 function zClose(){ zPinned = false; zv.classList.remove('on','pinned'); zh.textContent = 'клик — закрепить'; }
 canvas.addEventListener('mouseover', e=>{
-  const im = e.target.closest && e.target.closest('.shot img');
+  const im = e.target.closest && e.target.closest('.shot img, .carou-stage img');
   if(im && !zPinned) zShow(im.getAttribute('src'));
 });
-canvas.addEventListener('mouseout', e=>{ if(e.target.closest && e.target.closest('.shot img')) zHide(); });
+canvas.addEventListener('mouseout', e=>{ if(e.target.closest && e.target.closest('.shot img, .carou-stage img')) zHide(); });
 canvas.addEventListener('click', e=>{
-  const im = e.target.closest && e.target.closest('.shot img');
+  const im = e.target.closest && e.target.closest('.shot img, .carou-stage img');
   if(im){ e.stopPropagation(); zShow(im.getAttribute('src')); zPinned = true; zv.classList.add('pinned'); zh.textContent = 'клик — закрыть'; }
 }, true);
 zv.addEventListener('click', e=>{ e.stopPropagation(); zClose(); });
