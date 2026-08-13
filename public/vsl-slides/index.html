@@ -266,7 +266,7 @@ strong{color:var(--accent-light);font-weight:700;}
 .quotes-list .q::before{content:'“';position:absolute;left:24px;top:24px;font-family:var(--font-display);font-size:76px;line-height:.7;color:var(--accent);}
 
 /* ===== СКРИНШОТЫ ===== */
-.shots{display:grid;gap:22px;margin-top:34px;}
+.shots{display:grid;gap:22px;margin-top:34px;align-items:start;}
 .shots.k1{grid-template-columns:1fr;}
 .shots.k2{grid-template-columns:1fr 1fr;}
 .shots.k3{grid-template-columns:repeat(3,1fr);}
@@ -274,8 +274,10 @@ strong{color:var(--accent-light);font-weight:700;}
   background:linear-gradient(158deg,#181820,#0b0b11);
   border:1px solid var(--border-accent);border-radius:20px;padding:8px;
   box-shadow:0 20px 46px rgba(0,0,0,.55),0 0 34px rgba(232,146,26,.10);
-  display:flex;flex-direction:column;
+  display:flex;flex-direction:column;justify-self:center;max-width:100%;
 }
+/* высоту и ширину под пропорцию картинки проставляет fitShots(), чтобы
+   рамка облегала скриншот, а не висела вокруг него пустыми полями */
 .shot img{width:100%;height:var(--sh,360px);object-fit:contain;border-radius:13px;background:#0a0a10;}
 .shot .cap{font-size:24px;line-height:1.25;color:var(--text-muted);text-align:center;padding:12px 6px 4px;}
 .shot .ph{
@@ -408,12 +410,8 @@ body.cue .cuebar{display:flex;}
 }
 body.goto-on .goto{display:block;}
 
-/* зоны клика: левая половина — назад, правая — вперёд */
-.tap{position:fixed;top:0;bottom:0;width:50%;z-index:70;cursor:pointer;}
-.tap.l{left:0;} .tap.r{right:0;}
 /* в режиме монтажёра поднимаем служебное над строкой cue */
 body.cue .chrome .counter,body.cue .chrome .navbtn{bottom:74px;}
-body.cue .tap{bottom:56px;}
 </style>
 </head>
 <body class="rec">
@@ -426,9 +424,6 @@ body.cue .tap{bottom:56px;}
     <div class="canvas" id="canvas"></div>
   </div>
 </div>
-
-<div class="tap l" id="tapL"></div>
-<div class="tap r" id="tapR"></div>
 
 <div class="chrome">
   <div class="keys">← → · пробел · номер+Enter · <b>H</b> — служебное · <b>P</b> — монтажёр · <b>V</b> — кадр/только слайд · <b>F</b> — фулскрин</div>
@@ -504,7 +499,7 @@ const SLIDES = [
 {
   id:4, block:"Блок 1", cue:"И вот эта система, которая состоит из AI-сотрудников, делает за меня восемьдесят процентов рутины по контенту",
   type:"bullets",
-  title:"И эта система делает за тебя 80% рутины в контенте:",
+  title:"И эта AI Контент-Система делает за тебя 80% рутины в контенте:",
   items:[
     "собирает карусели,",
     "пишет сценарии,",
@@ -690,7 +685,7 @@ const SLIDES = [
   type:"compare",
   title:"Разница в объёме",
   left:{big:"5", sub:"единиц в месяц — руками, на пределе"},
-  right:{big:"30–60", sub:"единиц в месяц — один человек с системой"}
+  right:{big:"30–60", sub:"единиц в месяц — один человек с AI Контент-Системой"}
 },
 {
   id:22, block:"Блок 5", cue:"Отдельно скажу тем, кто зарабатывает на контенте",
@@ -729,7 +724,7 @@ const SLIDES = [
   id:25, hero:"v1", center:true, block:"Блок 6", cue:"Результат рождается на стыке",
   type:"statement",
   title:"Результат рождается на стыке",
-  lead:"Твои смыслы, твоя ниша, твоя экспертиза — плюс система, которая всё это упаковывает и выпускает. Ищешь кнопку «красиво за пять минут и ничего не контролировать» — тебе не ко мне."
+  lead:"Твои смыслы, твоя ниша, твоя экспертиза — плюс AI Контент-Система, которая всё это упаковывает и выпускает. Ищешь кнопку «красиво за пять минут и ничего не контролировать» — тебе не ко мне."
 },
 
 /* ---------- БЛОК 7 — Сколько это стоит в часах и деньгах ---------- */
@@ -759,7 +754,7 @@ const SLIDES = [
   type:"screens",
   eyebrow:"Кейс · психология",
   title:"Марина не снимается. Просто начитывает сценарии",
-  shotH:340,
+  shotH:390,
   shots:[
     {src:S+"marina_profile.png", cap:"Профиль"},
     {src:S+"marina_reels.png", cap:"Reels на 100+ тысяч"}
@@ -782,7 +777,7 @@ const SLIDES = [
   id:30, block:"Блок 7", cue:"Илья — экспертный блог, ниша финансы и инвестиции",
   type:"screens",
   eyebrow:"Кейс · финансы и инвестиции",
-  title:"10 месяцев на этой системе",
+  title:"10 месяцев на AI Контент-Системе",
   statline:[
     {n:"50 млн+", l:"просмотров"},
     {n:"+90 000", l:"подписчиков"},
@@ -880,7 +875,7 @@ const SLIDES = [
   type:"bullets",
   title:"Чего на встрече не будет",
   items:[
-    "**Не вебинар-распродажа.** 80% времени — система, разбор и открытый экран",
+    "**Не вебинар-распродажа.** 80% времени — AI Контент-Система, разбор и открытый экран",
     "**Не волшебная таблетка.** Я покажу логику, внедрять придётся руками",
     "**Не запись.** Клиентские проекты под NDA — показать можно только живой группе"
   ]
@@ -917,7 +912,7 @@ const SLIDES = [
   title:"Как проходит встреча",
   items:[
     "Знакомство — по минуте-полторы на каждого",
-    "Шесть шагов системы на открытом экране, на реальном проекте",
+    "Шесть шагов AI Контент-Системы на открытом экране, на реальном проекте",
     "Свободный блок — вникаю в твою нишу, блог и продукт",
     "Бонусы для тех, кто досидел до конца"
   ]
@@ -1167,6 +1162,28 @@ function fitNumbers(){
   });
 }
 
+/* рамка скриншота подгоняется под пропорцию картинки: по ширине — под колонку,
+   по высоте — под shotH; что меньше, то и ограничивает */
+function fitShots(){
+  canvas.querySelectorAll('.shots').forEach(row=>{
+    const cols = getComputedStyle(row).gridTemplateColumns.split(' ').map(parseFloat);
+    [...row.children].forEach((shot,i)=>{
+      const img = shot.querySelector('img');
+      if(!img || !img.naturalWidth) return;
+      const cs = getComputedStyle(shot);
+      const chrome = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight)
+                   + parseFloat(cs.borderLeftWidth) + parseFloat(cs.borderRightWidth);
+      const maxW = (cols[i] || cols[0]) - chrome;
+      const maxH = parseFloat(cs.getPropertyValue('--sh')) || 360;
+      const k = Math.min(maxW / img.naturalWidth, maxH / img.naturalHeight);
+      const w = Math.round(img.naturalWidth * k), h = Math.round(img.naturalHeight * k);
+      img.style.width = w + 'px';
+      img.style.height = h + 'px';
+      shot.style.width = (w + chrome) + 'px';
+    });
+  });
+}
+
 /* страховка: если контент всё же выше безопасной зоны — мягко ужимаем (не ниже .9) */
 const overflow = new Set();
 function fitSlides(){
@@ -1185,11 +1202,15 @@ function fitSlides(){
 }
 function measure(){
   slides.forEach(s=>s.style.visibility='visible');
-  fitNumbers(); fitSlides();
+  fitNumbers(); fitShots(); fitSlides();
   slides.forEach(s=>s.style.visibility='');
 }
+let mTimer = null;
+const remeasure = () => { clearTimeout(mTimer); mTimer = setTimeout(measure, 60); };
 if(document.fonts && document.fonts.ready){ document.fonts.ready.then(measure); } else { window.addEventListener('load', measure); }
 window.addEventListener('load', measure);
+/* картинки грузятся асинхронно — пересчитываем, когда станут известны их размеры */
+canvas.querySelectorAll('.shot img').forEach(img=>img.addEventListener('load', remeasure));
 
 /* ============================================================
    НАВИГАЦИЯ
@@ -1222,8 +1243,19 @@ const next = ()=>go(cur+1), prev = ()=>go(cur-1);
 
 nextBtn.addEventListener('click', e=>{e.stopPropagation(); next();});
 prevBtn.addEventListener('click', e=>{e.stopPropagation(); prev();});
-document.getElementById('tapR').addEventListener('click', next);
-document.getElementById('tapL').addEventListener('click', prev);
+
+/* клик по половинам экрана листает, но не мешает выделять текст:
+   если тянули мышью или что-то выделено — это не листание */
+let downX = 0, downY = 0;
+document.addEventListener('mousedown', e=>{ downX = e.clientX; downY = e.clientY; });
+document.addEventListener('click', e=>{
+  const t = e.target instanceof Element ? e.target : null;
+  if(t && (t.closest('.chrome') || t.closest('.cuebar'))) return;
+  if(Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6) return;
+  const sel = window.getSelection();
+  if(sel && !sel.isCollapsed) return;
+  (e.clientX > window.innerWidth / 2 ? next : prev)();
+});
 
 /* режимы */
 function toggleUI(){ document.body.classList.toggle('ui'); }
