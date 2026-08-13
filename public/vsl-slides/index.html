@@ -182,7 +182,7 @@ strong{color:var(--accent-light);font-weight:700;}
 /* верхний слой — цикл: рамка-петля с возвратом в первый узел */
 .scheme .box.loop{
   position:relative;border:2px solid var(--accent);border-radius:26px;
-  padding:28px 18px 16px 46px;
+  padding:46px 10px 30px 54px;
   background:linear-gradient(160deg,rgba(232,146,26,.05),transparent);
   box-shadow:0 0 44px rgba(232,146,26,.10);
   display:grid;gap:8px;
@@ -191,14 +191,15 @@ strong{color:var(--accent-light);font-weight:700;}
   content:'';position:absolute;left:16px;top:calc(50% + 7px);transform:translateY(-50%);
   border-left:13px solid var(--accent);border-top:9px solid transparent;border-bottom:9px solid transparent;
 }
-.scheme .flow{display:flex;align-items:stretch;justify-content:center;gap:7px;flex-wrap:nowrap;}
-.scheme .ar{display:flex;align-items:center;color:var(--accent);font-size:26px;font-style:normal;flex:0 0 auto;}
+.scheme .flow{display:flex;align-items:stretch;justify-content:center;gap:5px;flex-wrap:nowrap;font-size:26px;}
+.scheme .ar{display:flex;align-items:center;color:var(--accent);font-size:.88em;font-style:normal;flex:0 0 auto;}
+.scheme .ar::before{content:'→';}
 .scheme .nd{
   flex:0 0 auto;
   background:var(--bg-card);border:1px solid #39394a;border-radius:14px;
-  padding:13px 12px;text-align:center;
+  padding:16px 12px;text-align:center;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
-  font-size:26px;font-weight:700;line-height:1.15;
+  font-size:1em;font-weight:700;line-height:1.15;
 }
 .scheme .nd.acc{border-color:var(--border-accent-strong);color:var(--accent-light);}
 
@@ -600,7 +601,7 @@ const SLIDES = [
   eyebrow:"AI Контент-Система",
   title:"Шесть этапов, выстроенных в одну цепочку",
   layers:[
-    { kind:"cycle", rows:[3,3], items:[
+    { kind:"cycle", rows:[6], items:[
       "Исследование", "Фокус", "Оффер", "Контент", "Производство", "Аналитика"
     ]}
   ],
@@ -1229,7 +1230,7 @@ const RENDER = {
         let k = 0;
         body = plan.map(n=>{
           const chunk = L.items.slice(k, k+n); k += n;
-          return '<div class="flow">' + chunk.map(nd).join('<i class="ar">→</i>') + '</div>';
+          return '<div class="flow">' + chunk.map(nd).join('<i class="ar" aria-hidden="true"></i>') + '</div>';
         }).join('<div class="down">↓</div>');
       } else if(L.kind === 'pair'){
         boxCls = 'box flat'; lyrCls += ' narrow';
@@ -1366,6 +1367,21 @@ window.addEventListener('orientationchange', fitFrame);
 if(window.ResizeObserver) new ResizeObserver(fitFrame).observe(document.documentElement);
 fitFrame();
 
+/* цепочка цикла должна лечь в одну строку: ужимаем кегль ряда,
+   но не ниже 24px — ниже читаемость на видео уже теряется */
+function fitCycle(){
+  canvas.querySelectorAll('.box.loop .flow').forEach(f=>{
+    const box = f.parentElement, cs = getComputedStyle(box);
+    const room = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    f.style.fontSize = '';
+    const width = () => [...f.children].reduce((a,n)=>a+n.getBoundingClientRect().width,0)
+                      + (f.children.length-1) * parseFloat(getComputedStyle(f).gap || 0);
+    let size = parseFloat(getComputedStyle(f).fontSize), guard = 0;
+    while(width() > room && size > 24 && guard++ < 24){ size -= 1; f.style.fontSize = size + 'px'; }
+    if(width() > room) console.warn('[vsl-slides] цепочка цикла не влезает в строку даже на 24px');
+  });
+}
+
 /* крупные цифры не должны вылезать из колонки */
 function fitNumbers(){
   canvas.querySelectorAll('.stats .n, .statline .n, .compare .big').forEach(el=>{
@@ -1442,7 +1458,7 @@ function fitSlides(){
 }
 function measure(){
   slides.forEach(s=>s.style.visibility='visible');
-  fitNumbers(); fitShots(); fitSlides();
+  fitNumbers(); fitCycle(); fitShots(); fitSlides();
   slides.forEach(s=>s.style.visibility='');
 }
 let mTimer = null;
