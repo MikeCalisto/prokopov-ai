@@ -311,6 +311,11 @@ strong{color:var(--accent-light);font-weight:700;}
 .cards .c h4{font-family:var(--font-display);font-weight:700;font-size:32px;line-height:1.15;color:var(--accent-light);}
 .cards .c p{font-size:28px;line-height:1.4;color:var(--text);}
 .cards.c3 .c h4{font-size:30px;}
+/* только названия — карточка крупная и по центру */
+.cards.titles{gap:22px;margin-top:40px;}
+.cards.titles .c{padding:34px 28px;align-items:center;justify-content:center;text-align:center;gap:14px;min-height:150px;}
+.cards.titles .c h4{font-size:42px;line-height:1.15;}
+.cards.titles .c .cn{font-size:26px;}
 
 /* плотный режим — включается, когда слайд иначе не помещается.
    Ни один размер здесь не опускается ниже 24px. */
@@ -741,15 +746,9 @@ const SLIDES = [
 },
 {
   id:17, block:"Блок 4", cue:"Давай покажу одного изнутри",
-  type:"screens",
+  type:"bullets",
   eyebrow:"AI-сотрудник «Твоя манера общения»",
   title:"Как он разбирает твою речь",
-  split:true,
-  shotH:185,
-  shots:[
-    {src:S+"tone_of_voice_scales.jpg", cap:"Шкалы тона"},
-    {src:S+"tone_of_voice_words.jpg", cap:"Лексический код"}
-  ],
   items:[
     "Внутри — восьмиступенчатая методология: он разбирает, как именно человек разговаривает",
     "Загружаешь свои эфиры, разговоры и записи с клиентами — на выходе получаешь готовый документ",
@@ -788,14 +787,10 @@ const SLIDES = [
   title:"Четыре документа, которые идут перед контентом",
   cols:2,
   cards:[
-    {n:"01", t:"ДНК твоей целевой аудитории",
-     p:"Семнадцать листов А4 по конкретной нише: боли, страхи, мифы, прошлый опыт и то, что триггерит человека к покупке. Эти семнадцать листов пишу не я — их пишет AI на основе исследований."},
-    {n:"02", t:"Оффер по методологии Хормози",
-     p:"Алекс Хормози — автор книги «$100M Offers», человек, на которого сейчас равняется весь мировой маркетинг в части предложений. Оффер по его методологии тоже собираю не я, а AI, у которого она внутри."},
-    {n:"03", t:"Карта смыслов",
-     p:"Путь клиента по уровням осознанности — от «я вообще не вижу у себя проблемы» до «я готов купить»."},
-    {n:"04", t:"Твоя манера общения",
-     p:"Тот самый документ, который я только что показал: обороты, ритм, лексический код."}
+    {n:"01", t:"ДНК твоей целевой аудитории"},
+    {n:"02", t:"Оффер по методологии Хормози"},
+    {n:"03", t:"Карта смыслов"},
+    {n:"04", t:"Твоя манера общения"}
   ]
 },
 {
@@ -1271,11 +1266,13 @@ const RENDER = {
     const cc = d.cards.map(c=>`<div class="c">
       ${c.n?`<div class="cn">${md(c.n)}</div>`:''}
       <h4>${md(c.t)}</h4>
-      <p>${md(c.p)}</p>
+      ${c.p?`<p>${md(c.p)}</p>`:''}
     </div>`).join('');
     const last2 = (cols===3 && d.cards.length % 3 === 2) ? ' last2' : '';
+    /* карточки без текста — только названия: крупнее и по центру */
+    const titlesOnly = d.cards.every(c=>!c.p) ? ' titles' : '';
     return `<div class="inner">${eyebrow(d)}${title(d)}${lead(d)}
-      <div class="cards c${cols}${last2}">${cc}</div>${note(d)}</div>`;
+      <div class="cards c${cols}${last2}${titlesOnly}">${cc}</div>${note(d)}</div>`;
   },
   carousel(d){
     const h = d.carouH || 470;
