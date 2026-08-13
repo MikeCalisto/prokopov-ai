@@ -198,20 +198,12 @@ strong{color:var(--accent-light);font-weight:700;}
 .scheme .ar{display:flex;align-items:center;color:var(--accent);font-size:26px;font-style:normal;flex:0 0 auto;}
 .scheme .nd{
   flex:0 0 auto;
-  background:var(--bg-card);border:1px solid var(--border-strong);border-radius:14px;
+  background:var(--bg-card);border:1px solid #39394a;border-radius:14px;
   padding:13px 12px;text-align:center;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
   font-size:26px;font-weight:700;line-height:1.15;
 }
 .scheme .nd.acc{border-color:var(--border-accent-strong);color:var(--accent-light);}
-.scheme .nd.on{
-  background:linear-gradient(160deg,var(--accent-gold),var(--accent));
-  border-color:var(--accent);color:#1a0f00;box-shadow:0 0 34px var(--accent-glow-strong);
-}
-.scheme .nd .mk{
-  font-family:var(--font-display);font-weight:800;font-size:24px;font-style:normal;
-  letter-spacing:.06em;text-transform:uppercase;color:#2a1800;white-space:nowrap;
-}
 
 /* нижние слои — плоские контейнеры */
 .scheme .box.flat{
@@ -499,7 +491,7 @@ const SLIDES = [
     { kind:"cycle", cap:"Поверхность · цикл контента", rows:[4,3], items:[
       "Стратегия",
       "Идеи",
-      {t:"Сценарии", on:true, mark:"★ ты здесь"},
+      "Сценарии",
       "Съёмка",
       "Монтаж/дизайн",
       "Постинг",
@@ -1075,9 +1067,8 @@ const RENDER = {
       if(L.kind === 'cycle'){
         boxCls = 'box loop';
         const nd = x => {
-          const o = it(x), cls = ['nd'];
-          if(o.on) cls.push('on'); if(o.acc) cls.push('acc');
-          return `<div class="${cls.join(' ')}"><span>${md(o.t)}</span>${o.mark?`<i class="mk">${md(o.mark)}</i>`:''}</div>`;
+          const o = it(x);
+          return `<div class="nd${o.acc?' acc':''}"><span>${md(o.t)}</span></div>`;
         };
         /* rows — сколько узлов в каждой строке: в 1280 весь цикл в одну строку
            не влезает без падения кегля ниже читаемого */
