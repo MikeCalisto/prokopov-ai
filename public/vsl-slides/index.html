@@ -180,16 +180,17 @@ strong{color:var(--accent-light);font-weight:700;}
 .scheme .down{text-align:center;color:var(--accent);font-size:26px;line-height:1;}
 
 /* верхний слой — цикл: рамка-петля с возвратом в первый узел */
-.scheme .box.loop{
-  position:relative;border:2px solid var(--accent);border-radius:26px;
-  padding:44px 30px 30px 34px;
-  background:linear-gradient(160deg,rgba(232,146,26,.05),transparent);
-  box-shadow:0 0 44px rgba(232,146,26,.10);
-  display:grid;gap:8px;
+.scheme .box.loop{position:relative;padding:0 0 54px;display:grid;gap:8px;}
+/* возврат из последнего этапа в первый: линия вниз, назад и стрелка вверх */
+.scheme .loopback{
+  position:absolute;bottom:6px;height:36px;
+  border:2px solid var(--accent);border-top:none;border-radius:0 0 16px 16px;
+  opacity:.85;pointer-events:none;
 }
-.scheme .box.loop::after{
-  content:'';position:absolute;left:12px;top:50%;transform:translateY(-50%);
-  border-left:13px solid var(--accent);border-top:9px solid transparent;border-bottom:9px solid transparent;
+.scheme .loopback::before{
+  content:'';position:absolute;left:-7px;top:-12px;
+  border-bottom:13px solid var(--accent);
+  border-left:8px solid transparent;border-right:8px solid transparent;
 }
 .scheme .flow{display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:nowrap;font-size:26px;max-width:100%;}
 .scheme .ar{display:flex;align-items:center;color:var(--accent);font-size:.88em;font-style:normal;flex:0 0 auto;}
@@ -1239,8 +1240,9 @@ const RENDER = {
         boxCls = 'box flat';
         body = '<div class="cols">' + L.items.map(x=>`<div class="nd2">${md(it(x).t)}</div>`).join('') + '</div>';
       }
+      const loopback = L.kind === 'cycle' ? '<div class="loopback" aria-hidden="true"></div>' : '';
       return `<div class="lyr${lyrCls}">
-        <div class="${boxCls}">${body}</div>
+        <div class="${boxCls}">${body}${loopback}</div>
         ${L.cap?`<div class="cap">${md(L.cap)}</div>`:''}
       </div>`;
     };
@@ -1379,6 +1381,15 @@ function fitCycle(){
     let size = parseFloat(getComputedStyle(f).fontSize), guard = 0;
     while(width() > room && size > 24 && guard++ < 24){ size -= 1; f.style.fontSize = size + 'px'; }
     if(width() > room) console.warn('[vsl-slides] цепочка цикла не влезает в строку даже на 24px');
+    const lb = box.querySelector('.loopback');
+    const nodes = [...f.querySelectorAll('.nd')];
+    if(lb && nodes.length > 1){
+      const a = nodes[0], z = nodes[nodes.length-1];
+      const x1 = a.offsetLeft + a.offsetWidth / 2;
+      const x2 = z.offsetLeft + z.offsetWidth / 2;
+      lb.style.left  = x1 + 'px';
+      lb.style.width = (x2 - x1) + 'px';
+    }
   });
 }
 
