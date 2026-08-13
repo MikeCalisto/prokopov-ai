@@ -170,34 +170,69 @@ strong{color:var(--accent-light);font-weight:700;}
 .chain.compact .cn{left:-70px;width:54px;height:54px;font-size:24px;box-shadow:0 0 20px var(--accent-glow);}
 .chain.compact .ct{font-size:30px;line-height:1.25;}
 
-/* ===== СХЕМА · узлы со стрелками в рамке, слои друг над другом ===== */
-.scheme{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:30px;width:100%;}
+/* ===== СХЕМА · слои системы: поверхность / фундамент / глубина ===== */
+.scheme{display:flex;flex-direction:column;align-items:stretch;gap:6px;margin-top:18px;width:100%;}
 .scheme .lyr{width:100%;}
-.scheme .box{
-  border:2px solid var(--border-accent-strong);border-radius:28px;padding:22px;
-  background:linear-gradient(160deg,rgba(232,146,26,.06),transparent);
-  box-shadow:0 0 44px rgba(232,146,26,.10);
-  display:grid;gap:12px;
-}
-.scheme .lyr.plain .box{border:1px solid var(--border-strong);background:var(--bg-soft);box-shadow:none;}
 .scheme .cap{
-  margin-top:14px;text-align:center;
+  margin-top:6px;text-align:center;
   font-family:var(--font-display);font-weight:700;font-size:24px;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
 }
-.scheme .lyr.plain .cap{color:var(--text-dim);}
-.scheme .up{color:var(--accent);font-size:32px;line-height:1;}
-.scheme .rowf{display:grid;align-items:stretch;gap:12px;}
-.scheme .ar,.scheme .down{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:30px;font-style:normal;}
+.scheme .lyr.dim .cap{color:var(--text-dim);}
+.scheme .up{text-align:center;color:var(--accent);font-size:26px;line-height:1;}
+.scheme .down{text-align:center;color:var(--accent);font-size:26px;line-height:1;}
+
+/* верхний слой — цикл: рамка-петля с возвратом в первый узел */
+.scheme .box.loop{
+  position:relative;border:2px solid var(--accent);border-radius:26px;
+  padding:28px 18px 16px 46px;
+  background:linear-gradient(160deg,rgba(232,146,26,.05),transparent);
+  box-shadow:0 0 44px rgba(232,146,26,.10);
+  display:grid;gap:8px;
+}
+.scheme .box.loop::after{
+  content:'';position:absolute;left:16px;top:calc(50% + 7px);transform:translateY(-50%);
+  border-left:13px solid var(--accent);border-top:9px solid transparent;border-bottom:9px solid transparent;
+}
+.scheme .flow{display:flex;align-items:stretch;justify-content:center;gap:7px;flex-wrap:nowrap;}
+.scheme .ar{display:flex;align-items:center;color:var(--accent);font-size:26px;font-style:normal;flex:0 0 auto;}
 .scheme .nd{
-  background:var(--bg-card);border:1px solid var(--border-strong);border-radius:16px;
-  padding:14px 14px;min-height:96px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;
+  flex:0 0 auto;
+  background:var(--bg-card);border:1px solid var(--border-strong);border-radius:14px;
+  padding:13px 12px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  font-size:26px;font-weight:700;line-height:1.15;
 }
-.scheme .nd b{font-family:var(--font-display);font-weight:800;font-size:24px;letter-spacing:.06em;color:var(--accent);}
-.scheme .nd span{font-size:28px;font-weight:600;line-height:1.2;}
-.scheme .lyr.plain .nd{min-height:84px;}
-.scheme .lyr.plain .nd span{font-size:26px;font-weight:500;color:var(--text-muted);}
+.scheme .nd.acc{border-color:var(--border-accent-strong);color:var(--accent-light);}
+.scheme .nd.on{
+  background:linear-gradient(160deg,var(--accent-gold),var(--accent));
+  border-color:var(--accent);color:#1a0f00;box-shadow:0 0 34px var(--accent-glow-strong);
+}
+.scheme .nd .mk{
+  font-family:var(--font-display);font-weight:800;font-size:24px;font-style:normal;
+  letter-spacing:.06em;text-transform:uppercase;color:#2a1800;white-space:nowrap;
+}
+
+/* нижние слои — плоские контейнеры */
+.scheme .box.flat{
+  border:1px solid var(--border-strong);border-radius:24px;padding:14px 16px;
+  background:rgba(255,255,255,.015);
+}
+.scheme .cols{display:flex;align-items:stretch;gap:12px;}
+.scheme .cols .nd2{
+  flex:1 1 0;text-align:center;font-size:28px;font-weight:600;color:var(--text);
+  padding:12px 10px;border-left:3px solid var(--border-accent);border-radius:10px;
+  background:rgba(255,255,255,.02);
+  display:flex;align-items:center;justify-content:center;
+}
+.scheme .lyr.narrow{display:flex;flex-direction:column;align-items:center;}
+.scheme .lyr.narrow .box{width:auto;}
+.scheme .pair{display:flex;align-items:center;justify-content:center;gap:16px;}
+.scheme .pair .nd3{
+  font-size:28px;font-weight:600;color:var(--text-muted);
+  padding:11px 20px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.02);
+}
+.scheme .plus{color:var(--accent);font-family:var(--font-display);font-weight:800;font-size:30px;}
 
 /* ===== СРАВНЕНИЕ ===== */
 .compare{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:42px;align-items:stretch;}
@@ -459,18 +494,24 @@ const SLIDES = [
   id:3, block:"Блок 1", cue:"Давай сразу покажу, как она выглядит",
   type:"scheme",
   eyebrow:"AI Контент-Система",
-  title:"Шесть AI-сотрудников в одной цепочке",
+  title:"Как она устроена",
   layers:[
-    { cap:"Цепочка · шесть AI-сотрудников", cols:3, numbered:true, items:[
-      "ДНК целевой аудитории",
-      "Мастер офферов",
-      "Путь клиента",
-      "Твоя манера общения",
-      "Контент-система",
-      "Очеловечивание текста"
+    { kind:"cycle", cap:"Поверхность · цикл контента", rows:[4,3], items:[
+      "Стратегия",
+      "Идеи",
+      {t:"Сценарии", on:true, mark:"★ ты здесь"},
+      "Съёмка",
+      "Монтаж/дизайн",
+      "Постинг",
+      {t:"↺ Аналитика", acc:true}
+    ]},
+    { kind:"cols", cap:"Фундамент · 4 документа", items:[
+      "ДНК аудитории", "Оффер", "Карта смыслов", "Манера общения"
+    ]},
+    { kind:"pair", cap:"Глубина · исследования", items:[
+      "Маркетинговые исследования", "CustDev"
     ]}
-  ],
-  note:"Каждый следующий не работает без предыдущего: то, что собрал первый, идёт на вход второму."
+  ]
 },
 {
   id:4, block:"Блок 1", cue:"И вот эти шесть сотрудников делают за меня восемьдесят процентов рутины",
@@ -1026,21 +1067,35 @@ const RENDER = {
       <div class="compare${num}">${col(d.left,'bad')}${col(d.right,'good')}</div>${note(d)}</div>`;
   },
   scheme(d){
+    /* три вида слоя: cycle — узлы со стрелками в рамке-петле,
+       cols — равные колонки, pair — два узла через «+» */
     const layer = L => {
-      const cols = L.cols || L.items.length;
-      const tmpl = Array.from({length:cols},()=>'1fr').join(' auto ');
-      const rows = [];
-      for(let i=0;i<L.items.length;i+=cols) rows.push(L.items.slice(i,i+cols));
-      const body = rows.map((row,ri)=>{
-        const cells = row.map((t,ci)=>{
-          const n = ri*cols + ci + 1;
-          const node = `<div class="nd">${L.numbered?`<b>${String(n).padStart(2,'0')}</b>`:''}<span>${md(t)}</span></div>`;
-          return ci ? `<i class="ar">→</i>${node}` : node;
-        }).join('');
-        return `<div class="rowf" style="grid-template-columns:${tmpl}">${cells}</div>`;
-      }).join('<div class="down">↓</div>');
-      return `<div class="lyr${L.plain?' plain':''}">
-        <div class="box">${body}</div>
+      const it = x => (typeof x === 'string') ? {t:x} : x;
+      let body, boxCls, lyrCls = L.kind==='cycle' ? '' : ' dim';
+      if(L.kind === 'cycle'){
+        boxCls = 'box loop';
+        const nd = x => {
+          const o = it(x), cls = ['nd'];
+          if(o.on) cls.push('on'); if(o.acc) cls.push('acc');
+          return `<div class="${cls.join(' ')}"><span>${md(o.t)}</span>${o.mark?`<i class="mk">${md(o.mark)}</i>`:''}</div>`;
+        };
+        /* rows — сколько узлов в каждой строке: в 1280 весь цикл в одну строку
+           не влезает без падения кегля ниже читаемого */
+        const plan = L.rows || [L.items.length];
+        let k = 0;
+        body = plan.map(n=>{
+          const chunk = L.items.slice(k, k+n); k += n;
+          return '<div class="flow">' + chunk.map(nd).join('<i class="ar">→</i>') + '</div>';
+        }).join('<div class="down">↓</div>');
+      } else if(L.kind === 'pair'){
+        boxCls = 'box flat'; lyrCls += ' narrow';
+        body = '<div class="pair">' + L.items.map(x=>`<div class="nd3">${md(it(x).t)}</div>`).join('<i class="plus">+</i>') + '</div>';
+      } else {
+        boxCls = 'box flat';
+        body = '<div class="cols">' + L.items.map(x=>`<div class="nd2">${md(it(x).t)}</div>`).join('') + '</div>';
+      }
+      return `<div class="lyr${lyrCls}">
+        <div class="${boxCls}">${body}</div>
         ${L.cap?`<div class="cap">${md(L.cap)}</div>`:''}
       </div>`;
     };
