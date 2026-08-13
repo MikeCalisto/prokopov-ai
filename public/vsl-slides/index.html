@@ -170,6 +170,35 @@ strong{color:var(--accent-light);font-weight:700;}
 .chain.compact .cn{left:-70px;width:54px;height:54px;font-size:24px;box-shadow:0 0 20px var(--accent-glow);}
 .chain.compact .ct{font-size:30px;line-height:1.25;}
 
+/* ===== СХЕМА · узлы со стрелками в рамке, слои друг над другом ===== */
+.scheme{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:30px;width:100%;}
+.scheme .lyr{width:100%;}
+.scheme .box{
+  border:2px solid var(--border-accent-strong);border-radius:28px;padding:22px;
+  background:linear-gradient(160deg,rgba(232,146,26,.06),transparent);
+  box-shadow:0 0 44px rgba(232,146,26,.10);
+  display:grid;gap:12px;
+}
+.scheme .lyr.plain .box{border:1px solid var(--border-strong);background:var(--bg-soft);box-shadow:none;}
+.scheme .cap{
+  margin-top:14px;text-align:center;
+  font-family:var(--font-display);font-weight:700;font-size:24px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+}
+.scheme .lyr.plain .cap{color:var(--text-dim);}
+.scheme .up{color:var(--accent);font-size:32px;line-height:1;}
+.scheme .rowf{display:grid;align-items:stretch;gap:12px;}
+.scheme .ar,.scheme .down{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:30px;font-style:normal;}
+.scheme .nd{
+  background:var(--bg-card);border:1px solid var(--border-strong);border-radius:16px;
+  padding:14px 14px;min-height:96px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;
+}
+.scheme .nd b{font-family:var(--font-display);font-weight:800;font-size:24px;letter-spacing:.06em;color:var(--accent);}
+.scheme .nd span{font-size:28px;font-weight:600;line-height:1.2;}
+.scheme .lyr.plain .nd{min-height:84px;}
+.scheme .lyr.plain .nd span{font-size:26px;font-weight:500;color:var(--text-muted);}
+
 /* ===== СРАВНЕНИЕ ===== */
 .compare{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:42px;align-items:stretch;}
 .compare .col{border-radius:var(--radius-lg);padding:34px 30px;border:1px solid var(--border);display:flex;flex-direction:column;}
@@ -428,16 +457,18 @@ const SLIDES = [
 },
 {
   id:3, block:"Блок 1", cue:"Давай сразу покажу, как она выглядит",
-  type:"chain",
+  type:"scheme",
   eyebrow:"AI Контент-Система",
   title:"Шесть AI-сотрудников в одной цепочке",
-  items:[
-    "ДНК целевой аудитории",
-    "Мастер офферов",
-    "Путь клиента",
-    "Твоя манера общения",
-    "Контент-система",
-    "Очеловечивание текста"
+  layers:[
+    { cap:"Цепочка · шесть AI-сотрудников", cols:3, numbered:true, items:[
+      "ДНК целевой аудитории",
+      "Мастер офферов",
+      "Путь клиента",
+      "Твоя манера общения",
+      "Контент-система",
+      "Очеловечивание текста"
+    ]}
   ],
   note:"Каждый следующий не работает без предыдущего: то, что собрал первый, идёт на вход второму."
 },
@@ -993,6 +1024,28 @@ const RENDER = {
     const num = onlyBig(d.left) && onlyBig(d.right) ? ' num' : '';
     return `<div class="inner">${eyebrow(d)}${title(d)}
       <div class="compare${num}">${col(d.left,'bad')}${col(d.right,'good')}</div>${note(d)}</div>`;
+  },
+  scheme(d){
+    const layer = L => {
+      const cols = L.cols || L.items.length;
+      const tmpl = Array.from({length:cols},()=>'1fr').join(' auto ');
+      const rows = [];
+      for(let i=0;i<L.items.length;i+=cols) rows.push(L.items.slice(i,i+cols));
+      const body = rows.map((row,ri)=>{
+        const cells = row.map((t,ci)=>{
+          const n = ri*cols + ci + 1;
+          const node = `<div class="nd">${L.numbered?`<b>${String(n).padStart(2,'0')}</b>`:''}<span>${md(t)}</span></div>`;
+          return ci ? `<i class="ar">→</i>${node}` : node;
+        }).join('');
+        return `<div class="rowf" style="grid-template-columns:${tmpl}">${cells}</div>`;
+      }).join('<div class="down">↓</div>');
+      return `<div class="lyr${L.plain?' plain':''}">
+        <div class="box">${body}</div>
+        ${L.cap?`<div class="cap">${md(L.cap)}</div>`:''}
+      </div>`;
+    };
+    const body = d.layers.map(layer).join('<div class="up">↑</div>');
+    return `<div class="inner">${eyebrow(d)}${title(d)}<div class="scheme">${body}</div>${note(d)}</div>`;
   },
   table(d){
     const th = d.head.map(h=>`<th>${md(h)}</th>`).join('');
