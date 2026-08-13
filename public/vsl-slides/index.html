@@ -10,8 +10,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* ГЕОМЕТРИЯ КАНВАСА — правая часть кадра 1920×1080 */
-  --slide-w:1280px;
+  /* ГЕОМЕТРИЯ КАДРА: слева камера эксперта, справа презентация */
+  --frame-w:1920px;    /* весь кадр */
+  --expert-w:640px;    /* левая колонка под вертикальное видео эксперта */
+  --slide-w:1280px;    /* правая колонка — презентация */
   --slide-h:1080px;
   --pad:72px;          /* безопасные поля */
   --subzone:90px;      /* нижняя зона субтитров */
@@ -37,13 +39,29 @@ img,svg{max-width:100%;display:block;}
 body{font-family:var(--font-body);color:var(--text);-webkit-font-smoothing:antialiased;}
 ::selection{background:var(--accent);color:#000;}
 
-/* ===== СЦЕНА · масштабирование канваса ===== */
+/* ===== СЦЕНА · кадр 1920×1080 целиком масштабируется под окно ===== */
 .stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#000;}
+.frame{
+  position:relative;flex:0 0 auto;display:flex;
+  width:var(--frame-w);height:var(--slide-h);
+  transform-origin:center center;
+}
+/* левая колонка — сюда монтажёр кладёт вертикальное видео эксперта */
+.expert{position:relative;flex:0 0 auto;width:var(--expert-w);height:100%;background:#000;}
+.expert .ez{
+  position:absolute;inset:24px;border:2px dashed rgba(232,146,26,.32);border-radius:22px;
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;
+}
+body.ui .expert .ez{display:flex;}
+.expert .ez b{font-family:var(--font-display);font-weight:700;font-size:30px;color:var(--accent-light);}
+.expert .ez span{font-size:24px;color:var(--text-dim);}
+/* режим «только презентация» — левая колонка убирается, кадр становится 1280×1080 */
+body.solo .expert{display:none;}
+body.solo .frame{width:var(--slide-w);}
 .canvas{
   position:relative;flex:0 0 auto;
   width:var(--slide-w);height:var(--slide-h);
   background:var(--bg);overflow:hidden;
-  transform-origin:center center;
 }
 /* зерно */
 .canvas::after{
@@ -126,18 +144,30 @@ strong{color:var(--accent-light);font-weight:700;}
 .statline .n{font-family:var(--font-display);font-weight:800;font-size:52px;line-height:1;color:var(--accent-light);white-space:nowrap;}
 .statline .l{margin-top:8px;font-size:24px;color:var(--text-muted);line-height:1.25;}
 
-/* ===== ЦЕПОЧКА ===== */
-.chain{display:grid;gap:14px;margin-top:38px;}
+/* ===== ЦЕПОЧКА · номера-жетоны на общей линии ===== */
+.chain{position:relative;display:grid;gap:14px;margin-top:38px;padding-left:76px;}
+.chain::before{
+  content:'';position:absolute;left:29px;top:34px;bottom:34px;width:2px;
+  background:linear-gradient(180deg,transparent,var(--border-accent-strong) 10%,var(--border-accent-strong) 90%,transparent);
+}
 .chain .ci{
-  display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;
-  background:var(--bg-card);border:1px solid var(--border);border-left:4px solid var(--accent);
+  position:relative;
+  background:var(--bg-card);border:1px solid var(--border);
   border-radius:var(--radius-md);padding:18px 28px;
 }
-.chain .cn{font-family:var(--font-display);font-weight:800;font-size:40px;line-height:1;color:var(--accent-light);min-width:46px;}
+.chain .cn{
+  position:absolute;left:-76px;top:50%;transform:translateY(-50%);
+  width:60px;height:60px;border-radius:50%;
+  background:var(--bg-card);border:2px solid var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-weight:800;font-size:26px;color:var(--accent-light);
+  box-shadow:0 0 24px var(--accent-glow);
+}
 .chain .ct{font-size:34px;line-height:1.3;}
-.chain.compact{gap:12px;}
+.chain.compact{gap:12px;padding-left:70px;}
+.chain.compact::before{left:26px;}
 .chain.compact .ci{padding:13px 24px;}
-.chain.compact .cn{font-size:34px;min-width:40px;}
+.chain.compact .cn{left:-70px;width:54px;height:54px;font-size:24px;box-shadow:0 0 20px var(--accent-glow);}
 .chain.compact .ct{font-size:30px;line-height:1.25;}
 
 /* ===== СРАВНЕНИЕ ===== */
@@ -226,6 +256,61 @@ strong{color:var(--accent-light);font-weight:700;}
   padding:12px 24px;border:1px solid var(--border-accent);border-radius:60px;background:rgba(232,146,26,.07);
 }
 
+/* ===== ДЕКОР · статичный «геройский» фон =====
+   Всё намеренно без анимации: движение в кадре во время речи отвлекает
+   и плохо жмётся кодеком. Композиции те же, что в /prezentaciya-ai-konveyer. */
+.fx{overflow:hidden;}
+.fx .inner{position:relative;z-index:3;}
+.fxbg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.fxbg .base{position:absolute;inset:0;
+  background:radial-gradient(65% 60% at 18% 28%,rgba(232,146,26,.20),transparent 62%),
+             radial-gradient(55% 55% at 88% 82%,rgba(233,182,70,.14),transparent 60%);}
+.fxbg .grid{position:absolute;inset:-2px;
+  background-image:linear-gradient(rgba(232,146,26,.07) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(232,146,26,.07) 1px,transparent 1px);
+  background-size:58px 58px;
+  -webkit-mask-image:radial-gradient(72% 72% at 45% 42%,#000,transparent 82%);
+  mask-image:radial-gradient(72% 72% at 45% 42%,#000,transparent 82%);}
+.fxbg .emblem{position:absolute;right:-150px;top:8%;width:560px;height:560px;border-radius:50%;
+  background:conic-gradient(from 30deg,transparent 0deg,rgba(232,146,26,.15) 40deg,transparent 120deg,rgba(233,182,70,.11) 200deg,transparent 300deg);
+  -webkit-mask:radial-gradient(circle,transparent 54%,#000 55%,#000 71%,transparent 72%);
+  mask:radial-gradient(circle,transparent 54%,#000 55%,#000 71%,transparent 72%);opacity:.9;}
+.fxbg .emblem.two{width:360px;height:360px;right:-40px;top:26%;opacity:.7;transform:rotate(140deg);}
+.fxbg .orb{position:absolute;border-radius:50%;filter:blur(64px);mix-blend-mode:screen;opacity:.5;}
+.fxbg .orb.o1{width:440px;height:440px;background:radial-gradient(circle,var(--accent),transparent 70%);top:-90px;left:-70px;}
+.fxbg .orb.o2{width:380px;height:380px;background:radial-gradient(circle,var(--accent-gold),transparent 70%);bottom:-120px;right:-50px;}
+.fxbg .orb.o3{width:300px;height:300px;background:radial-gradient(circle,var(--accent-deep),transparent 70%);top:44%;left:52%;}
+.fxbg .ln{position:absolute;height:1.5px;width:38%;
+  background:linear-gradient(90deg,transparent,var(--accent-light),transparent);
+  filter:drop-shadow(0 0 6px var(--accent));opacity:.38;}
+.fxbg .ln.a{top:20%;left:-6%;} .fxbg .ln.b{top:53%;left:44%;opacity:.24;} .fxbg .ln.c{top:81%;left:10%;}
+/* варианты композиции, чтобы фон не повторялся подряд */
+.fx.v2 .base{background:radial-gradient(60% 60% at 84% 26%,rgba(232,146,26,.20),transparent 62%),
+                        radial-gradient(55% 55% at 12% 80%,rgba(233,182,70,.13),transparent 60%);}
+.fx.v2 .emblem{right:auto;left:-150px;} .fx.v2 .emblem.two{right:auto;left:-40px;}
+.fx.v3 .base{background:radial-gradient(72% 66% at 50% 14%,rgba(232,146,26,.19),transparent 66%);}
+.fx.v3 .emblem{right:-180px;top:-12%;} .fx.v3 .emblem.two{left:-60px;right:auto;top:auto;bottom:-6%;}
+
+/* гигантская цифра-подложка */
+.giantnum{
+  position:absolute;z-index:1;pointer-events:none;
+  right:calc(var(--pad) + var(--rightres) - 20px);bottom:calc(var(--subzone) + 10px);
+  font-family:var(--font-display);font-weight:800;font-size:400px;line-height:.78;
+  color:transparent;-webkit-text-stroke:3px rgba(232,146,26,.15);
+}
+
+/* свечение под кластером скриншотов и под сеткой цифр */
+.shots,.stats{position:relative;}
+.shots::before,.stats::before{
+  content:'';position:absolute;z-index:0;inset:0;pointer-events:none;
+  background:radial-gradient(72% 70% at 50% 46%,var(--accent-glow),rgba(232,146,26,.05) 48%,transparent 74%);
+}
+.shots > *,.stats > *{position:relative;z-index:1;}
+
+/* центрированные тезисы — крупнее и по центру полосы */
+.slide.center h2{font-size:80px;}
+.slide.center .lead{margin-left:auto;margin-right:auto;max-width:900px;}
+
 /* ===== СЛУЖЕБНОЕ (скрыто в режиме записи) ===== */
 .chrome{position:fixed;inset:0;z-index:80;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .18s;}
 body.ui .chrome{opacity:1;visibility:visible;}
@@ -282,14 +367,19 @@ body.cue .tap{bottom:56px;}
 <body class="rec">
 
 <div class="stage" id="stage">
-  <div class="canvas" id="canvas"></div>
+  <div class="frame" id="frame">
+    <div class="expert" id="expert">
+      <div class="ez"><b>Камера эксперта</b><span>640 × 1080</span><span>сюда монтажёр кладёт вертикальное видео</span></div>
+    </div>
+    <div class="canvas" id="canvas"></div>
+  </div>
 </div>
 
 <div class="tap l" id="tapL"></div>
 <div class="tap r" id="tapR"></div>
 
 <div class="chrome">
-  <div class="keys">← → · пробел · номер+Enter · <b>H</b> — служебное · <b>P</b> — монтажёр · <b>F</b> — фулскрин</div>
+  <div class="keys">← → · пробел · номер+Enter · <b>H</b> — служебное · <b>P</b> — монтажёр · <b>V</b> — кадр/только слайд · <b>F</b> — фулскрин</div>
   <div class="counter"><b id="cNow">01</b> / <span id="cTot">48</span></div>
   <button class="navbtn prev" id="prevBtn" aria-label="Назад">‹</button>
   <button class="navbtn next" id="nextBtn" aria-label="Вперёд">›</button>
@@ -314,14 +404,7 @@ const S = "/vsl-slides/screens/";
 const SLIDES = [
 /* ---------- БЛОК 1 — Открытие ---------- */
 {
-  id:1, block:"Блок 1", cue:"Привет. Прежде чем начнём…",
-  type:"title",
-  eyebrow:"Пара слов перед стартом",
-  title:"Почему это видео на русском",
-  lead:"В профессиональных вещах я эффективнее на русском. В жизни на украинском — без проблем."
-},
-{
-  id:2, block:"Блок 1", cue:"Если ты тратишь на создание одного Reels…",
+  id:1, hero:"v3", block:"Блок 1", cue:"Если ты тратишь на создание одного Reels…",
   type:"stats",
   title:"Знакомая математика?",
   stats:[
@@ -331,7 +414,7 @@ const SLIDES = [
   ]
 },
 {
-  id:3, block:"Блок 1", cue:"Меня зовут Роман Прокопов…",
+  id:2, hero:"v2", block:"Блок 1", cue:"Меня зовут Роман Прокопов…",
   type:"stats",
   eyebrow:"Кто я",
   title:"Роман Прокопов",
@@ -344,7 +427,7 @@ const SLIDES = [
   ]
 },
 {
-  id:4, block:"Блок 1", cue:"Давай сразу покажу, как она выглядит",
+  id:3, block:"Блок 1", cue:"Давай сразу покажу, как она выглядит",
   type:"chain",
   eyebrow:"AI Контент-Система",
   title:"Шесть AI-сотрудников в одной цепочке",
@@ -359,7 +442,7 @@ const SLIDES = [
   note:"Каждый следующий не работает без предыдущего: то, что собрал первый, идёт на вход второму."
 },
 {
-  id:5, block:"Блок 1", cue:"И вот эти шесть сотрудников делают за меня восемьдесят процентов рутины",
+  id:4, block:"Блок 1", cue:"И вот эти шесть сотрудников делают за меня восемьдесят процентов рутины",
   type:"bullets",
   title:"80% рутины — это что конкретно",
   items:[
@@ -371,7 +454,7 @@ const SLIDES = [
   note:"Каждый день. В моём аккаунте, в моём контенте."
 },
 {
-  id:6, block:"Блок 1", cue:"В этом видео я сделаю три вещи",
+  id:5, block:"Блок 1", cue:"В этом видео я сделаю три вещи",
   type:"bullets", numbered:true,
   title:"План на это видео",
   items:[
@@ -381,7 +464,7 @@ const SLIDES = [
   ]
 },
 {
-  id:7, block:"Блок 1", cue:"Сразу скажу про встречу",
+  id:6, block:"Блок 1", cue:"Сразу скажу про встречу",
   type:"screens",
   eyebrow:"Закрытая встреча в Zoom",
   title:"13–15 мест. Живая, не автовебинар",
@@ -395,7 +478,7 @@ const SLIDES = [
 
 /* ---------- БЛОК 2 — Проблема ---------- */
 {
-  id:8, block:"Блок 2", cue:"Ко мне в агентство приходят люди…",
+  id:7, block:"Блок 2", cue:"Ко мне в агентство приходят люди…",
   type:"quote",
   title:"Три запроса, которые я слышу четыре года",
   items:[
@@ -405,7 +488,7 @@ const SLIDES = [
   ]
 },
 {
-  id:9, block:"Блок 2", cue:"Ты ведь не только контент делаешь",
+  id:8, block:"Блок 2", cue:"Ты ведь не только контент делаешь",
   type:"bullets",
   title:"Что ты уже закрываешь собой",
   items:[
@@ -416,7 +499,7 @@ const SLIDES = [
   ]
 },
 {
-  id:10, block:"Блок 2", cue:"Потому что над одним роликом работают минимум четверо",
+  id:9, block:"Блок 2", cue:"Потому что над одним роликом работают минимум четверо",
   type:"chain",
   title:"Над **одним** роликом работают четверо",
   items:[
@@ -430,13 +513,13 @@ const SLIDES = [
 
 /* ---------- БЛОК 3 — Как я пришёл к системе ---------- */
 {
-  id:11, block:"Блок 3", cue:"Теперь честно про то, как я вообще пришёл к созданию…",
+  id:10, hero:"v1", block:"Блок 3", cue:"Теперь честно про то, как я вообще пришёл к созданию…",
   type:"title",
   title:"Как появилась AI Контент-Система",
   lead:"Небольшая предыстория — откуда всё это взялось."
 },
 {
-  id:12, block:"Блок 3", cue:"И я упёрся в конкретную проблему",
+  id:11, block:"Блок 3", cue:"И я упёрся в конкретную проблему",
   type:"bullets",
   eyebrow:"Моя проблема как владельца агентства",
   title:"Результат не получался предсказуемым",
@@ -448,14 +531,14 @@ const SLIDES = [
   ]
 },
 {
-  id:13, block:"Блок 3", cue:"Не «как мне сгенерить видосик», а…",
+  id:12, hero:"v3", block:"Блок 3", cue:"Не «как мне сгенерить видосик», а…",
   type:"statement",
   eyebrow:"Вопрос, который я себе задал",
   title:"Могу ли я регламентировать производство контента на AI?",
   lead:"И начал переносить внутрь нейросетей методологию, которую четыре года обтачивал на клиентах. По кусочкам."
 },
 {
-  id:14, block:"Блок 3", cue:"Дальше менеджеры, которые работают у меня в агентстве…",
+  id:13, block:"Блок 3", cue:"Дальше менеджеры, которые работают у меня в агентстве…",
   type:"chain",
   title:"Как система вышла наружу",
   items:[
@@ -468,7 +551,7 @@ const SLIDES = [
 
 /* ---------- БЛОК 4 — Что такое AI-сотрудник ---------- */
 {
-  id:15, block:"Блок 4", cue:"Ты видел беспилотные такси",
+  id:14, hero:"v2", block:"Блок 4", cue:"Ты видел беспилотные такси",
   type:"chain",
   eyebrow:"Проще всего объяснить так",
   title:"Беспилотное такси",
@@ -480,7 +563,7 @@ const SLIDES = [
   note:"AI-сотрудник — то же самое, только про маркетинг."
 },
 {
-  id:16, block:"Блок 4", cue:"Что вообще внутри такого сотрудника?",
+  id:15, block:"Блок 4", cue:"Что вообще внутри такого сотрудника?",
   type:"stats",
   title:"Что внутри каждого сотрудника",
   stats:[
@@ -491,7 +574,7 @@ const SLIDES = [
   note:"Всё это по кускам перенесено внутрь AI-сотрудников."
 },
 {
-  id:17, block:"Блок 4", cue:"Промпт — это просьба. Сотрудник — это обученный специалист",
+  id:16, block:"Блок 4", cue:"Промпт — это просьба. Сотрудник — это обученный специалист",
   type:"compare",
   title:"Промпт ≠ сотрудник",
   left:{title:"Промпт", items:[
@@ -508,7 +591,7 @@ const SLIDES = [
   ]}
 },
 {
-  id:18, block:"Блок 4", cue:"Давай покажу одного изнутри",
+  id:17, block:"Блок 4", cue:"Давай покажу одного изнутри",
   type:"screens",
   eyebrow:"Сотрудник «Твоя манера общения»",
   title:"Как он разбирает твою речь",
@@ -519,13 +602,13 @@ const SLIDES = [
   note:"Обороты · ритм и темп · эмоциональные паттерны · слова-паразиты · конструкции, которые тебе нельзя"
 },
 {
-  id:19, block:"Блок 4", cue:"AI не пишет воду",
+  id:18, hero:"v1", center:true, block:"Блок 4", cue:"AI не пишет воду",
   type:"statement",
   title:"AI не пишет воду",
   lead:"AI делает хороший контент из того, что в него загружено. Загружено ничего — он работает с воздухом."
 },
 {
-  id:20, block:"Блок 4", cue:"Поэтому перед созданием контента у меня идут четыре документа",
+  id:19, block:"Блок 4", cue:"Поэтому перед созданием контента у меня идут четыре документа",
   type:"bullets",
   title:"Четыре документа-фундамента",
   items:[
@@ -536,7 +619,7 @@ const SLIDES = [
   ]
 },
 {
-  id:21, block:"Блок 4", cue:"Четыре документа — и всё",
+  id:20, hero:"v2", block:"Блок 4", cue:"Четыре документа — и всё",
   type:"statement",
   title:"Больше ты никогда не объясняешь нейросети, кто ты",
   lead:"Просто прикладываешь их к запросу — и получаешь другое качество на выходе. Саму методологию передам на встрече: открытый экран и реальные документы реального клиента."
@@ -544,7 +627,7 @@ const SLIDES = [
 
 /* ---------- БЛОК 5 — Рыночная ситуация ---------- */
 {
-  id:22, block:"Блок 5", cue:"Пару слов про то, где мы сейчас находимся",
+  id:21, block:"Блок 5", cue:"Пару слов про то, где мы сейчас находимся",
   type:"chain",
   title:"Три фазы рынка контента",
   items:[
@@ -554,14 +637,14 @@ const SLIDES = [
   ]
 },
 {
-  id:23, block:"Блок 5", cue:"Не пять видео в месяц, а тридцать-шестьдесят",
+  id:22, hero:"v3", block:"Блок 5", cue:"Не пять видео в месяц, а тридцать-шестьдесят",
   type:"compare",
   title:"Разница в объёме",
   left:{big:"5", sub:"единиц в месяц — руками, на пределе"},
   right:{big:"30–60", sub:"единиц в месяц — один человек с системой"}
 },
 {
-  id:24, block:"Блок 5", cue:"Отдельно скажу тем, кто зарабатывает на контенте",
+  id:23, block:"Блок 5", cue:"Отдельно скажу тем, кто зарабатывает на контенте",
   type:"compare",
   eyebrow:"Если ты зарабатываешь на контенте",
   title:"Два пути",
@@ -572,7 +655,7 @@ const SLIDES = [
 
 /* ---------- БЛОК 6 — Честность об ограничениях ---------- */
 {
-  id:25, block:"Блок 6", cue:"Теперь то, чего ты обычно не услышишь",
+  id:24, block:"Блок 6", cue:"Теперь то, чего ты обычно не услышишь",
   type:"bullets",
   title:"Чего я не обещаю",
   items:[
@@ -583,7 +666,7 @@ const SLIDES = [
   ]
 },
 {
-  id:26, block:"Блок 6", cue:"По моему внутреннему перфекционизму система выдаёт качество семь из десяти",
+  id:25, block:"Блок 6", cue:"По моему внутреннему перфекционизму система выдаёт качество семь из десяти",
   type:"chain",
   title:"7 из 10 — и это честно",
   items:[
@@ -594,7 +677,7 @@ const SLIDES = [
   note:"Я не уволил ни одного сценариста и маркетолога. AI забрал у них рутину — они взяли больше проектов."
 },
 {
-  id:27, block:"Блок 6", cue:"Результат рождается на стыке",
+  id:26, hero:"v1", center:true, block:"Блок 6", cue:"Результат рождается на стыке",
   type:"statement",
   title:"Результат рождается на стыке",
   lead:"Твои смыслы, твоя ниша, твоя экспертиза — плюс система, которая всё это упаковывает и выпускает. Ищешь кнопку «красиво за пять минут и ничего не контролировать» — тебе не ко мне."
@@ -602,7 +685,7 @@ const SLIDES = [
 
 /* ---------- БЛОК 7 — Сколько это стоит в часах и деньгах ---------- */
 {
-  id:28, block:"Блок 7", cue:"Давай посчитаем",
+  id:27, block:"Блок 7", cue:"Давай посчитаем",
   type:"table",
   title:"Каждый ролик проходит эти этапы",
   head:["Этап","Было","Стало"],
@@ -616,14 +699,14 @@ const SLIDES = [
   ]
 },
 {
-  id:29, block:"Блок 7", cue:"Сложи",
+  id:28, hero:"v3", block:"Блок 7", cue:"Сложи",
   type:"compare",
   title:"Итого на один ролик",
   left:{title:"Было", big:"~4 часа", sub:"и от $1 500 в месяц на команду"},
   right:{title:"Стало", big:"~40 мин", sub:"и около $100 в месяц на инструменты"}
 },
 {
-  id:30, block:"Блок 7", cue:"У меня клиентка Марина вообще не любит камеру",
+  id:29, block:"Блок 7", cue:"У меня клиентка Марина вообще не любит камеру",
   type:"screens",
   eyebrow:"Кейс · психология",
   title:"Марина не снимается. Просто начитывает сценарии",
@@ -635,7 +718,7 @@ const SLIDES = [
   note:"AI-аватар по фото — заведомо хуже, чем по видео. Reels всё равно на 100+ тысяч. Решает **смысл**, а не внешний вид эксперта или монтаж."
 },
 {
-  id:31, block:"Блок 7", cue:"Поменяли только хук в начале ролика",
+  id:30, block:"Блок 7", cue:"Поменяли только хук в начале ролика",
   type:"screens",
   eyebrow:"Аналитика подсветила: менять надо не тему",
   title:"Один хук — охваты ×45",
@@ -647,7 +730,7 @@ const SLIDES = [
   note:"Тот же контент, та же тема. Другая первая фраза."
 },
 {
-  id:32, block:"Блок 7", cue:"Илья — экспертный блог, ниша финансы и инвестиции",
+  id:31, block:"Блок 7", cue:"Илья — экспертный блог, ниша финансы и инвестиции",
   type:"screens",
   eyebrow:"Кейс · финансы и инвестиции",
   title:"10 месяцев на этой системе",
@@ -667,7 +750,7 @@ const SLIDES = [
 
 /* ---------- БЛОК 8 — Для кого это ---------- */
 {
-  id:33, block:"Блок 8", cue:"Давай честно про то, кому моя закрытая Zoom-встреча реально нужна",
+  id:32, block:"Блок 8", cue:"Давай честно про то, кому моя закрытая Zoom-встреча реально нужна",
   type:"bullets",
   title:"Тебе стоит прийти, если ты",
   items:[
@@ -679,7 +762,7 @@ const SLIDES = [
   ]
 },
 {
-  id:34, block:"Блок 8", cue:"А вот кому не надо",
+  id:33, block:"Блок 8", cue:"А вот кому не надо",
   type:"bullets",
   title:"А вот кому не надо",
   items:[
@@ -690,7 +773,7 @@ const SLIDES = [
 
 /* ---------- БЛОК 9 — Что разбираем на встрече ---------- */
 {
-  id:35, block:"Блок 9", cue:"Я разберу всю AI Контент-Систему целиком",
+  id:34, block:"Блок 9", cue:"Я разберу всю AI Контент-Систему целиком",
   type:"chain",
   eyebrow:"Что разбираем на встрече",
   title:"Шесть шагов — и на каждом работает AI",
@@ -704,13 +787,13 @@ const SLIDES = [
   ]
 },
 {
-  id:36, block:"Блок 9", cue:"А контент это только четвёртый шаг",
+  id:35, hero:"v3", center:true, giant:"04", block:"Блок 9", cue:"А контент это только четвёртый шаг",
   type:"statement",
   title:"Контент — это ШАГ 4",
   lead:"Люди приходят с запросом «хотим делать контент» — и начинают сразу отсюда. До него есть три шага. Пропустил их — снимаешь в пустоту, просто ещё об этом не знаешь."
 },
 {
-  id:37, block:"Блок 9", cue:"Моя система собирает карусель в два клика",
+  id:36, block:"Блок 9", cue:"Моя система собирает карусель в два клика",
   type:"screens",
   eyebrow:"Шаг 05 · AI-производство",
   title:"Карусель в два клика",
@@ -721,7 +804,7 @@ const SLIDES = [
   note:"Карусели недооценивают, а заявки они дают часто лучше видео."
 },
 {
-  id:38, block:"Блок 9", cue:"Всё это я показываю не на слайдах",
+  id:37, hero:"v2", block:"Блок 9", cue:"Всё это я показываю не на слайдах",
   type:"statement",
   title:"Показываю на открытом экране",
   lead:"Захожу в аккаунт своего маркетолога и показываю на живом клиентском проекте: вот документы, вот сотрудники, вот сценарии, вот цифры."
@@ -729,7 +812,7 @@ const SLIDES = [
 
 /* ---------- БЛОК 10 — Что ты унесёшь со встречи ---------- */
 {
-  id:39, block:"Блок 10", cue:"Что у тебя будет в голове после этих двух часов",
+  id:38, block:"Блок 10", cue:"Что у тебя будет в голове после этих двух часов",
   type:"bullets",
   title:"Что ты унесёшь — даже если пойдёшь делать сам",
   items:[
@@ -744,7 +827,7 @@ const SLIDES = [
 
 /* ---------- БЛОК 11 — Антипродажа ---------- */
 {
-  id:40, block:"Блок 11", cue:"Теперь честно, чтобы у тебя не было иллюзий",
+  id:39, block:"Блок 11", cue:"Теперь честно, чтобы у тебя не было иллюзий",
   type:"bullets",
   title:"Чего на встрече не будет",
   items:[
@@ -754,7 +837,7 @@ const SLIDES = [
   ]
 },
 {
-  id:41, block:"Блок 11", cue:"Я прошу приходить с включённым микрофоном и камерой",
+  id:40, block:"Блок 11", cue:"Я прошу приходить с включённым микрофоном и камерой",
   type:"bullets",
   title:"Как мы там общаемся",
   items:[
@@ -765,7 +848,7 @@ const SLIDES = [
   ]
 },
 {
-  id:42, block:"Блок 11", cue:"Поэтому приходи со своим запросом",
+  id:41, block:"Блок 11", cue:"Поэтому приходи со своим запросом",
   type:"bullets", quotes:true,
   title:"Приходи со своим запросом",
   items:[
@@ -779,7 +862,7 @@ const SLIDES = [
 
 /* ---------- БЛОК 12 — Как проходит встреча ---------- */
 {
-  id:43, block:"Блок 12", cue:"По формату всё просто",
+  id:42, block:"Блок 12", cue:"По формату всё просто",
   type:"bullets", numbered:true,
   eyebrow:"Раз в неделю · 19:00 по Киеву · ~2 часа + Q&A",
   title:"Как проходит встреча",
@@ -791,7 +874,7 @@ const SLIDES = [
   ]
 },
 {
-  id:44, block:"Блок 12", cue:"Про запись важное",
+  id:43, hero:"v1", block:"Блок 12", cue:"Про запись важное",
   type:"statement",
   eyebrow:"Почему мест всего 13–15",
   title:"Записываю я лично",
@@ -800,14 +883,14 @@ const SLIDES = [
 
 /* ---------- БЛОК 13 — Сколько это стоит ---------- */
 {
-  id:45, block:"Блок 13", cue:"Про цену. Денег — ноль",
+  id:44, hero:"v3", block:"Блок 13", cue:"Про цену. Денег — ноль",
   type:"compare",
   title:"Сколько стоит участие",
   left:{title:"Деньгами", big:"0", sub:"встреча бесплатная, предоплаты нет"},
   right:{title:"По факту", big:"2 часа", sub:"времени · включённый микрофон и камера"}
 },
 {
-  id:46, block:"Блок 13", cue:"А теперь прикинь, сколько стоит по рынку сделать то, что я на этой встрече показываю",
+  id:45, block:"Блок 13", cue:"А теперь прикинь, сколько стоит по рынку сделать то, что я на этой встрече показываю",
   type:"bullets",
   title:"Сколько это стоит по рынку",
   items:[
@@ -821,7 +904,7 @@ const SLIDES = [
 
 /* ---------- БЛОК 14 — Гарантия и бонусы ---------- */
 {
-  id:47, block:"Блок 14", cue:"И третье — бонусы",
+  id:46, hero:"v2", block:"Блок 14", cue:"И третье — бонусы",
   type:"bullets",
   eyebrow:"Тем, кто досидит до конца",
   title:"Два готовых AI-сотрудника в подарок",
@@ -835,7 +918,7 @@ const SLIDES = [
 
 /* ---------- БЛОК 15 — Закрытие ---------- */
 {
-  id:48, block:"Блок 15", cue:"Тогда сделай одно действие",
+  id:47, hero:"v3", block:"Блок 15", cue:"Тогда сделай одно действие",
   type:"final",
   title:"Займи своё место",
   steps:[
@@ -938,10 +1021,22 @@ const RENDER = {
   }
 };
 
+/* статичный декоративный фон для «геройских» слайдов */
+const FXBG = '<div class="fxbg" aria-hidden="true">'
+  + '<div class="base"></div><div class="grid"></div>'
+  + '<div class="emblem"></div><div class="emblem two"></div>'
+  + '<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>'
+  + '<div class="ln a"></div><div class="ln b"></div><div class="ln c"></div>'
+  + '</div>';
+
 const canvas = document.getElementById('canvas');
 canvas.innerHTML = SLIDES.map(d=>{
-  const centered = (d.type==='title'||d.type==='final') ? ' center glow' : '';
-  return `<section class="slide${centered}" data-id="${d.id}">${RENDER[d.type](d)}</section>`;
+  const cls = ['slide'];
+  if(d.type==='title' || d.type==='final' || d.center) cls.push('center');
+  if(d.hero) cls.push('fx', d.hero);
+  else if(d.type==='title' || d.type==='final') cls.push('glow');
+  const giant = d.giant ? `<div class="giantnum">${esc(d.giant)}</div>` : '';
+  return `<section class="${cls.join(' ')}" data-id="${d.id}">${d.hero?FXBG:''}${giant}${RENDER[d.type](d)}</section>`;
 }).join('');
 
 const slides = [...canvas.querySelectorAll('.slide')];
@@ -959,15 +1054,19 @@ canvas.querySelectorAll('.shot img').forEach(img=>{
 /* ============================================================
    ПОДГОНКА: масштаб канваса + контроль переполнения слайда
    ============================================================ */
-const W = 1280, H = 1080;
-function fitCanvas(){
-  const s = Math.min(window.innerWidth / W, window.innerHeight / H);
-  canvas.style.transform = `scale(${s})`;
+const H = 1080;
+const frame = document.getElementById('frame');
+function fitFrame(){
+  /* в режиме кадра масштабируем всю раскладку 1920×1080,
+     в режиме «только слайд» — один канвас 1280×1080 */
+  const w = document.body.classList.contains('solo') ? 1280 : 1920;
+  const s = Math.min(window.innerWidth / w, window.innerHeight / H);
+  frame.style.transform = `scale(${s})`;
 }
-window.addEventListener('resize', fitCanvas);
-window.addEventListener('orientationchange', fitCanvas);
-if(window.ResizeObserver) new ResizeObserver(fitCanvas).observe(document.documentElement);
-fitCanvas();
+window.addEventListener('resize', fitFrame);
+window.addEventListener('orientationchange', fitFrame);
+if(window.ResizeObserver) new ResizeObserver(fitFrame).observe(document.documentElement);
+fitFrame();
 
 /* крупные цифры не должны вылезать из колонки */
 function fitNumbers(){
@@ -1045,6 +1144,8 @@ document.getElementById('tapL').addEventListener('click', prev);
 /* режимы */
 function toggleUI(){ document.body.classList.toggle('ui'); }
 function toggleCue(){ document.body.classList.toggle('cue'); }
+/* кадр 1920×1080 с местом под эксперта ⟷ только презентация 1280×1080 */
+function toggleSolo(){ document.body.classList.toggle('solo'); fitFrame(); }
 function toggleFs(){
   const r = document.documentElement;
   if(!document.fullscreenElement){ (r.requestFullscreen||r.webkitRequestFullscreen).call(r); }
@@ -1076,6 +1177,7 @@ window.addEventListener('keydown', e=>{
   const c = k.toLowerCase();
   if(c==='h'||c==='р'){ e.preventDefault(); toggleUI(); return; }   /* служебное */
   if(c==='p'||c==='з'){ e.preventDefault(); toggleCue(); return; }  /* монтажёр */
+  if(c==='v'||c==='м'){ e.preventDefault(); toggleSolo(); return; } /* кадр / только слайд */
   if(c==='f'||c==='а'){ e.preventDefault(); toggleFs(); return; }   /* фулскрин */
 });
 
