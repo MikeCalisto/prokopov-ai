@@ -518,6 +518,24 @@ body.cue .cuebar{display:flex;}
 .cuebar .cn{margin-left:auto;font-family:var(--font-display);font-weight:800;font-size:19px;color:var(--text-muted);white-space:nowrap;}
 .cuebar .warn{color:var(--danger);font-weight:700;font-size:15px;white-space:nowrap;}
 
+/* кнопка «на весь экран» — появляется при движении мыши и сама гаснет,
+   чтобы не попасть в кадр при записи */
+.fsbtn{
+  position:fixed;top:18px;right:20px;z-index:96;
+  width:50px;height:50px;border-radius:14px;cursor:pointer;
+  border:1px solid var(--border-strong);background:rgba(13,13,18,.82);
+  color:var(--text-muted);display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(6px);opacity:0;pointer-events:none;
+  transition:opacity .25s ease,border-color .2s,color .2s,box-shadow .2s;
+}
+.fsbtn.show{opacity:1;pointer-events:auto;}
+.fsbtn:hover{border-color:var(--border-accent-strong);color:var(--accent-light);box-shadow:0 0 20px var(--accent-glow);}
+.fsbtn:active{transform:scale(.94);}
+.fsbtn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.fsbtn .ico-exit{display:none;}
+.fsbtn.is-full .ico-enter{display:none;}
+.fsbtn.is-full .ico-exit{display:block;}
+
 /* ввод номера слайда */
 .goto{
   position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:95;
@@ -555,6 +573,11 @@ body.cue .chrome .counter,body.cue .chrome .navbtn{bottom:74px;}
   <span class="warn" id="cueWarn"></span>
   <span class="cn" id="cueNum"></span>
 </div>
+
+<button class="fsbtn" id="fsBtn" aria-label="На весь экран" title="На весь экран (F)">
+  <svg class="ico-enter" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+  <svg class="ico-exit" viewBox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>
+</button>
 
 <div class="zoomview" id="zoomView" aria-hidden="true">
   <img id="zoomImg" alt="">
@@ -1564,7 +1587,7 @@ let downX = 0, downY = 0;
 document.addEventListener('mousedown', e=>{ downX = e.clientX; downY = e.clientY; });
 document.addEventListener('click', e=>{
   const t = e.target instanceof Element ? e.target : null;
-  if(t && (t.closest('.chrome') || t.closest('.cuebar'))) return;
+  if(t && (t.closest('.chrome') || t.closest('.cuebar') || t.closest('.fsbtn'))) return;
   if(Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6) return;
   const sel = window.getSelection();
   if(sel && !sel.isCollapsed) return;
@@ -1581,6 +1604,21 @@ function toggleFs(){
   if(!document.fullscreenElement){ (r.requestFullscreen||r.webkitRequestFullscreen).call(r); }
   else{ (document.exitFullscreen||document.webkitExitFullscreen).call(document); }
 }
+
+/* кнопка фулскрина: видна, пока двигают мышь, дальше сама уходит */
+const fsBtn = document.getElementById('fsBtn');
+let fsTimer = null;
+function showFsBtn(){
+  fsBtn.classList.add('show');
+  clearTimeout(fsTimer);
+  fsTimer = setTimeout(()=>fsBtn.classList.remove('show'), 2500);
+}
+document.addEventListener('mousemove', showFsBtn, {passive:true});
+fsBtn.addEventListener('click', e=>{ e.stopPropagation(); toggleFs(); showFsBtn(); });
+const syncFsIcon = () => fsBtn.classList.toggle('is-full', !!(document.fullscreenElement || document.webkitFullscreenElement));
+document.addEventListener('fullscreenchange', syncFsIcon);
+document.addEventListener('webkitfullscreenchange', syncFsIcon);
+showFsBtn();
 
 /* ввод номера слайда */
 const gotoBox = document.getElementById('gotoBox');
