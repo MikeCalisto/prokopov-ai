@@ -616,6 +616,16 @@ p:first-child{margin-top:0;}
 .carou-dots i.on{background:var(--accent); transform:scale(1.3);}
 @media(max-width:900px){ .flow6{grid-template-columns:1fr 1fr;} .macro::after{display:none;} }
 
+/* ===== ВИДЕО-КАРУСЕЛЬ (примеры AI-аватаров) ===== */
+.vcaro{margin-top:26px; display:flex; flex-direction:column; align-items:center; gap:20px;}
+.vcaro-tabs{display:flex; flex-wrap:wrap; gap:10px; justify-content:center;}
+.vcaro-tab{font-family:var(--font-display); font-weight:700; font-size:14px; letter-spacing:.3px; padding:9px 18px; border-radius:12px; border:1px solid var(--border-strong); background:var(--bg-card); color:var(--text-muted); cursor:pointer; transition:.2s;}
+.vcaro-tab:hover{border-color:var(--border-accent); color:var(--text);}
+.vcaro-tab.on{background:var(--accent); border-color:var(--accent); color:#1a1206;}
+.vcaro-stage{display:flex; justify-content:center; align-items:center;}
+.vcaro-stage video{height:min(54vh,520px); width:auto; max-width:100%; border-radius:20px; border:1px solid var(--border-accent); background:#000; display:block; box-shadow:0 22px 60px rgba(0,0,0,.55),0 0 42px rgba(232,146,26,.08);}
+.vcaro-cap{font-size:14px; color:var(--text-dim); text-align:center;}
+
 /* ===== РЕФЕРЕНС-ДНК для слайдов до продающей части ===== */
 /* глобальная сетка на фоне всей колоды */
 .deck::before{content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
@@ -1225,6 +1235,28 @@ p:first-child{margin-top:0;}
       <div class="card"><span class="ic">✨</span><h4>AI-генерация</h4><p>Мини-сериалы, анимации, визуал вообще без съёмки.</p></div>
     </div>
     <p class="pill-note">Сквозной кейс эфира — Ирина: всю цепочку показываю на её проекте, до готового результата.</p>
+  </div>
+</section>
+
+<!-- C8b · примеры AI-аватаров -->
+<section class="slide pre">
+  <div class="slide-inner" style="max-width:var(--max-w)">
+    <div class="kicker">Реальные примеры</div>
+    <h2 class="big" style="margin-top:8px">Так выглядит <span style="color:var(--accent-light)">контент без съёмки</span></h2>
+    <div class="vcaro" data-vcaro>
+      <div class="vcaro-tabs">
+        <button class="vcaro-tab on" data-src="/prezentaciya-ai-konveyer/media/avatar1.mp4">Пример 1</button>
+        <button class="vcaro-tab" data-src="/prezentaciya-ai-konveyer/media/avatar2.mp4">Пример 2</button>
+        <button class="vcaro-tab" data-src="/prezentaciya-ai-konveyer/media/avatar3.mp4">Пример 3</button>
+        <button class="vcaro-tab" data-src="/prezentaciya-ai-konveyer/media/avatar4.mp4">Пример 4</button>
+        <button class="vcaro-tab" data-src="/prezentaciya-ai-konveyer/media/avatar5.mp4">Пример 5</button>
+        <button class="vcaro-tab" data-src="/prezentaciya-ai-konveyer/media/avatar6.mp4">Пример 6</button>
+      </div>
+      <div class="vcaro-stage">
+        <video src="/prezentaciya-ai-konveyer/media/avatar1.mp4" controls playsinline preload="metadata"></video>
+      </div>
+      <p class="vcaro-cap">6 видео, снятых AI-аватаром — без камеры</p>
+    </div>
   </div>
 </section>
 
@@ -2533,6 +2565,33 @@ p:first-child{margin-top:0;}
   render();
   // hash deep-link (?s=NN)
   const m=location.hash.match(/#(\d+)/); if(m){ go(parseInt(m[1],10)-1); }
+})();
+</script>
+<script>
+(function(){
+  // видео-карусель с вкладками
+  document.querySelectorAll('[data-vcaro]').forEach(function(w){
+    var vid=w.querySelector('video');
+    var tabs=[].slice.call(w.querySelectorAll('.vcaro-tab'));
+    tabs.forEach(function(t){
+      t.addEventListener('click',function(){
+        tabs.forEach(function(x){x.classList.remove('on');});
+        t.classList.add('on');
+        vid.pause(); vid.src=t.dataset.src; vid.load();
+        vid.play().catch(function(){});
+      });
+    });
+  });
+  // пауза видео на слайдах, которые ушли из active (кроме autoplay-фонов)
+  var obs=new MutationObserver(function(muts){
+    muts.forEach(function(m){
+      var s=m.target;
+      if(!s.classList.contains('active')){
+        s.querySelectorAll('video').forEach(function(v){ if(!v.hasAttribute('autoplay')) v.pause(); });
+      }
+    });
+  });
+  document.querySelectorAll('.deck .slide').forEach(function(s){ obs.observe(s,{attributes:true,attributeFilter:['class']}); });
 })();
 </script>
 </body>
